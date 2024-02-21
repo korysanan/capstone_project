@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'sign_up_screen.dart';
+import '../home/main_screen.dart';
+
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -78,7 +80,10 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               onPressed: () {
-                print('Guest mode button pressed');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => KFoodBoxHome()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.grey[400],
