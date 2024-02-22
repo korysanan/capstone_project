@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
             ElevatedButton(
               child: Text('Log in'),
               onPressed: () {
-                print('Login button pressed');
+                print('Login button pressed'); // 로그인 db 구현 했을때 일치 하면 적용되게 설정하기 
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.orange,
@@ -57,11 +57,12 @@ class LoginScreen extends StatelessWidget {
             TextButton(
               child: Text('Need An account? SIGN UP'),
               onPressed: () {
-                print('SIGN UP button pressed');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SignUpScreen()),
                 );
+                // 회원가입 화면으로 이동 
+                // lib/login/sign_up_screen.dart로 이동
               },
             ),
             SizedBox(height: 100.0),
@@ -84,6 +85,7 @@ class LoginScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => KFoodBoxHome()),
                 );
+                // lib/home/main_screen.dart로 이동 
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.grey[400],

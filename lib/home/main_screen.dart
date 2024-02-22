@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart'; // slider하기 위해 import
+import 'bottom.dart'; // lib/home/bottom.dart에서 bottomnavigation 불러옴 
 
 class KFoodBoxHome extends StatefulWidget {
   @override
@@ -7,8 +8,16 @@ class KFoodBoxHome extends StatefulWidget {
 }
 
 class _KFoodBoxHomeState extends State<KFoodBoxHome> {
-  int _currentIndex = 0;
-  
+  int _currentIndex = 0; // bottomnavigation index 번호 
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  } 
+  // 아이콘 눌렀을때 인덱스 번호 설정 
+  // home = 0, mail = 1, camera = 2, search = 3 , chatbot = 4
+
   final List<Map<String, String>> imageList = [
     {
       "url": "https://recipe1.ezmember.co.kr/cache/recipe/2023/06/29/a1a5a04e39879f1033ae07367dfee5251.jpg",
@@ -23,6 +32,8 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
       "name": "Bossam"
     },
   ];
+  // 우선 사진 링크랑 이름을 불러와서 메인화면 위에 추천음식 띄어주는거 
+  // db 링크 가져오면 될 듯
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +56,12 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
           ),
         ),
         */
+        // 우선 이거 나중에 앱 로고 넣을 부분 
+
         actions: <Widget>[
           GestureDetector(
             onTap: () {
-              print("right person icon click");
+              print("right person icon click"); // 여기 나중에 mypage 화면으로 들어가게 하기
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +106,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                         ),
                         padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
                         child: Text(
-                          e['name']!, // 텍스트 내용
+                          e['name']!, // 텍스트 내용, 여기서 `!`를 사용하여 null이 아님을 단언하기 / 안하면 오류 발생 
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,
@@ -112,7 +125,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
             padding: EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                print("view all Korean foods");
+                print("view all Korean foods"); // 카테고리 들어가는 화면 넣을 부분 
               },
               child: Text('View All Korean foods'),
             ),
@@ -130,7 +143,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                   trailing: Text('2 minutes ago'),
                 ),
                 ListTile(
-                  title: Text('Korean food recomme...'),
+                  title: Text('Korean food recomme ...'),
                   trailing: Text('1 days ago'),
                 ),
                 ListTile(
@@ -163,46 +176,15 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               ],
             ),
           ),
+          // 우선 위에 card 부분은 일단 text로 대체했는데 나중에 db 링크 이용해서 불러오는 식으로 코드 수정하면 될듯 
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
+
+      bottomNavigationBar: BottomNav(
         currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        type: BottomNavigationBarType.shifting,
-        selectedItemColor: Colors.black, 
-        unselectedItemColor: Colors.grey,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.mail),
-            label: 'Messages',
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.camera),
-            label: 'Camera',
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'search',
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.rocket),
-            label: 'rocket',
-            backgroundColor: Colors.blue,
-          ),
-        ],
+        onTap: _onItemTapped,
       ),
+      // lib/home/bottom.dart에서 bottomNavigation 불러오기 
     );
   }
 }
