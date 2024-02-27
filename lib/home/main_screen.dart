@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart'; // slider하기 위해 import
 import 'bottom.dart'; // lib/home/bottom.dart에서 bottomnavigation 불러옴 
+import '../page/my_page_no.dart';
 
 class KFoodBoxHome extends StatefulWidget {
   @override
@@ -61,7 +62,10 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
         actions: <Widget>[
           GestureDetector(
             onTap: () {
-              print("right person icon click"); // 여기 나중에 mypage 화면으로 들어가게 하기
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyPageNo()),
+              );
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
