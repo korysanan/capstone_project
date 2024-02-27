@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../home/bottom.dart';
 import '../login/sign_up_screen.dart';
 import '../login/login_screen.dart';
+import 'language_setting.dart';
 
 class MyPageNo extends StatefulWidget {
   @override
@@ -29,7 +30,10 @@ class _MyPageNoState extends State<MyPageNo> {
           IconButton(
             icon: Icon(Icons.language),
             onPressed: () {
-              // Handle settings button action
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LanguageSelectScreen()),
+              );
             },
           ),
         ],
