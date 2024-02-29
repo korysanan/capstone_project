@@ -3,6 +3,7 @@ import '../home/bottom.dart';
 import '../login/sign_up_screen.dart';
 import '../login/login_screen.dart';
 import 'language_setting.dart';
+import '../home/on_item_tap.dart';
 
 class MyPageNo extends StatefulWidget {
   @override
@@ -11,14 +12,6 @@ class MyPageNo extends StatefulWidget {
 
 class _MyPageNoState extends State<MyPageNo> {
   int _currentIndex = 0; // bottomnavigation index 번호 
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-  // 아이콘 눌렀을때 인덱스 번호 설정 
-  // home = 0, mail = 1, camera = 2, search = 3 , chatbot = 4
   
   @override
   Widget build(BuildContext context) {
@@ -70,7 +63,7 @@ class _MyPageNoState extends State<MyPageNo> {
       ),
       bottomNavigationBar: BottomNav(
         currentIndex: _currentIndex,
-        onTap: _onItemTapped,
+        onTap: (index) => onItemTapped(context, index),
       ),
       // lib/home/bottom.dart에서 bottomNavigation 불러오기 
     );

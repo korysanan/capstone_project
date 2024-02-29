@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../home/bottom.dart';
+import '../home/on_item_tap.dart';
 
 class LanguageSelectScreen extends StatefulWidget {
   @override
@@ -8,12 +9,6 @@ class LanguageSelectScreen extends StatefulWidget {
 
 class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
   int _currentIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 
   final List<Map<String, dynamic>> languages = [
     {'name': 'Korean', 'flag': '🇰🇷'},
@@ -64,8 +59,9 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
       ),
       bottomNavigationBar: BottomNav(
         currentIndex: _currentIndex,
-        onTap: _onItemTapped,
+        onTap: (index) => onItemTapped(context, index),
       ),
+      // lib/home/bottom.dart에서 bottomNavigation 불러오기 
     );
   }
 }

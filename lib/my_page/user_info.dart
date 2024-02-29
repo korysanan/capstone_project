@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../home/bottom.dart';
+import '../home/on_item_tap.dart';
 
 class UserInfoScreen extends StatefulWidget {
   @override
@@ -8,12 +9,6 @@ class UserInfoScreen extends StatefulWidget {
 
 class _UserInfoScreenState extends State<UserInfoScreen> {
   int _currentIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +122,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
       ),
       bottomNavigationBar: BottomNav(
         currentIndex: _currentIndex,
-        onTap: _onItemTapped,
+        onTap: (index) => onItemTapped(context, index), // 수정된 부분
       ),
     );
   }

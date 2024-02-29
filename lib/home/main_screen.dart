@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart'; // slider하기 위해 im
 import 'bottom.dart'; // lib/home/bottom.dart에서 bottomnavigation 불러옴 
 import '../my_page/my_page_no.dart';
 import '../my_page/my_page_yes.dart';
+import 'on_item_tap.dart';
 
 class KFoodBoxHome extends StatefulWidget {
   @override
@@ -12,14 +13,6 @@ class KFoodBoxHome extends StatefulWidget {
 class _KFoodBoxHomeState extends State<KFoodBoxHome> {
   int _currentIndex = 0; // bottomnavigation index 번호 
   int s = 1; // 나중에 세션으로 사용하면 대체될 예정
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  } 
-  // 아이콘 눌렀을때 인덱스 번호 설정 
-  // home = 0, mail = 1, camera = 2, search = 3 , chatbot = 4
 
   final List<Map<String, String>> imageList = [
     {
@@ -198,7 +191,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
 
       bottomNavigationBar: BottomNav(
         currentIndex: _currentIndex,
-        onTap: _onItemTapped,
+        onTap: (index) => onItemTapped(context, index),
       ),
       // lib/home/bottom.dart에서 bottomNavigation 불러오기 
     );
