@@ -17,12 +17,13 @@ class _MyPageNoState extends State<MyPageNo> {
       _currentIndex = index;
     });
   }
-
   // 아이콘 눌렀을때 인덱스 번호 설정 
   // home = 0, mail = 1, camera = 2, search = 3 , chatbot = 4
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false, // 위치 고정하는거 -> 이거 x일시 만약 키보드 올라올때 각각들도 따라 올라옴 
       appBar: AppBar(
         title: Text('MyPage'),
         centerTitle: true,

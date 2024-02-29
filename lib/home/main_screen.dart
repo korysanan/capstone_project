@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart'; // slider하기 위해 import
 import 'bottom.dart'; // lib/home/bottom.dart에서 bottomnavigation 불러옴 
-import '../page/my_page_no.dart';
+import '../my_page/my_page_no.dart';
+import '../my_page/my_page_yes.dart';
 
 class KFoodBoxHome extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class KFoodBoxHome extends StatefulWidget {
 
 class _KFoodBoxHomeState extends State<KFoodBoxHome> {
   int _currentIndex = 0; // bottomnavigation index 번호 
+  int s = 1; // 나중에 세션으로 사용하면 대체될 예정
 
   void _onItemTapped(int index) {
     setState(() {
@@ -39,6 +41,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false, // 위치 고정하는거 -> 이거 x일시 만약 키보드 올라올때 각각들도 따라 올라옴 
       appBar: AppBar(
         title: Text('K-Food Box'),
         centerTitle: true,
@@ -62,11 +65,20 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
         actions: <Widget>[
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyPageNo()),
-              );
+              if (s == 0){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyPageNo()),
+                );
+              }
+              else{
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyPageYes()),
+                );
+              } // 세션 보유 여부에 따라 mypage가 달라짐
             },
+            // 세션 id 하는 식으로
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[

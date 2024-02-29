@@ -7,7 +7,7 @@ class LanguageSelectScreen extends StatefulWidget {
 }
 
 class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
-  int _currentIndex = 0; // bottom navigation index number
+  int _currentIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -29,10 +29,12 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
     {'name': 'Russian', 'flag': '🇷🇺'},
     {'name': 'Turkish', 'flag': '🇹🇷'},
   ];
+  // 리스트 여기 아래에 추가
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false, // 위치 고정하는거 -> 이거 x일시 만약 키보드 올라올때 각각들도 따라 올라옴 
       appBar: AppBar(
         title: Text('Select Language'),
         centerTitle: true,
@@ -53,9 +55,9 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               onTap: () {
-                // This is where you add the print statement
                 print('Selected language: $language');
               },
+              // 일단 어떤거 선택했는지 출력하는거로 했는데 나중에 여기에 선택하면 언어 변경되게 수정 
             ),
           );
         },
