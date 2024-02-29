@@ -21,6 +21,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
       resizeToAvoidBottomInset: false, // 위치 고정하는거 -> 이거 x일시 만약 키보드 올라올때 각각들도 따라 올라옴 
       appBar: AppBar(
         title: Text('User Information'),
+        centerTitle: true,
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
