@@ -1,6 +1,7 @@
 // on_item_tap.dart
 import 'package:flutter/material.dart';
-import 'main_screen.dart'; // 여기서는 예시로 main_screen.dart를 import합니다. 실제 경로에 맞게 조정해야 합니다. // KFoodBoxHome 클래스를 import합니다. 실제 경로에 맞게 조정해야 합니다.
+import 'main_screen.dart';
+import '../camera_page/camera_page.dart';
 
 void onItemTapped(BuildContext context, int index) {
   switch (index) {
@@ -14,7 +15,10 @@ void onItemTapped(BuildContext context, int index) {
       print("mail");
       break;  
     case 2: // Camera 탭
-      print("camera");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CameraPage()),
+      );
       break;
     case 3: // search 탭
       print("search");
