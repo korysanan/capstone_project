@@ -5,6 +5,7 @@ import '../my_page/my_page_no.dart';
 import '../my_page/my_page_yes.dart';
 import 'on_item_tap.dart';
 
+
 class KFoodBoxHome extends StatefulWidget {
   @override
   _KFoodBoxHomeState createState() => _KFoodBoxHomeState();
@@ -196,4 +197,5 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
       // lib/home/bottom.dart에서 bottomNavigation 불러오기 
     );
   }
+
 }

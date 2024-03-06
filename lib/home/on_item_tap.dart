@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'main_screen.dart';
 import '../camera_page/camera_page.dart';
+import '../translate/translate.dart';
 
 void onItemTapped(BuildContext context, int index) {
   switch (index) {
@@ -13,7 +14,11 @@ void onItemTapped(BuildContext context, int index) {
       break;
     case 1: // mail 탭
       print("mail");
-      break;  
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => TranslatorScreen()),
+      );
+      break;
     case 2: // Camera 탭
       Navigator.push(
         context,
