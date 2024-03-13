@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />  <!-- 인터넷 권한 부여 -->
     <application
         android:label="capstone_project"
         android:name="${applicationName}"

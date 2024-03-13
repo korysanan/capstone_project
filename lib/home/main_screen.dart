@@ -101,8 +101,8 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                   children: <Widget>[
                     Image.network(
                       e['url']!, // 여기서 `!`를 사용하여 `e['url']`이 null이 아님을 단언/ 안하면 오류 발생 
-                      width: 1050.0,
-                      height: 350.0,
+                      width: 500.0,
+                      height: 300.0,
                       fit: BoxFit.cover,
                     ),
                     Positioned( // 이미지 위에 텍스트 위치

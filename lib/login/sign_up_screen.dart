@@ -10,6 +10,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
   String _passwordError = '';
+
   
   // 비밀번호 유효성 검사
   bool _validatePassword(String password) {

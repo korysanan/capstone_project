@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../home/bottom.dart';
 import '../home/on_item_tap.dart';
-import '../translate/language.dart';
+import '../translate/language_type.dart';
 
 class LanguageSelectScreen extends StatefulWidget {
   @override

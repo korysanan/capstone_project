@@ -20,7 +20,7 @@ class ImageDetailsPage extends StatelessWidget {
     );
 
     // 서버 업로드 로직
-    var uri = Uri.parse('http://43.201.164.78:5000/predict');
+    var uri = Uri.parse('http://3.35.120.84:5000/predict');
     var request = http.MultipartRequest('POST', uri)
       ..files.add(await http.MultipartFile.fromPath('image', image.path));
     var response = await request.send();
@@ -31,6 +31,7 @@ class ImageDetailsPage extends StatelessWidget {
       print('Image uploaded successfully');
       try {
         String responseBody = await response.stream.bytesToString();
+        print(responseBody);
         List<dynamic> jsonResponse = jsonDecode(responseBody);
         List<String> names = [];
         for (var item in jsonResponse) {
