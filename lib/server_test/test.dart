@@ -32,7 +32,7 @@ class _TestScreenState extends State<TestScreen> {
     final response = await http.get(Uri.parse('http://43.201.164.78:8080/food-categories/$categoryId'));
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      final data = jsonDecode(utf8.decode(response.bodyBytes));
       print(data);
     } else {
       throw Exception('Failed to load food category');
@@ -43,9 +43,8 @@ class _TestScreenState extends State<TestScreen> {
     final response = await http.get(Uri.parse('http://43.201.164.78:8080/food-categories'));
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      final data = jsonDecode(utf8.decode(response.bodyBytes));
       print(data);
-      print(utf8.decode(response.bodyBytes));
     } else {
       throw Exception('Failed to load food categories');
     }
@@ -55,9 +54,8 @@ class _TestScreenState extends State<TestScreen> {
     final response = await http.get(Uri.parse('http://43.201.164.78:8080/food-categories/$categoryId/foods'));
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      final data = jsonDecode(utf8.decode(response.bodyBytes));
       print(data);
-      print(utf8.decode(response.bodyBytes));
     } else {
       throw Exception('Failed to load foods for category $categoryId');
     }
@@ -74,7 +72,7 @@ class _TestScreenState extends State<TestScreen> {
           children: <Widget>[
             Text(foodInfo),
             ElevatedButton(
-              onPressed: () => fetchFood(1), // 예시로, ID가 1인 음식 정보를 가져옵니다
+              onPressed: () => fetchFood(72), // 예시로, ID가 1인 음식 정보를 가져옵니다
               child: Text('음식 정보 가져오기'),
             ),
           ],
