@@ -1,0 +1,18 @@
+final Map<String, String> langEn = {
+  'myPageTitle': 'MyPage',
+  'guest': 'Guest',
+  'login': 'Login',
+  'signUp': 'Sign up',
+  'kFoodBoxTitle': 'K-Food Box',
+  "today's recommended food": "Today's Recommended Food",
+  'viewAllKoreanFoods': 'View All Korean foods',
+  'community': 'Community',
+  'custom recipes': 'Custom Recipes',
+  'bookmark list': 'bookmark list',
+  'food images': 'Food Images',
+  'Community/Custom Recipes': 'Community/Custom Recipes',
+  'Are you sure you want to delete it?': 'Are you sure you want to delete it?',
+  'Cancel': 'Cancel',
+  'Delete': 'Delete',
+  'Select Language': 'Select Language',
+};

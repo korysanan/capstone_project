@@ -28,7 +28,7 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Language'),
+        title: Text(globals.getText('Select Language')),
         centerTitle: true,
       ),
       body: ListView.builder(

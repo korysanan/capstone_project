@@ -3,6 +3,7 @@ import 'language_setting.dart';
 import '../home/bottom.dart';
 import 'user_info.dart';
 import '../home/on_item_tap.dart';
+import '../globals.dart' as globals;
 
 class MyPageYes extends StatefulWidget {
   @override
@@ -13,8 +14,8 @@ class _MyPageYesState extends State<MyPageYes> {
   int _currentIndex = 0; // bottomnavigation index 번호 
 
   Map<String, List<String>> items = {
-    'Community/Custom Recipes': ['Article title 1', 'Article title 2', 'Article title 1', 'Article title 2'],
-    'Food Images': ['Water Kimchi', 'Bulgogi', 'food 2', 'food 3'],
+    globals.getText('Community/Custom Recipes'): ['Article title 1', 'Article title 2', 'Article title 1', 'Article title 2'],
+    globals.getText('food images'): ['Water Kimchi', 'Bulgogi', 'food 2', 'food 3'],
   };
   // 일단 북마크 했다고 가정하고 임시 자료
 
@@ -23,7 +24,7 @@ class _MyPageYesState extends State<MyPageYes> {
     return Scaffold(
       resizeToAvoidBottomInset: false, // 위치 고정하는거 -> 이거 x일시 만약 키보드 올라올때 각각들도 따라 올라옴 
       appBar: AppBar(
-        title: Text('MyPage'),
+        title: Text(globals.getText('myPageTitle')),
         centerTitle: true,
         actions: [
           IconButton(
@@ -82,7 +83,7 @@ class _MyPageYesState extends State<MyPageYes> {
                 Icon(Icons.bookmark),
                 SizedBox(width: 8),
                 Text(
-                  'bookmark list',
+                  globals.getText('bookmark list'),
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
@@ -122,16 +123,16 @@ class _MyPageYesState extends State<MyPageYes> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Are you sure you want to delete it?'),
+          title: Text(globals.getText('Are you sure you want to delete it?')),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: Text(globals.getText('Cancel')),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Delete'),
+              child: Text(globals.getText('Delete')),
               style: TextButton.styleFrom(
                 primary: Colors.red,
               ),

@@ -1,0 +1,18 @@
+final Map<String, String> langZh = {
+  'myPageTitle': '我的页面',
+  'guest' : '访客',
+  'login': '登录',
+  'signUp': '注册',
+  'kFoodBoxTitle': '韩国食品盒',
+  "today's recommended food" : "今日推荐食品",
+  'viewAllKoreanFoods': '查看所有韩国食品',
+  'community': '社区',
+  'custom recipes': '自定义食谱',
+  'bookmark list': '书签列表',
+  'food images': '食物图片',
+  'Community/Custom Recipes': '社区/自定义食谱',
+  'Are you sure you want to delete it?': '你确定要删除它吗？',
+  'Cancel': '取消',
+  'Delete': '删除',
+  'Select Language': '选择语言',
+};

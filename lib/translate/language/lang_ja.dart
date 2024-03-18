@@ -1,0 +1,18 @@
+final Map<String, String> langJa = {
+  'myPageTitle': 'マイページ',
+  'guest' : 'ゲスト',
+  'login': 'ログイン',
+  'signUp': 'サインアップ',
+  'kFoodBoxTitle': 'Kフードボックス',
+  "today's recommended food" : "今日のおすすめ",
+  'viewAllKoreanFoods': '全ての韓国食品を見る',
+  'community': 'コミュニティ',
+  'custom recipes': 'カスタムレシピ',
+  'bookmark list': 'ブックマークリスト',
+  'food images': '料理画像',
+  'Community/Custom Recipes': 'コミュニティ/カスタムレシピ',
+  'Are you sure you want to delete it?': '本当に削除しますか？',
+  'Cancel': 'キャンセル',
+  'Delete': '削除する',
+  'Select Language': '言語選択',
+};

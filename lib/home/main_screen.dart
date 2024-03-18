@@ -14,7 +14,7 @@ class KFoodBoxHome extends StatefulWidget {
 
 class _KFoodBoxHomeState extends State<KFoodBoxHome> {
   int _currentIndex = 0; // bottomnavigation index 번호 
-  int s = 0; // 나중에 세션으로 사용하면 대체될 예정
+  int s = 1; // 나중에 세션으로 사용하면 대체될 예정
 
   final List<Map<String, String>> imageList = [
     {
