@@ -31,7 +31,12 @@ class _MyPageYesState extends State<MyPageYes> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => LanguageSelectScreen()),
+                MaterialPageRoute(
+                  builder: (context) => LanguageSelectScreen(
+                    onLanguageSelected: (selectedCode) {
+                    },
+                  ),
+                ),
               );
             },
           ),

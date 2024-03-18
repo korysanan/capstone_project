@@ -4,6 +4,7 @@ import 'bottom.dart'; // lib/home/bottom.dart에서 bottomnavigation 불러옴
 import '../my_page/my_page_no.dart';
 import '../my_page/my_page_yes.dart';
 import 'on_item_tap.dart';
+import '../globals.dart' as globals;
 
 
 class KFoodBoxHome extends StatefulWidget {
@@ -13,7 +14,7 @@ class KFoodBoxHome extends StatefulWidget {
 
 class _KFoodBoxHomeState extends State<KFoodBoxHome> {
   int _currentIndex = 0; // bottomnavigation index 번호 
-  int s = 1; // 나중에 세션으로 사용하면 대체될 예정
+  int s = 0; // 나중에 세션으로 사용하면 대체될 예정
 
   final List<Map<String, String>> imageList = [
     {
@@ -37,7 +38,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
     return Scaffold(
       resizeToAvoidBottomInset: false, // 위치 고정하는거 -> 이거 x일시 만약 키보드 올라올때 각각들도 따라 올라옴 
       appBar: AppBar(
-        title: Text('K-Food Box'),
+        title: Text(globals.getText('kFoodBoxTitle')),
         centerTitle: true,
         backgroundColor: Colors.grey[400], // AppBar의 배경색을 회색으로 설정
         /*
@@ -77,7 +78,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Icon(Icons.person),
-                Text('My Page', style: TextStyle(fontSize: 10)),
+                Text(globals.getText('myPageTitle'), style: TextStyle(fontSize: 10)),
               ],
             ),
           ),
@@ -86,8 +87,16 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
       ),
 
       body: ListView(
-        padding: EdgeInsets.only(top: 40.0),
+        padding: EdgeInsets.only(top: 10.0),
         children: [
+          Center(
+            child: Text(
+              globals.getText("today's recommended food"),
+              style: TextStyle(
+                fontSize: 25.0,
+              ),
+            ),
+          ),
           Center(
             child: CarouselSlider(
               options: CarouselOptions(
@@ -137,7 +146,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               onPressed: () {
                 print("view all Korean foods"); // 카테고리 들어가는 화면 넣을 부분 
               },
-              child: Text('View All Korean foods'),
+              child: Text(globals.getText('viewAllKoreanFoods')),
             ),
           ),
           Card(
@@ -145,7 +154,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
             child: Column(
               children: [
                 ListTile(
-                  title: Text('Community', style: TextStyle(fontWeight: FontWeight.bold)),
+                  title: Text(globals.getText('community'), style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 Divider(),
                 ListTile(
@@ -168,7 +177,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
             child: Column(
               children: [
                 ListTile(
-                  title: Text('Custom Recipes', style: TextStyle(fontWeight: FontWeight.bold)),
+                  title: Text(globals.getText('custom recipes'), style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 Divider(),
                 ListTile(
