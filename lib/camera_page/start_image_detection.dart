@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../camera_page/camera_page.dart';
+import 'camera_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // JSON 파싱을 위해 추가
 import 'image_information.dart';
+import '../globals.dart' as globals;
 
 class ImageDetailsPage extends StatelessWidget {
   final File image;
@@ -31,17 +32,16 @@ class ImageDetailsPage extends StatelessWidget {
       print('Image uploaded successfully');
       try {
         String responseBody = await response.stream.bytesToString();
-        print(responseBody);
         List<dynamic> jsonResponse = jsonDecode(responseBody);
-        List<String> names = [];
+        List<dynamic> food_info = [];
         for (var item in jsonResponse) {
           //print('xmin: ${item["xmin"]}, ymin: ${item["ymin"]}, xmax: ${item["xmax"]}, ymax: ${item["ymax"]}, confidence: ${item["confidence"]}, class: ${item["class"]}, name: ${item["name"]}');
-          names.add(item["name"]); // 리스트에 이름 추가
+          food_info.add(item); // 모든 정보 food_info의 저장
         }
-        if (names.isNotEmpty) {
+        if (food_info.isNotEmpty) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ImageInformationPage(image: image, names: names)), // 수정된 부분
+            MaterialPageRoute(builder: (context) => ImageInformationPage(image: image, food_info: food_info)), // 수정된 부분
           );
         }
       } catch (e) {
@@ -57,7 +57,16 @@ class ImageDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Korean Food Detection'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CameraPage()),
+            );
+          },
+        ),
+        title: Text(globals.getText('Korean Food Detection')),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +78,7 @@ class ImageDetailsPage extends StatelessWidget {
           ElevatedButton.icon(
             icon: Icon(Icons.play_circle),
             label: Text(
-              'Start Image Detection',
+              globals.getText('Start Image Detection'),
               style: TextStyle(fontSize: 20),
             ),
             onPressed: () {
@@ -85,7 +94,7 @@ class ImageDetailsPage extends StatelessWidget {
           ElevatedButton.icon(
             icon: Icon(Icons.undo),
             label: Text(
-              'Undo',
+              globals.getText('Undo'),
               style: TextStyle(fontSize: 20),
             ),
             onPressed: () {
@@ -102,7 +111,7 @@ class ImageDetailsPage extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.all(20),
-            child: Text('What is Korean Food Detection?'),
+            child: Text(globals.getText('What is Korean Food Detection?')),
           ),
           SizedBox(height: 20), // Add spacing at the bottom if needed.
         ],

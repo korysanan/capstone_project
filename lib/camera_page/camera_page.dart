@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'start_image_detection.dart'; // This is the separate file for the ImageDetailsPage.
+import 'package:image/image.dart' as img;
+import 'start_image_detection.dart';
+import '../globals.dart' as globals;
+import '../home/main_screen.dart';
 
 class CameraPage extends StatefulWidget {
   @override
@@ -15,8 +18,16 @@ class _CameraPageState extends State<CameraPage> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
+      File imageFile = File(pickedFile.path);
+      img.Image image = img.decodeImage(imageFile.readAsBytesSync())!;
+      img.Image resizedImg = img.copyResize(image, width: 400, height: 300); // 이미지 크기 조정
+
+      // 조정된 이미지를 새 파일에 저장
+      String newPath = "${pickedFile.path}_resized.jpg";
+      File newImageFile = File(newPath)..writeAsBytesSync(img.encodeJpg(resizedImg));
+
       setState(() {
-        _image = File(pickedFile.path);
+        _image = newImageFile;
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => ImageDetailsPage(image: _image!),
         ));
@@ -28,8 +39,16 @@ class _CameraPageState extends State<CameraPage> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
+      File imageFile = File(pickedFile.path);
+      img.Image image = img.decodeImage(imageFile.readAsBytesSync())!;
+      img.Image resizedImg = img.copyResize(image, width: 400, height: 300); // 이미지 크기 조정
+
+      // 조정된 이미지를 새 파일에 저장
+      String newPath = "${pickedFile.path}_resized.jpg";
+      File newImageFile = File(newPath)..writeAsBytesSync(img.encodeJpg(resizedImg));
+
       setState(() {
-        _image = File(pickedFile.path);
+        _image = newImageFile;
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => ImageDetailsPage(image: _image!),
         ));
@@ -41,7 +60,16 @@ class _CameraPageState extends State<CameraPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Korean Food Detection'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => KFoodBoxHome()),
+            );
+          },
+        ),
+        title: Text(globals.getText('Korean Food Detection')),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +85,7 @@ class _CameraPageState extends State<CameraPage> {
             child: _image == null
                 ? Center(
                     child: Text(
-                      'Image is empty',
+                      globals.getText('Image is empty'),
                       style: TextStyle(fontSize: 20),
                     ),
                   )
@@ -67,7 +95,7 @@ class _CameraPageState extends State<CameraPage> {
           ElevatedButton.icon(
             icon: Icon(Icons.camera_alt),
             label: Text(
-              'Take a Picture',
+              globals.getText('Take a Picture'),
               style: TextStyle(fontSize: 20),
             ),
             onPressed: _takePicture,
@@ -81,7 +109,7 @@ class _CameraPageState extends State<CameraPage> {
           ElevatedButton.icon(
             icon: Icon(Icons.image),
             label: Text(
-              'Import from gallery',
+              globals.getText('Import from gallery'),
               style: TextStyle(fontSize: 20),
             ),
             onPressed: _pickImageFromGallery,
@@ -93,7 +121,7 @@ class _CameraPageState extends State<CameraPage> {
           ),
           Padding(
             padding: EdgeInsets.all(20),
-            child: Text('What is Korean Food Detection?'),
+            child: Text(globals.getText('What is Korean Food Detection?')),
           ),
         ],
       ),

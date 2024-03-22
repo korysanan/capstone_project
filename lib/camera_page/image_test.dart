@@ -25,8 +25,8 @@ class _ImageTestWidgetState extends State<ImageTestWidget> {
                 ),
                 if (_showWidget)
                   Positioned(
-                    left: 80, // 왼쪽 상단 모서리의 X좌표
-                    top: 100, // 왼쪽 상단 모서리의 Y좌표
+                    left: 55.94588, // 왼쪽 상단 모서리의 X좌표
+                    top: 138.23, // 왼쪽 상단 모서리의 Y좌표
                     right: 0, // 오른쪽 아래 모서리까지의 거리를 오른쪽으로부터 설정
                     bottom: 80, // 오른쪽 아래 모서리까지의 거리를 아래쪽으로부터 설정
                     child: Container(

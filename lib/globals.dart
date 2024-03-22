@@ -3,6 +3,8 @@ import "translate/language/lang_ko.dart";
 import "translate/language/lang_ja.dart";
 import "translate/language/lang_zh.dart";
 
+int s = 1; // 세션
+
 String selectedLanguageCode = 'en'; // 기본 언어 코드
 
 Map<String, Map<String, String>> appTexts = {

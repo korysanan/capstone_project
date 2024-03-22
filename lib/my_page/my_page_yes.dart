@@ -4,6 +4,7 @@ import '../home/bottom.dart';
 import 'user_info.dart';
 import '../home/on_item_tap.dart';
 import '../globals.dart' as globals;
+import '../home/main_screen.dart';
 
 class MyPageYes extends StatefulWidget {
   @override
@@ -24,6 +25,15 @@ class _MyPageYesState extends State<MyPageYes> {
     return Scaffold(
       resizeToAvoidBottomInset: false, // 위치 고정하는거 -> 이거 x일시 만약 키보드 올라올때 각각들도 따라 올라옴 
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => KFoodBoxHome()),
+            );
+          },
+        ),
         title: Text(globals.getText('myPageTitle')),
         centerTitle: true,
         actions: [

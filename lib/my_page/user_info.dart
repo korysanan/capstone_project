@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../home/bottom.dart';
 import '../home/on_item_tap.dart';
+import 'my_page_yes.dart';
+import '../globals.dart' as globals;
 
 class UserInfoScreen extends StatefulWidget {
   @override
@@ -15,7 +17,16 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false, // 위치 고정하는거 -> 이거 x일시 만약 키보드 올라올때 각각들도 따라 올라옴 
       appBar: AppBar(
-        title: Text('User Information'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MyPageYes()),
+            );
+          },
+        ),
+        title: Text(globals.getText('User Information')),
         centerTitle: true,
       ),
       body: Container(
@@ -67,7 +78,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 onPressed: () {
                   // Submit button action
                 },
-                child: Text('submit'),
+                child: Text(globals.getText('submit')),
               ),
             ),
             Spacer(), // This will push the withdrawal button to the bottom
@@ -88,16 +99,16 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text('Do you really want to withdraw?'),
+                          title: Text(globals.getText('Do you really want to withdraw?')),
                           actions: <Widget>[
                             TextButton(
-                              child: Text('Cancel'),
+                              child: Text(globals.getText('Cancel')),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
                             ),
                             TextButton(
-                              child: Text('withdraw'),
+                              child: Text(globals.getText('withdraw')),
                               style: TextButton.styleFrom(
                                 primary: Colors.red,
                               ),
@@ -110,7 +121,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                       },
                     );
                   },
-                  child: Text('withdrawal'),
+                  child: Text(globals.getText('withdraw')),
                   style: TextButton.styleFrom(
                     primary: Colors.red, // 버튼 텍스트 색상을 지정합니다.
                   ),

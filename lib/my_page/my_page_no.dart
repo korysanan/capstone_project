@@ -5,6 +5,7 @@ import '../login/login_screen.dart';
 import 'language_setting.dart';
 import '../home/on_item_tap.dart';
 import '../globals.dart' as globals;
+import '../home/main_screen.dart';
 
 class MyPageNo extends StatefulWidget {
   @override
@@ -18,6 +19,15 @@ class _MyPageNoState extends State<MyPageNo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => KFoodBoxHome()),
+            );
+          },
+        ),
         title: Text(globals.getText('myPageTitle')),
         centerTitle: true,
         actions: [

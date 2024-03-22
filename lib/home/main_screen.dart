@@ -14,7 +14,6 @@ class KFoodBoxHome extends StatefulWidget {
 
 class _KFoodBoxHomeState extends State<KFoodBoxHome> {
   int _currentIndex = 0; // bottomnavigation index 번호 
-  int s = 1; // 나중에 세션으로 사용하면 대체될 예정
 
   final List<Map<String, String>> imageList = [
     {
@@ -60,7 +59,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
         actions: <Widget>[
           GestureDetector(
             onTap: () {
-              if (s == 0){
+              if (globals.s == 0){
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => MyPageNo()),

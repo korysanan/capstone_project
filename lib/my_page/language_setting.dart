@@ -3,6 +3,8 @@ import '../home/bottom.dart';
 import '../home/on_item_tap.dart';
 import '../translate/language_type.dart';
 import '../globals.dart' as globals;
+import 'my_page_no.dart';
+import 'my_page_yes.dart';
 
 class LanguageSelectScreen extends StatefulWidget {
   final Function(String code) onLanguageSelected;
@@ -28,6 +30,23 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            if (globals.s == 0){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyPageNo()),
+              );
+            }
+            else{
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyPageYes()),
+              );
+            } 
+          },
+        ),
         title: Text(globals.getText('Select Language')),
         centerTitle: true,
       ),
@@ -44,9 +63,11 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
               languages[index]['name'],
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            // language_setting.dart 내의 ListTile의 onTap 수정
             onTap: () {
-              globals.selectedLanguageCode = code; // 전역 변수 업데이트
+              setState(() {
+                globals.selectedLanguageCode = code; // 전역 변수 업데이트
+              });
+              widget.onLanguageSelected(code); // 선택된 언어 코드를 부모 위젯에 전달
             },
           );
         },
