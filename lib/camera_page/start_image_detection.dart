@@ -8,8 +8,9 @@ import '../globals.dart' as globals;
 
 class ImageDetailsPage extends StatelessWidget {
   final File image;
+  final Size size; 
 
-  ImageDetailsPage({required this.image});
+  ImageDetailsPage({required this.image, required this.size});
 
   Future<void> uploadImage(BuildContext context, File image) async {
     showDialog(
@@ -41,7 +42,7 @@ class ImageDetailsPage extends StatelessWidget {
         if (food_info.isNotEmpty) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ImageInformationPage(image: image, food_info: food_info)), // 수정된 부분
+            MaterialPageRoute(builder: (context) => ImageInformationPage(image: image, food_info: food_info, size: size)), // 수정된 부분
           );
         }
       } catch (e) {
@@ -55,6 +56,7 @@ class ImageDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(size);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -67,6 +69,7 @@ class ImageDetailsPage extends StatelessWidget {
           },
         ),
         title: Text(globals.getText('Korean Food Detection')),
+        centerTitle: true,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -48,6 +48,8 @@ dependencies:
 
   http: ^1.2.0
 
+  dialog_flowtter:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -74,6 +76,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
+    - assets/dialog_flow_auth.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -18,6 +18,7 @@ class _TestScreenState extends State<TestScreen> {
         setState(() {
           foodInfo = data.toString();// 응답 데이터를 문자열로 변환하여 화면에 표시
         });
+        print(data);
       } else {
         throw Exception('Failed to load food');
       }

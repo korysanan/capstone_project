@@ -5,6 +5,7 @@ import '../my_page/my_page_no.dart';
 import '../my_page/my_page_yes.dart';
 import 'on_item_tap.dart';
 import '../globals.dart' as globals;
+//import '../translate/language_detect.dart';
 
 
 class KFoodBoxHome extends StatefulWidget {
@@ -18,11 +19,11 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
   final List<Map<String, String>> imageList = [
     {
       "url": "https://recipe1.ezmember.co.kr/cache/recipe/2023/06/29/a1a5a04e39879f1033ae07367dfee5251.jpg",
-      "name": "tteokbokki"
+      "name": "Tteokbokki"
     },
     {
       "url": "https://www.sanghafarm.co.kr/sanghafarm_Data/upload/shop/product/201810/A0003528_2018102319172333992.jpg",
-      "name": "sundae"
+      "name": "Sundae"
     },
     {
       "url": "https://recipe1.ezmember.co.kr/cache/recipe/2022/08/04/d6f211ffa5c3846d5134f4d6bb00a3a51.jpg",
@@ -103,34 +104,66 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                 enableInfiniteScroll: true,
                 autoPlay: true,
               ),
+              // CarouselSlider 내부에서 FutureBuilder를 사용하여 번역된 텍스트 표시
               items: imageList.map((e) => ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
                 child: Stack(
                   children: <Widget>[
                     Image.network(
-                      e['url']!, // 여기서 `!`를 사용하여 `e['url']`이 null이 아님을 단언/ 안하면 오류 발생 
+                      e['url']!, 
                       width: 500.0,
                       height: 300.0,
                       fit: BoxFit.cover,
                     ),
-                    Positioned( // 이미지 위에 텍스트 위치
+                    Positioned(
                       bottom: 0.0,
                       left: 0.0,
                       right: 0.0,
                       child: Container(
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: Colors.black54, // 반투명 배경
+                          color: Colors.black54,
                         ),
                         padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
                         child: Text(
-                          e['name']!, // 텍스트 내용, 여기서 `!`를 사용하여 null이 아님을 단언하기 / 안하면 오류 발생 
+                          e['name']!,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                        /*
+                        // FutureBuilder를 사용하여 비동기적으로 텍스트 번역 결과 반영
+                        child: FutureBuilder<String>(
+                          future: translateText(e['name']!),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.done) {
+                              if (snapshot.hasError) {
+                                return Text(
+                                  'Error',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                              } else {
+                                return Text(
+                                  snapshot.data!,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                              }
+                            } else {
+                              return CircularProgressIndicator(); // 로딩 중 표시
+                            }
+                          },
+                        ),
+                        */
                       ),
                     ),
                   ],

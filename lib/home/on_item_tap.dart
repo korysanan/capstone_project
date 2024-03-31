@@ -2,9 +2,8 @@
 import 'package:flutter/material.dart';
 import 'main_screen.dart';
 import '../camera_page/camera_page.dart';
-import '../camera_page/image_test.dart';
-import '../translate/trans_test.dart';
-import '../server_test/test.dart';
+import '../test/trans_test/text_test.dart';
+import '../chat_bot/chat.dart';
 
 void onItemTapped(BuildContext context, int index) {
   switch (index) {
@@ -18,7 +17,7 @@ void onItemTapped(BuildContext context, int index) {
       print("mail");
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ImageTestWidget()),
+        MaterialPageRoute(builder: (context) => TextTest()),
       );
       break;
     case 2: // Camera 탭
@@ -29,16 +28,11 @@ void onItemTapped(BuildContext context, int index) {
       break;
     case 3: // search 탭
       print("search");
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => TestScreen()),
-      );
       break;
     case 4: // chat_bot 탭
-      print("chat_bot");
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => TranslationPage()),
+        MaterialPageRoute(builder: (context) => ChatScreen()),
       );
       break;
   }

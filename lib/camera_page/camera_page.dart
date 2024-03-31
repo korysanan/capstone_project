@@ -14,47 +14,43 @@ class CameraPage extends StatefulWidget {
 class _CameraPageState extends State<CameraPage> {
   File? _image;
 
-  Future<void> _takePicture() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
-    if (pickedFile != null) {
-      File imageFile = File(pickedFile.path);
-      img.Image image = img.decodeImage(imageFile.readAsBytesSync())!;
-      img.Image resizedImg = img.copyResize(image, width: 400, height: 300); // 이미지 크기 조정
+Future<void> _takePicture() async {
+  final picker = ImagePicker();
+  final pickedFile = await picker.pickImage(source: ImageSource.camera);
+  if (pickedFile != null) {
+    File imageFile = File(pickedFile.path); // 이미지 파일 사용
+    final imageSize = await _getImageSize(imageFile);
 
-      // 조정된 이미지를 새 파일에 저장
-      String newPath = "${pickedFile.path}_resized.jpg";
-      File newImageFile = File(newPath)..writeAsBytesSync(img.encodeJpg(resizedImg));
-
-      setState(() {
-        _image = newImageFile;
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => ImageDetailsPage(image: _image!),
-        ));
-      });
-    }
+    // 상태 업데이트 및 이미지 상세 페이지로 이동
+    setState(() {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => ImageDetailsPage(image: imageFile, size: imageSize),
+      ));
+    });
   }
+}
 
-  Future<void> _pickImageFromGallery() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      File imageFile = File(pickedFile.path);
-      img.Image image = img.decodeImage(imageFile.readAsBytesSync())!;
-      img.Image resizedImg = img.copyResize(image, width: 400, height: 300); // 이미지 크기 조정
+Future<void> _pickImageFromGallery() async {
+  final picker = ImagePicker();
+  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  if (pickedFile != null) {
+    File imageFile = File(pickedFile.path); // 갤러리에서 선택한 원본 이미지 파일 사용
+    final imageSize = await _getImageSize(imageFile);
 
-      // 조정된 이미지를 새 파일에 저장
-      String newPath = "${pickedFile.path}_resized.jpg";
-      File newImageFile = File(newPath)..writeAsBytesSync(img.encodeJpg(resizedImg));
-
-      setState(() {
-        _image = newImageFile;
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => ImageDetailsPage(image: _image!),
-        ));
-      });
-    }
+    // 상태 업데이트 및 이미지 상세 페이지로 이동
+    setState(() {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => ImageDetailsPage(image: imageFile, size: imageSize),
+      ));
+    });
   }
+}
+
+Future<Size> _getImageSize(File imageFile) async {
+  final bytes = await imageFile.readAsBytes();
+  final image = img.decodeImage(bytes);
+  return Size(image!.width.toDouble(), image.height.toDouble());
+}
 
   @override
   Widget build(BuildContext context) {
