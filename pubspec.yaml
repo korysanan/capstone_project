@@ -50,6 +50,8 @@ dependencies:
 
   dialog_flowtter:
 
+  #google_maps_flutter: ^2.6.0 # google maps
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

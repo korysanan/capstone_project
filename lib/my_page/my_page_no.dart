@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../home/bottom.dart';
-import '../login/sign_up_screen.dart';
+import '../login/sign_up/sign_up_screen.dart';
 import '../login/login_screen.dart';
 import 'language_setting.dart';
 import '../home/on_item_tap.dart';

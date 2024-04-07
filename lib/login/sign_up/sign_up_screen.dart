@@ -24,13 +24,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return password.length >= 8 && typesIncluded >= 2; // 8이상 조건 2개 이상
   }
 
+/*
   @override
   void dispose() {
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
   }
-  
+*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
