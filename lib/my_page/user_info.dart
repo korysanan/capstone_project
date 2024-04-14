@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../home/bottom.dart';
 import '../home/on_item_tap.dart';
 import 'my_page_yes.dart';
-import '../globals.dart' as globals;
+import '../globals.dart' as globals;
 
 class UserInfoScreen extends StatefulWidget {
   @override

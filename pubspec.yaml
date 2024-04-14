@@ -50,6 +50,10 @@ dependencies:
 
   dialog_flowtter:
 
+  shared_preferences: ^2.2.3
+
+  #cookie_jar: ^4.0.8 # cookie
+
   #google_maps_flutter: ^2.6.0 # google maps
 
 dev_dependencies:

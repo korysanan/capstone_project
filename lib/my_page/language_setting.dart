@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../home/bottom.dart';
 import '../home/on_item_tap.dart';
 import '../translate/language_type.dart';
-import '../globals.dart' as globals;
+import '../globals.dart' as globals;
 import 'my_page_no.dart';
 import 'my_page_yes.dart';
 

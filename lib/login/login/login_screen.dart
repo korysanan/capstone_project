@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'sign_up/sign_up_screen.dart';
-import '../home/main_screen.dart';
-
+import 'package:flutter/services.dart';
+import 'login_service.dart'; // Import the login service
+import '../sign_up/sign_up_screen.dart';
+import '../../home/main_screen.dart';
 
 class LoginScreen extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false, // 위치 고정하는거 -> 이거 x일시 만약 키보드 올라올때 각각들도 따라 올라옴 
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -24,6 +28,7 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 48.0),
             TextField(
+              controller: emailController,
               decoration: InputDecoration(
                 labelText: 'EMAIL',
                 border: OutlineInputBorder(),
@@ -32,6 +37,7 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             TextField(
+              controller: passwordController,
               decoration: InputDecoration(
                 labelText: 'PASSWORD',
                 border: OutlineInputBorder(),
@@ -42,7 +48,25 @@ class LoginScreen extends StatelessWidget {
             ElevatedButton(
               child: Text('Log in'),
               onPressed: () {
-                print('Login button pressed'); // 로그인 db 구현 했을때 일치 하면 적용되게 설정하기 
+                if (_validateEmail(emailController.text)) {
+                  LoginService.login(context, emailController.text, passwordController.text);
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: Text('Invalid Email'),
+                      content: Text('Please enter a valid email address.'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(ctx).pop();
+                          },
+                          child: Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.orange,
@@ -62,8 +86,6 @@ class LoginScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => SignUpScreen()),
                 );
-                // 회원가입 화면으로 이동 
-                // lib/login/sign_up_screen.dart로 이동
               },
             ),
             SizedBox(height: 100.0),
@@ -86,7 +108,6 @@ class LoginScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => KFoodBoxHome()),
                 );
-                // lib/home/main_screen.dart로 이동 
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.grey[400],
@@ -100,5 +121,11 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool _validateEmail(String email) {
+    Pattern pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+    RegExp regex = RegExp(pattern.toString());
+    return regex.hasMatch(email);
   }
 }

@@ -3,7 +3,7 @@ import 'language_setting.dart';
 import '../home/bottom.dart';
 import 'user_info.dart';
 import '../home/on_item_tap.dart';
-import '../globals.dart' as globals;
+import '../globals.dart' as globals;
 import '../home/main_screen.dart';
 
 class MyPageYes extends StatefulWidget {

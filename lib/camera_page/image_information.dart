@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../globals.dart' as globals;
+import '../globals.dart' as globals;
 
 class ImageInformationPage extends StatelessWidget {
   final File image;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 import 'start_image_detection.dart';
-import '../globals.dart' as globals;
+import '../globals.dart' as globals;
 import '../home/main_screen.dart';
 
 class CameraPage extends StatefulWidget {

@@ -4,7 +4,7 @@ import 'camera_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // JSON 파싱을 위해 추가
 import 'image_information.dart';
-import '../globals.dart' as globals;
+import '../globals.dart' as globals;
 
 class ImageDetailsPage extends StatelessWidget {
   final File image;

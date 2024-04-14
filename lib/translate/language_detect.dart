@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../globals.dart';
+import '../globals.dart';
 
 Future<String> translateText(String text) async {
     

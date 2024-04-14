@@ -4,7 +4,7 @@ import 'bottom.dart'; // lib/home/bottom.dart에서 bottomnavigation 불러옴
 import '../my_page/my_page_no.dart';
 import '../my_page/my_page_yes.dart';
 import 'on_item_tap.dart';
-import '../globals.dart' as globals;
+import '../globals.dart' as globals;
 //import '../translate/language_detect.dart';
 
 
@@ -56,7 +56,6 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
         ),
         */
         // 우선 이거 나중에 앱 로고 넣을 부분 
-
         actions: <Widget>[
           GestureDetector(
             onTap: () {
@@ -238,5 +237,4 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
       // lib/home/bottom.dart에서 bottomNavigation 불러오기 
     );
   }
-
 }
