@@ -59,16 +59,16 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
         actions: <Widget>[
           GestureDetector(
             onTap: () {
-              if (globals.s == 0){
+              if (globals.sessionId != null){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyPageNo()),
+                  MaterialPageRoute(builder: (context) => MyPageYes()),
                 );
               }
               else{
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyPageYes()),
+                  MaterialPageRoute(builder: (context) => MyPageNo()),
                 );
               } // 세션 보유 여부에 따라 mypage가 달라짐
             },
@@ -175,7 +175,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
             padding: EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                print("view all Korean foods"); // 카테고리 들어가는 화면 넣을 부분 
+                print(''); // 카테고리 들어가는 화면 넣을 부분 
               },
               child: Text(globals.getText('viewAllKoreanFoods')),
             ),

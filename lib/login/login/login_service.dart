@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../home/main_screen.dart';
 import 'login_screen.dart';
+import '../../globals.dart' as globals; // Import globals
 
 class LoginService {
   static Future<void> login(BuildContext context, String email, String password) async {
@@ -17,13 +18,13 @@ class LoginService {
     );
 
     if (response.statusCode == 200) {
-      // 세션 ID 저장
-      String? sessionId = response.headers['set-cookie'];
-      if (sessionId != null) {
+      // Retrieve and store session ID globally
+      globals.sessionId = response.headers['set-cookie'];
+      if (globals.sessionId != null) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('sessionId', sessionId);
+        await prefs.setString('sessionId', globals.sessionId!);
       }
-      print("아이디 : $sessionId");
+      print("Session ID: ${globals.sessionId}");
 
       showDialog(
         context: context,
@@ -73,15 +74,16 @@ class LoginService {
       );
 
       if (response.statusCode == 200) {
-        print("성공?");
-        // 서버 응답 성공 시 로컬 세션 ID 삭제
+        print("Logout Successful");
+        // Clear global and local session ID
         await prefs.remove('sessionId');
+        globals.sessionId = null;
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => LoginScreen()), // 로그인 화면으로 이동
+          MaterialPageRoute(builder: (context) => LoginScreen()), // Redirect to login screen
         );
       } else {
-        // 로그아웃 실패 처리, 에러 메시지를 보여주거나 로깅
+        // Handle logout failure
         showDialog(
           context: context,
           builder: (BuildContext context) {

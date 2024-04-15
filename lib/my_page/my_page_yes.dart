@@ -5,6 +5,7 @@ import 'user_info.dart';
 import '../home/on_item_tap.dart';
 import '../globals.dart' as globals;
 import '../home/main_screen.dart';
+import '../login/login/login_service.dart';
 
 class MyPageYes extends StatefulWidget {
   @override
@@ -79,7 +80,7 @@ class _MyPageYesState extends State<MyPageYes> {
                 IconButton(
                   icon: Icon(Icons.logout),
                   onPressed: () {
-                    // 로그아웃 기능 추가
+                    LoginService.logout(context);
                   },
                 ),
               ],
