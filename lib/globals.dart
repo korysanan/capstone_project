@@ -15,3 +15,6 @@ String getText(String key) {
 }
 
 String? sessionId;
+String? user_nickname;
+String? user_email;
+String? user_language;

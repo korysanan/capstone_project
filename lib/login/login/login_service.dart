@@ -18,13 +18,17 @@ class LoginService {
     );
 
     if (response.statusCode == 200) {
-      // Retrieve and store session ID globally
       globals.sessionId = response.headers['set-cookie'];
       if (globals.sessionId != null) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('sessionId', globals.sessionId!);
+        // Fetch user_nickname
+        await _fetchNickname();
+        // Fetch user_email
+        await _fetchEmail();
+        // Fetch user_language
+        await _fetchLanguage();
       }
-      print("Session ID: ${globals.sessionId}");
 
       showDialog(
         context: context,
@@ -60,30 +64,70 @@ class LoginService {
     }
   }
 
+  static Future<void> _fetchNickname() async {
+    var response = await http.get(
+      Uri.parse('http://api.kfoodbox.click/my-nickname'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': globals.sessionId!, // Send session ID in headers
+      },
+    );
+    if (response.statusCode == 200) {
+      globals.user_nickname = json.decode(response.body)['nickname']; // Assuming the nickname is returned in this manner
+    }
+  }
+
+  static Future<void> _fetchEmail() async {
+    var response = await http.get(
+      Uri.parse('http://api.kfoodbox.click/my-email'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': globals.sessionId!, // Send session ID in headers
+      },
+    );
+    if (response.statusCode == 200) {
+      globals.user_email = json.decode(response.body)['email']; // Assuming the email is returned in this manner
+    }
+  }
+
+  static Future<void> _fetchLanguage() async {
+    var response = await http.get(
+      Uri.parse('http://api.kfoodbox.click/my-language'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': globals.sessionId!, // Send session ID in headers
+      },
+    );
+    if (response.statusCode == 200) {
+      int userId = json.decode(response.body)['id'];
+      globals.user_language = userId.toString();
+    }
+  }
+
   static Future<void> logout(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? sessionId = prefs.getString('sessionId');
 
     if (sessionId != null) {
       var response = await http.post(
-        Uri.parse('http://api.kfoodbox.click/logout'), // 실제 로그아웃을 처리할 서버의 URI
+        Uri.parse('http://api.kfoodbox.click/logout'),
         headers: {
           'Content-Type': 'application/json',
-          'Cookie': sessionId, // 서버에 세션 ID 전송
+          'Cookie': sessionId,
         },
       );
 
       if (response.statusCode == 200) {
-        print("Logout Successful");
-        // Clear global and local session ID
         await prefs.remove('sessionId');
         globals.sessionId = null;
+        globals.user_nickname = null;
+        globals.user_email = null;
+        globals.user_language = null;
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => LoginScreen()), // Redirect to login screen
+          MaterialPageRoute(builder: (context) => LoginScreen()),
         );
       } else {
-        // Handle logout failure
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -93,7 +137,7 @@ class LoginService {
               actions: <Widget>[
                 TextButton(
                   child: Text('OK'),
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () => Navigator.of(context). pop(),
                 ),
               ],
             );

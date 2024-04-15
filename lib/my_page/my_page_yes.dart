@@ -70,7 +70,7 @@ class _MyPageYesState extends State<MyPageYes> {
                     );
                   },
                   child: Text(
-                    'abcd@gmail.com',
+                    globals.user_email ?? 'No email set',  // This will use the globally stored email or a default string if null
                     style: TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold,

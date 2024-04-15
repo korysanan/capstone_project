@@ -174,8 +174,10 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
           Padding(
             padding: EdgeInsets.all(8.0),
             child: ElevatedButton(
-              onPressed: () {
-                print(''); // 카테고리 들어가는 화면 넣을 부분 
+              onPressed: () { // 카테고리 들어가는 화면 넣을 부분 
+                print(globals.user_email);
+                print(globals.user_nickname);
+                print(globals.user_language);
               },
               child: Text(globals.getText('viewAllKoreanFoods')),
             ),
