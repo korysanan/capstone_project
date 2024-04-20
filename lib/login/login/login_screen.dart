@@ -5,8 +5,11 @@ import '../sign_up/sign_up_screen.dart';
 import '../../home/main_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  //final TextEditingController emailController = TextEditingController();
+  //final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController(text: "ujin0561@naver.com");
+  final TextEditingController passwordController = TextEditingController(text: "dnwls0561");
+
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                 }
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.orange,
+                backgroundColor: Colors.orange,
                 padding: EdgeInsets.symmetric(vertical: 12.0),
               ),
             ),
@@ -110,7 +113,7 @@ class LoginScreen extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.grey[400],
+                backgroundColor: Colors.grey[400],
                 padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),

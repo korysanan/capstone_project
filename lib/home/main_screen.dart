@@ -5,6 +5,8 @@ import '../my_page/my_page_no.dart';
 import '../my_page/my_page_yes.dart';
 import 'on_item_tap.dart';
 import '../globals.dart' as globals;
+//import '../bookmark/test.dart';
+import '../bookmark/foods_bookmark/foods_bookmark_service.dart';
 //import '../translate/language_detect.dart';
 
 
@@ -58,8 +60,9 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
         // 우선 이거 나중에 앱 로고 넣을 부분 
         actions: <Widget>[
           GestureDetector(
-            onTap: () {
+            onTap: () async{
               if (globals.sessionId != null){
+                await BookmarkService.fetchBookmarks();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => MyPageYes()),
@@ -175,9 +178,12 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
             padding: EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () { // 카테고리 들어가는 화면 넣을 부분 
-                print(globals.user_email);
-                print(globals.user_nickname);
-                print(globals.user_language);
+                /*
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
+                */
               },
               child: Text(globals.getText('viewAllKoreanFoods')),
             ),

@@ -96,7 +96,7 @@ Future<Size> _getImageSize(File imageFile) async {
             ),
             onPressed: _takePicture,
             style: ElevatedButton.styleFrom(
-              primary: Colors.green.shade100,
+              backgroundColor: Colors.green.shade100,
               minimumSize: Size(double.infinity, 100),
               padding: EdgeInsets.symmetric(horizontal: 20),
             ),
@@ -110,7 +110,7 @@ Future<Size> _getImageSize(File imageFile) async {
             ),
             onPressed: _pickImageFromGallery,
             style: ElevatedButton.styleFrom(
-              primary: Colors.green.shade100,
+              backgroundColor: Colors.green.shade100,
               minimumSize: Size(double.infinity, 100),
               padding: EdgeInsets.symmetric(horizontal: 20),
             ),

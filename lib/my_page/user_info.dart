@@ -3,6 +3,7 @@ import '../home/bottom.dart';
 import '../home/on_item_tap.dart';
 import 'my_page_yes.dart';
 import '../globals.dart' as globals;
+import '../login/login/login_service.dart';
 
 class UserInfoScreen extends StatefulWidget {
   @override
@@ -11,6 +12,10 @@ class UserInfoScreen extends StatefulWidget {
 
 class _UserInfoScreenState extends State<UserInfoScreen> {
   int _currentIndex = 0;
+  final TextEditingController _nicknameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordCheckController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +52,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   ),
                   SizedBox(width: 10),
                   Text(
-                    'abcd@gmail.com',
+                    globals.user_email ?? 'No email set',
                     style: TextStyle(
                       fontSize: 20.0,
                     ),
@@ -56,17 +61,20 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               ),
             ),
             TextField(
+              controller: _nicknameController,
               decoration: InputDecoration(
                 labelText: 'nickname',
               ),
             ),
             TextField(
+              controller: _passwordController,
               decoration: InputDecoration(
                 labelText: 'password',
               ),
               obscureText: true,
             ),
             TextField(
+              controller: _passwordCheckController,
               decoration: InputDecoration(
                 labelText: 'password check',
               ),
@@ -76,7 +84,50 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Submit button action
+                  if (_passwordController.text == _passwordCheckController.text) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Confirm Update'),
+                          content: Text('Do you want to update your nickname to ${_nicknameController.text} and password?'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('Cancel'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            TextButton(
+                              child: Text('Confirm'),
+                              onPressed: () {
+                                LoginService.updateUser(context, _nicknameController.text, _passwordController.text);
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Fail'),
+                          content: Text('Fail'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
                 },
                 child: Text(globals.getText('submit')),
               ),
@@ -110,10 +161,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                             TextButton(
                               child: Text(globals.getText('withdraw')),
                               style: TextButton.styleFrom(
-                                primary: Colors.red,
+                                backgroundColor: Colors.red,
                               ),
                               onPressed: () {
-                                Navigator.of(context).pop();
+                                LoginService.deleteUser(context);
                               },
                             ),
                           ],
@@ -122,9 +173,11 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                     );
                   },
                   child: Text(globals.getText('withdraw')),
+                  /*
                   style: TextButton.styleFrom(
-                    primary: Colors.red, // 버튼 텍스트 색상을 지정합니다.
+                    backgroundColor: Colors.red, // 버튼 텍스트 색상을 지정합니다.
                   ),
+                  */
                 ),
               ),
             ),

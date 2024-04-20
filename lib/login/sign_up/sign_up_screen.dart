@@ -161,7 +161,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: 32.0),
             ElevatedButton(
               child: Text('Sign up'),
-              style: ElevatedButton.styleFrom(primary: Colors.orange, padding: EdgeInsets.symmetric(vertical: 12.0)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange, // 'primary'를 'backgroundColor'로 변경
+                padding: EdgeInsets.symmetric(vertical: 12.0)
+              ),
               onPressed: _isEmailVerified && _isCertificationNumberVerified && _passwordController.text == _confirmPasswordController.text && _isNicknameChecked ? () async {
                 await registerUser(
                   context,

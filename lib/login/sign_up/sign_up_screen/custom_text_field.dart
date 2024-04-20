@@ -58,8 +58,8 @@ class CustomTextFieldWithButton extends StatelessWidget {
       return ElevatedButton(
         child: Text(buttonText),
         style: ElevatedButton.styleFrom(
-          primary: buttonColor,
-          onPrimary: Colors.black,
+          backgroundColor: buttonColor,
+          foregroundColor: Colors.black,
           textStyle: TextStyle(color: Colors.black),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0),

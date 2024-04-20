@@ -7,6 +7,7 @@ import 'login_screen.dart';
 import '../../globals.dart' as globals; // Import globals
 
 class LoginService {
+  // 로그인 api 이용
   static Future<void> login(BuildContext context, String email, String password) async {
     var response = await http.post(
       Uri.parse('http://api.kfoodbox.click/login'),
@@ -64,6 +65,7 @@ class LoginService {
     }
   }
 
+  // 자신의 닉네임 불러오기 api
   static Future<void> _fetchNickname() async {
     var response = await http.get(
       Uri.parse('http://api.kfoodbox.click/my-nickname'),
@@ -77,6 +79,7 @@ class LoginService {
     }
   }
 
+  // 자신의 이메일 불러오기 api
   static Future<void> _fetchEmail() async {
     var response = await http.get(
       Uri.parse('http://api.kfoodbox.click/my-email'),
@@ -90,6 +93,7 @@ class LoginService {
     }
   }
 
+  // 자신의 언어선택한거 불러오기 
   static Future<void> _fetchLanguage() async {
     var response = await http.get(
       Uri.parse('http://api.kfoodbox.click/my-language'),
@@ -104,6 +108,65 @@ class LoginService {
     }
   }
 
+  // 닉네임, 비밀번호 변경 api 불러오기 
+  static Future<void> updateUser(BuildContext context, String nickname, String password) async {
+    var url = Uri.parse('http://api.kfoodbox.click/user'); // Modify with your actual server URL
+    var response = await http.put(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': globals.sessionId!,
+      },
+      body: jsonEncode({
+        'nickname': nickname,
+        'password': password,
+      }),
+    );
+
+    if (!Navigator.of(context).mounted) return;
+
+    if (response.statusCode == 200) {
+      if (!Navigator.of(context).mounted) return;  // Ensure the context is still valid before showing the dialog
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Success'),
+            content: Text('User updated successfully.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();  // Close the dialog
+                  LoginService.logout(context);
+                },
+              ),
+            ],
+          );
+      });
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Fail'),
+            content: Text('User updated fail'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  // 로그아웃 api
   static Future<void> logout(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? sessionId = prefs.getString('sessionId');
@@ -144,6 +207,66 @@ class LoginService {
           },
         );
       }
+    }
+  }
+
+  // 회원 탈퇴 기능 api 
+  static Future<void> deleteUser(BuildContext context) async {
+    var url = Uri.parse('http://api.kfoodbox.click/user');  // Modify with your actual server URL
+    var response = await http.delete(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': globals.sessionId!,
+      },
+    );
+
+    if (!Navigator.of(context).mounted) return;  // Check if the context is still valid
+
+    if (response.statusCode == 200) {
+      if (!Navigator.of(context).mounted) return;  // Ensure the context is still valid before showing the dialog
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Account Deleted'),
+            content: Text('Your account has been successfully deleted.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop(); 
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  ); // Close the dialog
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else{
+      if (!Navigator.of(context).mounted) return;  // Ensure the context is still valid before showing the dialog
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Deletion Failed'),
+            content: Text('Failed to delete account: ${response.body}'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();  // Close the dialog
+                },
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 }

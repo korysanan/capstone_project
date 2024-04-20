@@ -88,7 +88,7 @@ class ImageDetailsPage extends StatelessWidget {
               uploadImage(context, image); // 여기에서 context와 함께 uploadImage 호출
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.yellow.shade100,
+              backgroundColor: Colors.yellow.shade100,
               minimumSize: Size(double.infinity, 100),
               padding: EdgeInsets.symmetric(horizontal: 20),
             ),
@@ -107,7 +107,7 @@ class ImageDetailsPage extends StatelessWidget {
               );
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.grey.shade400,
+              backgroundColor: Colors.grey.shade400,
               minimumSize: Size(double.infinity, 100),
               padding: EdgeInsets.symmetric(horizontal: 20),
             ),

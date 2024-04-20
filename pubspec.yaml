@@ -56,6 +56,8 @@ dependencies:
 
   #google_maps_flutter: ^2.6.0 # google maps
 
+  flutter_naver_map: ^1.2.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -82,6 +84,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
+    - assets/icons/
     - assets/dialog_flow_auth.json
 
   # An image asset can refer to one or more resolution-specific "variants", see

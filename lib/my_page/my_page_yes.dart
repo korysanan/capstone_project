@@ -6,6 +6,7 @@ import '../home/on_item_tap.dart';
 import '../globals.dart' as globals;
 import '../home/main_screen.dart';
 import '../login/login/login_service.dart';
+import '../bookmark/foods_bookmark/foods_bookmark_data.dart';
 
 class MyPageYes extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _MyPageYesState extends State<MyPageYes> {
 
   Map<String, List<String>> items = {
     globals.getText('Community/Custom Recipes'): ['Article title 1', 'Article title 2', 'Article title 1', 'Article title 2'],
-    globals.getText('food images'): ['Water Kimchi', 'Bulgogi', 'food 2', 'food 3'],
+    globals.getText('food images'): BookmarkData.getBookmarkNames(),
   };
   // 일단 북마크 했다고 가정하고 임시 자료
 
@@ -145,10 +146,11 @@ class _MyPageYesState extends State<MyPageYes> {
             TextButton(
               child: Text(globals.getText('Delete')),
               style: TextButton.styleFrom(
-                primary: Colors.red,
+                backgroundColor: Colors.red,
               ),
               onPressed: () {
                 setState(() {
+                  BookmarkData.deleteBookmark(item);
                   items[category]?.remove(item);
                   if (items[category]?.isEmpty ?? true) {
                     items.remove(category);
