@@ -8,6 +8,7 @@ int s = 1;
 String selectedLanguageCode = 'en'; // 기본 언어 코드
 
 final apiKey = '7f0cb90f-8897-474f-a7d0-570e0f6a5bd2:fx';
+String ODSay_apiKey = "NmHBe2KbysaotzsEo6+3ewb5Dke9KHGzmtW+QDXXvJM";
 
 // 글로벌 함수
 String getText(String key) {

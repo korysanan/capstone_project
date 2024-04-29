@@ -8,6 +8,7 @@ import '../globals.dart' as globals;
 //import '../bookmark/test.dart';
 import '../bookmark/foods_bookmark/foods_bookmark_service.dart';
 //import '../translate/language_detect.dart';
+import '../design_test/login_design_1/myapp.dart';
 
 
 class KFoodBoxHome extends StatefulWidget {
@@ -178,12 +179,10 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
             padding: EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () { // 카테고리 들어가는 화면 넣을 부분 
-                /*
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                  MaterialPageRoute(builder: (context) => MyApp()),
                 );
-                */
               },
               child: Text(globals.getText('viewAllKoreanFoods')),
             ),
