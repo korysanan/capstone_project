@@ -58,6 +58,9 @@ dependencies:
 
   flutter_naver_map: ^1.2.2
 
+  smooth_page_indicator: ^1.0.0+2
+  dio: ^5.4.2+1
+  http_parser: ^4.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
