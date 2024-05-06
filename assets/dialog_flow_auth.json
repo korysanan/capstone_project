@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "kfoodbox-9bas",
+  "private_key_id": "0328c26ba0066c5af6924731ac9834f142e557af",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzW6trrcOnoBSu\nR2iFn6A9RCpLKz5JPeTOtV9ZOKCR/Kh9Zbr/c6LmnWp9xowCN+nY7ZhAFmHVPEAD\ndlgzmQB98vBsWN1TK1p+lUnj077DpKRxKPJB8mpL1wfcAYNP44Wd3HUCSQwMyL6T\n0dqn86/mHbHgFHfi6Mw7MmUt29tqOrD1p66YCr0/0kc/QKRNPjMUn7eSThvrFZps\nAD0d8TwmlxqeoKTDbWw/emKRESOkH8b/+MnDLl+VWaTvq1fLHA+SNlsWrbUESnGs\n2x7uFS/lk6ikm0482rwMti/5Grkx7SqBB60Sf5fYRb9lkVhB4JGHDQRio0ghPNxn\nN6Zh0EfjAgMBAAECggEABoFf0F5trm2MYnrDNOUrPUwvDFhIrwSSjNhC/H2B/ogW\ntggw4zEoZL/C0ej1EswSGvZH6V5vLyi7VATR/G7vA2hIgAks61q+snsfzgOZythd\naf0hzWbPRwEx2ryn201v59Q0x4iTu6D45VR6XznA/ZJN4dPSC7piJlXgX7JN4uZ4\n+FviXatkjrfzJqXVPbfy8jMFHY+bKN0bwORs8U4lYOUgccqDdDCdnYPFbYrA6wg2\n0ea6OJemGooCz/9xlNJn6ETvueyBj8JU4iEzho5XDKiOjWctyrifAm0lcP8pche2\n5UR84oygEeHuc3Nez19gHcD5DOCRo7pyVy3is79/jQKBgQDdKAAh0rRGMDge7Vec\nro5oc7zH9Bev0wtGAB/Cg18pnjmZamDTwgZ0M75eyAYJS7en3DJF+3O7tZBPFQQF\nVs+JFS4kh24BS5K1PXmyOjP/TPKpNWkv8kEEzyYB11QPrL+EqIBT1ZefAXYJ4u3a\nFioRBX3k1jxvHmKhBUbZ3Ut0FwKBgQDPnc3K0qZMOY3dYIPDRBzj4I22yNswbGMQ\na65tceBMliogTPNcEalt0pgOHq6Pu74iJxHdZLsKPn+PPGZjGp+KK57SlAVuDWiB\nQUg7OPpXIJgnXCIOL9Pd44HP4cTBG5bC17gGmKSfz+7t/Ebf/fD/R9Q1EdW+gBvx\nq5Ivd32OFQKBgGBLooMXs9c797O/tH5Mo0Vn37NQ3V95jVcVhr6zZSRB+OKMJ00N\nFrJSNXofrkEt7vHwNxOxwVriW8uTYwTQH92Yk1bkgUmfFmpEMlEgdrObVa3Hy91M\npnLpn6r9j2Sj22Bv3jCiuDpL8JGtddOYAwkWUxLpFbdsi5WBLrB+YvRRAoGAB9P0\nWWxd1svovGsSLL+Zs0HZNgYWtZmwloLo3bmIcnrK9dLQ7izATaK+FvIzNLoobhM5\nCjbtEnLOznDBj4UGdOg2Icxw8/hPc2gpuAnq7nQNKJbBtfU5sMkOMO9bQsiug4Qs\nrRr+QgROBu0XIwTpHEbyClo0y+z6oL8OUPnZYw0CgYEAip83Bb/aOPdfq8wIqmUe\nl1jCmvxWsYJiETE7VQEGEgll0sDxlFhqGD6nfy+EQH9mPYoz8t1N08E1+mq6NFa6\n3Mh99waS5XystaGZSmddhn3VKABXrkXgL6d9PqBoj/9qVacGBX7YusFMJFOk1eN4\niKxHKtvDOUw7p1b9cLvlikE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "k-food-box@kfoodbox-9bas.iam.gserviceaccount.com",
+  "client_id": "112312358867650138692",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/k-food-box%40kfoodbox-9bas.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'main_screen.dart';
 import '../camera_page/camera_page.dart';
 import '../chat_bot/chat.dart';
-import '../map/naver_map.dart';
+//import '../map/naver_map.dart';
 import '../map/naver_test.dart';
 
 
@@ -38,7 +38,7 @@ void onItemTapped(BuildContext context, int index) {
     case 4: // chat_bot 탭
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ChatScreen()),
+        MaterialPageRoute(builder: (context) => chatbot()),
       );
       break;
   }
