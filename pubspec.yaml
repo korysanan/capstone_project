@@ -31,7 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -47,8 +46,8 @@ dependencies:
   deepl_dart: ^1.3.1 # deepl api
 
   http: ^1.2.0
-
-  dialog_flowtter:
+  
+  #googleapis_auth: ^1.6.0
 
   shared_preferences: ^2.2.3
 
@@ -61,6 +60,8 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   dio: ^5.4.2+1
   http_parser: ^4.0.2
+  dialog_flowtter: ^0.2.0-nullsafety.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

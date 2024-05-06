@@ -30,7 +30,7 @@ class LoginService {
         // Fetch user_language
         await _fetchLanguage();
       }
-
+      globals.setLanguageCode();
       showDialog(
         context: context,
         barrierDismissible: false,

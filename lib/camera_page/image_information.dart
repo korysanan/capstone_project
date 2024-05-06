@@ -51,21 +51,21 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
   }
 
   void fetchInitialBookmarks() async {
-    await BookmarkService.fetchBookmarks();
+    await FoodBookmarkService.fetchBookmarks();
     setState(() {
       for (int i = 0; i < uniqueFoodInfo.length; i++) {
         var info = uniqueFoodInfo[i];
         int foodId = int.parse(info["class"].toString());
-        bookmarkStatus[i] = BookmarkData.isBookmarked(foodId);
+        bookmarkStatus[i] = FoodBookmarkData.isBookmarked(foodId);
       }
     });
   }
 
   void toggleBookmark(int index, int foodId) async {
     if (bookmarkStatus[index]) {
-      await BookmarkService.deleteBookmark(foodId);
+      await FoodBookmarkService.deleteBookmark(foodId);
     } else {
-      await BookmarkService.addBookmark(foodId);
+      await FoodBookmarkService.addBookmark(foodId);
     }
     setState(() {
       bookmarkStatus[index] = !bookmarkStatus[index];

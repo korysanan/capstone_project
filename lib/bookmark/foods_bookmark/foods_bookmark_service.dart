@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../../globals.dart' as globals;
 import 'foods_bookmark_data.dart';
 
-class BookmarkService {
+class FoodBookmarkService {
   // 음식 북마크 조회
   static Future<void> fetchBookmarks() async {
     try {
@@ -18,7 +18,7 @@ class BookmarkService {
       if (response.statusCode == 200) {
         var data = jsonDecode(utf8.decode(response.bodyBytes));
         if (data is Map<String, dynamic> && data.containsKey('bookmarks')) {
-          BookmarkData.setBookmarks(data['bookmarks']);
+          FoodBookmarkData.setBookmarks(data['bookmarks']);
         } else {
           print("No 'bookmarks' key found in response or not a list");
         }

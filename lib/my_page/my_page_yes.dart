@@ -7,6 +7,7 @@ import '../globals.dart' as globals;
 import '../home/main_screen.dart';
 import '../login/login/login_service.dart';
 import '../bookmark/foods_bookmark/foods_bookmark_data.dart';
+import '../bookmark/community_bookmark/community_bookmark_data.dart';
 
 class MyPageYes extends StatefulWidget {
   @override
@@ -17,8 +18,9 @@ class _MyPageYesState extends State<MyPageYes> {
   int _currentIndex = 0; // bottomnavigation index 번호 
 
   Map<String, List<String>> items = {
-    globals.getText('Community/Custom Recipes'): ['Article title 1', 'Article title 2', 'Article title 1', 'Article title 2'],
-    globals.getText('food images'): BookmarkData.getBookmarkNames(),
+    globals.getText('community'): CommunityBookmarkData.getBookmarkNames(),
+    globals.getText('custom recipes'): ['Article title 1', 'Article title 2', 'Article title 1', 'Article title 2'],
+    globals.getText('foods'): FoodBookmarkData.getBookmarkNames(),
   };
   // 일단 북마크 했다고 가정하고 임시 자료
 
@@ -149,8 +151,12 @@ class _MyPageYesState extends State<MyPageYes> {
                 backgroundColor: Colors.red,
               ),
               onPressed: () {
-                setState(() {
-                  BookmarkData.deleteBookmark(item);
+                  setState(() {
+                  if (category == globals.getText('foods')) {
+                    FoodBookmarkData.deleteBookmark(item);
+                  } else if (category == globals.getText('community')) {
+                    CommunityBookmarkData.deleteBookmark(item);
+                  }
                   items[category]?.remove(item);
                   if (items[category]?.isEmpty ?? true) {
                     items.remove(category);

@@ -3,7 +3,7 @@ import 'dart:convert';
 import '../globals.dart';
 
 Future<String> translateText(String text) async {
-    
+  print(selectedLanguageCode);
   final url = Uri.parse('https://api-free.deepl.com/v2/translate?auth_key=$apiKey&text=$text&target_lang=$selectedLanguageCode');
 
   final response = await http.post(url);

@@ -21,7 +21,6 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
     return {
       "code": lang.name, // 언어 코드 포함
       "name": lang.language,
-      "flag": lang.flag,
       if (lang.locale != null) "locale": lang.locale!,
     };
   }).toList();
@@ -55,10 +54,6 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
         itemBuilder: (context, index) {
           var code = languages[index]['code'];
           return ListTile(
-            leading: CircleAvatar(
-              child: Text(languages[index]['flag']),
-              backgroundColor: Colors.transparent,
-            ),
             title: Text(
               languages[index]['name'],
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

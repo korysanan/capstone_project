@@ -1,39 +1,42 @@
 enum Language {
-  bg(language: "Bulgarian", flag: '🇧🇬'),
-  da(language: "Danish", flag: '🇩🇰'),
-  de(language: "German", flag: '🇩🇪'),
-  el(language: "Greek", flag: '🇬🇷'),
-  en(language: "English", locale: "en_US", flag: '🇬🇧'),
-  es(language: "Spanish", flag: '🇪🇸'),
-  et(language: "Estonian", flag: '🇪🇪'),
-  fi(language: "Finnish", flag: '🇫🇮'),
-  fr(language: "French", flag: '🇫🇷'),
-  hu(language: "Hungarian", flag: '🇭🇺'),
-  id(language: "Indonesian", flag: '🇮🇩'),
-  it(language: "Italian", flag: '🇮🇹'),
-  ja(language: "Japanese", flag: '🇯🇵'),
-  ko(language: "Korean", flag: '🇰🇷'),
-  lt(language: "Lithuanian", flag: '🇱🇹'),
-  lv(language: "Latvian", flag: '🇱🇻'),
-  nb(language: "Norwegian Bokmal", flag: '🇳🇴'),
-  nl(language: "Dutch", flag: '🇳🇱'),
-  pl(language: "Polish", flag: '🇵🇱'),
-  pt(language: "Portuguese", locale: "pt-PT", flag: '🇵🇹'),
-  ro(language: "Romanian", flag: '🇷🇴'),
-  sk(language: "Slovak", flag: '🇸🇰'),
-  sl(language: "Slovenian", flag: '🇸🇮'),
-  sv(language: "Swedish", flag: '🇸🇪'),
-  tr(language: "Turkish", flag: '🇹🇷'),
-  uk(language: "Ukrainian", flag: '🇺🇦'),
-  zh(language: "Chinese", flag: '🇨🇳');
+  ko(language: "한국어"),
+  el(language: "Ελληνική"),
+  nl(language: "Nederlands"),
+  no(language: "Norge"),
+  da(language: "Dansk"),
+  de(language: "Deutsch"),
+  lv(language: "Latviešu"),
+  ru(language: "Русский"),
+  ro(language: "Românesc"),
+  lt(language: "Lietuvių kalba"),
+  bg(language: "Български"),
+  sv(language: "Svenska"),
+  es(language: "Español"),
+  sk(language: "Slovensko"),
+  sl(language: "Slovenski"),
+  ar(language: "اللغة العربية"),
+  et(language: "Eesti"),
+  en(language: "English (USA)", locale: "en-US"),
+  eu(language: "English (UK)", locale: "en-GB"), // 일단 이렇게만
+  uk(language: "Українська"),
+  it(language: "Italiano"),
+  id(language: "Bahasa Indonesia"),
+  ja(language: "日本語"),
+  zh(language: "中文"),
+  cs(language: "Česky"),
+  tr(language: "Türkçe"),
+  pt(language: "Português", locale: "pt-PT"),
+  br(language: "Português (Brasil)", locale: "pt-BR"), // 일단 이렇게만
+  pl(language: "Polski"),
+  fr(language: "Français"),
+  fi(language: "Suomalainen"),
+  hu(language: "Magyar");
 
   const Language({
     required this.language,
     this.locale,
-    required this.flag,
   });
 
   final String language;
   final String? locale;
-  final String flag;
 }

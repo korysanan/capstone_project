@@ -7,9 +7,11 @@ import 'on_item_tap.dart';
 import '../globals.dart' as globals;
 //import '../bookmark/test.dart';
 import '../bookmark/foods_bookmark/foods_bookmark_service.dart';
-//import '../translate/language_detect.dart';
-import '../design_test/login_design_1/myapp.dart';
+import '../bookmark/community_bookmark/community_bookmark_service.dart';
+import '../translate/language_detect.dart';
+//import '../design_test/login_design_1/myapp.dart';
 import '../community/communityMain.dart';
+import '../categoryPage/categoryMain.dart';
 
 
 class KFoodBoxHome extends StatefulWidget {
@@ -42,7 +44,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
     return Scaffold(
       resizeToAvoidBottomInset: false, // 위치 고정하는거 -> 이거 x일시 만약 키보드 올라올때 각각들도 따라 올라옴 
       appBar: AppBar(
-        title: Text(globals.getText('kFoodBoxTitle')),
+        title: Text('K-Food Box'),
         centerTitle: true,
         backgroundColor: Colors.grey[400], // AppBar의 배경색을 회색으로 설정
         /*
@@ -64,7 +66,9 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
           GestureDetector(
             onTap: () async{
               if (globals.sessionId != null){
-                await BookmarkService.fetchBookmarks();
+                await FoodBookmarkService.fetchBookmarks();
+                await CommunityBookmarkService.fetchBookmarks();
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => MyPageYes()),
@@ -129,6 +133,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                           color: Colors.black54,
                         ),
                         padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+                        /*
                         child: Text(
                           e['name']!,
                           style: TextStyle(
@@ -137,8 +142,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        /*
-                        // FutureBuilder를 사용하여 비동기적으로 텍스트 번역 결과 반영
+                        */
                         child: FutureBuilder<String>(
                           future: translateText(e['name']!),
                           builder: (context, snapshot) {
@@ -167,7 +171,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                             }
                           },
                         ),
-                        */
+            
                       ),
                     ),
                   ],
@@ -180,9 +184,10 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
             padding: EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () { // 카테고리 들어가는 화면 넣을 부분 
+                print("viewAllKoreanFoods");
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CommuntiyMain()),
+                  MaterialPageRoute(builder: (context) => CategoryMain()),
                 );
               },
               child: Text(globals.getText('viewAllKoreanFoods')),
@@ -194,6 +199,12 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               children: [
                 ListTile(
                   title: Text(globals.getText('community'), style: TextStyle(fontWeight: FontWeight.bold)),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CommuntiyMain()),
+                    );
+                  },
                 ),
                 Divider(),
                 ListTile(
@@ -217,6 +228,15 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               children: [
                 ListTile(
                   title: Text(globals.getText('custom recipes'), style: TextStyle(fontWeight: FontWeight.bold)),
+                  onTap: () {
+                    print("Custom Recipes");
+                    /*
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CategoryMain()),
+                    );
+                    */
+                  },
                 ),
                 Divider(),
                 ListTile(
