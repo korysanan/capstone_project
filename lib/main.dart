@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'login/login_design_1/myapp.dart';
+import 'login/screen/welcome_screen.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login_Screen(),
+      home: WelcomeScreen(),
       theme: ThemeData(fontFamily: 'Jalnan'),
     );
   }

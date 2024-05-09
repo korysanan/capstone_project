@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../home/main_screen.dart';
-import 'login_screen.dart';
-import '../../globals.dart' as globals; // Import globals
+import '../../globals.dart' as globals;
+import '../screen/login_screen.dart'; // Import globals
 
 class LoginService {
   // 로그인 api 이용
@@ -31,7 +31,6 @@ class LoginService {
         await _fetchLanguage();
       }
       globals.setLanguageCode();
-      /*
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -46,7 +45,7 @@ class LoginService {
       );
       await Future.delayed(Duration(seconds: 1));
       Navigator.pop(context);
-      */
+
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => KFoodBoxHome()),

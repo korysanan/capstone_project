@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import '../translate/language_detect.dart';
 import 'language_setting.dart';
 import '../home/bottom.dart';
 import 'user_info.dart';
 import '../home/on_item_tap.dart';
 import '../globals.dart' as globals;
 import '../home/main_screen.dart';
-import '../login/login/login_service.dart';
+import '../login/service/login_service.dart';
 import '../bookmark/foods_bookmark/foods_bookmark_data.dart';
 import '../bookmark/community_bookmark/community_bookmark_data.dart';
 
@@ -16,7 +17,7 @@ class MyPageYes extends StatefulWidget {
 
 class _MyPageYesState extends State<MyPageYes> {
   int _currentIndex = 0; // bottomnavigation index 번호 
-
+  
   Map<String, List<String>> items = {
     globals.getText('community'): CommunityBookmarkData.getBookmarkNames(),
     globals.getText('custom recipes'): ['Article title 1', 'Article title 2', 'Article title 1', 'Article title 2'],
@@ -123,7 +124,32 @@ class _MyPageYesState extends State<MyPageYes> {
       title: Text(title),
       children: children.map((String item) {
         return ListTile(
-          title: Text(item),
+          title: FutureBuilder<String>(
+            future: translateText(item),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return Text(
+                    'Error',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                } else {
+                  return Text(
+                    snapshot.data ?? 'Translation error',  // 번역 실패시 대체 텍스트
+                    style: TextStyle(
+                      fontSize: 16.0,
+                    ),
+                  );
+                }
+              } else {
+                return CircularProgressIndicator();  // 로딩 중 표시
+              }
+            },
+          ),
           trailing: IconButton(
             icon: Icon(Icons.delete),
             onPressed: () => _deleteItem(title, item),

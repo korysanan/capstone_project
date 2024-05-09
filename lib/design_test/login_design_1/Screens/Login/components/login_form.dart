@@ -1,7 +1,8 @@
-import 'package:capstone_project/login/login/login_service.dart';
+import 'package:capstone_project/login/service/login_service.dart';
+import 'package:capstone_project/login/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../components/already_have_an_account_acheck.dart';
-import '../../Signup/signup_screen.dart';
+//import '../../Signup/signup_screen.dart';
 
 class LoginForm extends StatelessWidget {
   LoginForm({
@@ -77,11 +78,7 @@ class LoginForm extends StatelessWidget {
             press: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const SignUpScreen();
-                  },
-                ),
+                MaterialPageRoute(builder: (context) => SignUpScreen()),
               );
             },
           ),
@@ -90,7 +87,7 @@ class LoginForm extends StatelessWidget {
       ),
     );
   }
-  
+
   bool _validateEmail(String email) {
     Pattern pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
     RegExp regex = RegExp(pattern.toString());

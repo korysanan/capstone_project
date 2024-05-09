@@ -3,7 +3,7 @@ import '../home/bottom.dart';
 import '../home/on_item_tap.dart';
 import 'my_page_yes.dart';
 import '../globals.dart' as globals;
-import '../login/login/login_service.dart';
+import '../login/service/login_service.dart';
 
 class UserInfoScreen extends StatefulWidget {
   @override

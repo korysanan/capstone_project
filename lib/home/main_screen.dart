@@ -36,6 +36,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        leading: Image.asset('assets/ex/kfood_logo.png'),
         title: Text(
           'K-Food Box',
           style: TextStyle(
@@ -46,13 +47,13 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.blue[300],
+        //backgroundColor: Color.fromARGB(255, 117, 201, 243),
       ),
-      body: Container(  // 배경색 적용을 위한 Container 추가
-        color: Colors.lightBlue[100],  // 배경색 설정
+      body: Container(
         child: ListView(
           padding: EdgeInsets.only(top: 10.0),
           children: [
+            SizedBox(height: 20),
             Center(
               child: Text(
                 globals.getText("today's recommended food"),
@@ -99,34 +100,34 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                             ),
                           ),
                           */
-                                                  child: FutureBuilder<String>(
-                          future: translateText(e['name']!),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState == ConnectionState.done) {
-                              if (snapshot.hasError) {
-                                return Text(
-                                  'Error',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                );
+                          child: FutureBuilder<String>(
+                            future: translateText(e['name']!),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.done) {
+                                if (snapshot.hasError) {
+                                  return Text(
+                                    'Error',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                } else {
+                                  return Text(
+                                    snapshot.data!,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                }
                               } else {
-                                return Text(
-                                  snapshot.data!,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                );
+                                return CircularProgressIndicator(); // 로딩 중 표시
                               }
-                            } else {
-                              return CircularProgressIndicator(); // 로딩 중 표시
-                            }
-                          },
-                        ),
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -139,8 +140,10 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               clipBehavior: Clip.antiAlias,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
+                side: BorderSide(color: Colors.black, width: 1.0),  // 검은색 테두리 추가
               ),
               elevation: 5,
+              color: Color(0xFFF1E6FF),// 카드의 배경색 설정
               child: InkWell(
                 onTap: () {
                   Navigator.push(
@@ -151,6 +154,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    SizedBox(height: 20.0),
                     Image.asset(
                       'assets/ex/kfood_detection.png',
                       height: 140,
@@ -160,7 +164,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                     Padding(
                       padding: EdgeInsets.all(16),
                       child: Text(
-                        'K',
+                        'K-Food Detection',
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
@@ -169,43 +173,6 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               ),
             ),
             SizedBox(height: 20.0),
-            /*
-            Card(
-              clipBehavior: Clip.antiAlias,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              elevation: 5,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CameraPage()),
-                  );
-                },
-                child: Row(
-                  children: <Widget>[
-                    Image.asset(
-                      'assets/ex/kf_detection.png',
-                      height: 140,
-                      width: 140,
-                      fit: BoxFit.cover,
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Text(
-                          'Learn about Korean food through photos',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 20.0),
-            */
             Padding(
               padding: EdgeInsets.all(8.0),
               child: ElevatedButton(
@@ -215,6 +182,14 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                     MaterialPageRoute(builder: (context) => CategoryMain()),
                   );
                 },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.black, backgroundColor: Color(0xFFF1E6FF), // 텍스트 색상 설정
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10), // 모서리 둥글게 처리
+                    side: BorderSide(color: Colors.black, width: 1), // 테두리 색상 및 두께
+                  ),
+                  elevation: 5, // 그림자 높이
+                ),
                 child: Text(globals.getText('viewAllKoreanFoods')),
               ),
             ),
@@ -225,23 +200,41 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 8, right: 4),
-                    child: CustomCard(
-                      imagePath: 'assets/ex/community.png',
-                      label: globals.getText('community'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => CommuntiyMain()),
-                        );
-                      },
-                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black, // 테두리 색상
+                          width: 1.0, // 테두리 두께
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),  // 모서리 둥글기
+                      ),
+                      child: CustomCard(
+                        imagePath: 'assets/ex/community.png',
+                        label: globals.getText('community'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CommuntiyMain()),
+                          );
+                        },
+                      ),
+                    )
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 4, right: 8),
-                    child: CustomCard(
-                      imagePath: 'assets/ex/recipes.png',
-                      label: globals.getText('custom recipes'),
-                      onTap: () => print('Custom Recipes Card tapped!'),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black, // 테두리 색상
+                          width: 1.0, // 테두리 두께
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),  // 모서리 둥글기
+                      ),
+                      child: CustomCard(
+                        imagePath: 'assets/ex/recipes.png',
+                        label: globals.getText('custom recipes'),
+                        onTap: () => print('Custom Recipes Card tapped!'),
+                      ),
                     ),
                   ),
                 ],
@@ -251,8 +244,10 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               clipBehavior: Clip.antiAlias,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
+                side: BorderSide(color: Colors.black, width: 1.0),  // 검은색 테두리 추가
               ),
               elevation: 5,
+              color: Color(0xFFF1E6FF),  // 카드의 배경색 설정
               child: InkWell(
                 onTap: () {
                   Navigator.push(
@@ -263,6 +258,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    SizedBox(height: 20),
                     Image.asset(
                       'assets/ex/food_map.png',
                       height: 140,
@@ -280,42 +276,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                 ),
               ),
             ),
-            /*
-            Card(
-              clipBehavior: Clip.antiAlias,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              elevation: 5,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CameraPage()),
-                  );
-                },
-                child: Row(
-                  children: <Widget>[
-                    Image.asset(
-                      'assets/ex/kf_map.png',
-                      height: 140,
-                      width: 140,
-                      fit: BoxFit.cover,
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Text(
-                          'Learn about Korean food through photos',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            */
+            SizedBox(height: 20),
           ],
         ),
       ),
@@ -336,7 +297,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width / 2 - 20;
+    double width = MediaQuery.of(context).size.width / 2 - 22;
 
     return InkWell(
       onTap: onTap,
@@ -344,6 +305,7 @@ class CustomCard extends StatelessWidget {
         elevation: 4,
         child: Container(
           width: width,
+          color: Color(0xFFF1E6FF),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

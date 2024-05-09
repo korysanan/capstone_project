@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:capstone_project/login/login/login_screen.dart';
+
+import '../screen/login_screen.dart';
+
 
 Future<void> sendVerificationCode(BuildContext context, String email) async { // 인증번호 보내기
   const String serverAddress = 'http://api.kfoodbox.click/authentication-number';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:capstone_project/login/sign_up/sign_up_server.dart';// Update this path as necessary
+import 'package:capstone_project/login/service/sign_up_server.dart';// Update this path as necessary
 
 class EmailVerification {
   final BuildContext context;

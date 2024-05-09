@@ -1,7 +1,8 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'login_service.dart'; // Import the login service
-import '../sign_up/sign_up_screen.dart';
+import '../../login/service/login_service.dart'; // Import the login service
+import '../../login/screen/sign_up_screen.dart';
 import '../../home/main_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -132,3 +133,4 @@ class LoginScreen extends StatelessWidget {
     return regex.hasMatch(email);
   }
 }
+*/
