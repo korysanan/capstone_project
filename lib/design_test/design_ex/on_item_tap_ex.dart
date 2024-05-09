@@ -6,8 +6,8 @@ import 'package:capstone_project/my_page/my_page_no.dart';
 import 'package:capstone_project/my_page/my_page_yes.dart';
 import 'package:capstone_project/test/trans_test/text_test.dart';
 import 'package:flutter/material.dart';
-import 'main_screen.dart';
-import '../globals.dart' as globals;
+import 'main_page_ex.dart';
+import '../../globals.dart' as globals;
 
 
 Future<void> onItemTapped(BuildContext context, int index) async {
@@ -31,10 +31,11 @@ Future<void> onItemTapped(BuildContext context, int index) async {
         MaterialPageRoute(builder: (context) => chatbot()),
       );
       break;
-    case 3: 
+    case 3: // search 탭
       if (globals.sessionId != null){
         await FoodBookmarkService.fetchBookmarks();
         await CommunityBookmarkService.fetchBookmarks();
+
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => MyPageYes()),

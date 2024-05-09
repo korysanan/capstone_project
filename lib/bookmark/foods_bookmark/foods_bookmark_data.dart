@@ -1,3 +1,7 @@
+//import 'package:capstone_project/translate/language_detect.dart';
+
+import 'package:capstone_project/translate/language_detect.dart';
+
 import 'foods_bookmark_service.dart';
 
 class FoodBookmarkData {
@@ -5,8 +9,24 @@ class FoodBookmarkData {
   static List<dynamic> foods_bookmarks = [];
 
   // 북마크 리스트에 저장
+  /*
   static void setBookmarks(List<dynamic> newBookmarks) {
     foods_bookmarks = newBookmarks;
+    print(foods_bookmarks);
+  }
+  */
+  static Future<void> setBookmarks(List<dynamic> newBookmarks) async {
+    // 비동기 작업을 위해 Future.wait 사용
+    var translatedBookmarks = await Future.wait(newBookmarks.map((bookmark) async {
+      String translatedName = await translateText(bookmark['name'] as String);
+      return {
+        'id': bookmark['id'],
+        'name': translatedName
+      };
+    }).toList());
+
+    foods_bookmarks = translatedBookmarks;
+    print(foods_bookmarks);
   }
 
   // 북마크 이름만 보내기 (이거 마이페이지에서 사용)

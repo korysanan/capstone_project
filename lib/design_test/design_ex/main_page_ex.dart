@@ -1,12 +1,11 @@
 import 'package:capstone_project/camera_page/camera_page.dart';
-import 'package:capstone_project/translate/language_detect.dart';
 import 'package:flutter/material.dart';
 import 'package:capstone_project/categoryPage/categoryMain.dart';
 import 'package:capstone_project/community/communityMain.dart';
-import 'bottom.dart';
-import 'on_item_tap.dart';
+import 'bottom_ex.dart';
+import 'on_item_tap_ex.dart';
 import 'package:carousel_slider/carousel_slider.dart'; // slider하기 위해 import
-import '../globals.dart' as globals;
+import '../../globals.dart' as globals;
 
 class KFoodBoxHome extends StatefulWidget {
   @override
@@ -36,15 +35,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(
-          'K-Food Box',
-          style: TextStyle(
-            fontSize: 24, // 글꼴 크기 설정
-            fontWeight: FontWeight.w500,
-            fontFamily: "Recipekorea",
-            color: Colors.black,
-          ),
-        ),
+        title: Text('K-Food Box'),
         centerTitle: true,
         backgroundColor: Colors.blue[300],
       ),
@@ -61,7 +52,6 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                 ),
               ),
             ),
-            SizedBox(height: 20.0),
             Center(
               child: CarouselSlider(
                 options: CarouselOptions(
@@ -89,7 +79,6 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                             color: Colors.black54,
                           ),
                           padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                          /*
                           child: Text(
                             e['name']!,
                             style: TextStyle(
@@ -98,35 +87,6 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          */
-                                                  child: FutureBuilder<String>(
-                          future: translateText(e['name']!),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState == ConnectionState.done) {
-                              if (snapshot.hasError) {
-                                return Text(
-                                  'Error',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                );
-                              } else {
-                                return Text(
-                                  snapshot.data!,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                );
-                              }
-                            } else {
-                              return CircularProgressIndicator(); // 로딩 중 표시
-                            }
-                          },
-                        ),
                         ),
                       ),
                     ],
@@ -152,7 +112,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Image.asset(
-                      'assets/ex/kfood_detection.png',
+                      'assets/ex/kf_detection.png',
                       height: 140,
                       width: 140,
                       fit: BoxFit.cover,
@@ -160,7 +120,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                     Padding(
                       padding: EdgeInsets.all(16),
                       child: Text(
-                        'K',
+                        'Learn about Korean food through photos',
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
@@ -169,43 +129,6 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               ),
             ),
             SizedBox(height: 20.0),
-            /*
-            Card(
-              clipBehavior: Clip.antiAlias,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              elevation: 5,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CameraPage()),
-                  );
-                },
-                child: Row(
-                  children: <Widget>[
-                    Image.asset(
-                      'assets/ex/kf_detection.png',
-                      height: 140,
-                      width: 140,
-                      fit: BoxFit.cover,
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Text(
-                          'Learn about Korean food through photos',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 20.0),
-            */
             Padding(
               padding: EdgeInsets.all(8.0),
               child: ElevatedButton(
@@ -227,7 +150,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                     padding: EdgeInsets.only(left: 8, right: 4),
                     child: CustomCard(
                       imagePath: 'assets/ex/community.png',
-                      label: globals.getText('community'),
+                      label: 'Community',
                       onTap: () {
                         Navigator.push(
                           context,
@@ -240,7 +163,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                     padding: EdgeInsets.only(left: 4, right: 8),
                     child: CustomCard(
                       imagePath: 'assets/ex/recipes.png',
-                      label: globals.getText('custom recipes'),
+                      label: 'Custom Recipes',
                       onTap: () => print('Custom Recipes Card tapped!'),
                     ),
                   ),
@@ -264,7 +187,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Image.asset(
-                      'assets/ex/food_map.png',
+                      'assets/ex/kf_map.png',
                       height: 140,
                       width: 140,
                       fit: BoxFit.cover,
@@ -280,42 +203,6 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                 ),
               ),
             ),
-            /*
-            Card(
-              clipBehavior: Clip.antiAlias,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              elevation: 5,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CameraPage()),
-                  );
-                },
-                child: Row(
-                  children: <Widget>[
-                    Image.asset(
-                      'assets/ex/kf_map.png',
-                      height: 140,
-                      width: 140,
-                      fit: BoxFit.cover,
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Text(
-                          'Learn about Korean food through photos',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            */
           ],
         ),
       ),

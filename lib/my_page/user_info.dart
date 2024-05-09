@@ -31,6 +31,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
             );
           },
         ),
+        backgroundColor: Colors.blue[300],
         title: Text(globals.getText('User Information')),
         centerTitle: true,
       ),

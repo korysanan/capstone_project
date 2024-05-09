@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login/login/login_screen.dart'; // Make sure to create this file
+import 'login/login_design_1/myapp.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,7 +9,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginScreen(),
+      debugShowCheckedModeBanner: false,
+      home: Login_Screen(),
+      theme: ThemeData(fontFamily: 'Jalnan'),
     );
   }
 }

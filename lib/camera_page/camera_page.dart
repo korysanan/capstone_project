@@ -65,7 +65,9 @@ Future<Size> _getImageSize(File imageFile) async {
             );
           },
         ),
+        backgroundColor: Colors.blue[300],
         title: Text(globals.getText('Korean Food Detection')),
+        centerTitle: true,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

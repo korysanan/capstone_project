@@ -88,6 +88,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/ex/
     - assets/svg/
     - assets/icons/
     - assets/dialog_flow_auth.json
@@ -103,6 +104,19 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Recipekorea
+      fonts:
+        - asset: assets/fonts/Recipekorea-FONT.ttf
+          weight: 700
+    - family: Jalnan
+      fonts:
+        - asset: assets/fonts/Jalnan-TTF.ttf
+          weight: 100
+    - family: Nanum
+      fonts:
+        - asset: assets/fonts/Nanum-SquareRoundR.ttf
+          weight: 800
   # fonts:
   #   - family: Schyler
   #     fonts:

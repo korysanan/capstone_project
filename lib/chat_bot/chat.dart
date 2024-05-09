@@ -25,22 +25,26 @@ class _chatbotState extends State<chatbot> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AMBot'),
+        title: Text('ChatBot'),
+        backgroundColor: Colors.blue[300],
+        centerTitle: true,
       ),
       body: Container(
+        color: Colors.lightBlue[100],
         child: Column(
           children: [
             Expanded(child: MessagesScreen(messages: messages)),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              color: Colors.deepPurple,
+              color: Colors.blue,
               child: Row(
                 children: [
                   Expanded(
-                      child: TextField(
-                    controller: _controller,
-                    style: TextStyle(color: Colors.white),
-                  )),
+                    child: TextField(
+                      controller: _controller,
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ),
                   IconButton(
                       onPressed: () {
                         sendMessage(_controller.text);

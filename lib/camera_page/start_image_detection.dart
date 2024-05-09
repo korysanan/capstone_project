@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:capstone_project/translate/language_detect.dart';
 import 'package:flutter/material.dart';
 import 'camera_page.dart';
 import 'package:http/http.dart' as http;
@@ -27,8 +28,6 @@ class ImageDetailsPage extends StatelessWidget {
       ..files.add(await http.MultipartFile.fromPath('image', image.path));
     var response = await request.send();
 
-    Navigator.of(context).pop(); // 로딩 다이얼로그 닫기
-
     if (response.statusCode == 200) {
       print('Image uploaded successfully');
       try {
@@ -40,10 +39,7 @@ class ImageDetailsPage extends StatelessWidget {
           food_info.add(item); // 모든 정보 food_info의 저장
         }
         if (food_info.isNotEmpty) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ImageInformationPage(image: image, food_info: food_info, size: size)), // 수정된 부분
-          );
+          await fetchFoodDetailsAndNavigate(food_info, context, image);
         }
       } catch (e) {
         print('Error parsing server response: $e');
@@ -52,6 +48,51 @@ class ImageDetailsPage extends StatelessWidget {
       print('Image upload failed');
       // 실패 처리 로직 (예: 실패 알림 표시)
     }
+  }
+
+  Future<void> fetchFoodDetailsAndNavigate(List<dynamic> food_info, BuildContext context, File image) async {
+    List<Map<String, dynamic>> foodDetails = [];
+    Map<int, Map<String, dynamic>> labelLookup = {};
+
+    for (var item in food_info) {
+      var response = await http.get(
+        Uri.parse('http://api.kfoodbox.click/labelled-foods/${item['class']}'),
+        headers: {
+          'accept': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        var data = jsonDecode(utf8.decode(response.bodyBytes));
+        if (data != null && data['labelId'] != null) {
+          labelLookup[data['labelId']] = {
+            'id': data['id'],
+            'name': await translateText(data['name'])
+          };
+        }
+      }
+    }
+
+    foodDetails = food_info.map((food) {
+      var details = labelLookup[food['class']];
+      if (details != null) {
+        return {
+          'xmin': food['xmin'],
+          'ymin': food['ymin'],
+          'xmax': food['xmax'],
+          'ymax': food['ymax'],
+          'id': details['id'],
+          'name': details['name'],
+        };
+      } else {
+        return null; // Or handle the case where details are not found
+      }
+    }).where((element) => element != null).cast<Map<String, dynamic>>().toList();
+    Navigator.of(context).pop(); // 로딩 다이얼로그 닫기
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ImageInformationPage(image: image, food_info: foodDetails, size: size)), // 수정된 부분
+    );
   }
 
   @override
@@ -68,6 +109,7 @@ class ImageDetailsPage extends StatelessWidget {
             );
           },
         ),
+        backgroundColor: Colors.blue[300],
         title: Text(globals.getText('Korean Food Detection')),
         centerTitle: true,
       ),

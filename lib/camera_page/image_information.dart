@@ -21,20 +21,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
   late List<bool> bookmarkStatus;
   final double maxWidth = 400.0;
   late List<dynamic> uniqueFoodInfo;
-/*
-  String getDisplayName(String name) {
-    switch (name) {
-      case "food120":
-        return "Sundae";
-      case "food72":
-        return "Tteokbokki";
-      case "food61":
-        return "Kimbap";
-      default:
-        return name; // 일치하는 조건이 없으면 원래의 name 값을 반환
-    }
-  }
-*/
+
   @override
   void initState() {
     super.initState();
@@ -55,7 +42,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
     setState(() {
       for (int i = 0; i < uniqueFoodInfo.length; i++) {
         var info = uniqueFoodInfo[i];
-        int foodId = int.parse(info["class"].toString());
+        int foodId = int.parse(info["id"].toString());
         bookmarkStatus[i] = FoodBookmarkData.isBookmarked(foodId);
       }
     });
@@ -104,7 +91,6 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
           ),
         ),
       );
-
       positionedWidgets.add(
         Positioned(
           left: left,
@@ -149,6 +135,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
             );
           },
         ),
+        backgroundColor: Colors.blue[300],
         title: Text(globals.getText('Korean Food Detection')),
         centerTitle: true,
         actions: <Widget>[
@@ -184,7 +171,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
                           title: Text(info["name"], style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                           trailing: IconButton(
                             icon: bookmarkStatus[idx] ? Icon(Icons.bookmark) : Icon(Icons.bookmark_border_outlined),
-                            onPressed: () => toggleBookmark(idx, int.parse(info["class"].toString())),
+                            onPressed: () => toggleBookmark(idx, int.parse(info["id"].toString())),
                           ),
                         ),
                         Divider(),

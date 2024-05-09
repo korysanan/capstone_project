@@ -31,17 +31,22 @@ class LoginService {
         await _fetchLanguage();
       }
       globals.setLanguageCode();
+      /*
       showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
+          return Center(child: CircularProgressIndicator());
+          /*
           return AlertDialog(
             content: Text('Login Successful!'),
           );
+          */
         },
       );
       await Future.delayed(Duration(seconds: 1));
-      Navigator.of(context).pop(); // Closes the dialog
+      Navigator.pop(context);
+      */
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => KFoodBoxHome()),

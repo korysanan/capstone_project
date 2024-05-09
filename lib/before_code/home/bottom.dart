@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -15,7 +16,7 @@ class _BottomNavState extends State<BottomNav> {
   BottomNavigationBarItem _bottomNavigationBarItem(String iconName, String label) {
     return BottomNavigationBarItem(
       icon: Padding(
-        padding: const EdgeInsets.only(bottom: 4),
+        padding: const EdgeInsets.only(bottom: 5),
         child: SvgPicture.asset("assets/svg/${iconName}_off.svg", width: 22),
       ),
       label: '',
@@ -26,17 +27,18 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Colors.blue[200],
       type: BottomNavigationBarType.fixed,
       onTap: widget.onTap,
       selectedFontSize: 1,
       currentIndex: widget.currentIndex,
       items: [
         _bottomNavigationBarItem("home", "Home"),
+        _bottomNavigationBarItem("mail", "Mail"),
+        _bottomNavigationBarItem("camera", "Camera"),
         _bottomNavigationBarItem("search", "Search"),
         _bottomNavigationBarItem("chatbot", "Chatbot"),
-        _bottomNavigationBarItem("mypage", "Mypage"),
       ],
     );
   }
 }
+*/
