@@ -1,3 +1,4 @@
+import '../translate/language_detect.dart';
 import 'editComment.dart';
 import 'postInformation.dart';
 import 'communityService.dart';
@@ -8,7 +9,12 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 class ArticleComments extends StatefulWidget {
   final int postId;
   List<dynamic>? comments;
-  ArticleComments({required this.postId, required this.comments, super.key});
+  bool isTranslate;
+  ArticleComments(
+      {required this.postId,
+      required this.comments,
+      required this.isTranslate,
+      super.key});
 
   @override
   State<ArticleComments> createState() => _ArticleCommentsState();
@@ -47,10 +53,46 @@ class _ArticleCommentsState extends State<ArticleComments> {
                           ),
                         ],
                       ),
-                      Text(
-                        widget.comments?[index].content,
-                        style: const TextStyle(fontSize: 15),
-                      ),
+                      widget.isTranslate
+                          ? FutureBuilder<String>(
+                              future: translateText(
+                                  widget.comments?[index].content),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  if (snapshot.hasError) {
+                                    return const Text(
+                                      'Error',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    );
+                                  } else {
+                                    return Text(
+                                      snapshot.data ??
+                                          'Translation error', // 번역 실패시 대체 텍스트
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    );
+                                  }
+                                } else {
+                                  return const SizedBox(
+                                    height: 10,
+                                    width: 10,
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  );
+                                }
+                              },
+                            )
+                          : Text(
+                              widget.comments?[index].content,
+                              style: const TextStyle(fontSize: 15),
+                            )
                     ],
                   ),
                   if (globals.user_nickname == widget.comments?[index].nickname)
