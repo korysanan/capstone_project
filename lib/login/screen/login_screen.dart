@@ -1,11 +1,13 @@
-
 import 'package:capstone_project/login/service/login_service.dart';
-import 'package:capstone_project/login/screen/sign_up_screen.dart';
+//import 'package:capstone_project/login/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
+import '../../design_test/sign_up_design/sign_up_test1.dart';
 
 class LoginScreen extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController(text: "ujin0561@naver.com");
-  final TextEditingController passwordController = TextEditingController(text: "dnwls0561");
+  final TextEditingController emailController =
+      TextEditingController(text: "ujin0561@naver.com");
+  final TextEditingController passwordController =
+      TextEditingController(text: "dnwls0561");
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,8 @@ class LoginScreen extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(20),
           child: Column(
-            mainAxisSize: MainAxisSize.min, // Ensures the content takes only needed space
+            mainAxisSize:
+                MainAxisSize.min, // Ensures the content takes only needed space
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               /*
@@ -28,7 +31,8 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               */
-              Image.asset('assets/ex/kfood_logo.png', height: 400), // Logo Image
+              Image.asset('assets/ex/kfood_logo.png',
+                  height: 400), // Logo Image
               TextField(
                 controller: emailController,
                 decoration: InputDecoration(
@@ -60,7 +64,8 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 60),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 117, 201, 243), // Button color
+                  backgroundColor:
+                      Color.fromARGB(255, 117, 201, 243), // Button color
                   minimumSize: Size(double.infinity, 50), // Button size
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -68,7 +73,8 @@ class LoginScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   if (_validateEmail(emailController.text)) {
-                    LoginService.login(context, emailController.text, passwordController.text);
+                    LoginService.login(
+                        context, emailController.text, passwordController.text);
                   } else {
                     showDialog(
                       context: context,
@@ -109,6 +115,7 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+
   bool _validateEmail(String email) {
     Pattern pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
     RegExp regex = RegExp(pattern.toString());

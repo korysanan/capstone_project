@@ -1,21 +1,18 @@
+import 'postInformation.dart';
 import '../community/communityMain.dart';
-import 'package:image_picker/image_picker.dart';
 import 'communityService.dart';
 import 'package:flutter/material.dart';
 
-class CommunityPostAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
-  final String title;
-  String inputTitle;
+class CommentEditAppBar extends StatelessWidget implements PreferredSizeWidget {
+  int postId;
+  int commentId;
   String inputContent;
-  List<XFile> images;
 
-  CommunityPostAppBar({
+  CommentEditAppBar({
     super.key,
-    required this.title,
-    required this.inputTitle,
+    required this.postId,
+    required this.commentId,
     required this.inputContent,
-    required this.images,
   });
 
   @override
@@ -29,9 +26,9 @@ class CommunityPostAppBar extends StatelessWidget
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,
       ),
-      title: Text(
-        title,
-        style: const TextStyle(
+      title: const Text(
+        'Edit Article',
+        style: TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.w700,
         ),
@@ -44,15 +41,14 @@ class CommunityPostAppBar extends StatelessWidget
           ),
           child: TextButton(
             onPressed: () async {
-              if (inputTitle != '' && inputContent != '') {
-                CommunitySerrvices.addCommunityPosting(
-                    inputTitle, inputContent, images);
+              if (inputContent != '') {
+                CommunitySerrvices.editComment(commentId, inputContent);
                 showDialog(
                   context: context,
                   barrierDismissible: false,
                   builder: (BuildContext context) {
                     return const AlertDialog(
-                      content: Text('Post added!'),
+                      content: Text('Comment edited!'),
                     );
                   },
                 );
@@ -60,7 +56,9 @@ class CommunityPostAppBar extends StatelessWidget
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const CommuntiyMain()));
+                        builder: (context) => PostInformation(
+                              postId: postId,
+                            )));
               } else {
                 showDialog(
                     context: context,
@@ -80,7 +78,7 @@ class CommunityPostAppBar extends StatelessWidget
               }
             },
             child: const Text(
-              'Post',
+              'Edit',
               style: TextStyle(
                 fontSize: 18,
               ),

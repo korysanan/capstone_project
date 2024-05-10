@@ -1,9 +1,9 @@
 final Map<String, String> langKo = {
   'myPageTitle': '마이페이지',
-  'guest' : '게스트',
+  'guest': '게스트',
   'login': '로그인',
   'signUp': '회원가입',
-  "today's recommended food" : "오늘의 추천 음식",
+  "today's recommended food": "오늘의 추천 음식",
   'viewAllKoreanFoods': '한국 음식 전체보기',
   'community': '커뮤니티',
   'custom recipes': '커스텀 레시피',
@@ -25,4 +25,5 @@ final Map<String, String> langKo = {
   'submit': '제출',
   'Do you really want to withdraw?': '정말 탈퇴하시겠습니까?',
   'withdraw': '탈퇴',
+  'Find a Korean restaurant in South Korea': '한국 내 음식점 찾기',
 };

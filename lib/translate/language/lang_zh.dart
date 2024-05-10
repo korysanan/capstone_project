@@ -1,9 +1,9 @@
 final Map<String, String> langZh = {
   'myPageTitle': '我的页面',
-  'guest' : '访客',
+  'guest': '访客',
   'login': '登录',
   'signUp': '注册',
-  "today's recommended food" : "今日推荐食品",
+  "today's recommended food": "今日推荐食品",
   'viewAllKoreanFoods': '查看所有韩国食品',
   'community': '社区',
   'custom recipes': '自定义食谱',
@@ -25,4 +25,5 @@ final Map<String, String> langZh = {
   'submit': '提交',
   'Do you really want to withdraw?': '您真的想退出吗？',
   'withdraw': '退出',
+  'Find a Korean restaurant in South Korea': '查找韩国的韩国餐厅',
 };

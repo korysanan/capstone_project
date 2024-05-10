@@ -1,26 +1,33 @@
+import 'package:capstone_project/community/communityService.dart';
+import 'package:capstone_project/community/postInformation.dart';
+import 'package:flutter/cupertino.dart';
 import 'mainAppbar.dart';
 import '../home/bottom.dart';
 import 'package:flutter/material.dart';
 
-enum Article { all, hot, notice }
-
-const List<String> list = <String>['Latest', 'Oldest', 'Likes', 'Comments'];
+const List<String> list = <String>['LATEST', 'OLDEST', 'LIKES', 'COMMENTS'];
 
 class CommuntiyMain extends StatefulWidget {
-  const CommuntiyMain({super.key});
+  const CommuntiyMain({
+    super.key,
+  });
 
   @override
   State<CommuntiyMain> createState() => _CommuntiyMainState();
 }
 
 class _CommuntiyMainState extends State<CommuntiyMain> {
-  Article articleView = Article.all;
+  final Map<int, Widget> myTabs = const <int, Widget>{
+    0: Text("All"),
+    1: Text("Notice")
+  };
+  int idx = 0;
+  String type = "ALL";
+  String sort = "LATEST";
   String dropdownValue = list.first;
   int _currentIndex = 0; // bottomnavigation index 번호
-
-  final url = 'http://api.kfoodbox.click';
   int page = 1;
-  final limit = 15;
+  final limit = 20;
   bool hasNextPage = true;
   bool isFirstLoadRunning = false;
   bool isLoadMoreRunning = false;
@@ -36,84 +43,229 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
   @override
   void initState() {
     super.initState();
+    initLoad();
+    controller = ScrollController()..addListener(nextLoad);
+  }
+
+  void initLoad() async {
+    setState(() {
+      isFirstLoadRunning = true;
+    });
+    CommunitySerrvices.getArticleList(page, limit, type, sort, null)
+        .then((value) {
+      setState(() {
+        postList = value;
+      });
+    });
+    setState(() {
+      isFirstLoadRunning = false;
+    });
+  }
+
+  void nextLoad() async {
+    if (hasNextPage &&
+        !isFirstLoadRunning &&
+        !isLoadMoreRunning &&
+        controller.position.extentAfter < 100) {
+      setState(() {
+        isLoadMoreRunning = true;
+      });
+      page += 1;
+
+      CommunitySerrvices.getArticleList(page, limit, type, sort, null)
+          .then((value) {
+        if (value.isNotEmpty) {
+          setState(() {
+            postList.addAll(value);
+          });
+        } else {
+          setState(() {
+            hasNextPage = false;
+          });
+        }
+      });
+
+      setState(() {
+        isLoadMoreRunning = false;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(nextLoad);
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CommunityAppBar(title: 'Community'),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-            ),
-            child: Row(
+      body: isFirstLoadRunning
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
+                    vertical: 10,
                   ),
-                  child: SegmentedButton<Article>(
-                    segments: const <ButtonSegment<Article>>[
-                      ButtonSegment<Article>(
-                          value: Article.all,
-                          label: Text('All'),
-                          icon: Icon(Icons.article_outlined)),
-                      ButtonSegment<Article>(
-                          value: Article.hot,
-                          label: Text('Hot'),
-                          icon: Icon(Icons.favorite)),
-                      ButtonSegment<Article>(
-                          value: Article.notice,
-                          label: Text('Notice'),
-                          icon: Icon(Icons.notifications)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                        ),
+                        child: CupertinoSlidingSegmentedControl(
+                            groupValue: idx,
+                            children: myTabs,
+                            onValueChanged: (i) {
+                              setState(() {
+                                idx = i!;
+                                type = i == 0 ? 'ALL' : 'NOTICE';
+                                page = 1;
+                                hasNextPage = true;
+                                isLoadMoreRunning = false;
+                                initLoad();
+                                controller = ScrollController()
+                                  ..addListener(nextLoad);
+                              });
+                            }),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                        ),
+                        child: DropdownButton<String>(
+                          value: dropdownValue,
+                          icon: const Icon(Icons.arrow_drop_down_rounded),
+                          elevation: 16,
+                          style: const TextStyle(color: Colors.deepPurple),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          onChanged: (String? value) {
+                            setState(() {
+                              dropdownValue = value!;
+                              sort = value;
+                              page = 1;
+                              hasNextPage = true;
+                              isLoadMoreRunning = false;
+                              initLoad();
+                              controller = ScrollController()
+                                ..addListener(nextLoad);
+                            });
+                          },
+                          items: list.map<DropdownMenuItem<String>>(
+                            (String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            },
+                          ).toList(),
+                        ),
+                      ),
                     ],
-                    selected: <Article>{articleView},
-                    onSelectionChanged: (Set<Article> newSelection) {
-                      setState(
-                        () {
-                          articleView = newSelection.first;
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    controller: controller,
+                    itemCount: postList.length,
+                    itemBuilder: (context, index) => Card(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 2, horizontal: 10),
+                      shape: ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ListTile(
+                        title: Text(
+                          postList[index].title,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              postList[index].content,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Icon(
+                                  Icons.favorite,
+                                  color: Color(0xfff44336),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: Text(
+                                    postList[index].likeCount.toString(),
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xfff44336),
+                                    ),
+                                  ),
+                                ),
+                                const Icon(
+                                  Icons.mode_comment,
+                                  color: Color(0xff475387),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: Text(
+                                    postList[index].commentCount.toString(),
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xff475387),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  child: Text(
+                                    '  |   ${CommunitySerrvices.calUploadTime(postList[index].createdAt)}   |  ',
+                                    style: const TextStyle(
+                                        color: Color(0xff5b5b5b), fontSize: 12),
+                                  ),
+                                ),
+                                Text(
+                                  postList[index].nickname,
+                                  style: const TextStyle(
+                                      color: Color(0xff5b5b5b), fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        isThreeLine: true,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PostInformation(
+                                      postId: postList[index].id)));
                         },
-                      );
-                    },
+                      ),
+                    ),
                   ),
                 ),
-                DropdownButton<String>(
-                  value: dropdownValue,
-                  icon: const Icon(Icons.arrow_drop_down_rounded),
-                  elevation: 16,
-                  style: const TextStyle(color: Colors.deepPurple),
-                  underline: Container(
-                    height: 2,
-                    color: Colors.deepPurpleAccent,
+                if (isLoadMoreRunning == true)
+                  Container(
+                    padding: const EdgeInsets.all(30),
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
-                  onChanged: (String? value) {
-                    // This is called when the user selects an item.
-                    setState(() {
-                      dropdownValue = value!;
-                    });
-                  },
-                  items: list.map<DropdownMenuItem<String>>(
-                    (String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    },
-                  ).toList(),
-                ),
               ],
             ),
-          ),
-          // ListView.builder(
-          //     itemCount: 100,
-          //     itemBuilder: (BuildContext ctx, int idx) {
-          //       return Text('Content Number $idx');
-          //     })
-          // 게시판 리스트
-        ],
-      ),
       bottomNavigationBar: BottomNav(
         currentIndex: _currentIndex,
         onTap: _onItemTapped,

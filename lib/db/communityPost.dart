@@ -6,7 +6,7 @@ class CommunityPost {
   bool like;
   String title;
   String content;
-  List<dynamic> imageUrls;
+  List imageUrls;
   String createdAt;
   String? updatedAt;
   String nickname;

@@ -1,28 +1,28 @@
 import 'dart:io';
 import 'postAppbar.dart';
-import '../db/communityPost.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:dio/dio.dart';
 
 class CommunityPosting extends StatefulWidget {
-  const CommunityPosting({super.key});
+  const CommunityPosting({
+    super.key,
+  });
 
   @override
   State<CommunityPosting> createState() => _CommunityPostingState();
 }
 
 class _CommunityPostingState extends State<CommunityPosting> {
-  final titleController = TextEditingController();
-  final bodyController = TextEditingController();
-  final picker = ImagePicker();
-  final focusNode = FocusNode();
+  late final titleController = TextEditingController();
+  late final bodyController = TextEditingController();
   String inputTitle = '';
   String inputContent = '';
+  final picker = ImagePicker();
+  final focusNode = FocusNode();
 
-  XFile? image;
-  List<XFile?> multiImage = [];
-  List<XFile?> images = [];
+  List<XFile> multiImage = [];
+  List<XFile> images = [];
+  int currIdx = 0;
 
   Future<dynamic> showdialog(BuildContext context) {
     return showDialog(
@@ -46,7 +46,12 @@ class _CommunityPostingState extends State<CommunityPosting> {
         focusNode.unfocus();
       },
       child: Scaffold(
-        appBar: CommunityPostAppBar(title: "Writing", images: images),
+        appBar: CommunityPostAppBar(
+          title: 'Writing',
+          inputTitle: inputTitle,
+          inputContent: inputContent,
+          images: images,
+        ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(
             horizontal: 12,
@@ -69,10 +74,6 @@ class _CommunityPostingState extends State<CommunityPosting> {
                   setState(() => inputTitle = value);
                 },
               ),
-              const SizedBox(
-                width: 500,
-                child: Divider(color: Colors.black, thickness: 2.0),
-              ),
               TextField(
                 decoration: const InputDecoration(
                   border: InputBorder.none,
@@ -88,10 +89,6 @@ class _CommunityPostingState extends State<CommunityPosting> {
                   setState(() => inputContent = value);
                 },
               ),
-              const SizedBox(
-                width: 500,
-                child: Divider(color: Colors.black, thickness: 2.0),
-              ),
               Container(
                 width: 350,
                 height: 50,
@@ -102,7 +99,7 @@ class _CommunityPostingState extends State<CommunityPosting> {
                   borderRadius: BorderRadius.circular(5),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
+                        color: const Color(0xFF303F9F).withOpacity(0.5),
                         spreadRadius: 0.5,
                         blurRadius: 5)
                   ],
@@ -111,7 +108,7 @@ class _CommunityPostingState extends State<CommunityPosting> {
                   label: const Text(
                     "Add photo...",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Color(0xFF303F9F),
                     ),
                   ),
                   onPressed: () async {
@@ -157,7 +154,7 @@ class _CommunityPostingState extends State<CommunityPosting> {
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: FileImage(
-                                  File(images[index]!.path),
+                                  File(images[index].path),
                                 ),
                               ),
                             ),
@@ -166,7 +163,7 @@ class _CommunityPostingState extends State<CommunityPosting> {
                         SizedBox(
                           width: 200,
                           child: Text(
-                            images[index]!.name,
+                            images[index].name,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -187,6 +184,7 @@ class _CommunityPostingState extends State<CommunityPosting> {
                               onPressed: () {
                                 setState(() {
                                   images.remove(images[index]);
+                                  currIdx--;
                                 });
                               },
                             ),

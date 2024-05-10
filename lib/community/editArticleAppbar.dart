@@ -3,19 +3,21 @@ import 'package:image_picker/image_picker.dart';
 import 'communityService.dart';
 import 'package:flutter/material.dart';
 
-class CommunityPostAppBar extends StatelessWidget
+class CommunityEditAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  final String title;
+  int postId;
   String inputTitle;
   String inputContent;
   List<XFile> images;
+  List imageUrls;
 
-  CommunityPostAppBar({
+  CommunityEditAppBar({
     super.key,
-    required this.title,
+    required this.postId,
     required this.inputTitle,
     required this.inputContent,
     required this.images,
+    required this.imageUrls,
   });
 
   @override
@@ -29,9 +31,9 @@ class CommunityPostAppBar extends StatelessWidget
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,
       ),
-      title: Text(
-        title,
-        style: const TextStyle(
+      title: const Text(
+        'Edit Article',
+        style: TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.w700,
         ),
@@ -45,14 +47,14 @@ class CommunityPostAppBar extends StatelessWidget
           child: TextButton(
             onPressed: () async {
               if (inputTitle != '' && inputContent != '') {
-                CommunitySerrvices.addCommunityPosting(
-                    inputTitle, inputContent, images);
+                CommunitySerrvices.editPost(
+                    postId, inputTitle, inputContent, images, imageUrls);
                 showDialog(
                   context: context,
                   barrierDismissible: false,
                   builder: (BuildContext context) {
                     return const AlertDialog(
-                      content: Text('Post added!'),
+                      content: Text('Post edited!'),
                     );
                   },
                 );
@@ -80,7 +82,7 @@ class CommunityPostAppBar extends StatelessWidget
               }
             },
             child: const Text(
-              'Post',
+              'Edit',
               style: TextStyle(
                 fontSize: 18,
               ),

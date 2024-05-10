@@ -1,9 +1,9 @@
 final Map<String, String> langJa = {
   'myPageTitle': 'マイページ',
-  'guest' : 'ゲスト',
+  'guest': 'ゲスト',
   'login': 'ログイン',
   'signUp': 'サインアップ',
-  "today's recommended food" : "今日のおすすめ",
+  "today's recommended food": "今日のおすすめ",
   'viewAllKoreanFoods': '全ての韓国食品を見る',
   'community': 'コミュニティ',
   'custom recipes': 'カスタムレシピ',
@@ -25,4 +25,5 @@ final Map<String, String> langJa = {
   'submit': '投稿',
   'Do you really want to withdraw?': '本当に撤退しますか？',
   'withdraw': '退会する',
+  'Find a Korean restaurant in South Korea': '韓国で韓国料理レストランを探す',
 };

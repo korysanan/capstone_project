@@ -1,9 +1,11 @@
+import '../translate/language_detect.dart';
+import 'postInformationAppbar.dart';
+import '../../globals.dart' as globals;
 import 'communityService.dart';
 import 'postComment.dart';
 import 'postImage.dart';
 import '../db/comment.dart';
 import '../db/communityPost.dart';
-import '../home/appbar.dart';
 import 'package:flutter/material.dart';
 
 class PostInformation extends StatefulWidget {
@@ -19,6 +21,9 @@ class PostInformation extends StatefulWidget {
 
 class _PostInformationState extends State<PostInformation> {
   late int postId;
+  String title = '';
+  String content = '';
+  bool isLoading = false;
   CommunityPost post = CommunityPost(
     id: 0,
     userId: 0,
@@ -31,13 +36,48 @@ class _PostInformationState extends State<PostInformation> {
     createdAt: '',
     updatedAt: '',
     nickname: 'nickname',
-    likeCount: 12,
-    commentCount: 10,
+    likeCount: 0,
+    commentCount: 0,
   );
   List<Comment> comments = [];
-  String inputText = '';
   final commentController = TextEditingController();
   final focusNode = FocusNode();
+
+  Future<dynamic> commentDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Warning'),
+        content: const Text('You must log in to post a comment'),
+        actions: [
+          ElevatedButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK')),
+        ],
+      ),
+    );
+  }
+
+  Future<void> translateArticle() async {
+    setState(() {
+      isLoading = true;
+    });
+    String translatedTitle = await translateText(title);
+    String tanslatedContent = await translateText(content);
+    setState(() {
+      title = translatedTitle;
+      content = tanslatedContent;
+    });
+    for (var comment in comments) {
+      String translatedComment = await translateText(comment.content);
+      setState(() {
+        comment.content = translatedComment;
+      });
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   void bookmarkPressed() {}
 
@@ -50,6 +90,10 @@ class _PostInformationState extends State<PostInformation> {
     CommunitySerrvices.getPostInfo(postId).then((value) {
       setState(() {
         post = value;
+        try {
+          title = post.title;
+          content = post.content;
+        } catch (e) {}
       });
     });
     CommunitySerrvices.getComments(postId).then((value) {
@@ -61,131 +105,202 @@ class _PostInformationState extends State<PostInformation> {
 
   @override
   Widget build(BuildContext context) {
-    print(inputText);
     return GestureDetector(
       onTap: () {
         focusNode.unfocus();
       },
       child: Scaffold(
         body: Scaffold(
-          appBar: const BasicAppBar(title: ''),
+          appBar: PostInformationAppBar(
+            postId: post.id,
+            authorNickname: post.nickname,
+            userNickname: globals.user_nickname ?? '',
+            title: post.title,
+            content: post.content,
+            imageUrls: post.imageUrls,
+          ),
           resizeToAvoidBottomInset: false,
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    post.title,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
+          body: isLoading
+              ? MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  home: Scaffold(
+                    body: Container(
+                      decoration: const BoxDecoration(color: Colors.white),
+                      child: Center(
+                          child: Image.asset('assets/images/load-33_256.gif')),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                )
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(
-                          Icons.favorite,
-                          color: Colors.red,
+                        Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.favorite,
+                              color: Color(0xfff44336),
+                            ),
+                            Text(
+                              post.likeCount.toString(),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Color(0xfff44336),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            const Icon(
+                              Icons.mode_comment,
+                              color: Color(0xff475387),
+                            ),
+                            Text(
+                              post.commentCount.toString(),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Color(0xff475387),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Text(
+                                ' |  ${CommunitySerrvices.calUploadTime(post.createdAt)}  | ',
+                                style: const TextStyle(
+                                    color: Color(0xff5b5b5b), fontSize: 12),
+                              ),
+                            ),
+                            Text(
+                              post.nickname,
+                              style: const TextStyle(
+                                  color: Color(0xff5b5b5b), fontSize: 12),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton.icon(
+                              icon: const Icon(Icons.g_translate_outlined),
+                              label: const Text(
+                                'Translate',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              onPressed: () async {
+                                translateArticle();
+                              },
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 500,
+                          child: Divider(
+                              color: Color.fromARGB(255, 219, 179, 242),
+                              thickness: 1.0),
                         ),
                         Text(
-                          post.likeCount.toString(),
+                          content,
                           style: const TextStyle(
-                            fontSize: 16,
+                            fontSize: 18,
                           ),
                         ),
                         const SizedBox(
-                          width: 12,
+                          height: 10,
                         ),
-                        const Icon(
-                          Icons.mode_comment,
-                          color: Colors.blue,
-                        ),
-                        Text(
-                          post.commentCount.toString(),
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
+                        if (post.imageUrls.isNotEmpty)
+                          PostImages(images: post.imageUrls),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            IconButton(
+                              onPressed: likePressed,
+                              icon: const Icon(Icons.favorite_border),
+                              iconSize: 30,
+                              tooltip: 'Like',
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            IconButton(
+                              onPressed: bookmarkPressed,
+                              icon: const Icon(Icons.bookmark_border),
+                              iconSize: 30,
+                              tooltip: 'Bookmark',
+                            ),
+                          ],
                         ),
                         const SizedBox(
-                          width: 12,
+                          width: 500,
+                          child: Divider(
+                              color: Color.fromARGB(255, 219, 179, 242),
+                              thickness: 1.0),
                         ),
-                        Text(post.createdAt.toString())
+                        if (comments.isNotEmpty)
+                          ArticleComments(postId: post.id, comments: comments),
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    width: 500,
-                    child: Divider(color: Colors.black, thickness: 2.0),
-                  ),
-                  Text(
-                    post.content,
-                    style: const TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  if (post.imageUrls.isNotEmpty)
-                    PostImages(images: post.imageUrls),
-                  // const SizedBox(
-                  //   width: 500,
-                  //   child: Divider(color: Color(0xff808080), thickness: 1.0),
-                  // ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        onPressed: likePressed,
-                        icon: const Icon(Icons.favorite_border),
-                        iconSize: 30,
-                        tooltip: 'Like',
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      IconButton(
-                        onPressed: bookmarkPressed,
-                        icon: const Icon(Icons.bookmark_border),
-                        iconSize: 30,
-                        tooltip: 'Bookmark',
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 500,
-                    child: Divider(color: Colors.black, thickness: 2.0),
-                  ),
-                  if (comments.isNotEmpty) PostComments(comments: comments),
-                ],
-              ),
-            ),
-          ),
+                ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              onChanged: (text) {
-                setState(() {
-                  inputText = text;
-                });
-              },
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Write Comment',
-              ),
-              maxLines: 1,
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-              focusNode: focusNode,
-              controller: commentController,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Flexible(
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      hintText: 'Write Comment',
+                    ),
+                    maxLines: 1,
+                    style: const TextStyle(
+                      fontSize: 20,
+                    ),
+                    focusNode: focusNode,
+                    controller: commentController,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: IconButton(
+                    icon: const Icon(Icons.send),
+                    onPressed: () {
+                      if (globals.sessionId == null) {
+                        commentDialog(context);
+                      } else {
+                        if (commentController.text.isNotEmpty) {
+                          CommunitySerrvices.addCommunityComment(
+                              post.id, commentController.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PostInformation(postId: post.id)),
+                          );
+                        }
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ),
