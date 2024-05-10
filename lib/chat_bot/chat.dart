@@ -26,17 +26,17 @@ class _chatbotState extends State<chatbot> {
     return Scaffold(
       appBar: AppBar(
         title: Text('ChatBot'),
-        backgroundColor: Colors.blue[300],
+        backgroundColor: Colors.white,
         centerTitle: true,
       ),
       body: Container(
-        color: Colors.lightBlue[100],
+        color: Colors.white,
         child: Column(
           children: [
             Expanded(child: MessagesScreen(messages: messages)),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              color: Colors.blue,
+              color: Color.fromARGB(255, 117, 201, 243),
               child: Row(
                 children: [
                   Expanded(

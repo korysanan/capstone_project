@@ -26,7 +26,7 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Color.fromARGB(255, 117, 201, 243),
+      backgroundColor: Color.fromARGB(255, 219, 179, 242),
       type: BottomNavigationBarType.fixed,
       onTap: widget.onTap,
       selectedFontSize: 1,

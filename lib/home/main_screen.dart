@@ -136,7 +136,16 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               ),
             ),
             new Divider(height: 50.0,),
+            Center(
+              child: Text(
+                '음식 정보',
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+            ),
             Card(
+              margin: EdgeInsets.symmetric(horizontal: 20.0),
               clipBehavior: Clip.antiAlias,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
@@ -156,7 +165,8 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                   children: <Widget>[
                     SizedBox(height: 20.0),
                     Image.asset(
-                      'assets/ex/kfood_detection.png',
+                      //'assets/ex/kfood_detection.png',
+                      'assets/ex/camera.png',
                       height: 140,
                       width: 140,
                       fit: BoxFit.cover,
@@ -164,7 +174,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                     Padding(
                       padding: EdgeInsets.all(16),
                       child: Text(
-                        'K-Food Detection',
+                        globals.getText('Korean Food Detection'),
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
@@ -174,7 +184,8 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
             ),
             SizedBox(height: 20.0),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              //padding: EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -191,6 +202,15 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                   elevation: 5, // 그림자 높이
                 ),
                 child: Text(globals.getText('viewAllKoreanFoods')),
+              ),
+            ),
+            new Divider(height: 50.0,),
+            Center(
+              child: Text(
+                '게시판',
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
               ),
             ),
             Padding(
@@ -240,7 +260,17 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                 ],
               ),
             ),
+            new Divider(height: 50.0,),
+            Center(
+              child: Text(
+                '한국 여행',
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+            ),
             Card(
+              margin: EdgeInsets.symmetric(horizontal: 20.0),
               clipBehavior: Clip.antiAlias,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
@@ -268,7 +298,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                     Padding(
                       padding: EdgeInsets.all(16),
                       child: Text(
-                        'Find a Korean restaurant in South Korea',
+                        globals.getText('Find a Korean restaurant in South Korea'),
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
@@ -297,7 +327,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width / 2 - 22;
+    double width = MediaQuery.of(context).size.width / 2 - 24;
 
     return InkWell(
       onTap: onTap,
@@ -309,6 +339,7 @@ class CustomCard extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              SizedBox(height: 10),
               Image.asset(imagePath, width: 80, height: 80),
               Padding(
                 padding: const EdgeInsets.all(8.0),

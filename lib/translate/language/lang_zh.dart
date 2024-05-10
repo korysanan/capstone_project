@@ -25,4 +25,5 @@ final Map<String, String> langZh = {
   'submit': '提交',
   'Do you really want to withdraw?': '您真的想退出吗？',
   'withdraw': '退出',
+  'Find a Korean restaurant in South Korea' : '查找韩国的韩国餐厅',
 };

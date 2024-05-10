@@ -25,4 +25,5 @@ final Map<String, String> langKo = {
   'submit': '제출',
   'Do you really want to withdraw?': '정말 탈퇴하시겠습니까?',
   'withdraw': '탈퇴',
+  'Find a Korean restaurant in South Korea' : '한국 내 음식점 찾기',
 };

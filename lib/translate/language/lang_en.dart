@@ -25,4 +25,5 @@ final Map<String, String> langEn = {
   'submit': 'submit',
   'Do you really want to withdraw?': 'Do you really want to withdraw?',
   'withdraw': 'withdraw',
+  'Find a Korean restaurant in South Korea' : 'Find a Korean restaurant in South Korea',
 };
