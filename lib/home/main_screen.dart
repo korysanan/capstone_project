@@ -7,6 +7,7 @@ import 'bottom.dart';
 import 'on_item_tap.dart';
 import 'package:carousel_slider/carousel_slider.dart'; // slider하기 위해 import
 import '../globals.dart' as globals;
+import 'package:badges/badges.dart' as badges;
 
 class KFoodBoxHome extends StatefulWidget {
   @override
@@ -36,7 +37,10 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        leading: Image.asset('assets/ex/kfood_logo.png'),
+        leading: Padding(
+          padding: EdgeInsets.only(left: 10.0),  // 왼쪽 여백 추가
+          child: Image.asset('assets/ex/kfood_logo.png'),
+        ),
         title: Text(
           'K-Food Box',
           style: TextStyle(
@@ -47,6 +51,25 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
           ),
         ),
         centerTitle: true,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 10.0),  // 오른쪽 여백 추가
+            child: badges.Badge(
+              badgeContent: Text(
+                '1',  // 배지 숫자
+                style: TextStyle(color: Colors.white),
+              ),
+              badgeColor: Colors.red,
+              position: badges.BadgePosition.topEnd(top: 5, end: 5),
+              child: IconButton(
+                icon: Icon(Icons.notifications),
+                onPressed: () {
+                  print('Notifications icon tapped!');
+                },
+              ),
+            ),
+          ),
+        ],
         //backgroundColor: Color.fromARGB(255, 117, 201, 243),
       ),
       body: Container(
@@ -141,9 +164,11 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                 '음식 정보',
                 style: TextStyle(
                   fontSize: 20.0,
+                  color: Color.fromARGB(221, 73, 73, 73),
                 ),
               ),
             ),
+            SizedBox(height: 10),
             Card(
               margin: EdgeInsets.symmetric(horizontal: 20.0),
               clipBehavior: Clip.antiAlias,
@@ -210,16 +235,18 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                 '게시판',
                 style: TextStyle(
                   fontSize: 20.0,
+                  color: Color.fromARGB(221, 73, 73, 73),
                 ),
               ),
             ),
+            //SizedBox(height: 10),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 8, right: 4),
+                    padding: EdgeInsets.only(left: 20, right: 4),
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -241,7 +268,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                     )
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 4, right: 8),
+                    padding: EdgeInsets.only(left: 4, right: 20),
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -266,9 +293,11 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                 '한국 여행',
                 style: TextStyle(
                   fontSize: 20.0,
+                  color: Color.fromARGB(221, 73, 73, 73),
                 ),
               ),
             ),
+            SizedBox(height: 10),
             Card(
               margin: EdgeInsets.symmetric(horizontal: 20.0),
               clipBehavior: Clip.antiAlias,
@@ -327,7 +356,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width / 2 - 24;
+    double width = MediaQuery.of(context).size.width / 2 - 44;
 
     return InkWell(
       onTap: onTap,
