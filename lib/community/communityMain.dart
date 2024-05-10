@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'mainAppbar.dart';
 import '../home/bottom.dart';
 import 'package:flutter/material.dart';
+import '../home/on_item_tap.dart';
 
 const List<String> list = <String>['LATEST', 'OLDEST', 'LIKES', 'COMMENTS'];
 
@@ -25,7 +26,7 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
   String type = "ALL";
   String sort = "LATEST";
   String dropdownValue = list.first;
-  int _currentIndex = 0; // bottomnavigation index 번호
+  final int _currentIndex = 0; // bottomnavigation index 번호
   int page = 1;
   final limit = 20;
   bool hasNextPage = true;
@@ -33,12 +34,6 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
   bool isLoadMoreRunning = false;
   List postList = [];
   late ScrollController controller;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 
   @override
   void initState() {
@@ -268,7 +263,7 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
             ),
       bottomNavigationBar: BottomNav(
         currentIndex: _currentIndex,
-        onTap: _onItemTapped,
+        onTap: (index) => onItemTapped(context, index),
       ),
     );
   }
