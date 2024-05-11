@@ -54,45 +54,52 @@ class _ArticleCommentsState extends State<ArticleComments> {
                         ],
                       ),
                       widget.isTranslate
-                          ? FutureBuilder<String>(
-                              future: translateText(
-                                  widget.comments?[index].content),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  if (snapshot.hasError) {
-                                    return const Text(
-                                      'Error',
-                                      style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    );
+                          ? SizedBox(
+                              width: MediaQuery.of(context).size.width - 40,
+                              child: FutureBuilder<String>(
+                                future: translateText(
+                                    widget.comments?[index].content),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return const Text(
+                                        'Error',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      );
+                                    } else {
+                                      return Text(
+                                        snapshot.data ??
+                                            'Translation error', // 번역 실패시 대체 텍스트
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                        ),
+                                        softWrap: true, // Added this line
+                                      );
+                                    }
                                   } else {
-                                    return Text(
-                                      snapshot.data ??
-                                          'Translation error', // 번역 실패시 대체 텍스트
-                                      style: const TextStyle(
-                                        fontSize: 15,
+                                    return const SizedBox(
+                                      height: 10,
+                                      width: 10,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
                                       ),
                                     );
                                   }
-                                } else {
-                                  return const SizedBox(
-                                    height: 10,
-                                    width: 10,
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  );
-                                }
-                              },
-                            )
-                          : Text(
-                              widget.comments?[index].content,
-                              style: const TextStyle(fontSize: 15),
-                            )
+                                },
+                              ))
+                          : SizedBox(
+                              width: MediaQuery.of(context).size.width - 40,
+                              child: Text(
+                                widget.comments?[index].content,
+                                style: const TextStyle(fontSize: 15),
+                                softWrap: true, // Added this line
+                              ),
+                            ),
                     ],
                   ),
                   if (globals.user_nickname == widget.comments?[index].nickname)
