@@ -1,9 +1,11 @@
+import 'categoryAppbar.dart';
 import 'categoryService.dart';
 import '../db/categoryFood.dart';
 import '../db/categoryInfo.dart';
 import 'package:flutter/material.dart';
-import '../home/appbar.dart';
 import 'foodList.dart';
+import '../translate/language_detect.dart';
+import '../globals.dart' as globals;
 
 class CategoryDetail extends StatefulWidget {
   final int categoryId;
@@ -21,7 +23,7 @@ class _CategoryDetailState extends State<CategoryDetail> {
   String inputText = '';
 
   FoodCategoryInfo categoryInfo =
-      FoodCategoryInfo(id: 0, name: '', explanation: '');
+      FoodCategoryInfo(id: 0, name: '', englishName: '', explanation: '');
   List<CategoryFood> categoryFoods = [];
 
   @override
@@ -43,7 +45,10 @@ class _CategoryDetailState extends State<CategoryDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BasicAppBar(title: categoryInfo.name),
+      appBar: CategoryAppBar(
+          title: globals.selectedLanguageCode == 'ko'
+              ? categoryInfo.name
+              : categoryInfo.englishName),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -59,17 +64,55 @@ class _CategoryDetailState extends State<CategoryDetail> {
                   padding: const EdgeInsets.symmetric(
                     horizontal: 10,
                   ),
-                  child: Text(
-                    categoryInfo.explanation,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  child: globals.selectedLanguageCode == 'ko'
+                      ? Text(
+                          categoryInfo.explanation,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                      : FutureBuilder<String>(
+                          future: translateText(categoryInfo.explanation),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              if (snapshot.hasError) {
+                                return const Text(
+                                  'Error',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                );
+                              } else {
+                                return Text(
+                                  snapshot.data ??
+                                      'Translation error', // 번역 실패시 대체 텍스트
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                );
+                              }
+                            } else {
+                              return const SizedBox(
+                                height: 10,
+                                width: 10,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+                            }
+                          },
+                        ),
                 ),
                 const SizedBox(
                   width: 500,
-                  child: Divider(color: Colors.black, thickness: 2.0),
+                  child: Divider(
+                      color: Color.fromARGB(255, 219, 179, 242),
+                      thickness: 1.0),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -82,17 +125,18 @@ class _CategoryDetailState extends State<CategoryDetail> {
                         onPressed: () {
                           FocusManager.instance.primaryFocus
                               ?.unfocus(); // 검색 아이콘 누르면 키보드 숨김
+                          setState(() => inputText);
                         },
                       ),
                     ],
                     backgroundColor: const MaterialStatePropertyAll(
-                      Color(0xFFC9C9C9),
+                      Color.fromARGB(255, 202, 209, 249),
                     ),
                     shadowColor: const MaterialStatePropertyAll(Colors.black),
                     overlayColor:
-                        const MaterialStatePropertyAll(Color(0xFFAAAAAA)),
-                    constraints: const BoxConstraints(
-                      maxWidth: 350.0,
+                        const MaterialStatePropertyAll(Color(0xFFAEB9F0)),
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width - 20,
                       minHeight: 55.0,
                     ),
                     shape: MaterialStateProperty.all(
@@ -101,10 +145,9 @@ class _CategoryDetailState extends State<CategoryDetail> {
                       ),
                     ),
                     padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
-                    hintText: "Enter a category name",
+                    hintText: globals.getText('Enter a search term'),
                     onChanged: (value) {
-                      setState(
-                          () => inputText = value); // 입력값 inputText로 실시간 저장
+                      inputText = value;
                     },
                   ),
                 ),
@@ -113,7 +156,6 @@ class _CategoryDetailState extends State<CategoryDetail> {
                 ),
                 FoodList(
                   foods: categoryFoods,
-                  category: 'as',
                   searchText: inputText,
                 ),
               ],

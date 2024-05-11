@@ -1,11 +1,13 @@
 class FoodCategoryInfo {
   int id;
   String name;
+  String englishName;
   String explanation;
 
   FoodCategoryInfo({
     required this.id,
     required this.name,
+    required this.englishName,
     required this.explanation,
   });
 
@@ -13,6 +15,7 @@ class FoodCategoryInfo {
       FoodCategoryInfo(
         id: json["id"],
         name: json["name"],
+        englishName: json["englishName"],
         explanation: json["explanation"],
       );
 }

@@ -14,6 +14,7 @@ class CategorySerrvices {
       foodCategories.add(FoodCategory(
         id: element["id"],
         name: element["name"],
+        englishName: element['englishName'],
         imageUrl: element["imageUrl"],
       ));
     }
@@ -46,10 +47,12 @@ class CategorySerrvices {
         FoodCategoryInfo categoryInfo = FoodCategoryInfo.fromJson(jsonData);
         return categoryInfo;
       } else {
-        return FoodCategoryInfo(id: 0, name: '', explanation: '');
+        return FoodCategoryInfo(
+            id: 0, name: '', englishName: '', explanation: '');
       }
     } catch (e) {
-      return FoodCategoryInfo(id: 0, name: '', explanation: '');
+      return FoodCategoryInfo(
+          id: 0, name: '', englishName: '', explanation: '');
     }
   }
 

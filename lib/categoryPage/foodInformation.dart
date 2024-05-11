@@ -1,8 +1,10 @@
+import 'categoryAppbar.dart';
 import 'categoryService.dart';
 import '../db/food.dart';
-import '../home/appbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import '../translate/language_detect.dart';
+import '../globals.dart' as globals;
 
 class FoodInformation extends StatefulWidget {
   final int foodId;
@@ -42,7 +44,10 @@ class _FoodInformationState extends State<FoodInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BasicAppBar(title: food.name),
+      appBar: CategoryAppBar(
+          title: globals.selectedLanguageCode == 'ko'
+              ? food.name
+              : food.englishName),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -66,7 +71,7 @@ class _FoodInformationState extends State<FoodInformation> {
                           child: Stack(
                             children: <Widget>[
                               Image.network(
-                                imgUrl!, // 여기서 `!`를 사용하여 `e['url']`이 null이 아님을 단언/ 안하면 오류 발생
+                                'http://$imgUrl', // 여기서 `!`를 사용하여 `e['url']`이 null이 아님을 단언/ 안하면 오류 발생
                                 width: 1050.0,
                                 height: 350.0,
                                 fit: BoxFit.cover,
@@ -88,7 +93,8 @@ class _FoodInformationState extends State<FoodInformation> {
               ),
               const SizedBox(
                 width: 500,
-                child: Divider(color: Colors.black, thickness: 2.0),
+                child: Divider(
+                    color: Color.fromARGB(255, 219, 179, 242), thickness: 1.0),
               ),
               Column(
                 children: [
@@ -99,9 +105,9 @@ class _FoodInformationState extends State<FoodInformation> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "About",
-                          style: TextStyle(
+                        Text(
+                          globals.getText('About'),
+                          style: const TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w600,
                           ),
@@ -120,32 +126,71 @@ class _FoodInformationState extends State<FoodInformation> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 5,
-                      horizontal: 30,
+                      horizontal: 10,
                     ),
-                    child: Text(
-                      food.explanation,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w500),
-                    ),
+                    child: globals.selectedLanguageCode == 'ko'
+                        ? Text(
+                            food.explanation,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        : FutureBuilder<String>(
+                            future: translateText(food.englishExplanation),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasError) {
+                                  return const Text(
+                                    'Error',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  );
+                                } else {
+                                  return Text(
+                                    snapshot.data ??
+                                        'Translation error', // 번역 실패시 대체 텍스트
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  );
+                                }
+                              } else {
+                                return const SizedBox(
+                                  height: 10,
+                                  width: 10,
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
                   )
                 ],
               ),
               const SizedBox(
                 width: 500,
-                child: Divider(color: Colors.black, thickness: 2.0),
+                child: Divider(
+                    color: Color.fromARGB(255, 219, 179, 242), thickness: 1.0),
               ),
               Column(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 10,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Recipe",
-                          style: TextStyle(
+                          globals.getText('Recipe'),
+                          style: const TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w600,
                           ),
@@ -153,8 +198,8 @@ class _FoodInformationState extends State<FoodInformation> {
                       ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 10,
                       vertical: 2,
                     ),
@@ -162,10 +207,10 @@ class _FoodInformationState extends State<FoodInformation> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Ingredients and portions",
+                          globals.getText('Ingredients and portions'),
                           textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 22,
+                          style: const TextStyle(
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.indigo,
                           ),
@@ -173,9 +218,97 @@ class _FoodInformationState extends State<FoodInformation> {
                       ],
                     ),
                   ),
-                  // 재료 추가
-                  const Padding(
-                    padding: EdgeInsets.symmetric(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: food.recipeIngredients.reversed.map((ingredient) {
+                      return Column(children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width - 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FutureBuilder<String>(
+                                future: translateText('${ingredient['name']}'),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return const Text(
+                                        'Error',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 16,
+                                        ),
+                                      );
+                                    } else {
+                                      return Text(
+                                        snapshot.data ??
+                                            'Translation error', // 번역 실패시 대체 텍스트
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    return const SizedBox(
+                                      height: 10,
+                                      width: 10,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                              FutureBuilder<String>(
+                                future: translateText(
+                                    '${ingredient['quantity'] ?? ''}'),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return const Text(
+                                        'Error',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 16,
+                                        ),
+                                      );
+                                    } else {
+                                      return Text(
+                                        snapshot.data ??
+                                            'Translation error', // 번역 실패시 대체 텍스트
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    return const SizedBox(
+                                      height: 10,
+                                      width: 10,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: const Divider(
+                            color: Colors.grey,
+                            thickness: 1.0,
+                          ),
+                        ),
+                      ]);
+                    }).toList(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 10,
                       vertical: 2,
                     ),
@@ -183,10 +316,10 @@ class _FoodInformationState extends State<FoodInformation> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Sequence",
+                          globals.getText('Sequence'),
                           textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 22,
+                          style: const TextStyle(
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.indigo,
                           ),
@@ -194,29 +327,66 @@ class _FoodInformationState extends State<FoodInformation> {
                       ],
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(
-                  //     vertical: 5,
-                  //     horizontal: 30,
-                  //   ),
-                  //   child: ListView.builder(
-                  //     itemCount: food.recipeSequence.length,
-                  //     itemBuilder: (BuildContext context, index) {
-                  //       return SizedBox(
-                  //           height: 50,
-                  //           child: Text(
-                  //               food.recipeSequence[index]['sequenceNum']));
-                  //     },
-                  //   ),
-                  // ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: food.recipeSequence.map((sequence) {
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width - 50,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(sequence['sequenceNumber'].toString(),
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            FutureBuilder<String>(
+                              future: translateText('${sequence['content']}'),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  if (snapshot.hasError) {
+                                    return const Text(
+                                      'Error',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 16,
+                                      ),
+                                    );
+                                  } else {
+                                    return Text(
+                                      snapshot.data ??
+                                          'Translation error', // 번역 실패시 대체 텍스트
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    );
+                                  }
+                                } else {
+                                  return const SizedBox(
+                                    height: 10,
+                                    width: 10,
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton.icon(
-                        onPressed: () {},
-                        label: const Text(
-                          "Custom Recipe",
-                          style: TextStyle(
+                        onPressed: () {}, // 해당 커스텀 레시피 페이지로 이동
+                        label: Text(
+                          globals.getText('custom recipes'),
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: Colors.red,
@@ -230,21 +400,24 @@ class _FoodInformationState extends State<FoodInformation> {
                     ],
                   ),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        "Explanation source: ${food.explanationSource}",
-                        style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.grey,
+                      if (food.explanationSource != null)
+                        Text(
+                          "Explanation source: ${food.explanationSource}",
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Recipe source: ${food.recipeSource}",
-                        style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.grey,
+                      if (food.recipeSource != null)
+                        Text(
+                          "Recipe source: ${food.recipeSource}",
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ],

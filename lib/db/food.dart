@@ -1,14 +1,14 @@
 class Food {
-  int id;
-  String name;
-  String englishName;
-  List<dynamic> imageUrls;
-  String explanation;
-  String englishExplanation;
-  String explanationSource;
-  String recipeSource;
-  List<dynamic> recipeIngredients; // db 자료형에따라 수정
-  List<dynamic> recipeSequence;
+  final int id;
+  final String name;
+  final String englishName;
+  final List<String> imageUrls;
+  final String explanation;
+  final String englishExplanation;
+  final String? explanationSource;
+  final String? recipeSource;
+  final List<Map<String, dynamic>> recipeIngredients;
+  final List<Map<String, dynamic>> recipeSequence;
 
   Food({
     required this.id,
@@ -23,34 +23,19 @@ class Food {
     required this.recipeSequence,
   });
 
-  static List<RecipeSequence> getRecipeSequence(List<dynamic> list) {
-    List<RecipeSequence> recipeSequence = [];
-    for (var element in list) {
-      recipeSequence.add(RecipeSequence(
-          sequenceNum: element['sequenceNumber'], content: element['content']));
-    }
-    return recipeSequence;
+  factory Food.fromJson(Map<String, dynamic> json) {
+    return Food(
+      id: json['id'],
+      name: json['name'],
+      englishName: json['englishName'],
+      imageUrls: List<String>.from(json['imageUrls']),
+      explanation: json['explanation'],
+      englishExplanation: json['englishExplanation'],
+      explanationSource: json['explanationSource'],
+      recipeSource: json['recipeSource'],
+      recipeIngredients:
+          List<Map<String, dynamic>>.from(json['recipeIngredients']),
+      recipeSequence: List<Map<String, dynamic>>.from(json['recipeSequence']),
+    );
   }
-
-  factory Food.fromJson(Map<String, dynamic> json) => Food(
-      id: json["id"],
-      name: json["name"],
-      englishName: json["englishName"],
-      imageUrls: json["imageUrls"],
-      explanation: json["explanation"],
-      englishExplanation: json["englishExplanation"],
-      explanationSource: json["explanationSource"],
-      recipeSource: json["recipeSource"],
-      recipeIngredients: json["recipeIngredients"],
-      recipeSequence: getRecipeSequence(json['recipeSequence']));
-}
-
-class RecipeSequence {
-  int sequenceNum;
-  String content;
-
-  RecipeSequence({
-    required this.sequenceNum,
-    required this.content,
-  });
 }

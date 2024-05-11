@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import '../home/bottom.dart';
 import '../home/appbar.dart';
 import '../db/foodcategory.dart';
+import '../home/on_item_tap.dart';
+import '../globals.dart' as globals;
 
 class CategoryMain extends StatefulWidget {
   const CategoryMain({super.key});
@@ -22,8 +24,6 @@ class _CategoryMainState extends State<CategoryMain> {
       _currentIndex = index;
     });
   }
-  // 아이콘 눌렀을때 인덱스 번호 설정
-  // home = 0, mail = 1, camera = 2, search = 3 , chatbot = 4
 
   void textChanged(String text) {
     inputText = text;
@@ -42,7 +42,7 @@ class _CategoryMainState extends State<CategoryMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BasicAppBar(title: '음식 카테고리'),
+      appBar: BasicAppBar(title: globals.getText('Food Category')),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -52,7 +52,6 @@ class _CategoryMainState extends State<CategoryMain> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
                   vertical: 7,
                 ),
                 child: SearchBar(
@@ -60,30 +59,30 @@ class _CategoryMainState extends State<CategoryMain> {
                     IconButton(
                       icon: const Icon(Icons.search),
                       onPressed: () {
-                        FocusManager.instance.primaryFocus
-                            ?.unfocus(); // 검색 아이콘 누르면 키보드 숨김
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        setState(() => inputText);
                       },
                     ),
                   ],
                   backgroundColor: const MaterialStatePropertyAll(
-                    Color(0xFFC9C9C9),
+                    Color.fromARGB(255, 202, 209, 249),
                   ),
                   shadowColor: const MaterialStatePropertyAll(Colors.black),
                   overlayColor:
-                      const MaterialStatePropertyAll(Color(0XFFAAAAAA)),
-                  constraints: const BoxConstraints(
-                    maxWidth: 350.0,
+                      const MaterialStatePropertyAll(Color(0xFFAEB9F0)),
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width - 20,
                     minHeight: 55.0,
                   ),
                   shape: MaterialStateProperty.all(
                     ContinuousRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(50),
                     ),
                   ),
                   padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
-                  hintText: "검색어를 입력하세요",
+                  hintText: globals.getText("Enter a search term"),
                   onChanged: (value) {
-                    setState(() => inputText = value); // 입력값 inputText로 실시간 저장
+                    inputText = value;
                   },
                 ),
               ),
@@ -100,7 +99,7 @@ class _CategoryMainState extends State<CategoryMain> {
       ),
       bottomNavigationBar: BottomNav(
         currentIndex: _currentIndex,
-        onTap: _onItemTapped,
+        onTap: (index) => onItemTapped(context, index),
       ),
     );
   }
