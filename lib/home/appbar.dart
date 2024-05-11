@@ -27,10 +27,8 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       actions: [
-        IconButton(
-          onPressed: () {}, // 홈화면으로 or 동작 X
-          icon: const Icon(Icons.food_bank), // 임시 로고
-          iconSize: 40,
+        InkWell(
+          child: Image.asset('assets/ex/kfood_logo.png'),
         )
       ],
     );
