@@ -5,6 +5,7 @@ import 'mainAppbar.dart';
 import '../home/bottom.dart';
 import 'package:flutter/material.dart';
 import '../home/on_item_tap.dart';
+import '../globals.dart' as globals;
 
 const List<String> list = <String>['LATEST', 'OLDEST', 'LIKES', 'COMMENTS'];
 
@@ -95,7 +96,7 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommunityAppBar(title: 'Community'),
+      appBar: CommunityAppBar(title: globals.getText('community')),
       body: isFirstLoadRunning
           ? const Center(
               child: CircularProgressIndicator(),

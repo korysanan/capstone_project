@@ -63,9 +63,8 @@ class CommentEditAppBar extends StatelessWidget implements PreferredSizeWidget {
                 showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                          title: const Text('Can\'t upload article'),
-                          content: const Text(
-                              'Article must include title and content'),
+                          title: const Text('Warning'),
+                          content: const Text('Comment must include content'),
                           actions: [
                             TextButton(
                               onPressed: () {

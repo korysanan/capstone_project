@@ -65,7 +65,7 @@ class CommunityPostAppBar extends StatelessWidget
                 showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                          title: const Text('Can\'t upload article'),
+                          title: const Text('Warning'),
                           content: const Text(
                               'Article must include title and content'),
                           actions: [
