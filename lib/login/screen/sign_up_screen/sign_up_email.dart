@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:capstone_project/login/service/sign_up_server.dart';
 import 'package:flutter/material.dart';
 import 'sign_up_password.dart';
-import 'sign_up_screen/email_verification.dart';
+import 'email_verification.dart';
 
 void main() {
   runApp(MyApp());
@@ -94,14 +94,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   Text('Remaining Time: $_remainingTime s', style: TextStyle(fontSize: 16)),
                   TextButton(
-                    onPressed: _resetTimer,
+                    onPressed: () {
+                      emailVerification!.checkEmailAndSendVerification();
+                    },
                     child: Text('ReDuplicate check'),
                   ),
                 ],
               )
               : ElevatedButton(
                   child: Text('Duplicate check'),
-                  onPressed: _startTimer,
+                  onPressed: () {
+                    emailVerification!.checkEmailAndSendVerification();
+                  },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.blue,
                     backgroundColor: Colors.white,
@@ -124,7 +128,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               SizedBox(height: 32.0),
               ElevatedButton(
-                child: Text('Next'),
+                child: Text('Confirm'),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.black,
                   backgroundColor: Color.fromARGB(255, 197, 165, 239),
@@ -133,11 +137,55 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     side: BorderSide(color: Colors.black, width: 2.0),
                   ),
                 ),
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUpPasswordScreen()),
-                  );
+                onPressed: () async {
+                  bool result = await verifyCertificationNumber(context, _emailController.text, _certificationNumberController.text);
+                  if (result) {
+                    // 성공 시 AlertDialog를 통해 사용자에게 알립니다.
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Verification Success'),
+                          content: Text('Your certification number is verified successfully!'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SignUpPasswordScreen(
+                                      email: _emailController.text, 
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    // 실패 시 AlertDialog를 통해 사용자에게 알립니다.
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Verification Failed'),
+                          content: Text('Please check your certification number and try again.'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
                 }
               ),
             ],
@@ -190,10 +238,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
   
   void _startTimer() {
-    _resetTimer(); // 타이머 시작 시 초기화
-  }
-
-  void _resetTimer() {
     setState(() {
       _isTimerVisible = true;
       _remainingTime = 300; // 타이머 시간을 초기화

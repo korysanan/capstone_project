@@ -1,7 +1,14 @@
-import 'package:capstone_project/design_test/sign_up_design/sign_up_screen/language_list.dart';
+import 'package:capstone_project/login/screen/sign_up_screen/language_list.dart';
 import 'package:flutter/material.dart';
 
+import '../../service/sign_up_server.dart';
+
 class SignUpEtcScreen extends StatefulWidget {
+  final String email;
+  final String password;
+
+  SignUpEtcScreen({Key? key, required this.email, required this.password}) : super(key: key);
+
   @override
   _SignUpEtcScreenState createState() => _SignUpEtcScreenState();
 }
@@ -9,15 +16,11 @@ class SignUpEtcScreen extends StatefulWidget {
 class _SignUpEtcScreenState extends State<SignUpEtcScreen> {
   final TextEditingController _nicknameController = TextEditingController();
 
-  bool _isNicknameChecked = false; // 닉네임 중복 검사가 완료되었는지 확인하는 플래그
-  bool _isNicknameFieldEnabled = true; // 닉네임 필드 활성화 여부
+  bool _isNicknameChecked = false;
+  bool _isNicknameFieldEnabled = true;
+  bool _isSignUpButtonEnabled = false;  // Initially, the Sign Up button is disabled
 
-  String _selectedLanguageId = '18'; // 기본 선택 언어 ID
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  String _selectedLanguageId = '18'; // Default selected language ID
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +53,7 @@ class _SignUpEtcScreenState extends State<SignUpEtcScreen> {
             SizedBox(height: 10),
             ElevatedButton(
               child: Text('Duplicate check'),
-              onPressed: (){},
+              onPressed: _isNicknameFieldEnabled ? _checkNicknameExistence : null,
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.blue,
                 backgroundColor: Colors.white,
@@ -71,6 +74,15 @@ class _SignUpEtcScreenState extends State<SignUpEtcScreen> {
             SizedBox(height: 10),
             ElevatedButton(
               child: Text('Sign Up'),
+              onPressed: _isSignUpButtonEnabled ? () async {
+                await registerUser(
+                  context,
+                  widget.email,
+                  widget.password,
+                  _nicknameController.text,
+                  int.tryParse(_selectedLanguageId) ?? 1
+                );
+              } : null,
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.black,
                 backgroundColor: Color.fromARGB(255, 197, 165, 239),
@@ -79,14 +91,6 @@ class _SignUpEtcScreenState extends State<SignUpEtcScreen> {
                   side: BorderSide(color: Colors.black, width: 2.0),
                 ),
               ),
-              onPressed: () {
-                /*
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignUpEtcScreen()),
-                );
-                */
-              },
             ),
           ],
         ),
@@ -94,9 +98,81 @@ class _SignUpEtcScreenState extends State<SignUpEtcScreen> {
     );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
+  void _checkNicknameExistence() {
+    String nickname = _nicknameController.text;
+    if (nickname.isEmpty || nickname.length > 8) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Invalid Nickname Length"),
+            content: Text("The nickname length must be between 1 and 8 characters."),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
+    checkNicknameExistence(nickname).then((isExist) {
+      if (!isExist) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Nickname Available"),
+              content: Text("The nickname is available. Do you want to use this nickname?"),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("Cancel"),
+                  onPressed: () {
+                    Navigator.of(context). pop();
+                  },
+                ),
+                TextButton(
+                  child: Text("OK"),
+                  onPressed: () {
+                    setState(() {
+                      _isNicknameChecked = true;
+                      _isNicknameFieldEnabled = false;
+                      _isSignUpButtonEnabled = true;
+                    });
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Duplicate Nickname"),
+              content: Text("This nickname is already in use. Please enter a different nickname."),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("OK"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }).catchError((error) {
+      print("An error occurred: $error");
+    });
   }
 }
 

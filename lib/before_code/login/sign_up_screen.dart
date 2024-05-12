@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import '../service/sign_up_server.dart';
+import '../../login/service/sign_up_server.dart';
 
 import 'sign_up_screen/language_list.dart';
 import 'sign_up_screen/custom_text_field.dart';

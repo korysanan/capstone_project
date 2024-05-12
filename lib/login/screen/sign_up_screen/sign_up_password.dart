@@ -3,9 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart'; 
 
 import 'sign_up_etc.dart';
-import 'sign_up_screen/email_verification.dart';
+import 'email_verification.dart';
 
 class SignUpPasswordScreen extends StatefulWidget {
+  final String email;
+
+  SignUpPasswordScreen({Key? key, required this.email}) : super(key: key);
+
   @override
   _SignUpPasswordScreenState createState() => _SignUpPasswordScreenState();
 }
@@ -13,7 +17,7 @@ class SignUpPasswordScreen extends StatefulWidget {
 class _SignUpPasswordScreenState extends State<SignUpPasswordScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
-
+  
   EmailVerification? emailVerification;
 
   String _passwordError = '';
@@ -104,12 +108,42 @@ class _SignUpPasswordScreenState extends State<SignUpPasswordScreen> {
                   side: BorderSide(color: Colors.black, width: 2.0),
                 ),
               ),
-              onPressed: _isButtonEnabled ? () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignUpEtcScreen()),
-                );
-              } : null,
+              onPressed: _isButtonEnabled
+                ? () async {
+                    // 다이얼로그를 표시하여 사용자의 확인을 받습니다.
+                    final bool confirm = await showDialog(
+                      context: context,
+                      builder: (BuildContext dialogContext) {
+                        return AlertDialog(
+                          title: Text('Password Check'),
+                          content: Text('Do you want to continue?'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.of(dialogContext).pop(false),
+                              child: Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.of(dialogContext).pop(true),
+                              child: Text('Confirm'),
+                            ),
+                          ],
+                        );
+                      },
+                    ) ?? false;
+
+                    if (confirm) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUpEtcScreen(
+                            email: widget.email,
+                            password: _passwordController.text,
+                          ),
+                        ),
+                      );
+                    }
+                  }
+                : null,
             ),
           ],
         ),

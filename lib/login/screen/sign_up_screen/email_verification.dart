@@ -6,28 +6,24 @@ class EmailVerification {
   final TextEditingController emailController;
   final Function(bool) updateCertificationCodeEnabled;
   final Function(bool) updateTimerVisible;
-  final Function startTimer;
+  final Function startTimer;  // 타이머 시작 함수
 
   EmailVerification({
     required this.context,
     required this.emailController,
     required this.updateCertificationCodeEnabled,
     required this.updateTimerVisible,
-    required this.startTimer,
+    required this.startTimer,  // 생성자를 통해 전달받음
   });
 
   void checkEmailAndSendVerification() {
-    // Email format verification regular expression
     final emailRegExp = RegExp(
       r'^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z]+',
     );
 
-    // Retrieve the entered email
     final email = emailController.text;
 
-    // Check email format
     if (!emailRegExp.hasMatch(email)) {
-      // If format is incorrect, display warning dialog
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -38,18 +34,18 @@ class EmailVerification {
               TextButton(
                 child: Text("OK"),
                 onPressed: () {
-                  Navigator.of(context).pop(); // Close dialog
+                  Navigator.of(context).pop();
                 },
               ),
             ],
           );
         },
       );
-      return; // Exit function if email format is incorrect
+      return;
     }
+
     checkEmailExistence(email).then((isExist) {
-      if (!isExist) { // If email is not duplicated
-        // Ask if user wants to send a verification code
+      if (!isExist) {
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -60,25 +56,22 @@ class EmailVerification {
                 TextButton(
                   child: Text("Cancel"),
                   onPressed: () {
-                    Navigator.of(context).pop(); // Close dialog on cancel
+                    Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
                   child: Text("Send"),
                   onPressed: () async {
-                    await sendVerificationCode(context, email); // Wait to send verification code
-                    updateCertificationCodeEnabled(true);
-                    updateTimerVisible(true);
-                    startTimer();
-                    Navigator.of(context).pop(); // Close dialog after sending
+                    await sendVerificationCode(context, email);
+                    Navigator.of(context).pop();
+                    startTimer();  // 여기서 타이머를 시작합니다
                   },
                 ),
               ],
             );
           },
         );
-      } else { // If email is duplicated
-        // Notify user of duplication
+      } else {
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -98,7 +91,6 @@ class EmailVerification {
         );
       }
     }).catchError((error) {
-      // Handle errors
       print("An error occurred: $error");
     });
   }

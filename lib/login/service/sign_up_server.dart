@@ -48,7 +48,7 @@ Future<bool> verifyCertificationNumber(BuildContext context, String email, Strin
         'authenticationNumber': certificationNumber,
       }),
     );
-
+    print(response.statusCode);
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Certification number verified successfully.")),
@@ -80,7 +80,7 @@ Future<bool> checkNicknameExistence(String nickname) async { // 닉네임 중복
   }
 }
 
-Future<bool> checkEmailExistence(String email) async { // 닉네임 중복 체크 
+Future<bool> checkEmailExistence(String email) async { // 이메일 중복 체크 
   final Uri url = Uri.parse('http://api.kfoodbox.click/email-existence?email=$email');
   final response = await http.get(url);
 
