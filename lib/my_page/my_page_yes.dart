@@ -39,7 +39,6 @@ class _MyPageYesState extends State<MyPageYes> {
             );
           },
         ),
-        backgroundColor: Colors.blue[300],
         title: Text(globals.getText('myPageTitle')),
         centerTitle: true,
         actions: [

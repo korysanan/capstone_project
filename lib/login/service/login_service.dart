@@ -1,3 +1,4 @@
+import 'package:capstone_project/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -17,7 +18,7 @@ class LoginService {
         'password': password,
       }),
     );
-
+    print(response.statusCode);
     if (response.statusCode == 200) {
       globals.sessionId = response.headers['set-cookie'];
       if (globals.sessionId != null) {
@@ -29,6 +30,8 @@ class LoginService {
         await _fetchEmail();
         // Fetch user_language
         await _fetchLanguage();
+        
+        await _recommendfood();
       }
       globals.setLanguageCode();
       showDialog(
@@ -36,11 +39,6 @@ class LoginService {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return Center(child: CircularProgressIndicator());
-          /*
-          return AlertDialog(
-            content: Text('Login Successful!'),
-          );
-          */
         },
       );
       await Future.delayed(Duration(seconds: 1));
@@ -108,10 +106,29 @@ class LoginService {
     );
     if (response.statusCode == 200) {
       int userId = json.decode(response.body)['id'];
+      globals.user_language_id = userId;
       globals.user_language = userId.toString();
     }
   }
 
+  // 자신의 음식 추천
+  static Future<void> _recommendfood() async {
+    var response = await http.get(
+      Uri.parse('http://api.kfoodbox.click/recommended-foods'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': globals.sessionId!, // Send session ID in headers
+      },
+    );
+    if (response.statusCode == 200) {
+      var decodedResponse = utf8.decode(response.bodyBytes);
+      var data = json.decode(decodedResponse);
+      List<Food> foods = (data['foods'] as List).map((foodJson) => Food.fromJson(foodJson)).toList();
+      globals.foods = foods;  // Store the list of foods in the global variable
+    } else {
+      print('Failed to fetch foods. Status code: ${response.statusCode}');
+    }
+  }
   // 닉네임, 비밀번호 변경 api 불러오기 
   static Future<void> updateUser(BuildContext context, String nickname, String password) async {
     var url = Uri.parse('http://api.kfoodbox.click/user'); // Modify with your actual server URL

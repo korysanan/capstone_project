@@ -123,7 +123,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
   Widget build(BuildContext context) {
     double imageWidth = widget.size.width;
     double imageHeight = widget.size.height;
-
+    print(widget.food_info);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

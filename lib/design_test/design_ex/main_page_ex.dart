@@ -112,7 +112,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Image.asset(
-                      'assets/ex/kf_detection.png',
+                      'assets/images/kf_detection.png',
                       height: 140,
                       width: 140,
                       fit: BoxFit.cover,
@@ -149,7 +149,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                   Padding(
                     padding: EdgeInsets.only(left: 8, right: 4),
                     child: CustomCard(
-                      imagePath: 'assets/ex/community.png',
+                      imagePath: 'assets/images/community.png',
                       label: 'Community',
                       onTap: () {
                         Navigator.push(
@@ -162,7 +162,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                   Padding(
                     padding: EdgeInsets.only(left: 4, right: 8),
                     child: CustomCard(
-                      imagePath: 'assets/ex/recipes.png',
+                      imagePath: 'assets/images/recipes.png',
                       label: 'Custom Recipes',
                       onTap: () => print('Custom Recipes Card tapped!'),
                     ),
@@ -187,7 +187,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Image.asset(
-                      'assets/ex/kf_map.png',
+                      'assets/images/kf_map.png',
                       height: 140,
                       width: 140,
                       fit: BoxFit.cover,

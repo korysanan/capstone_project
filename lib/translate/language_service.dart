@@ -19,7 +19,7 @@ Future<void> updateUserLanguage(int languageId) async {
     if (response.statusCode == 200) {
       // 언어 설정 업데이트 성공
       globals.user_language = languageId.toString();  // 전역 변수 업데이트
-      print('Language updated to ID: $languageId');
+      //print('Language updated to ID: $languageId');
     } else {
       var responseBody = utf8.decode(response.bodyBytes);
       print('Failed to update language: $responseBody');

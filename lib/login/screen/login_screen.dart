@@ -2,7 +2,7 @@
 import 'package:capstone_project/login/service/login_service.dart';
 //import 'package:capstone_project/login/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-import '../../design_test/sign_up_design/sign_up_test1.dart';
+import '../../design_test/sign_up_design/sign_up_email.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController(text: "ujin0561@naver.com");
@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               */
-              Image.asset('assets/ex/kfood_logo.png', height: 400), // Logo Image
+              Image.asset('assets/images/kfood_logo.png', height: 400), // Logo Image
               TextField(
                 controller: emailController,
                 decoration: InputDecoration(

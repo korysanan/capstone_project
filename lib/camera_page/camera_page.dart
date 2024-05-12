@@ -65,7 +65,7 @@ Future<Size> _getImageSize(File imageFile) async {
             );
           },
         ),
-        backgroundColor: Colors.blue[300],
+        
         title: Text(globals.getText('Korean Food Detection')),
         centerTitle: true,
       ),
@@ -98,7 +98,7 @@ Future<Size> _getImageSize(File imageFile) async {
             ),
             onPressed: _takePicture,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green.shade100,
+              backgroundColor: Color(0xFFF1E6FF),
               minimumSize: Size(double.infinity, 100),
               padding: EdgeInsets.symmetric(horizontal: 20),
             ),
@@ -112,7 +112,7 @@ Future<Size> _getImageSize(File imageFile) async {
             ),
             onPressed: _pickImageFromGallery,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green.shade100,
+              backgroundColor: Color(0xFFF1E6FF),
               minimumSize: Size(double.infinity, 100),
               padding: EdgeInsets.symmetric(horizontal: 20),
             ),

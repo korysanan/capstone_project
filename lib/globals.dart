@@ -2,7 +2,26 @@ library globals;
 
 import 'translate/translation_manager.dart';
 
+class Food {
+  final int id;
+  final String name;
+  final String englishName;
+  final String imageUrl;
+
+  Food({required this.id, required this.name, required this.englishName, required this.imageUrl});
+
+  factory Food.fromJson(Map<String, dynamic> json) {
+    return Food(
+      id: json['id'],
+      name: json['name'],
+      englishName: json['englishName'],
+      imageUrl: json['imageUrl'],
+    );
+  }
+}
+
 String selectedLanguageCode = 'en'; // 기본 언어 코드
+List<Food>? foods;
 
 final apiKey = '7f0cb90f-8897-474f-a7d0-570e0f6a5bd2:fx';
 String ODSay_apiKey = "NmHBe2KbysaotzsEo6+3ewb5Dke9KHGzmtW+QDXXvJM";
@@ -16,9 +35,14 @@ String? sessionId;
 String? user_nickname;
 String? user_email;
 String? user_language;
+int user_language_id = 18;
 
 void updateUserLanguage(String newLanguage) {
   user_language = newLanguage;
+}
+
+void updateFoods(List<Food> newFoods) {
+  foods = newFoods;
 }
 
 void setLanguageCode() {

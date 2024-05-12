@@ -17,21 +17,6 @@ class KFoodBoxHome extends StatefulWidget {
 class _KFoodBoxHomeState extends State<KFoodBoxHome> {
   int _currentIndex = 0; // bottomnavigation index 번호 
 
-  final List<Map<String, String>> imageList = [
-    {
-      "url": "https://recipe1.ezmember.co.kr/cache/recipe/2023/06/29/a1a5a04e39879f1033ae07367dfee5251.jpg",
-      "name": "Tteokbokki"
-    },
-    {
-      "url": "https://www.sanghafarm.co.kr/sanghafarm_Data/upload/shop/product/201810/A0003528_2018102319172333992.jpg",
-      "name": "Sundae"
-    },
-    {
-      "url": "https://recipe1.ezmember.co.kr/cache/recipe/2022/08/04/d6f211ffa5c3846d5134f4d6bb00a3a51.jpg",
-      "name": "Bossam"
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +24,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
       appBar: AppBar(
         leading: Padding(
           padding: EdgeInsets.only(left: 10.0),  // 왼쪽 여백 추가
-          child: Image.asset('assets/ex/kfood_logo.png'),
+          child: Image.asset('assets/images/kfood_logo.png'),
         ),
         title: Text(
           'K-Food Box',
@@ -87,76 +72,191 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
             ),
             SizedBox(height: 20.0),
             Center(
-              child: CarouselSlider(
-                options: CarouselOptions(
-                  enlargeCenterPage: true,
-                  enableInfiniteScroll: true,
-                  autoPlay: true,
-                ),
-                items: imageList.map((e) => ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.network(
-                        e['url']!, 
-                        width: 500.0,
-                        height: 300.0,
-                        fit: BoxFit.cover,
+              child: globals.sessionId != null
+                  ? CarouselSlider(
+                      options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        enableInfiniteScroll: true,
+                        autoPlay: true,
                       ),
-                      Positioned(
-                        bottom: 0.0,
-                        left: 0.0,
-                        right: 0.0,
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: Colors.black54,
-                          ),
-                          padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                          /*
-                          child: Text(
-                            e['name']!,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
+                      items: globals.foods?.map((food) => ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Stack(
+                          children: <Widget>[
+                            Image.network(
+                              food.imageUrl.startsWith('http://') || food.imageUrl.startsWith('https://') 
+                                ? food.imageUrl 
+                                : 'http://' + food.imageUrl,
+                              width: 1000.0,
+                              height: 300.0,
+                              fit: BoxFit.cover,
                             ),
-                          ),
-                          */
-                          child: FutureBuilder<String>(
-                            future: translateText(e['name']!),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.done) {
-                                if (snapshot.hasError) {
-                                  return Text(
-                                    'Error',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  );
-                                } else {
-                                  return Text(
-                                    snapshot.data!,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  );
-                                }
-                              } else {
-                                return CircularProgressIndicator(); // 로딩 중 표시
-                              }
-                            },
-                          ),
+                            Positioned(
+                              bottom: 0.0,
+                              left: 0.0,
+                              right: 0.0,
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: Colors.black54,
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+                                child: globals.selectedLanguageCode == 'ko' ? Text(
+                                  food.name,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ) : globals.selectedLanguageCode == 'en' ? Text(
+                                  food.englishName,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ) : FutureBuilder<String>(
+                                  future: translateText(food.englishName),  // Assuming translateText is an async function you've defined or imported
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState == ConnectionState.done) {
+                                      if (snapshot.hasError) {
+                                        return Text(
+                                          'Error',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        );
+                                      } else if (snapshot.data != null) {
+                                        return Text(
+                                          snapshot.data!,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        );
+                                      } else {
+                                        return Text(
+                                          'No translation available',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        );
+                                      }
+                                    } else {
+                                      return CircularProgressIndicator(
+                                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                      ); // Loading indicator while the translation loads
+                                    }
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
+                      )).toList() ?? [],
+                    )
+                  : CarouselSlider(
+                      options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        enableInfiniteScroll: true,
+                        autoPlay: true,
                       ),
-                    ],
-                  ),
-                )).toList(),
-              ),
+                      items: globals.foods?.map((food) => ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Stack(
+                          children: <Widget>[
+                            Image.network(
+                              food.imageUrl.startsWith('http://') || food.imageUrl.startsWith('https://') 
+                                ? food.imageUrl 
+                                : 'http://' + food.imageUrl,
+                              width: 1000.0,
+                              height: 300.0,
+                              fit: BoxFit.cover,
+                            ),
+                            Positioned(
+                              bottom: 0.0,
+                              left: 0.0,
+                              right: 0.0,
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: Colors.black54,
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+                                child: globals.selectedLanguageCode == 'ko' ? Text(
+                                  food.name,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ) : globals.selectedLanguageCode == 'en' ? Text(
+                                  food.englishName,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ) : FutureBuilder<String>(
+                                  future: translateText(food.englishName),  // Assuming translateText is an async function you've defined or imported
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState == ConnectionState.done) {
+                                      if (snapshot.hasError) {
+                                        return Text(
+                                          'Error',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        );
+                                      } else if (snapshot.data != null) {
+                                        return Text(
+                                          snapshot.data!,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        );
+                                      } else {
+                                        return Text(
+                                          'No translation available',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        );
+                                      }
+                                    } else {
+                                      return CircularProgressIndicator(
+                                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                      ); // Loading indicator while the translation loads
+                                    }
+                                  },
+                                ),
+                                /*
+                                child: Text(
+                                  globals.selectedLanguageCode == 'ko' ? food.name : food.englishName,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                */
+                              ),
+                            ),
+                          ],
+                        ),
+                      )).toList() ?? [],
+                    ),
             ),
             new Divider(height: 50.0,),
             Center(
@@ -191,7 +291,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                     SizedBox(height: 20.0),
                     Image.asset(
                       //'assets/ex/kfood_detection.png',
-                      'assets/ex/camera.png',
+                      'assets/images/camera.png',
                       height: 140,
                       width: 140,
                       fit: BoxFit.cover,
@@ -256,7 +356,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                         borderRadius: BorderRadius.circular(10.0),  // 모서리 둥글기
                       ),
                       child: CustomCard(
-                        imagePath: 'assets/ex/community.png',
+                        imagePath: 'assets/images/community.png',
                         label: globals.getText('community'),
                         onTap: () {
                           Navigator.push(
@@ -278,7 +378,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                         borderRadius: BorderRadius.circular(10.0),  // 모서리 둥글기
                       ),
                       child: CustomCard(
-                        imagePath: 'assets/ex/recipes.png',
+                        imagePath: 'assets/images/recipes.png',
                         label: globals.getText('custom recipes'),
                         onTap: () => print('Custom Recipes Card tapped!'),
                       ),
@@ -319,7 +419,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                   children: <Widget>[
                     SizedBox(height: 20),
                     Image.asset(
-                      'assets/ex/food_map.png',
+                      'assets/images/food_map.png',
                       height: 140,
                       width: 140,
                       fit: BoxFit.cover,

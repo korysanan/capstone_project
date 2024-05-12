@@ -1,21 +1,32 @@
 import '../db/categoryFood.dart';
 import 'foodInformation.dart';
 import 'package:flutter/material.dart';
+import '../translate/language_detect.dart';
+import '../globals.dart' as globals;
 
 class FoodList extends StatelessWidget {
   final List<CategoryFood> foods;
-  final String category;
   final String searchText;
+  bool isLoading = true;
 
-  const FoodList({
+  FoodList({
     super.key,
     required this.foods,
-    required this.category,
     required this.searchText,
   });
 
+  Future<void> translateFoodName() async {
+    for (var food in foods) {
+      food.name = await translateText(food.englishName);
+    }
+    isLoading = false;
+  }
+
   List<Widget> makeFoodList(List<CategoryFood> foods, context) {
     List<Widget> results = [];
+    if (globals.selectedLanguageCode != 'ko') {
+      translateFoodName();
+    }
     for (var i = 0; i < foods.length; i++) {
       if (foods[i].name.contains(searchText)) {
         results.add(
@@ -31,18 +42,18 @@ class FoodList extends StatelessWidget {
             }, // 해당 음식정보 페이지로 이동
             child: Container(
               padding: const EdgeInsets.symmetric(
-                horizontal: 15,
+                horizontal: 5,
                 vertical: 5,
               ),
               child: Container(
                 width: 500,
-                height: 100,
+                height: 80,
                 decoration: BoxDecoration(
                   border: Border.all(),
                   borderRadius: const BorderRadius.all(
                     Radius.circular(10),
                   ),
-                  color: Colors.lime.shade50,
+                  color: const Color.fromARGB(255, 199, 206, 240),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -50,13 +61,6 @@ class FoodList extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Image(
-                          image: AssetImage(
-                              'assets/image/kimchi.webp'), // 해당 음식 이미지로 수정
-                        ),
-                      ),
                       const SizedBox(
                         width: 20,
                       ),
@@ -75,13 +79,43 @@ class FoodList extends StatelessWidget {
                             const SizedBox(
                               width: 20,
                             ),
-                            Text(
-                              foods[i].englishName,
-                              style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                            globals.selectedLanguageCode == 'ko'
+                                ? Text(foods[i].englishName)
+                                : FutureBuilder<String>(
+                                    future: translateText(foods[i].englishName),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        if (snapshot.hasError) {
+                                          return const Text(
+                                            'Error',
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          );
+                                        } else {
+                                          return Text(
+                                            snapshot.data ??
+                                                'Translation error', // 번역 실패시 대체 텍스트
+                                            style: const TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          );
+                                        }
+                                      } else {
+                                        return const SizedBox(
+                                          height: 10,
+                                          width: 10,
+                                          child: Center(
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
                           ],
                         ),
                       ),

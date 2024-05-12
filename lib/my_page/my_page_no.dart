@@ -28,7 +28,6 @@ class _MyPageNoState extends State<MyPageNo> {
             );
           },
         ),
-        backgroundColor: Colors.blue[300],
         title: Text(globals.getText('myPageTitle')),
         centerTitle: true,
         actions: [
