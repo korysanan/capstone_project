@@ -95,7 +95,7 @@ class CategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sizeX = MediaQuery.of(context).size.width;
-    final sizeY = MediaQuery.of(context).size.height * 0.75;
+    final sizeY = MediaQuery.of(context).size.height * 0.83;
     return SizedBox(
       width: sizeX,
       height: sizeY,

@@ -50,42 +50,42 @@ class _CategoryMainState extends State<CategoryMain> {
           ),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 7,
-                ),
-                child: SearchBar(
-                  trailing: [
-                    IconButton(
-                      icon: const Icon(Icons.search),
-                      onPressed: () {
-                        FocusManager.instance.primaryFocus?.unfocus();
-                        setState(() => inputText);
-                      },
-                    ),
-                  ],
-                  backgroundColor: const MaterialStatePropertyAll(
-                    Color.fromARGB(255, 202, 209, 249),
-                  ),
-                  shadowColor: const MaterialStatePropertyAll(Colors.black),
-                  overlayColor:
-                      const MaterialStatePropertyAll(Color(0xFFAEB9F0)),
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width - 20,
-                    minHeight: 55.0,
-                  ),
-                  shape: MaterialStateProperty.all(
-                    ContinuousRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                  padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
-                  hintText: globals.getText("Enter a search term"),
-                  onChanged: (value) {
-                    inputText = value;
-                  },
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(
+              //     vertical: 7,
+              //   ),
+              //   child: SearchBar(
+              //     trailing: [
+              //       IconButton(
+              //         icon: const Icon(Icons.search),
+              //         onPressed: () {
+              //           FocusManager.instance.primaryFocus?.unfocus();
+              //           setState(() => inputText);
+              //         },
+              //       ),
+              //     ],
+              //     backgroundColor: const MaterialStatePropertyAll(
+              //       Color.fromARGB(255, 202, 209, 249),
+              //     ),
+              //     shadowColor: const MaterialStatePropertyAll(Colors.black),
+              //     overlayColor:
+              //         const MaterialStatePropertyAll(Color(0xFFAEB9F0)),
+              //     constraints: BoxConstraints(
+              //       maxWidth: MediaQuery.of(context).size.width - 20,
+              //       minHeight: 55.0,
+              //     ),
+              //     shape: MaterialStateProperty.all(
+              //       ContinuousRectangleBorder(
+              //         borderRadius: BorderRadius.circular(50),
+              //       ),
+              //     ),
+              //     padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
+              //     hintText: globals.getText("Enter a search term"),
+              //     onChanged: (value) {
+              //       inputText = value;
+              //     },
+              //   ),
+              // ),
               const SizedBox(
                 height: 8,
               ),
