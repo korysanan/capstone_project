@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
 // that case you can also remove them after copying the theme to your app.
       theme: FlexThemeData.light(
         fontFamily: 'Jalnan',
+        scheme: FlexScheme.blue,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         blendLevel: 9,
         subThemesData: const FlexSubThemesData(
