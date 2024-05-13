@@ -25,8 +25,6 @@ class _PostInformationState extends State<PostInformation> {
   String content = '';
   bool isTranslate = false;
   bool isLoading = false;
-  List<Map<String, dynamic>> sequences = [];
-  List<Map<String, dynamic>> ingredients = [];
   RecipePost post = RecipePost(
     id: -1,
     userId: -1,
@@ -69,28 +67,11 @@ class _PostInformationState extends State<PostInformation> {
     });
     String translatedTitle = await translateText(title);
     String tanslatedContent = await translateText(content);
-    List<Map<String, dynamic>> translatedSequences = [];
-    for (var sequence in sequences) {
-      translatedSequences.add({
-        'sequenceNumber': sequence['sequenceNumber'],
-        'content': await translateText(sequence['content']),
-        'imageUrl': sequence['imageUrl']
-      });
-    }
-    List<Map<String, dynamic>> translatedIngredients = [];
-    for (var ingredient in ingredients) {
-      translatedIngredients.add({
-        'name': await translateTextFromGoogle(ingredient['name']),
-        'quantity': await translateTextFromGoogle(ingredient['quantity'] ?? ''),
-      });
-    }
 
     setState(() {
       isTranslate = true;
       title = translatedTitle;
       content = tanslatedContent;
-      sequences = translatedSequences;
-      ingredients = translatedIngredients;
       isLoading = false;
     });
   }
@@ -109,8 +90,6 @@ class _PostInformationState extends State<PostInformation> {
         try {
           title = post.title;
           content = post.content;
-          sequences = post.sequences;
-          ingredients = post.ingredients;
         } catch (e) {}
       });
     });
@@ -256,7 +235,7 @@ class _PostInformationState extends State<PostInformation> {
                         ),
                         if (post.imageUrls.isNotEmpty)
                           PostImages(images: post.imageUrls),
-                        if (ingredients.isNotEmpty)
+                        if (post.ingredients.isNotEmpty)
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 5,
@@ -279,7 +258,7 @@ class _PostInformationState extends State<PostInformation> {
                           ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: ingredients.reversed.map((ingredient) {
+                          children: post.ingredients.reversed.map((ingredient) {
                             return Column(children: [
                               SizedBox(
                                 width: MediaQuery.of(context).size.width - 100,
@@ -287,8 +266,82 @@ class _PostInformationState extends State<PostInformation> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('${ingredient['name']}'),
-                                    Text('${ingredient['quantity'] ?? ''}'),
+                                    if (isTranslate)
+                                      FutureBuilder<String>(
+                                        future: translateTextFromGoogle(
+                                            '${ingredient['name']}'),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.connectionState ==
+                                              ConnectionState.done) {
+                                            if (snapshot.hasError) {
+                                              return const Text(
+                                                'Error',
+                                                style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontSize: 16,
+                                                ),
+                                              );
+                                            } else {
+                                              return Text(
+                                                snapshot.data ??
+                                                    'Translation error', // 번역 실패시 대체 텍스트
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                ),
+                                              );
+                                            }
+                                          } else {
+                                            return const SizedBox(
+                                              height: 10,
+                                              width: 10,
+                                              child: Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      )
+                                    else
+                                      Text('${ingredient['name']}'),
+                                    if (isTranslate)
+                                      FutureBuilder<String>(
+                                        future: translateTextFromGoogle(
+                                            '${ingredient['quantity'] ?? ''}'),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.connectionState ==
+                                              ConnectionState.done) {
+                                            if (snapshot.hasError) {
+                                              return const Text(
+                                                'Error',
+                                                style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontSize: 16,
+                                                ),
+                                              );
+                                            } else {
+                                              return Text(
+                                                snapshot.data ??
+                                                    'Translation error', // 번역 실패시 대체 텍스트
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                ),
+                                              );
+                                            }
+                                          } else {
+                                            return const SizedBox(
+                                              height: 10,
+                                              width: 10,
+                                              child: Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      )
+                                    else
+                                      Text('${ingredient['quantity'] ?? ''}'),
                                   ],
                                 ),
                               ),
@@ -302,7 +355,7 @@ class _PostInformationState extends State<PostInformation> {
                             ]);
                           }).toList(),
                         ),
-                        if (sequences.isNotEmpty)
+                        if (post.sequences.isNotEmpty)
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 5,
@@ -325,7 +378,7 @@ class _PostInformationState extends State<PostInformation> {
                           ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: sequences.map((sequence) {
+                          children: post.sequences.map((sequence) {
                             return Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 8),
@@ -354,10 +407,51 @@ class _PostInformationState extends State<PostInformation> {
                                                       fontWeight:
                                                           FontWeight.bold,
                                                     )),
-                                                Text(
-                                                  sequence['content'],
-                                                  softWrap: true,
-                                                ),
+                                                if (isTranslate)
+                                                  FutureBuilder<String>(
+                                                    future: translateText(
+                                                        '${sequence['content']}'),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      if (snapshot
+                                                              .connectionState ==
+                                                          ConnectionState
+                                                              .done) {
+                                                        if (snapshot.hasError) {
+                                                          return const Text(
+                                                            'Error',
+                                                            style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontSize: 16,
+                                                            ),
+                                                          );
+                                                        } else {
+                                                          return Text(
+                                                            snapshot.data ??
+                                                                'Translation error', // 번역 실패시 대체 텍스트
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize: 16,
+                                                            ),
+                                                          );
+                                                        }
+                                                      } else {
+                                                        return const SizedBox(
+                                                          height: 10,
+                                                          width: 10,
+                                                          child: Center(
+                                                            child:
+                                                                CircularProgressIndicator(),
+                                                          ),
+                                                        );
+                                                      }
+                                                    },
+                                                  )
+                                                else
+                                                  Text(
+                                                    sequence['content'],
+                                                    softWrap: true,
+                                                  ),
                                               ],
                                             ),
                                           ),
