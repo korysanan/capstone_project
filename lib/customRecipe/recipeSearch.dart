@@ -1,4 +1,4 @@
-import 'communityService.dart';
+import 'recipeService.dart';
 import '../home/appbar.dart';
 import 'package:flutter/material.dart';
 import 'postInformation.dart';
@@ -14,7 +14,7 @@ class _CommunitySearchState extends State<CommunitySearch> {
   String inputText = '';
   final focusNode = FocusNode();
   int page = 1;
-  final limit = 10;
+  final limit = 20;
   bool hasNextPage = true;
   bool isFirstLoadRunning = false;
   bool isLoadMoreRunning = false;
@@ -31,7 +31,7 @@ class _CommunitySearchState extends State<CommunitySearch> {
     setState(() {
       isFirstLoadRunning = true;
     });
-    CommunitySerrvices.getArticleList(page, limit, 'ALL', 'LATEST', inputText)
+    RecipeSerrvices.getArticleList(page, limit, 'ALL', 'LATEST', inputText)
         .then((value) {
       setState(() {
         postList = value;
@@ -52,7 +52,7 @@ class _CommunitySearchState extends State<CommunitySearch> {
       });
       page += 1;
 
-      CommunitySerrvices.getArticleList(page, limit, 'ALL', 'LATEST', inputText)
+      RecipeSerrvices.getArticleList(page, limit, 'ALL', 'LATEST', inputText)
           .then((value) {
         if (value.isNotEmpty) {
           setState(() {
@@ -185,7 +185,7 @@ class _CommunitySearchState extends State<CommunitySearch> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 10),
                                     child: Text(
-                                      '  |   ${CommunitySerrvices.calUploadTime(postList[index].createdAt)}   |  ',
+                                      '  |   ${RecipeSerrvices.calUploadTime(postList[index].createdAt)}   |  ',
                                       style: const TextStyle(
                                           color: Color(0xff5b5b5b),
                                           fontSize: 12),

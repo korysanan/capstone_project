@@ -1,28 +1,24 @@
-import 'package:capstone_project/community/communityService.dart';
-import 'package:capstone_project/community/postInformation.dart';
+import 'postInformation.dart';
 import 'package:flutter/cupertino.dart';
 import 'mainAppbar.dart';
 import '../home/bottom.dart';
 import 'package:flutter/material.dart';
 import '../home/on_item_tap.dart';
+import 'recipeService.dart';
 import '../globals.dart' as globals;
 
 const List<String> list = <String>['LATEST', 'OLDEST', 'LIKES', 'COMMENTS'];
 
-class CommuntiyMain extends StatefulWidget {
-  const CommuntiyMain({
+class RecipeMain extends StatefulWidget {
+  const RecipeMain({
     super.key,
   });
 
   @override
-  State<CommuntiyMain> createState() => _CommuntiyMainState();
+  State<RecipeMain> createState() => _RecipeMainState();
 }
 
-class _CommuntiyMainState extends State<CommuntiyMain> {
-  final Map<int, Widget> myTabs = const <int, Widget>{
-    0: Text("All"),
-    1: Text("Notice")
-  };
+class _RecipeMainState extends State<RecipeMain> {
   int idx = 0;
   String type = "ALL";
   String sort = "LATEST";
@@ -47,8 +43,7 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
     setState(() {
       isFirstLoadRunning = true;
     });
-    CommunitySerrvices.getArticleList(page, limit, type, sort, null)
-        .then((value) {
+    RecipeSerrvices.getArticleList(page, limit, type, sort, null).then((value) {
       setState(() {
         postList = value;
       });
@@ -68,7 +63,7 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
       });
       page += 1;
 
-      CommunitySerrvices.getArticleList(page, limit, type, sort, null)
+      RecipeSerrvices.getArticleList(page, limit, type, sort, null)
           .then((value) {
         if (value.isNotEmpty) {
           setState(() {
@@ -96,7 +91,7 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommunityAppBar(title: globals.getText('community')),
+      appBar: CommunityAppBar(title: globals.getText('custom recipes')),
       body: isFirstLoadRunning
           ? const Center(
               child: CircularProgressIndicator(),
@@ -108,29 +103,8 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
                     vertical: 10,
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                        ),
-                        child: CupertinoSlidingSegmentedControl(
-                            backgroundColor: const Color(0xFFBEDCFF),
-                            groupValue: idx,
-                            children: myTabs,
-                            onValueChanged: (i) {
-                              setState(() {
-                                idx = i!;
-                                type = i == 0 ? 'ALL' : 'NOTICE';
-                                page = 1;
-                                hasNextPage = true;
-                                isLoadMoreRunning = false;
-                                initLoad();
-                                controller = ScrollController()
-                                  ..addListener(nextLoad);
-                              });
-                            }),
-                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 20,
@@ -228,7 +202,7 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 10),
                                   child: Text(
-                                    '  |   ${CommunitySerrvices.calUploadTime(postList[index].createdAt)}   |  ',
+                                    '  |   ${RecipeSerrvices.calUploadTime(postList[index].createdAt)}   |  ',
                                     style: const TextStyle(
                                         color: Color(0xff5b5b5b), fontSize: 12),
                                   ),

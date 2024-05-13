@@ -1,4 +1,5 @@
 import 'package:capstone_project/camera_page/camera_page.dart';
+import 'package:capstone_project/customRecipe/recipeMain.dart';
 import 'package:capstone_project/translate/language_detect.dart';
 import 'package:flutter/material.dart';
 import 'package:capstone_project/categoryPage/categoryMain.dart';
@@ -297,7 +298,13 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                       child: CustomCard(
                         imagePath: 'assets/ex/recipes.png',
                         label: globals.getText('custom recipes'),
-                        onTap: () => print('Custom Recipes Card tapped!'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RecipeMain()),
+                          );
+                        },
                       ),
                     ),
                   ),

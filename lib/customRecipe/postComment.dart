@@ -1,7 +1,7 @@
 import '../translate/language_detect.dart';
 import 'editComment.dart';
 import 'postInformation.dart';
-import 'communityService.dart';
+import 'recipeService.dart';
 import '../../globals.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -46,7 +46,7 @@ class _ArticleCommentsState extends State<ArticleComments> {
                             ),
                           ),
                           Text(
-                            CommunitySerrvices.calUploadTime(
+                            RecipeSerrvices.calUploadTime(
                                 widget.comments?[index].createdAt),
                             style: const TextStyle(
                                 fontSize: 12, color: Color(0xff808080)),
@@ -185,7 +185,7 @@ abstract class MenuItems {
         actions: [
           ElevatedButton(
               onPressed: () async {
-                CommunitySerrvices.deleteComment(commentId);
+                RecipeSerrvices.deleteComment(commentId);
                 showDialog(
                   context: context,
                   barrierDismissible: false,

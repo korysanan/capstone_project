@@ -110,47 +110,8 @@ class _CategoryDetailState extends State<CategoryDetail> {
                 ),
                 const SizedBox(
                   width: 500,
-                  child: Divider(
-                      color: Color.fromARGB(255, 219, 179, 242),
-                      thickness: 1.0),
+                  child: Divider(color: Color(0xFF1565C0), thickness: 1.0),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(
-                //     vertical: 10,
-                //   ),
-                //   child: SearchBar(
-                //     trailing: [
-                //       IconButton(
-                //         icon: const Icon(Icons.search),
-                //         onPressed: () {
-                //           FocusManager.instance.primaryFocus
-                //               ?.unfocus(); // 검색 아이콘 누르면 키보드 숨김
-                //           setState(() => inputText);
-                //         },
-                //       ),
-                //     ],
-                //     backgroundColor: const MaterialStatePropertyAll(
-                //       Color.fromARGB(255, 202, 209, 249),
-                //     ),
-                //     shadowColor: const MaterialStatePropertyAll(Colors.black),
-                //     overlayColor:
-                //         const MaterialStatePropertyAll(Color(0xFFAEB9F0)),
-                //     constraints: BoxConstraints(
-                //       maxWidth: MediaQuery.of(context).size.width - 20,
-                //       minHeight: 55.0,
-                //     ),
-                //     shape: MaterialStateProperty.all(
-                //       ContinuousRectangleBorder(
-                //         borderRadius: BorderRadius.circular(20),
-                //       ),
-                //     ),
-                //     padding: MaterialStateProperty.all(const EdgeInsets.all(5)),
-                //     hintText: globals.getText('Enter a search term'),
-                //     onChanged: (value) {
-                //       inputText = value;
-                //     },
-                //   ),
-                // ),
                 const SizedBox(
                   height: 8,
                 ),

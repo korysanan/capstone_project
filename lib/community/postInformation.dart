@@ -210,9 +210,7 @@ class _PostInformationState extends State<PostInformation> {
                   ),
                   const SizedBox(
                     width: 500,
-                    child: Divider(
-                        color: Color.fromARGB(255, 219, 179, 242),
-                        thickness: 1.0),
+                    child: Divider(color: Color(0xFF1565C0), thickness: 1.0),
                   ),
                   Text(
                     content,
@@ -247,9 +245,7 @@ class _PostInformationState extends State<PostInformation> {
                   ),
                   const SizedBox(
                     width: 500,
-                    child: Divider(
-                        color: Color.fromARGB(255, 219, 179, 242),
-                        thickness: 1.0),
+                    child: Divider(color: Color(0xFF1565C0), thickness: 1.0),
                   ),
                   if (comments.isNotEmpty)
                     isTranslate
