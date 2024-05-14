@@ -11,7 +11,9 @@ class PostInformationAppBar extends StatefulWidget
   final String userNickname;
   final String title;
   final String content;
-  final List imageUrls;
+  final List<String> imageUrls;
+  final List<Map<String, dynamic>> ingredients;
+  final List<Map<String, dynamic>> sequences;
 
   const PostInformationAppBar({
     super.key,
@@ -21,6 +23,8 @@ class PostInformationAppBar extends StatefulWidget
     required this.title,
     required this.content,
     required this.imageUrls,
+    required this.ingredients,
+    required this.sequences,
   });
 
   @override
@@ -36,8 +40,7 @@ class _PostInformationAppBarState extends State<PostInformationAppBar> {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const RecipeMain()));
+          Navigator.pop(context);
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,
@@ -66,6 +69,8 @@ class _PostInformationAppBarState extends State<PostInformationAppBar> {
                 MenuItems.title = widget.title;
                 MenuItems.content = widget.content;
                 MenuItems.imageUrls = widget.imageUrls;
+                MenuItems.ingredients = widget.ingredients;
+                MenuItems.sequences = widget.sequences;
                 MenuItems.onChanged(context, value! as MenuItem);
               },
               dropdownStyleData: DropdownStyleData(
@@ -106,7 +111,9 @@ abstract class MenuItems {
   static int postId = -1;
   static String title = '';
   static String content = '';
-  static List imageUrls = [];
+  static List<String> imageUrls = [];
+  static List<Map<String, dynamic>> ingredients = [];
+  static List<Map<String, dynamic>> sequences = [];
 
   static const delete = MenuItem(text: 'Delete', icon: Icons.delete_forever);
   static const edit = MenuItem(text: 'Edit', icon: Icons.edit_document);
@@ -132,10 +139,8 @@ abstract class MenuItems {
                 );
                 await Future.delayed(const Duration(seconds: 1));
                 Navigator.of(context).pop();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const RecipeMain()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RecipeMain()));
               },
               child: const Text('Yes')),
           ElevatedButton(
@@ -167,11 +172,13 @@ abstract class MenuItems {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => CommunityArticleEdit(
+                        builder: (context) => RecipeArticleEdit(
                               postId: postId,
                               inputTitle: title,
                               inputContent: content,
                               imageUrls: imageUrls,
+                              savedIngredients: ingredients,
+                              inputSequence: sequences,
                             )));
               },
               child: const Text('Yes')),

@@ -1,28 +1,25 @@
-import 'dart:collection';
 import 'dart:io';
 import 'postAppbar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../globals.dart' as globals;
 
-class CommunityPosting extends StatefulWidget {
-  const CommunityPosting({
+class RecipePosting extends StatefulWidget {
+  const RecipePosting({
     super.key,
   });
 
   @override
-  State<CommunityPosting> createState() => _CommunityPostingState();
+  State<RecipePosting> createState() => _RecipePostingState();
 }
 
-class _CommunityPostingState extends State<CommunityPosting> {
+class _RecipePostingState extends State<RecipePosting> {
   late final titleController = TextEditingController();
   late final bodyController = TextEditingController();
   late final ingredientController = <TextEditingController>[];
-  late final quantityController = <TextEditingController>[];
   late final sequenceController = <TextEditingController>[];
   List<Map<String, dynamic>> savedIngredients = [];
-  final List<XFile?> _imageFiles = [];
   List<Map<String, dynamic>> inputSequence = [];
+  List<XFile?> recipeImages = [];
 
   String inputTitle = '';
   String inputContent = '';
@@ -65,7 +62,7 @@ class _CommunityPostingState extends State<CommunityPosting> {
 
     if (pickedFile != null) {
       setState(() {
-        _imageFiles[index] = pickedFile;
+        recipeImages[index] = pickedFile;
       });
       _updateSavedRecipe(index, sequenceController[index].text);
     }
@@ -78,7 +75,7 @@ class _CommunityPostingState extends State<CommunityPosting> {
         inputSequence[index] = {
           'sequenceNumber': index + 1,
           'content': text,
-          'imageUrl': _imageFiles[index]
+          'imageUrl': recipeImages[index]
         };
       }
     });
@@ -87,7 +84,7 @@ class _CommunityPostingState extends State<CommunityPosting> {
   void _deleteRecipe(int index) {
     setState(() {
       sequenceController.removeAt(index);
-      _imageFiles.removeAt(index);
+      recipeImages.removeAt(index);
       inputSequence.removeAt(index);
     });
   }
@@ -384,7 +381,7 @@ class _CommunityPostingState extends State<CommunityPosting> {
                           ],
                         ),
                         const SizedBox(height: 20.0),
-                        _imageFiles[index] == null
+                        recipeImages[index] == null
                             ? ElevatedButton(
                                 onPressed: () {
                                   _getImage(index);
@@ -393,7 +390,7 @@ class _CommunityPostingState extends State<CommunityPosting> {
                                     Text('Add Image for Recipe ${index + 1}'),
                               )
                             : Image.file(
-                                File(_imageFiles[index]!.path),
+                                File(recipeImages[index]!.path),
                                 height: 200,
                                 fit: BoxFit.cover,
                               ),
@@ -427,7 +424,7 @@ class _CommunityPostingState extends State<CommunityPosting> {
                     onPressed: () async {
                       setState(() {
                         sequenceController.add(TextEditingController());
-                        _imageFiles.add(null);
+                        recipeImages.add(null);
                         inputSequence.add({
                           'sequenceNumber': sequenceController.length + 1,
                           'content': sequenceController.last.text,

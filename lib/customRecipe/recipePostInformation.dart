@@ -1,3 +1,5 @@
+import '../bookmark/custom-recipe-aricles_bookmark/custom-recipe-articles_bookmark_data.dart';
+import '../bookmark/custom-recipe-aricles_bookmark/custom-recipe-articles_bookmark_service.dart';
 import '../db/recipePost.dart';
 import '../translate/language_detect.dart';
 import 'postInformationAppbar.dart';
@@ -8,18 +10,18 @@ import 'postImage.dart';
 import '../db/comment.dart';
 import 'package:flutter/material.dart';
 
-class PostInformation extends StatefulWidget {
+class RecipeInformation extends StatefulWidget {
   final int postId;
-  const PostInformation({
+  const RecipeInformation({
     super.key,
     required this.postId,
   });
 
   @override
-  State<PostInformation> createState() => _PostInformationState();
+  State<RecipeInformation> createState() => _RecipeInformationState();
 }
 
-class _PostInformationState extends State<PostInformation> {
+class _RecipeInformationState extends State<RecipeInformation> {
   late int postId;
   String title = '';
   String content = '';
@@ -45,6 +47,8 @@ class _PostInformationState extends State<PostInformation> {
   List<Comment> comments = [];
   final commentController = TextEditingController();
   final focusNode = FocusNode();
+  bool bookmarkStatus = false;
+  bool likeStatus = false;
 
   Future<dynamic> commentDialog(BuildContext context) {
     return showDialog(
@@ -76,9 +80,34 @@ class _PostInformationState extends State<PostInformation> {
     });
   }
 
-  void bookmarkPressed() {}
+  void fetchInitialBookmarks() async {
+    await RecipeBookmarkService.fetchBookmarks();
+    setState(() {
+      bookmarkStatus = RecipeBookmarkData.isBookmarked(postId);
+    });
+  }
 
-  void likePressed() {}
+  void toggleBookmark(int postId) async {
+    if (bookmarkStatus) {
+      await RecipeBookmarkService.deleteBookmark(postId);
+    } else {
+      await RecipeBookmarkService.addBookmark(postId);
+    }
+    setState(() {
+      bookmarkStatus = !bookmarkStatus;
+    });
+  }
+
+  void toggleLike(int postId) async {
+    if (likeStatus) {
+      await RecipeBookmarkService.deleteLike(postId);
+    } else {
+      await RecipeBookmarkService.addLike(postId);
+    }
+    setState(() {
+      likeStatus = !likeStatus;
+    });
+  }
 
   @override
   void initState() {
@@ -98,6 +127,7 @@ class _PostInformationState extends State<PostInformation> {
         comments = value;
       });
     });
+    fetchInitialBookmarks();
   }
 
   @override
@@ -109,12 +139,14 @@ class _PostInformationState extends State<PostInformation> {
       child: Scaffold(
         body: Scaffold(
           appBar: PostInformationAppBar(
-            postId: post.id,
+            postId: postId,
             authorNickname: post.nickname,
             userNickname: globals.user_nickname ?? '',
             title: post.title,
             content: post.content,
             imageUrls: post.imageUrls,
+            ingredients: post.ingredients,
+            sequences: post.sequences,
           ),
           resizeToAvoidBottomInset: false,
           body: isLoading
@@ -478,8 +510,10 @@ class _PostInformationState extends State<PostInformation> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             IconButton(
-                              onPressed: likePressed,
-                              icon: const Icon(Icons.favorite_border),
+                              onPressed: () => toggleLike(postId),
+                              icon: likeStatus
+                                  ? const Icon(Icons.favorite)
+                                  : const Icon(Icons.favorite_border_outlined),
                               iconSize: 30,
                               tooltip: 'Like',
                             ),
@@ -487,8 +521,10 @@ class _PostInformationState extends State<PostInformation> {
                               width: 8,
                             ),
                             IconButton(
-                              onPressed: bookmarkPressed,
-                              icon: const Icon(Icons.bookmark_border),
+                              onPressed: () => toggleBookmark(postId),
+                              icon: bookmarkStatus
+                                  ? const Icon(Icons.bookmark)
+                                  : const Icon(Icons.bookmark_border_outlined),
                               iconSize: 30,
                               tooltip: 'Bookmark',
                             ),
@@ -547,7 +583,7 @@ class _PostInformationState extends State<PostInformation> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    PostInformation(postId: post.id)),
+                                    RecipeInformation(postId: post.id)),
                           );
                         }
                       }

@@ -10,7 +10,9 @@ import '../globals.dart' as globals;
 const List<String> list = <String>['LATEST', 'OLDEST', 'LIKES', 'COMMENTS'];
 
 class CommuntiyMain extends StatefulWidget {
-  const CommuntiyMain({
+  String? inputText;
+  CommuntiyMain({
+    this.inputText,
     super.key,
   });
 
@@ -47,7 +49,7 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
     setState(() {
       isFirstLoadRunning = true;
     });
-    CommunitySerrvices.getArticleList(page, limit, type, sort, null)
+    CommunitySerrvices.getArticleList(page, limit, type, sort, widget.inputText)
         .then((value) {
       setState(() {
         postList = value;
@@ -96,7 +98,9 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommunityAppBar(title: globals.getText('community')),
+      appBar: CommunityAppBar(
+          title: globals.getText('community'),
+          isFromSearch: widget.inputText != null),
       body: isFirstLoadRunning
           ? const Center(
               child: CircularProgressIndicator(),

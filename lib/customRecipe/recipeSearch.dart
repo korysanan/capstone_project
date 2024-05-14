@@ -1,16 +1,17 @@
 import 'recipeService.dart';
 import '../home/appbar.dart';
 import 'package:flutter/material.dart';
-import 'postInformation.dart';
+import 'recipePostInformation.dart';
+import '../globals.dart' as globals;
 
-class CommunitySearch extends StatefulWidget {
-  const CommunitySearch({super.key});
+class RecipeSearch extends StatefulWidget {
+  const RecipeSearch({super.key});
 
   @override
-  State<CommunitySearch> createState() => _CommunitySearchState();
+  State<RecipeSearch> createState() => CommunitySearch();
 }
 
-class _CommunitySearchState extends State<CommunitySearch> {
+class CommunitySearch extends State<RecipeSearch> {
   String inputText = '';
   final focusNode = FocusNode();
   int page = 1;
@@ -52,7 +53,8 @@ class _CommunitySearchState extends State<CommunitySearch> {
       });
       page += 1;
 
-      RecipeSerrvices.getArticleList(page, limit, 'ALL', 'LATEST', inputText)
+      RecipeSerrvices.getArticleList(
+              page, limit, 'ALL', 'LATEST', widget.hashCode)
           .then((value) {
         if (value.isNotEmpty) {
           setState(() {
@@ -122,7 +124,7 @@ class _CommunitySearchState extends State<CommunitySearch> {
                       ),
                       padding:
                           MaterialStateProperty.all(const EdgeInsets.all(5)),
-                      hintText: "검색어를 입력하세요",
+                      hintText: globals.getText("Enter a search term"),
                       onChanged: (value) {
                         setState(
                             () => inputText = value); // 입력값 inputText로 실시간 저장
@@ -205,7 +207,7 @@ class _CommunitySearchState extends State<CommunitySearch> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PostInformation(
+                                    builder: (context) => RecipeInformation(
                                         postId: postList[index].id)));
                           },
                         ),

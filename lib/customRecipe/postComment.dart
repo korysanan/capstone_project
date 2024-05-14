@@ -1,6 +1,6 @@
 import '../translate/language_detect.dart';
 import 'editComment.dart';
-import 'postInformation.dart';
+import 'recipePostInformation.dart';
 import 'recipeService.dart';
 import '../../globals.dart' as globals;
 import 'package:flutter/material.dart';
@@ -200,7 +200,8 @@ abstract class MenuItems {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => PostInformation(postId: postId)));
+                        builder: (context) =>
+                            RecipeInformation(postId: postId)));
               },
               child: const Text('Yes')),
           ElevatedButton(

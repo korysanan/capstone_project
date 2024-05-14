@@ -26,8 +26,8 @@ class RecipePostAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const RecipeMain()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => RecipeMain()));
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,
@@ -63,10 +63,8 @@ class RecipePostAppBar extends StatelessWidget implements PreferredSizeWidget {
                   },
                 );
                 await Future.delayed(const Duration(seconds: 1));
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const RecipeMain()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RecipeMain()));
               } else {
                 showDialog(
                     context: context,

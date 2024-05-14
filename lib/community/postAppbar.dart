@@ -24,7 +24,7 @@ class CommunityPostAppBar extends StatelessWidget
       leading: IconButton(
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const CommuntiyMain()));
+              MaterialPageRoute(builder: (context) => CommuntiyMain()));
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,
@@ -57,10 +57,8 @@ class CommunityPostAppBar extends StatelessWidget
                   },
                 );
                 await Future.delayed(const Duration(seconds: 1));
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CommuntiyMain()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CommuntiyMain()));
               } else {
                 showDialog(
                     context: context,

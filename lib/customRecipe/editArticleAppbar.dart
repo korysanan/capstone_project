@@ -1,23 +1,26 @@
-import '../community/communityMain.dart';
+import 'recipeMain.dart';
 import 'package:image_picker/image_picker.dart';
 import 'recipeService.dart';
 import 'package:flutter/material.dart';
 
-class CommunityEditAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class ReicpeEditAppBar extends StatelessWidget implements PreferredSizeWidget {
   int postId;
   String inputTitle;
   String inputContent;
   List<XFile> images;
-  List imageUrls;
+  List<String> imageUrls;
+  List<Map<String, dynamic>> savedIngredients = [];
+  List<Map<String, dynamic>> inputSequence = [];
 
-  CommunityEditAppBar({
+  ReicpeEditAppBar({
     super.key,
     required this.postId,
     required this.inputTitle,
     required this.inputContent,
     required this.images,
     required this.imageUrls,
+    required this.savedIngredients,
+    required this.inputSequence,
   });
 
   @override
@@ -25,8 +28,8 @@ class CommunityEditAppBar extends StatelessWidget
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const CommuntiyMain()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => RecipeMain()));
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,
@@ -47,8 +50,8 @@ class CommunityEditAppBar extends StatelessWidget
           child: TextButton(
             onPressed: () async {
               if (inputTitle != '' && inputContent != '') {
-                RecipeSerrvices.editPost(
-                    postId, inputTitle, inputContent, images, imageUrls);
+                RecipeSerrvices.editRecipePost(postId, inputTitle, inputContent,
+                    images, imageUrls, savedIngredients, inputSequence);
                 showDialog(
                   context: context,
                   barrierDismissible: false,
@@ -59,10 +62,8 @@ class CommunityEditAppBar extends StatelessWidget
                   },
                 );
                 await Future.delayed(const Duration(seconds: 1));
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CommuntiyMain()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RecipeMain()));
               } else {
                 showDialog(
                     context: context,

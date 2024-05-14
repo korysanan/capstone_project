@@ -1,5 +1,5 @@
-import 'postInformation.dart';
-import '../community/communityMain.dart';
+import 'recipeMain.dart';
+import 'recipePostInformation.dart';
 import 'recipeService.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +20,8 @@ class CommentEditAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const CommuntiyMain()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => RecipeMain()));
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,
@@ -56,7 +56,7 @@ class CommentEditAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => PostInformation(
+                        builder: (context) => RecipeInformation(
                               postId: postId,
                             )));
               } else {

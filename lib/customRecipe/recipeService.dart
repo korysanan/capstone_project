@@ -260,19 +260,48 @@ class RecipeSerrvices {
     }
   }
 
-  // 커뮤니티 게시물 수정
-  static Future<void> editPost(int id, String title, String content,
-      List<XFile> images, List iUrls) async {
+  static Future<void> editRecipePost(
+      int id,
+      String title,
+      String content,
+      List<XFile> images,
+      List<String> iUrls,
+      List<Map<String, dynamic>> ingredients,
+      List<Map<String, dynamic>> sequences) async {
     List imageUrls = iUrls;
     if (images.isNotEmpty) {
-      print('not empty');
       imageUrls.addAll(
           List<String>.from(await postImages(images, 'COMMUNITY_ARTICLE')));
+    }
+    List<Map<String, dynamic>> newSequences = [];
+    for (var sequence in sequences) {
+      if (sequence['imageUrl'].runtimeType == String) {
+        newSequences.add({
+          'sequenceNumber': sequence['sequenceNumber'],
+          'content': sequence['content'],
+          'imageUrl': sequence['imageUrl'],
+        });
+      } else if (sequence['imageUrl'].runtimeType == XFile) {
+        String imageUrl =
+            await postImage(sequence['imageUrl'], 'CUSTOM_RECIPE_ARTICLE');
+        newSequences.add({
+          'sequenceNumber': sequence['sequenceNumber'],
+          'content': sequence['content'],
+          'imageUrl': imageUrl,
+        });
+      } else {
+        newSequences.add({
+          'sequenceNumber': sequence['sequenceNumber'],
+          'content': sequence['content'],
+        });
+      }
     }
     try {
       Map<String, dynamic> results = {
         'title': title,
         'content': content,
+        'sequences': newSequences,
+        'ingredients': ingredients,
         'imageUrls': imageUrls
       };
       final encodedResults = jsonEncode(results);
@@ -285,12 +314,12 @@ class RecipeSerrvices {
               },
               body: encodedResults);
       if (response.statusCode == 200) {
-        print("Post edited successfully.");
+        print("Post edit successfully.");
       } else {
         print("Failed to edit post. Status code: ${response.statusCode}");
       }
     } catch (e) {
-      print("Error editing post: $e");
+      print("Error edit post: $e");
     }
   }
 

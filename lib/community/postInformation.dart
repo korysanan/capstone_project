@@ -7,6 +7,8 @@ import 'postImage.dart';
 import '../db/comment.dart';
 import '../db/communityPost.dart';
 import 'package:flutter/material.dart';
+import '../bookmark/community_bookmark/community_bookmark_data.dart';
+import '../bookmark/community_bookmark/community_bookmark_service.dart';
 
 class PostInformation extends StatefulWidget {
   final int postId;
@@ -42,6 +44,8 @@ class _PostInformationState extends State<PostInformation> {
   List<Comment> comments = [];
   final commentController = TextEditingController();
   final focusNode = FocusNode();
+  bool bookmarkStatus = false;
+  bool likeStatus = false;
 
   Future<dynamic> commentDialog(BuildContext context) {
     return showDialog(
@@ -66,17 +70,36 @@ class _PostInformationState extends State<PostInformation> {
       title = translatedTitle;
       content = tanslatedContent;
     });
-    // for (var comment in comments) {
-    //   String translatedComment = await translateText(comment.content);
-    //   setState(() {
-    //     comment.content = translatedComment;
-    //   });
-    // }
   }
 
-  void bookmarkPressed() {}
+  void fetchInitialBookmarks() async {
+    await CommunityBookmarkService.fetchBookmarks();
+    setState(() {
+      bookmarkStatus = CommunityBookmarkData.isBookmarked(postId);
+    });
+  }
 
-  void likePressed() {}
+  void toggleBookmark(int postId) async {
+    if (bookmarkStatus) {
+      await CommunityBookmarkService.deleteBookmark(postId);
+    } else {
+      await CommunityBookmarkService.addBookmark(postId);
+    }
+    setState(() {
+      bookmarkStatus = !bookmarkStatus;
+    });
+  }
+
+  void toggleLike(int postId) async {
+    if (likeStatus) {
+      await CommunityBookmarkService.deleteLike(postId);
+    } else {
+      await CommunityBookmarkService.addLike(postId);
+    }
+    setState(() {
+      likeStatus = !likeStatus;
+    });
+  }
 
   @override
   void initState() {
@@ -96,6 +119,7 @@ class _PostInformationState extends State<PostInformation> {
         comments = value;
       });
     });
+    fetchInitialBookmarks();
   }
 
   @override
@@ -115,17 +139,6 @@ class _PostInformationState extends State<PostInformation> {
             imageUrls: post.imageUrls,
           ),
           resizeToAvoidBottomInset: false,
-          // body: isLoading
-          //     ? MaterialApp(
-          //         debugShowCheckedModeBanner: false,
-          //         home: Scaffold(
-          //           body: Container(
-          //             decoration: const BoxDecoration(color: Colors.white),
-          //             child: Center(
-          //                 child: Image.asset('assets/images/load-33_256.gif')),
-          //           ),
-          //         ),
-          //       )
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -227,8 +240,10 @@ class _PostInformationState extends State<PostInformation> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       IconButton(
-                        onPressed: likePressed,
-                        icon: const Icon(Icons.favorite_border),
+                        onPressed: () => toggleLike(postId),
+                        icon: likeStatus
+                            ? const Icon(Icons.favorite)
+                            : const Icon(Icons.favorite_border_outlined),
                         iconSize: 30,
                         tooltip: 'Like',
                       ),
@@ -236,8 +251,10 @@ class _PostInformationState extends State<PostInformation> {
                         width: 8,
                       ),
                       IconButton(
-                        onPressed: bookmarkPressed,
-                        icon: const Icon(Icons.bookmark_border),
+                        onPressed: () => toggleBookmark(postId),
+                        icon: bookmarkStatus
+                            ? const Icon(Icons.bookmark)
+                            : const Icon(Icons.bookmark_border_outlined),
                         iconSize: 30,
                         tooltip: 'Bookmark',
                       ),

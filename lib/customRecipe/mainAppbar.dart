@@ -1,15 +1,16 @@
-import 'package:capstone_project/home/main_screen.dart';
-
+import '../home/main_screen.dart';
 import 'recipeSearch.dart';
 import 'postArticle.dart';
 import 'package:flutter/material.dart';
 
 class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool isFromSearch;
 
   const CommunityAppBar({
     super.key,
     required this.title,
+    required this.isFromSearch,
   });
 
   @override
@@ -17,8 +18,12 @@ class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const KFoodBoxHome()));
+          if (isFromSearch) {
+            Navigator.of(context).pop();
+          } else {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const KFoodBoxHome()));
+          }
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,
@@ -34,20 +39,16 @@ class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const CommunitySearch()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const RecipeSearch()));
           },
           icon: const Icon(Icons.search),
           iconSize: 40,
         ),
         IconButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const CommunityPosting()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const RecipePosting()));
           },
           icon: const Icon(Icons.edit),
           iconSize: 40,

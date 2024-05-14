@@ -1,4 +1,4 @@
-import 'postInformation.dart';
+import 'recipePostInformation.dart';
 import 'package:flutter/cupertino.dart';
 import 'mainAppbar.dart';
 import '../home/bottom.dart';
@@ -10,7 +10,9 @@ import '../globals.dart' as globals;
 const List<String> list = <String>['LATEST', 'OLDEST', 'LIKES', 'COMMENTS'];
 
 class RecipeMain extends StatefulWidget {
-  const RecipeMain({
+  String? inputText;
+  RecipeMain({
+    this.inputText,
     super.key,
   });
 
@@ -43,7 +45,8 @@ class _RecipeMainState extends State<RecipeMain> {
     setState(() {
       isFirstLoadRunning = true;
     });
-    RecipeSerrvices.getArticleList(page, limit, type, sort, null).then((value) {
+    RecipeSerrvices.getArticleList(page, limit, type, sort, widget.inputText)
+        .then((value) {
       setState(() {
         postList = value;
       });
@@ -91,7 +94,10 @@ class _RecipeMainState extends State<RecipeMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommunityAppBar(title: globals.getText('custom recipes')),
+      appBar: CommunityAppBar(
+        title: globals.getText('custom recipes'),
+        isFromSearch: widget.inputText != null,
+      ),
       body: isFirstLoadRunning
           ? const Center(
               child: CircularProgressIndicator(),
@@ -221,7 +227,7 @@ class _RecipeMainState extends State<RecipeMain> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => PostInformation(
+                                  builder: (context) => RecipeInformation(
                                       postId: postList[index].id)));
                         },
                       ),
