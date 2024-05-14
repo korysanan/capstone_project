@@ -3,6 +3,7 @@ import 'package:capstone_project/translate/language_detect.dart';
 import 'package:flutter/material.dart';
 import 'package:capstone_project/categoryPage/categoryMain.dart';
 import 'package:capstone_project/community/communityMain.dart';
+import '../food_restaurant/food_select.dart';
 import 'bottom.dart';
 import 'on_item_tap.dart';
 import 'package:carousel_slider/carousel_slider.dart'; // slider하기 위해 import
@@ -411,7 +412,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CameraPage()),
+                    MaterialPageRoute(builder: (context) => FoodSelectScreen()),
                   );
                 },
                 child: Column(
