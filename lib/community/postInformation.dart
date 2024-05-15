@@ -108,6 +108,7 @@ class _PostInformationState extends State<PostInformation> {
     CommunitySerrvices.getPostInfo(postId).then((value) {
       setState(() {
         post = value;
+        likeStatus = post.like;
         try {
           title = post.title;
           content = post.content;

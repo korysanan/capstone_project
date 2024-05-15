@@ -74,8 +74,12 @@ class RecipeSerrvices {
       commentCount: -1,
     );
     try {
-      final response =
-          await http.get(Uri.parse('$url/custom-recipe-articles/$postId'));
+      var response = await http
+          .get(Uri.parse('$url/custom-recipe-articles/$postId'), headers: {
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'Cookie': globals.sessionId!,
+      });
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
         RecipePost postInfo = RecipePost.fromJson(jsonData);

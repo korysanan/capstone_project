@@ -71,8 +71,14 @@ class CommunitySerrvices {
         likeCount: -1,
         commentCount: -1);
     try {
-      final response =
-          await http.get(Uri.parse('$url/community-articles/$postId'));
+      var response = await http
+          .get(Uri.parse('$url/community-articles/$postId'), headers: {
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'Cookie': globals.sessionId!,
+      });
+      // final response =
+      //     await http.get(Uri.parse('$url/community-articles/$postId'));
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
         CommunityPost postInfo = CommunityPost.fromJson(jsonData);

@@ -116,6 +116,8 @@ class _RecipeInformationState extends State<RecipeInformation> {
     RecipeSerrvices.getPostInfo(postId).then((value) {
       setState(() {
         post = value;
+        likeStatus = post.like;
+
         try {
           title = post.title;
           content = post.content;
