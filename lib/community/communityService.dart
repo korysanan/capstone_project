@@ -76,11 +76,14 @@ class CommunitySerrvices {
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
         CommunityPost postInfo = CommunityPost.fromJson(jsonData);
+        print("Get post successfully.");
         return postInfo;
       } else {
+        print("Failed to get post. Status code: ${response.statusCode}");
         return temp;
       }
     } catch (e) {
+      print(e);
       return temp;
     }
   }

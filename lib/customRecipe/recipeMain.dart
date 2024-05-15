@@ -214,7 +214,7 @@ class _RecipeMainState extends State<RecipeMain> {
                                   ),
                                 ),
                                 Text(
-                                  postList[index].nickname,
+                                  postList[index].nickname ?? 'deleted account',
                                   style: const TextStyle(
                                       color: Color(0xff5b5b5b), fontSize: 12),
                                 ),

@@ -5,7 +5,7 @@ class Article {
   int likeCount;
   int commentCount;
   String createdAt;
-  String nickname;
+  String? nickname;
 
   Article({
     required this.id,

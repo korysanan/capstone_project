@@ -1,6 +1,6 @@
 class RecipePost {
   int id;
-  int userId;
+  int? userId;
   bool isMine;
   bool isBookmarked;
   bool like;
@@ -11,7 +11,7 @@ class RecipePost {
   List<String> imageUrls;
   String createdAt;
   String? updatedAt;
-  String nickname;
+  String? nickname;
   int likeCount;
   int commentCount;
 

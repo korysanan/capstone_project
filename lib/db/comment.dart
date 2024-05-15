@@ -1,8 +1,8 @@
 class Comment {
   int id;
-  int userId;
+  int? userId;
   bool isMine;
-  String nickname;
+  String? nickname;
   String createdAt;
   String? updatedAt;
   String content;

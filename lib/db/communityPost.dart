@@ -1,6 +1,6 @@
 class CommunityPost {
   int id;
-  int userId;
+  int? userId;
   bool isMine;
   bool isBookmarked;
   bool like;
@@ -9,7 +9,7 @@ class CommunityPost {
   List imageUrls;
   String createdAt;
   String? updatedAt;
-  String nickname;
+  String? nickname;
   int likeCount;
   int commentCount;
 
