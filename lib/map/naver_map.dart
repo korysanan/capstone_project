@@ -4,6 +4,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
+void main() async {
+  await _initialize();
+  runApp(const NaverMapApp());
+}
+
 // Initialize Naver Map and run the app
 void initializeAndRunNaverMapApp(BuildContext context) async {
   await _initialize();

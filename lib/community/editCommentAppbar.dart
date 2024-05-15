@@ -21,7 +21,7 @@ class CommentEditAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const CommuntiyMain()));
+              MaterialPageRoute(builder: (context) => CommuntiyMain()));
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,

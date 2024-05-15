@@ -4,6 +4,8 @@ import '../db/food.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../translate/language_detect.dart';
+import '../bookmark/foods_bookmark/foods_bookmark_service.dart';
+import '../bookmark/foods_bookmark/foods_bookmark_data.dart';
 import '../globals.dart' as globals;
 
 class FoodInformation extends StatefulWidget {
@@ -30,6 +32,25 @@ class _FoodInformationState extends State<FoodInformation> {
     recipeSequence: [],
   );
 
+  bool bookmarkStatus = false;
+  void fetchInitialBookmarks() async {
+    await FoodBookmarkService.fetchBookmarks();
+    setState(() {
+      bookmarkStatus = FoodBookmarkData.isBookmarked(foodId);
+    });
+  }
+
+  void toggleBookmark(int foodId) async {
+    if (bookmarkStatus) {
+      await FoodBookmarkService.deleteBookmark(foodId);
+    } else {
+      await FoodBookmarkService.addBookmark(foodId);
+    }
+    setState(() {
+      bookmarkStatus = !bookmarkStatus;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +60,7 @@ class _FoodInformationState extends State<FoodInformation> {
         food = value;
       });
     });
+    fetchInitialBookmarks();
   }
 
   @override
@@ -93,8 +115,7 @@ class _FoodInformationState extends State<FoodInformation> {
               ),
               const SizedBox(
                 width: 500,
-                child: Divider(
-                    color: Color.fromARGB(255, 219, 179, 242), thickness: 1.0),
+                child: Divider(color: Color(0xFF1565C0), thickness: 1.0),
               ),
               Column(
                 children: [
@@ -113,11 +134,10 @@ class _FoodInformationState extends State<FoodInformation> {
                           ),
                         ),
                         IconButton(
-                          // 북마크 기능 추가
-                          onPressed: () {},
-                          icon: true
-                              ? const Icon(Icons.bookmark_outlined)
-                              : const Icon(Icons.bookmark_outline_rounded),
+                          icon: bookmarkStatus
+                              ? const Icon(Icons.bookmark)
+                              : const Icon(Icons.bookmark_border_outlined),
+                          onPressed: () => toggleBookmark(foodId),
                           iconSize: 40,
                         ),
                       ],
@@ -176,8 +196,7 @@ class _FoodInformationState extends State<FoodInformation> {
               ),
               const SizedBox(
                 width: 500,
-                child: Divider(
-                    color: Color.fromARGB(255, 219, 179, 242), thickness: 1.0),
+                child: Divider(color: Color(0xFF1565C0), thickness: 1.0),
               ),
               Column(
                 children: [
@@ -198,115 +217,116 @@ class _FoodInformationState extends State<FoodInformation> {
                       ],
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(
-                  //     horizontal: 10,
-                  //     vertical: 2,
-                  //   ),
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     children: [
-                  //       Text(
-                  //         globals.getText('Ingredients and portions'),
-                  //         textAlign: TextAlign.left,
-                  //         style: const TextStyle(
-                  //           fontSize: 18,
-                  //           fontWeight: FontWeight.bold,
-                  //           color: Colors.indigo,
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                  // Column(
-                  //   mainAxisAlignment: MainAxisAlignment.start,
-                  //   children: food.recipeIngredients.reversed.map((ingredient) {
-                  //     return Column(children: [
-                  //       SizedBox(
-                  //         width: MediaQuery.of(context).size.width - 100,
-                  //         child: Row(
-                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //           children: [
-                  //             FutureBuilder<String>(
-                  //               future: translateText('${ingredient['name']}'),
-                  //               builder: (context, snapshot) {
-                  //                 if (snapshot.connectionState ==
-                  //                     ConnectionState.done) {
-                  //                   if (snapshot.hasError) {
-                  //                     return const Text(
-                  //                       'Error',
-                  //                       style: TextStyle(
-                  //                         color: Colors.red,
-                  //                         fontSize: 16,
-                  //                       ),
-                  //                     );
-                  //                   } else {
-                  //                     return Text(
-                  //                       snapshot.data ??
-                  //                           'Translation error', // 번역 실패시 대체 텍스트
-                  //                       style: const TextStyle(
-                  //                         fontSize: 16,
-                  //                       ),
-                  //                     );
-                  //                   }
-                  //                 } else {
-                  //                   return const SizedBox(
-                  //                     height: 10,
-                  //                     width: 10,
-                  //                     child: Center(
-                  //                       child: CircularProgressIndicator(),
-                  //                     ),
-                  //                   );
-                  //                 }
-                  //               },
-                  //             ),
-                  //             FutureBuilder<String>(
-                  //               future: translateText(
-                  //                   '${ingredient['quantity'] ?? ''}'),
-                  //               builder: (context, snapshot) {
-                  //                 if (snapshot.connectionState ==
-                  //                     ConnectionState.done) {
-                  //                   if (snapshot.hasError) {
-                  //                     return const Text(
-                  //                       'Error',
-                  //                       style: TextStyle(
-                  //                         color: Colors.red,
-                  //                         fontSize: 16,
-                  //                       ),
-                  //                     );
-                  //                   } else {
-                  //                     return Text(
-                  //                       snapshot.data ??
-                  //                           'Translation error', // 번역 실패시 대체 텍스트
-                  //                       style: const TextStyle(
-                  //                         fontSize: 16,
-                  //                       ),
-                  //                     );
-                  //                   }
-                  //                 } else {
-                  //                   return const SizedBox(
-                  //                     height: 10,
-                  //                     width: 10,
-                  //                     child: Center(
-                  //                       child: CircularProgressIndicator(),
-                  //                     ),
-                  //                   );
-                  //                 }
-                  //               },
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //       SizedBox(
-                  //         width: MediaQuery.of(context).size.width,
-                  //         child: const Divider(
-                  //           color: Colors.grey,
-                  //           thickness: 1.0,
-                  //         ),
-                  //       ),
-                  //     ]);
-                  //   }).toList(),
-                  // ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 2,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          globals.getText('Ingredients and portions'),
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.indigo,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: food.recipeIngredients.reversed.map((ingredient) {
+                      return Column(children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width - 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FutureBuilder<String>(
+                                future: translateTextFromGoogle(
+                                    '${ingredient['name']}'),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return const Text(
+                                        'Error',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 16,
+                                        ),
+                                      );
+                                    } else {
+                                      return Text(
+                                        snapshot.data ??
+                                            'Translation error', // 번역 실패시 대체 텍스트
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    return const SizedBox(
+                                      height: 10,
+                                      width: 10,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                              FutureBuilder<String>(
+                                future: translateTextFromGoogle(
+                                    '${ingredient['quantity'] ?? ''}'),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return const Text(
+                                        'Error',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 16,
+                                        ),
+                                      );
+                                    } else {
+                                      return Text(
+                                        snapshot.data ??
+                                            'Translation error', // 번역 실패시 대체 텍스트
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    return const SizedBox(
+                                      height: 10,
+                                      width: 10,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: const Divider(
+                            color: Colors.grey,
+                            thickness: 1.0,
+                          ),
+                        ),
+                      ]);
+                    }).toList(),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 10,
@@ -378,26 +398,6 @@ class _FoodInformationState extends State<FoodInformation> {
                         ),
                       );
                     }).toList(),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton.icon(
-                        onPressed: () {}, // 해당 커스텀 레시피 페이지로 이동
-                        label: Text(
-                          globals.getText('custom recipes'),
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.red,
-                          ),
-                        ),
-                        icon: const Icon(
-                          Icons.arrow_forward,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ],
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,

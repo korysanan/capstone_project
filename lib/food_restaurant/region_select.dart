@@ -97,6 +97,7 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
                             } else {
                               print('Failed to fetch restaurant data.');
                             }
+                            // 한국의 네이버지도 서비스에서 방문자의 리뷰수나 평점수가 높은 드
                           },
                         ),
                       ],

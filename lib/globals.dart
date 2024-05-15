@@ -1,6 +1,7 @@
 library globals;
 
 import 'translate/translation_manager.dart';
+String selectedLanguageCode = 'en'; // 기본 언어 코드
 
 class Food {
   final int id;
@@ -20,11 +21,13 @@ class Food {
   }
 }
 
-String selectedLanguageCode = 'en'; // 기본 언어 코드
 List<Food>? foods;
 
-final apiKey = '7f0cb90f-8897-474f-a7d0-570e0f6a5bd2:fx';
+//const apiKey = '7f0cb90f-8897-474f-a7d0-570e0f6a5bd2:fx';
+const apiKey = 'cc306a14-243b-4106-8133-633127ed6af8:fx';
 String ODSay_apiKey = "NmHBe2KbysaotzsEo6+3ewb5Dke9KHGzmtW+QDXXvJM";
+const googleTranslateApiKey = 'AIzaSyBq5r5xStMzDC56y1nx0HUoQdhi5JGOwJM';
+//const googleTranslateApiKey = '';
 
 // 글로벌 함수
 String getText(String key) {
@@ -36,6 +39,9 @@ String? user_nickname;
 String? user_email;
 String? user_language;
 int user_language_id = 18;
+
+double? my_latitude;
+double? my_longitude;
 
 void updateUserLanguage(String newLanguage) {
   user_language = newLanguage;

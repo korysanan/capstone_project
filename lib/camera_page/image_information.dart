@@ -106,7 +106,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
-              info["name"],
+              info["englishName"],
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 14,
@@ -168,7 +168,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
                     child: Column(
                       children: [
                         ListTile(
-                          title: Text(info["name"], style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                          title: Text(info["englishName"], style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                           trailing: IconButton(
                             icon: bookmarkStatus[idx] ? Icon(Icons.bookmark) : Icon(Icons.bookmark_border_outlined),
                             onPressed: () => toggleBookmark(idx, int.parse(info["id"].toString())),

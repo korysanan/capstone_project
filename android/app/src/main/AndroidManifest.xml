@@ -1,9 +1,12 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">   
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 위치 권한 부여 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 위치 권한 부여 -->
     <uses-permission android:name="android.permission.INTERNET" />  <!-- 인터넷 권한 부여 -->
     <application
         android:label="capstone_project"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -30,6 +33,13 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- 
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="0zwgla6npt"/>
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_SECRET"
+            android:value="i89JWsdVDpyzGEcPBGSmTl774rt0nj9Mj0n19lkD"/> -->
         <!--
         <meta-data android:name="com.google.android.geo.AIzaSyCFmIj6-ZZCwI7T2w1Z-f0N7tspld6Ttlw"
                android:value="AIzaSyCFmIj6-ZZCwI7T2w1Z-f0N7tspld6Ttlw"/>

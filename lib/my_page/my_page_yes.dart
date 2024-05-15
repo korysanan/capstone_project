@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../bookmark/custom-recipe-aricles_bookmark/custom-recipe-articles_bookmark_data.dart';
 import '../translate/language_detect.dart';
 import 'language_setting.dart';
 import '../home/bottom.dart';
@@ -22,6 +23,11 @@ class _MyPageYesState extends State<MyPageYes> {
     globals.getText('community'): CommunityBookmarkData.getBookmarkNames(),
     globals.getText('custom recipes'): ['Article title 1', 'Article title 2', 'Article title 1', 'Article title 2'],
     globals.getText('foods'): FoodBookmarkData.getBookmarkNames(),
+    /*
+    globals.getText('community'): CommunityBookmarkData.getBookmarkNames(),
+    globals.getText('custom recipes'): RecipeBookmarkData.getBookmarkNames(),
+    globals.getText('foods'): FoodBookmarkData.getBookmarkNames(),
+    */
   };
   // 일단 북마크 했다고 가정하고 임시 자료
 

@@ -34,7 +34,8 @@ class CommunityBookmarkService {
   static Future<void> addBookmark(int postId) async {
     try {
       var response = await http.post(
-        Uri.parse('http://api.kfoodbox.click/community-articles/$postId/bookmark'),
+        Uri.parse(
+            'http://api.kfoodbox.click/community-articles/$postId/bookmark'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,
@@ -55,7 +56,8 @@ class CommunityBookmarkService {
   static Future<void> deleteBookmark(int postId) async {
     try {
       var response = await http.delete(
-        Uri.parse('http://api.kfoodbox.click/community-articles/$postId/bookmark'),
+        Uri.parse(
+            'http://api.kfoodbox.click/community-articles/$postId/bookmark'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,
@@ -65,10 +67,50 @@ class CommunityBookmarkService {
       if (response.statusCode == 200) {
         print("Bookmark deleted successfully.");
       } else {
-        print("Failed to add bookmark. Status code: ${response.statusCode}");
+        print("Failed to delete bookmark. Status code: ${response.statusCode}");
       }
     } catch (e) {
-      print("Error adding bookmark: $e");
+      print("Error delete bookmark: $e");
+    }
+  }
+
+  // 커뮤니티 좋아요 생성
+  static Future<void> addLike(int postId) async {
+    try {
+      var response = await http.post(
+        Uri.parse('http://api.kfoodbox.click/community-articles/$postId/like'),
+        headers: {
+          'Accept': '*/*',
+          'Cookie': globals.sessionId!,
+        },
+      );
+      if (response.statusCode == 200) {
+        print("Like added successfully.");
+      } else {
+        print("Failed to add Like. Status code: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error adding Like: $e");
+    }
+  }
+
+  // 커뮤니티 좋아요 삭제
+  static Future<void> deleteLike(int postId) async {
+    try {
+      var response = await http.delete(
+        Uri.parse('http://api.kfoodbox.click/community-articles/$postId/like'),
+        headers: {
+          'Accept': '*/*',
+          'Cookie': globals.sessionId!,
+        },
+      );
+      if (response.statusCode == 200) {
+        print("Like deleted successfully.");
+      } else {
+        print("Failed to deleted Like. Status code: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error deleted Like: $e");
     }
   }
 }

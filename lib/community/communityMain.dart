@@ -10,7 +10,9 @@ import '../globals.dart' as globals;
 const List<String> list = <String>['LATEST', 'OLDEST', 'LIKES', 'COMMENTS'];
 
 class CommuntiyMain extends StatefulWidget {
-  const CommuntiyMain({
+  String? inputText;
+  CommuntiyMain({
+    this.inputText,
     super.key,
   });
 
@@ -29,7 +31,7 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
   String dropdownValue = list.first;
   final int _currentIndex = 0; // bottomnavigation index 번호
   int page = 1;
-  final limit = 20;
+  final limit = 10;
   bool hasNextPage = true;
   bool isFirstLoadRunning = false;
   bool isLoadMoreRunning = false;
@@ -47,7 +49,7 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
     setState(() {
       isFirstLoadRunning = true;
     });
-    CommunitySerrvices.getArticleList(page, limit, type, sort, null)
+    CommunitySerrvices.getArticleList(page, limit, type, sort, widget.inputText)
         .then((value) {
       setState(() {
         postList = value;
@@ -96,7 +98,9 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommunityAppBar(title: globals.getText('community')),
+      appBar: CommunityAppBar(
+          title: globals.getText('community'),
+          isFromSearch: widget.inputText != null),
       body: isFirstLoadRunning
           ? const Center(
               child: CircularProgressIndicator(),
@@ -115,6 +119,7 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
                           horizontal: 10,
                         ),
                         child: CupertinoSlidingSegmentedControl(
+                            backgroundColor: const Color(0xFFBEDCFF),
                             groupValue: idx,
                             children: myTabs,
                             onValueChanged: (i) {
@@ -138,10 +143,10 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
                           value: dropdownValue,
                           icon: const Icon(Icons.arrow_drop_down_rounded),
                           elevation: 16,
-                          style: const TextStyle(color: Colors.deepPurple),
+                          style: const TextStyle(color: Color(0xFF1565C0)),
                           underline: Container(
                             height: 2,
-                            color: Colors.deepPurpleAccent,
+                            color: const Color(0xFF1565C0),
                           ),
                           onChanged: (String? value) {
                             setState(() {

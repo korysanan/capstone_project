@@ -55,7 +55,7 @@ class _ArticleCommentsState extends State<ArticleComments> {
                       ),
                       widget.isTranslate
                           ? SizedBox(
-                              width: MediaQuery.of(context).size.width - 40,
+                              width: MediaQuery.of(context).size.width * 0.8,
                               child: FutureBuilder<String>(
                                 future: translateText(
                                     widget.comments?[index].content),
@@ -93,7 +93,7 @@ class _ArticleCommentsState extends State<ArticleComments> {
                                 },
                               ))
                           : SizedBox(
-                              width: MediaQuery.of(context).size.width - 40,
+                              width: MediaQuery.of(context).size.width * 0.8,
                               child: Text(
                                 widget.comments?[index].content,
                                 style: const TextStyle(fontSize: 15),

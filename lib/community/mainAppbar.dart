@@ -1,15 +1,14 @@
-import 'package:capstone_project/home/main_screen.dart';
-
 import 'communitySearch.dart';
 import 'postArticle.dart';
 import 'package:flutter/material.dart';
 
 class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-
+  final bool isFromSearch;
   const CommunityAppBar({
     super.key,
     required this.title,
+    required this.isFromSearch,
   });
 
   @override
@@ -17,8 +16,7 @@ class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => KFoodBoxHome()));
+          Navigator.of(context).pop();
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,

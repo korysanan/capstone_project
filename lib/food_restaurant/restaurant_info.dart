@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../directions_and_map/directions/filterling.dart';
+import '../home/bottom.dart';
+import '../home/on_item_tap.dart';
+import '../directions_and_map/map/naver_map.dart';
+
 class RestaurantPage extends StatefulWidget {
   final Map<String, dynamic> restaurant_info;
 
@@ -10,6 +15,8 @@ class RestaurantPage extends StatefulWidget {
 }
 
 class _RestaurantPageState extends State<RestaurantPage> {
+  int _currentIndex = 0;
+
   late String restaurantName;
   late String address;
   late String phoneNumber;
@@ -31,7 +38,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
     restaurantName = widget.restaurant_info['name'] ?? 'Unknown Restaurant';
     address = widget.restaurant_info['address'] ?? 'No address available';
     phoneNumber = widget.restaurant_info['phoneNumber'] ?? 'No phone number available';
-    imageUrl = widget.restaurant_info['imageUrl'] ?? 'https://yourimageurl.com/default.jpg';
+    imageUrl = widget.restaurant_info['imageUrl'] ?? 'assets/images/image_comming_soon.png';
     visitorReviewCount = widget.restaurant_info['visitorReviewCount']?.toInt() ?? 0;
     visitorRating = widget.restaurant_info['visitorRating']?.toDouble() ?? 0.0;
     blogReviewCount = widget.restaurant_info['blogReviewCount']?.toInt() ?? 0;
@@ -46,18 +53,24 @@ class _RestaurantPageState extends State<RestaurantPage> {
 
     // 여기에서 all_review를 계산합니다.
     all_review_count = visitorReviewCount + blogReviewCount + photoReviewCount;
-
-    // 결과를 콘솔에 출력해 확인합니다.
-    print(latitude);
-    print(longitude);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: Text('Restaurant Info'),
         centerTitle: true,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -108,7 +121,11 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                     children: [
                                       TextButton(
                                         onPressed: () {
-                                          // 첫 번째 이미지 버튼 기능
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => FilterScreen()),
+                                          );
+                                          // 첫 번째 이미지 버튼 기능FilterScreen
                                         },
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min, // 내용에 맞게 최소 크기 설정
@@ -124,7 +141,17 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                       ),
                                       TextButton(
                                         onPressed: () {
-                                          // 두 번째 이미지 버튼 기능
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => RestaurantMap(
+                                              restaurantName: restaurantName,
+                                              address: address,
+                                              phoneNumber: phoneNumber,
+                                              visitorRating: visitorRating,
+                                              latitude: latitude,
+                                              longitude: longitude
+                                            )),
+                                          );
                                         },
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min, // 내용에 맞게 최소 크기 설정
@@ -180,6 +207,10 @@ class _RestaurantPageState extends State<RestaurantPage> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNav(
+        currentIndex: _currentIndex,
+        onTap: (index) => onItemTapped(context, index),
       ),
     );
   }

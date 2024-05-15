@@ -2,6 +2,7 @@ import 'communityService.dart';
 import '../home/appbar.dart';
 import 'package:flutter/material.dart';
 import 'postInformation.dart';
+import '../globals.dart' as globals;
 
 class CommunitySearch extends StatefulWidget {
   const CommunitySearch({super.key});
@@ -14,7 +15,7 @@ class _CommunitySearchState extends State<CommunitySearch> {
   String inputText = '';
   final focusNode = FocusNode();
   int page = 1;
-  final limit = 20;
+  final limit = 10;
   bool hasNextPage = true;
   bool isFirstLoadRunning = false;
   bool isLoadMoreRunning = false;
@@ -122,7 +123,7 @@ class _CommunitySearchState extends State<CommunitySearch> {
                       ),
                       padding:
                           MaterialStateProperty.all(const EdgeInsets.all(5)),
-                      hintText: "검색어를 입력하세요",
+                      hintText: globals.getText("Enter a search term"),
                       onChanged: (value) {
                         setState(
                             () => inputText = value); // 입력값 inputText로 실시간 저장

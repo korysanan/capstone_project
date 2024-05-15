@@ -36,8 +36,7 @@ class _PostInformationAppBarState extends State<PostInformationAppBar> {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const CommuntiyMain()));
+          Navigator.pop(context);
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,
@@ -132,10 +131,8 @@ abstract class MenuItems {
                 );
                 await Future.delayed(const Duration(seconds: 1));
                 Navigator.of(context).pop();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CommuntiyMain()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CommuntiyMain()));
               },
               child: const Text('Yes')),
           ElevatedButton(

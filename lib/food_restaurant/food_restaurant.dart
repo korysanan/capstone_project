@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../home/bottom.dart';
+import '../home/on_item_tap.dart';
 import 'region_select.dart';
 import 'restaurant_info.dart';
 
 class RestaurantDetailsPage extends StatelessWidget {
-    final int food_id;
+  int _currentIndex = 0;
+  final int food_id;
   final String food_name;
   final Map<String, dynamic> restaurantData;
 
@@ -27,6 +30,12 @@ class RestaurantDetailsPage extends StatelessWidget {
         ),
         title: Text('Select Restaurants'),
         centerTitle: true,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: restaurantCount,
@@ -71,6 +80,10 @@ class RestaurantDetailsPage extends StatelessWidget {
             ),
           );
         },
+      ),
+      bottomNavigationBar: BottomNav(
+        currentIndex: _currentIndex,
+        onTap: (index) => onItemTapped(context, index),
       ),
     );
   }

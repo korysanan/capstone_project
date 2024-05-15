@@ -7,8 +7,8 @@ import 'sign_up_screen/sign_up_email.dart';
 
 
 class LoginScreen extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController(text: "ujin0561@naver.com");
-  final TextEditingController passwordController = TextEditingController(text: "dnwls0561");
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

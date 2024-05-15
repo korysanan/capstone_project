@@ -3,6 +3,8 @@ import 'package:capstone_project/translate/language_detect.dart';
 import 'package:flutter/material.dart';
 import 'package:capstone_project/categoryPage/categoryMain.dart';
 import 'package:capstone_project/community/communityMain.dart';
+import '../customRecipe/recipeMain.dart';
+import '../directions_and_map/my_location/my_location_service.dart';
 import '../food_restaurant/food_select.dart';
 import 'bottom.dart';
 import 'on_item_tap.dart';
@@ -331,7 +333,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               ),
             ),
             new Divider(height: 50.0,),
-            Center(
+            const Center(
               child: Text(
                 '게시판',
                 style: TextStyle(
@@ -342,46 +344,52 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
             ),
             //SizedBox(height: 10),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 20, right: 4),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black, // 테두리 색상
-                          width: 1.0, // 테두리 두께
+                      padding: const EdgeInsets.only(left: 20, right: 4),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black, // 테두리 색상
+                            width: 1.0, // 테두리 두께
+                          ),
+                          borderRadius: BorderRadius.circular(10.0), // 모서리 둥글기
                         ),
-                        borderRadius: BorderRadius.circular(10.0),  // 모서리 둥글기
-                      ),
-                      child: CustomCard(
-                        imagePath: 'assets/images/community.png',
-                        label: globals.getText('community'),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => CommuntiyMain()),
-                          );
-                        },
-                      ),
-                    )
-                  ),
+                        child: CustomCard(
+                          imagePath: 'assets/images/community.png',
+                          label: globals.getText('community'),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CommuntiyMain()),
+                            );
+                          },
+                        ),
+                      )),
                   Padding(
-                    padding: EdgeInsets.only(left: 4, right: 20),
+                    padding: const EdgeInsets.only(left: 4, right: 20),
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.black, // 테두리 색상
                           width: 1.0, // 테두리 두께
                         ),
-                        borderRadius: BorderRadius.circular(10.0),  // 모서리 둥글기
+                        borderRadius: BorderRadius.circular(10.0), // 모서리 둥글기
                       ),
                       child: CustomCard(
                         imagePath: 'assets/images/recipes.png',
                         label: globals.getText('custom recipes'),
-                        onTap: () => print('Custom Recipes Card tapped!'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RecipeMain()),
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -409,11 +417,38 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               elevation: 5,
               color: Color(0xFFF1E6FF),  // 카드의 배경색 설정
               child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => FoodSelectScreen()),
-                  );
+                onTap: () async {
+                  try {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false, // 사용자가 다이얼로그 바깥을 터치해도 닫히지 않도록 설정
+                      builder: (BuildContext context) {
+                        return Center(child: CircularProgressIndicator());
+                      },
+                    );
+                    await LocationService.getCurrentLocation(); // Fetch the location
+                    // After fetching location, navigate to the new screen
+                    Navigator.of(context).pop(); // 로딩 다이얼로그 닫기
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FoodSelectScreen()),
+                    );
+                  } catch (e) {
+                    // Handle errors appropriately
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('Error'),
+                        content: Text('Failed to get location: $e'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
                 },
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

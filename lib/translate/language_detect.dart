@@ -16,3 +16,17 @@ Future<String> translateText(String text) async {
     throw Exception('Failed to translate text.');
   }
 }
+
+Future<String> translateTextFromGoogle(String text) async {
+  final url = Uri.parse(
+      'https://translation.googleapis.com/language/translate/v2?target=$selectedLanguageCode&key=$googleTranslateApiKey&q=$text');
+
+  final response = await http.post(url);
+
+  if (response.statusCode == 200) {
+    var dataJson = jsonDecode(response.body);
+    return dataJson['data']['translations'][0]['translatedText'];
+  } else {
+    throw Exception('Failed to translate text.');
+  }
+}
