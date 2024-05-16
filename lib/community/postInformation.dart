@@ -12,9 +12,11 @@ import '../bookmark/community_bookmark/community_bookmark_service.dart';
 
 class PostInformation extends StatefulWidget {
   final int postId;
+  final bool isChanged;
   const PostInformation({
     super.key,
     required this.postId,
+    required this.isChanged,
   });
 
   @override
@@ -138,6 +140,7 @@ class _PostInformationState extends State<PostInformation> {
             title: post.title,
             content: post.content,
             imageUrls: post.imageUrls,
+            isChanged: widget.isChanged,
           ),
           resizeToAvoidBottomInset: false,
           body: SingleChildScrollView(
@@ -313,8 +316,10 @@ class _PostInformationState extends State<PostInformation> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    PostInformation(postId: post.id)),
+                                builder: (context) => PostInformation(
+                                      postId: post.id,
+                                      isChanged: true,
+                                    )),
                           );
                         }
                       }

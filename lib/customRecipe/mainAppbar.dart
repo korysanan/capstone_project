@@ -19,12 +19,12 @@ class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          if (isFromSearch) {
-            Navigator.of(context).pop();
-          } else {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const KFoodBoxHome()));
-          }
+          isFromSearch
+              ? Navigator.of(context).pop()
+              : Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const KFoodBoxHome()));
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,

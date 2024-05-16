@@ -252,7 +252,9 @@ class _CommuntiyMainState extends State<CommuntiyMain> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => PostInformation(
-                                      postId: postList[index].id)));
+                                        postId: postList[index].id,
+                                        isChanged: false,
+                                      )));
                         },
                       ),
                     ),

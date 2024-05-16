@@ -12,6 +12,7 @@ class PostInformationAppBar extends StatefulWidget
   final String title;
   final String content;
   final List imageUrls;
+  final bool isChanged;
 
   const PostInformationAppBar({
     super.key,
@@ -21,6 +22,7 @@ class PostInformationAppBar extends StatefulWidget
     required this.title,
     required this.content,
     required this.imageUrls,
+    required this.isChanged,
   });
 
   @override
@@ -36,7 +38,10 @@ class _PostInformationAppBarState extends State<PostInformationAppBar> {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          Navigator.pop(context);
+          widget.isChanged
+              ? Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CommuntiyMain()))
+              : Navigator.pop(context);
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,

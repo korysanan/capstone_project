@@ -293,7 +293,9 @@ class _CommunitySearchState extends State<UnifiedSearchMain> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => PostInformation(
-                                          postId: communityInfo[2].id)));
+                                            postId: communityInfo[2].id,
+                                            isChanged: false,
+                                          )));
                             },
                           ),
                         ),
@@ -412,7 +414,9 @@ class _CommunitySearchState extends State<UnifiedSearchMain> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => RecipeInformation(
-                                          postId: recipeInfo[2].id)));
+                                            postId: recipeInfo[2].id,
+                                            isChanged: false,
+                                          )));
                             },
                           ),
                         ),

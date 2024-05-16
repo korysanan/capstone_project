@@ -208,7 +208,9 @@ class _CommunitySearchState extends State<CommunitySearch> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => PostInformation(
-                                        postId: postList[index].id)));
+                                          postId: postList[index].id,
+                                          isChanged: false,
+                                        )));
                           },
                         ),
                       ),

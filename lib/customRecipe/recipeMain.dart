@@ -228,7 +228,9 @@ class _RecipeMainState extends State<RecipeMain> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => RecipeInformation(
-                                      postId: postList[index].id)));
+                                        postId: postList[index].id,
+                                        isChanged: false,
+                                      )));
                         },
                       ),
                     ),

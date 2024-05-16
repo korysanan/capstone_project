@@ -58,6 +58,7 @@ class CommentEditAppBar extends StatelessWidget implements PreferredSizeWidget {
                     MaterialPageRoute(
                         builder: (context) => PostInformation(
                               postId: postId,
+                              isChanged: true,
                             )));
               } else {
                 showDialog(

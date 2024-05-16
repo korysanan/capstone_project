@@ -12,9 +12,11 @@ import 'package:flutter/material.dart';
 
 class RecipeInformation extends StatefulWidget {
   final int postId;
+  final bool isChanged;
   const RecipeInformation({
     super.key,
     required this.postId,
+    required this.isChanged,
   });
 
   @override
@@ -149,6 +151,7 @@ class _RecipeInformationState extends State<RecipeInformation> {
             imageUrls: post.imageUrls,
             ingredients: post.ingredients,
             sequences: post.sequences,
+            isChanged: widget.isChanged,
           ),
           resizeToAvoidBottomInset: false,
           body: isLoading
@@ -584,8 +587,10 @@ class _RecipeInformationState extends State<RecipeInformation> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    RecipeInformation(postId: post.id)),
+                                builder: (context) => RecipeInformation(
+                                      postId: post.id,
+                                      isChanged: true,
+                                    )),
                           );
                         }
                       }
