@@ -108,6 +108,7 @@ class _PostInformationState extends State<PostInformation> {
     CommunitySerrvices.getPostInfo(postId).then((value) {
       setState(() {
         post = value;
+        likeStatus = post.like;
         try {
           title = post.title;
           content = post.content;
@@ -132,7 +133,7 @@ class _PostInformationState extends State<PostInformation> {
         body: Scaffold(
           appBar: PostInformationAppBar(
             postId: post.id,
-            authorNickname: post.nickname,
+            authorNickname: post.nickname ?? 'deleted account',
             userNickname: globals.user_nickname ?? '',
             title: post.title,
             content: post.content,
@@ -191,7 +192,7 @@ class _PostInformationState extends State<PostInformation> {
                         ),
                       ),
                       Text(
-                        post.nickname,
+                        post.nickname ?? 'deleted account',
                         style: const TextStyle(
                             color: Color(0xff5b5b5b), fontSize: 12),
                       ),

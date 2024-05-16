@@ -2,6 +2,7 @@ import '../home/main_screen.dart';
 import 'recipeSearch.dart';
 import 'postArticle.dart';
 import 'package:flutter/material.dart';
+import '../globals.dart' as globals;
 
 class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -45,14 +46,17 @@ class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.search),
           iconSize: 40,
         ),
-        IconButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const RecipePosting()));
-          },
-          icon: const Icon(Icons.edit),
-          iconSize: 40,
-        ),
+        if (globals.sessionId != null)
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RecipePosting()));
+            },
+            icon: const Icon(Icons.edit),
+            iconSize: 40,
+          ),
       ],
     );
   }

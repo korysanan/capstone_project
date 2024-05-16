@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'service/fetch.dart';
+import 'transit.dart';
+
 class FilterScreen extends StatefulWidget {
   @override
   _FilterScreenState createState() => _FilterScreenState();
@@ -17,6 +20,11 @@ class _FilterScreenState extends State<FilterScreen> {
   int _selectedMinutes = 0;
   int? _totalMinutes; // 총 시간을 분 단위로 저장하는 변수
 
+  double sx = 126.6335;
+  double sy = 36.19709;
+  double ex = 129.1665;
+  double ey = 35.19159;
+  
   final List<int> hours = List.generate(24, (index) => index);
   final List<int> minutes = List.generate(60, (index) => index);
 
@@ -24,6 +32,15 @@ class _FilterScreenState extends State<FilterScreen> {
     setState(() {
       _totalMinutes = _selectedHours * 60 + _selectedMinutes; // 시간을 분으로 변환하여 더하기
     });
+  }
+
+  void _navigateToTransitScreen(BuildContext context, Map<String, dynamic> jsonMap) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TransitScreen(jsonMap: jsonMap),
+      ),
+    );
   }
 
   void printFilters(BuildContext context) {
@@ -50,10 +67,14 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
             TextButton(
               child: const Text('Confirm'),
-              onPressed: () {
-                // 여기에 'Confirm' 버튼을 눌렀을 때 실행될 로직을 추가하세요.
-                Navigator.of(context).pop();
-              },
+                onPressed: () => fetchData(
+                  sx, sy, ex, ey,
+                  paymentThreshold: _selectedPrice?.round(),
+                  timeThreshold: _totalMinutes,
+                  onComplete: (jsonMap) {
+                    _navigateToTransitScreen(context, jsonMap);
+                  },
+                ),
             ),
           ],
         );
