@@ -400,6 +400,7 @@ class _RecipeArticleEditState extends State<RecipeArticleEdit> {
                             setState(() {
                               ingredientController.removeAt(index * 2 + 1);
                               ingredientController.removeAt(index * 2);
+                              savedIngredients.removeAt(index * 2);
                             });
                           },
                         ),

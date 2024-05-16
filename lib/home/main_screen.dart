@@ -280,7 +280,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const CommuntiyMain()),
+                                  builder: (context) => CommuntiyMain()),
                             );
                           },
                         ),
@@ -302,7 +302,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const RecipeMain()),
+                                builder: (context) => RecipeMain()),
                           );
                         },
                       ),
