@@ -200,7 +200,10 @@ abstract class MenuItems {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => PostInformation(postId: postId)));
+                        builder: (context) => PostInformation(
+                              postId: postId,
+                              isChanged: true,
+                            )));
               },
               child: const Text('Yes')),
           ElevatedButton(

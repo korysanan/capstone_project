@@ -123,7 +123,10 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                         onPressed: () {
                                           Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context) => FilterScreen()),
+                                            MaterialPageRoute(builder: (context) => FilterScreen(
+                                              latitude: latitude,
+                                              longitude: longitude
+                                            )),
                                           );
                                           // 첫 번째 이미지 버튼 기능FilterScreen
                                         },

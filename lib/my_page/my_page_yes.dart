@@ -21,15 +21,9 @@ class _MyPageYesState extends State<MyPageYes> {
   
   Map<String, List<String>> items = {
     globals.getText('community'): CommunityBookmarkData.getBookmarkNames(),
-    globals.getText('custom recipes'): ['Article title 1', 'Article title 2', 'Article title 1', 'Article title 2'],
-    globals.getText('foods'): FoodBookmarkData.getBookmarkNames(),
-    /*
-    globals.getText('community'): CommunityBookmarkData.getBookmarkNames(),
     globals.getText('custom recipes'): RecipeBookmarkData.getBookmarkNames(),
     globals.getText('foods'): FoodBookmarkData.getBookmarkNames(),
-    */
   };
-  // 일단 북마크 했다고 가정하고 임시 자료
 
   @override
   Widget build(BuildContext context) {

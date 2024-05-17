@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'odsay_api_service.dart'; // JSON 디코딩을 위해 추가
 
 Future<void> fetchData(double sx, double sy, double ex, double ey, {int? paymentThreshold, int? timeThreshold, required Function(Map<String, dynamic>) onComplete}) async {
-  // 실제 ODsay API 키로 대체하세요
+  print(sx);
+  print(sy);
+  print(ex);
+  print(ey);
   String result = await ApiService.fetchBusData(sx, sy, ex, ey);
 
   // JSON 응답 파싱

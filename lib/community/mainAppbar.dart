@@ -1,3 +1,4 @@
+import '../home/main_screen.dart';
 import 'communitySearch.dart';
 import 'postArticle.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,12 @@ class CommunityAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          Navigator.of(context).pop();
+          isFromSearch
+              ? Navigator.of(context).pop()
+              : Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => KFoodBoxHome()));
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,

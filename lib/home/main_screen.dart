@@ -418,6 +418,11 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               color: Color(0xFFF1E6FF),  // 카드의 배경색 설정
               child: InkWell(
                 onTap: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FoodSelectScreen()),
+                    );
+                  /*
                   try {
                     showDialog(
                       context: context,
@@ -448,7 +453,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                         ],
                       ),
                     );
-                  }
+                  }*/
                 },
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

@@ -40,8 +40,8 @@ String? user_email;
 String? user_language;
 int user_language_id = 18;
 
-double? my_latitude;
-double? my_longitude;
+double my_latitude = 36.76327;
+double my_longitude = 127.2820;
 
 void updateUserLanguage(String newLanguage) {
   user_language = newLanguage;

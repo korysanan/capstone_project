@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../home/bottom.dart';
-import '../../home/on_item_tap.dart';
+import '../../../home/bottom.dart';
+import '../../../home/on_item_tap.dart';
 
 class RestaurantMap extends StatefulWidget {
   final String restaurantName;
@@ -48,7 +48,7 @@ class _RestaurantMapState extends State<RestaurantMap> {
         ],
       ),
       body: WebView(
-        initialUrl: 'http://3.35.120.84/restaurant_map.html',//'http://10.0.2.2/flutter/odsay_test.html',
+        initialUrl: 'http://10.0.2.2/flutter/restaurant_map.html',//'http://10.0.2.2/flutter/odsay_test.html',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) {
           _controller = webViewController;

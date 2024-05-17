@@ -14,6 +14,7 @@ class PostInformationAppBar extends StatefulWidget
   final List<String> imageUrls;
   final List<Map<String, dynamic>> ingredients;
   final List<Map<String, dynamic>> sequences;
+  final bool isChanged;
 
   const PostInformationAppBar({
     super.key,
@@ -25,6 +26,7 @@ class PostInformationAppBar extends StatefulWidget
     required this.imageUrls,
     required this.ingredients,
     required this.sequences,
+    required this.isChanged,
   });
 
   @override
@@ -40,7 +42,10 @@ class _PostInformationAppBarState extends State<PostInformationAppBar> {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          Navigator.pop(context);
+          widget.isChanged
+              ? Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RecipeMain()))
+              : Navigator.pop(context);
         },
         icon: const Icon(Icons.arrow_back),
         iconSize: 40,

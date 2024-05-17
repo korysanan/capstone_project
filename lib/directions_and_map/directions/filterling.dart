@@ -2,8 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'service/fetch.dart';
 import 'transit.dart';
+import '../../globals.dart' as globals;
 
 class FilterScreen extends StatefulWidget {
+  final double latitude;
+  final double longitude;
+
+  FilterScreen({
+    Key? key,  
+    required this.latitude, 
+    required this.longitude
+  }) : super(key: key); 
+
   @override
   _FilterScreenState createState() => _FilterScreenState();
 }
@@ -20,11 +30,22 @@ class _FilterScreenState extends State<FilterScreen> {
   int _selectedMinutes = 0;
   int? _totalMinutes; // 총 시간을 분 단위로 저장하는 변수
 
-  double sx = 126.6335;
-  double sy = 36.19709;
-  double ex = 129.1665;
-  double ey = 35.19159;
-  
+  late double sx;
+  late double sy;
+  late double ex;
+  late double ey;
+
+  @override
+  void initState() {
+    super.initState();
+    // 초기화 과정에서 globals 파일의 값을 sx와 sy에 할당
+    sx = globals.my_longitude;
+    sy = globals.my_latitude;
+    // 위젯에서 전달받은 latitude와 longitude 값을 ex와 ey에 할당
+    ex = widget.longitude;
+    ey = widget.latitude;
+  }
+
   final List<int> hours = List.generate(24, (index) => index);
   final List<int> minutes = List.generate(60, (index) => index);
 
@@ -66,15 +87,15 @@ class _FilterScreenState extends State<FilterScreen> {
               },
             ),
             TextButton(
-              child: const Text('Confirm'),
-                onPressed: () => fetchData(
-                  sx, sy, ex, ey,
-                  paymentThreshold: _selectedPrice?.round(),
-                  timeThreshold: _totalMinutes,
-                  onComplete: (jsonMap) {
-                    _navigateToTransitScreen(context, jsonMap);
-                  },
-                ),
+            child: const Text('Confirm'),              
+              onPressed: () => fetchData(
+                sx, sy, ex, ey,
+                paymentThreshold: _selectedPrice?.round(),
+                timeThreshold: _totalMinutes,
+                onComplete: (jsonMap) {
+                  _navigateToTransitScreen(context, jsonMap);
+                },
+              ),
             ),
           ],
         );
@@ -271,7 +292,7 @@ class _FilterScreenState extends State<FilterScreen> {
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: ElevatedButton(
               onPressed: () => printFilters(context), // 익명 함수를 사용하여 context 전달
-              child: const Text('Print Filters'),
+              child: const Text('Filters select'),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50), // Makes button full-width
               ),

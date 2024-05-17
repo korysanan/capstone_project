@@ -209,7 +209,9 @@ class CommunitySearch extends State<RecipeSearch> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => RecipeInformation(
-                                        postId: postList[index].id)));
+                                          postId: postList[index].id,
+                                          isChanged: false,
+                                        )));
                           },
                         ),
                       ),
