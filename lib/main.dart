@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login/screen/welcome_screen.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
 // you use a lower version, some properties may not be supported. In
 // that case you can also remove them after copying the theme to your app.
       theme: FlexThemeData.light(
-        fontFamily: 'Jalnan',
+        fontFamily: GoogleFonts.notoSans().fontFamily,
         scheme: FlexScheme.blue,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         blendLevel: 9,
