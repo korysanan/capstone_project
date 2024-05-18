@@ -48,6 +48,8 @@ double arr_longitude = 126.9116406; //임시
 double arr_latitude = 0.0;
 double arr_longitude = 0.0;
 */
+
+String? arr_restaurantName;
 void updateUserLanguage(String newLanguage) {
   user_language = newLanguage;
 }

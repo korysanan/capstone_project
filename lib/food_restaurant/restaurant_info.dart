@@ -37,6 +37,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
   void initState() {
     super.initState();
     restaurantName = widget.restaurant_info['name'] ?? 'Unknown Restaurant';
+    globals.arr_restaurantName = restaurantName;
     address = widget.restaurant_info['address'] ?? 'No address available';
     phoneNumber = widget.restaurant_info['phoneNumber'] ?? 'No phone number available';
     imageUrl = widget.restaurant_info['imageUrl'] ?? 'assets/images/image_comming_soon.png';

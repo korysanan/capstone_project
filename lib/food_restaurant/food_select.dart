@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FoodSelectScreen(),
+      home: const FoodSelectScreen(),
 // This theme was made for FlexColorScheme version 6.1.1. Make sure
 // you use same or higher version, but still same major version. If
 // you use a lower version, some properties may not be supported. In
@@ -46,14 +46,16 @@ class MyApp extends StatelessWidget {
 
 // ignore: must_be_immutable
 class FoodSelectScreen extends StatelessWidget {
-  int _currentIndex = 0;
-  
+  final int _currentIndex = 0;
+
+  const FoodSelectScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(
               context,
@@ -61,25 +63,25 @@ class FoodSelectScreen extends StatelessWidget {
             );
           },
         ),
-        title: Text('Select Korean Food (1/2)'),
+        title: const Text('Select Korean Food (1/2)'),
         centerTitle: true,
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(16.0),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 1,
           crossAxisSpacing: 10.0,
           mainAxisSpacing: 10.0,
-          childAspectRatio: 2,
+          childAspectRatio: 4,
         ),
         itemCount: KoreanFood.foods.length,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              _showConfirmationDialog(context, KoreanFood.foods[index].id, KoreanFood.foods[index].name);
+              _showConfirmationDialog(context, KoreanFood.foods[index].id,
+                  KoreanFood.foods[index].name);
             },
             child: Container(
-              alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
@@ -88,21 +90,43 @@ class FoodSelectScreen extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.3),
                     spreadRadius: 1,
                     blurRadius: 2,
-                    offset: Offset(0, 2),
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    KoreanFood.foods[index].name,
-                    style: TextStyle(
-                      fontSize: 16,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  children: [
+                    Image.network('http://${KoreanFood.foods[index].imageUrl}',
+                        fit: BoxFit.cover, width: 70, height: 70),
+                    const SizedBox(width: 10),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            KoreanFood.foods[index].name,
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: Text(
+                            KoreanFood.foods[index].englishName,
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                            softWrap: true,
+                          ),
+                        ),
+                      ],
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );
@@ -120,22 +144,27 @@ class FoodSelectScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Confirm Selection'),
+          title: const Text('Confirm Selection'),
           content: Text('You have selected $name.'),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop(); // 다이얼로그 닫기
               },
             ),
             TextButton(
-              child: Text('Confirm'),
+              child: const Text('Confirm'),
               onPressed: () {
                 Navigator.of(context).pop(); // 다이얼로그 닫고
-                Navigator.push( // 새 페이지로 이동
+                Navigator.push(
+                  // 새 페이지로 이동
                   context,
-                  MaterialPageRoute(builder: (context) => RegionSelectScreen(food_id : id, food_name: name,)),
+                  MaterialPageRoute(
+                      builder: (context) => RegionSelectScreen(
+                            food_id: id,
+                            food_name: name,
+                          )),
                 );
               },
             ),

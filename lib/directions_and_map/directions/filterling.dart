@@ -5,6 +5,9 @@ import 'trans_search1/test.dart';
 import 'trans_0/transit_0.dart';
 import '../../globals.dart' as globals;
 
+import 'private_car/service/naver_map_api_service.dart';
+import 'private_car/car_directions.dart';
+
 class FilterScreen extends StatefulWidget {
   @override
   _FilterScreenState createState() => _FilterScreenState();
@@ -40,6 +43,8 @@ class _FilterScreenState extends State<FilterScreen> {
 
   final List<int> hours = List.generate(24, (index) => index);
   final List<int> minutes = List.generate(60, (index) => index);
+  
+  final _naverMapAPIService = NaverMapAPIService('0zwgla6npt', 'i89JWsdVDpyzGEcPBGSmTl774rt0nj9Mj0n19lkD');
 
   void updateTotalMinutes() {
     setState(() {
@@ -62,6 +67,23 @@ class _FilterScreenState extends State<FilterScreen> {
           builder: (context) => TestScreen(jsonMap: jsonMap),
         ),
       );
+    }
+  }
+
+  void _getDirections(BuildContext context) async {
+    try {
+      var directions = await _naverMapAPIService.getDrivingDirections(
+        '${globals.my_longitude},${globals.my_latitude}',
+        '${globals.arr_longitude},${globals.arr_latitude}'
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DirectionsResultScreen(directions: directions),
+        ),
+      );
+    } catch (e) {
+      print('Error getting directions: $e');
     }
   }
 
@@ -91,7 +113,7 @@ class _FilterScreenState extends State<FilterScreen> {
               child: const Text('Confirm'),
               onPressed: () {
                 if (_selectedVehicle == 'Private car') {
-                  print('private car');
+                  _getDirections(context);
                 } else if (_selectedVehicle == 'Transit') {
                   fetchData(
                     sx, sy, ex, ey,
