@@ -4,6 +4,7 @@ import '../directions_and_map/directions/filterling.dart';
 import '../home/bottom.dart';
 import '../home/on_item_tap.dart';
 import '../directions_and_map/map/naver_map.dart';
+import '../globals.dart' as globals;
 
 class RestaurantPage extends StatefulWidget {
   final Map<String, dynamic> restaurant_info;
@@ -45,8 +46,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
     photoReviewCount = widget.restaurant_info['photoReviewCount']?.toInt() ?? 0;
     String latitudeStr = widget.restaurant_info['latitude'] ?? '0.0';
     String longitudeStr = widget.restaurant_info['longitude'] ?? '0.0';
-    latitude = double.tryParse(latitudeStr) ?? 0.0;
-    longitude = double.tryParse(longitudeStr) ?? 0.0;
+    globals.arr_latitude = double.tryParse(latitudeStr) ?? 0.0;
+    globals.arr_longitude = double.tryParse(longitudeStr) ?? 0.0;
     information = widget.restaurant_info['information'] ?? 'No additional information available';
     additionalExplanation = widget.restaurant_info['additionalExplanation'] ?? 'No additionalExplanation available';
     homepageUrl = widget.restaurant_info['homepageUrl'] ?? 'No homepage available';
@@ -123,10 +124,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                         onPressed: () {
                                           Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context) => FilterScreen(
-                                              latitude: latitude,
-                                              longitude: longitude
-                                            )),
+                                            MaterialPageRoute(builder: (context) => FilterScreen()),
                                           );
                                           // 첫 번째 이미지 버튼 기능FilterScreen
                                         },
@@ -151,8 +149,6 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                               address: address,
                                               phoneNumber: phoneNumber,
                                               visitorRating: visitorRating,
-                                              latitude: latitude,
-                                              longitude: longitude
                                             )),
                                           );
                                         },

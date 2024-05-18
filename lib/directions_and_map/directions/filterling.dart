@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'service/fetch.dart';
-import 'transit.dart';
+import 'trans_search1/test.dart';
+import 'trans_0/transit_0.dart';
 import '../../globals.dart' as globals;
 
 class FilterScreen extends StatefulWidget {
-  final double latitude;
-  final double longitude;
-
-  FilterScreen({
-    Key? key,  
-    required this.latitude, 
-    required this.longitude
-  }) : super(key: key); 
-
   @override
   _FilterScreenState createState() => _FilterScreenState();
 }
@@ -42,8 +34,8 @@ class _FilterScreenState extends State<FilterScreen> {
     sx = globals.my_longitude;
     sy = globals.my_latitude;
     // 위젯에서 전달받은 latitude와 longitude 값을 ex와 ey에 할당
-    ex = widget.longitude;
-    ey = widget.latitude;
+    ex = globals.arr_longitude;
+    ey = globals.arr_latitude;
   }
 
   final List<int> hours = List.generate(24, (index) => index);
@@ -56,12 +48,21 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 
   void _navigateToTransitScreen(BuildContext context, Map<String, dynamic> jsonMap) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => TransitScreen(jsonMap: jsonMap),
-      ),
-    );
+    if (jsonMap['result']['searchType'] == 0){
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TransitScreen0(jsonMap: jsonMap),
+        ),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TestScreen(jsonMap: jsonMap),
+        ),
+      );
+    }
   }
 
   void printFilters(BuildContext context) {
@@ -87,15 +88,33 @@ class _FilterScreenState extends State<FilterScreen> {
               },
             ),
             TextButton(
-            child: const Text('Confirm'),              
-              onPressed: () => fetchData(
-                sx, sy, ex, ey,
-                paymentThreshold: _selectedPrice?.round(),
-                timeThreshold: _totalMinutes,
-                onComplete: (jsonMap) {
-                  _navigateToTransitScreen(context, jsonMap);
-                },
-              ),
+              child: const Text('Confirm'),
+              onPressed: () {
+                if (_selectedVehicle == 'Private car') {
+                  print('private car');
+                } else if (_selectedVehicle == 'Transit') {
+                  fetchData(
+                    sx, sy, ex, ey,
+                    paymentThreshold: _selectedPrice?.round(),
+                    timeThreshold: _totalMinutes,
+                    onComplete: (jsonMap) {
+                      // Transit 선택시 처리 로직
+                      // 예를 들어, 'TransitScreen'으로 이동할 수 있음
+                      _navigateToTransitScreen(context, jsonMap); // 수정된 부분
+                    },
+                  );
+                } else {
+                  fetchData(
+                    sx, sy, ex, ey,
+                    paymentThreshold: _selectedPrice?.round(),
+                    timeThreshold: _totalMinutes,
+                    onComplete: (jsonMap) {
+                      // 선택된 차량이 없을 때 기본 처리 로직
+                      _navigateToTransitScreen(context, jsonMap); // 수정된 부분
+                    },
+                  );
+                }
+              },
             ),
           ],
         );

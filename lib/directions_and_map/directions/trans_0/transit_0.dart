@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TransitScreen extends StatelessWidget {
+import 'test.dart';
+
+class TransitScreen0 extends StatelessWidget {
   final Map<String, dynamic> jsonMap;
 
-  TransitScreen({required this.jsonMap});
+  TransitScreen0({required this.jsonMap});
   
   @override
   Widget build(BuildContext context) {
@@ -34,8 +36,28 @@ class TransitScreen extends StatelessWidget {
     return paths.map((path) {
       return InkWell(
         onTap: () {
-          // Handle tap event here
-          print('Card tapped with path info: ${path['info']}');
+          // Create jsonMap2
+          Map<String, dynamic> jsonMap2 = {
+            "result": {
+              "searchType": jsonMap['result']['searchType'],
+              "outTrafficCheck": jsonMap['result']['outTrafficCheck'],
+              "busCount": jsonMap['result']['busCount'],
+              "subwayCount": jsonMap['result']['subwayCount'],
+              "subwayBusCount": jsonMap['result']['subwayBusCount'],
+              "pointDistance": jsonMap['result']['pointDistance'],
+              "startRadius": jsonMap['result']['startRadius'],
+              "endRadius": jsonMap['result']['endRadius'],
+              "path": [path] // Only the clicked path
+            }
+          };
+
+          // Navigate to PathDetailScreen
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PathDetailScreen(jsonMap2: jsonMap2),
+            ),
+          );
         },
         child: Card(
           margin: EdgeInsets.symmetric(vertical: 8.0),
