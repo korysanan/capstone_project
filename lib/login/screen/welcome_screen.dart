@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:capstone_project/globals.dart';
-import 'package:capstone_project/home/main_screen.dart';
 //import 'package:capstone_project/login/service/login_service.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
@@ -42,8 +41,7 @@ class WelcomeScreen extends StatelessWidget {
               width: 400,
               height: 400,
             ),
-            SizedBox(height: 40),
-            
+            SizedBox(height: 100),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50),
               child: SizedBox(
@@ -63,41 +61,7 @@ class WelcomeScreen extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => LoginScreen()),
                     );
                   },
-                  child: Text('LOGIN'),
-                ),
-              ),
-            ),
-            SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: SizedBox(
-                width: double.infinity, // Set the width as needed
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Color.fromARGB(255, 101, 180, 249), // Button color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0), // Adjust border radius if needed
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 12), // Adjust padding if needed
-                  ),
-                  onPressed: () async {
-                    fetchRecommendedFoods();
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext context) {
-                        return Center(child: CircularProgressIndicator());
-                      },
-                    );
-                    await Future.delayed(Duration(seconds: 1));
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => KFoodBoxHome()),
-                    );
-                  },
-                  child: Text('GUEST MODE'),
+                  child: Text('ENTER'),
                 ),
               ),
             ),

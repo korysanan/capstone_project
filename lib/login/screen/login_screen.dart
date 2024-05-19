@@ -1,9 +1,12 @@
+import 'dart:convert';
 
 import 'package:capstone_project/login/service/login_service.dart';
 //import 'package:capstone_project/login/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
+import '../../globals.dart';
 import 'sign_up_screen/sign_up_email.dart';
+import 'package:capstone_project/home/main_screen.dart';
 
 
 class LoginScreen extends StatelessWidget {
@@ -106,15 +109,74 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 120),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 249, 195, 255),
+                    minimumSize: Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  onPressed: () async {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return Center(child: CircularProgressIndicator());
+                      },
+                    );
+                    fetchRecommendedFoods();
+                    await Future.delayed(Duration(seconds: 1));
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => KFoodBoxHome()),
+                    );
+                  },
+                  child: Text('GUEST MODE'),
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
   bool _validateEmail(String email) {
     Pattern pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
     RegExp regex = RegExp(pattern.toString());
     return regex.hasMatch(email);
+  }
+
+  Future<void> fetchRecommendedFoods() async {
+    try {
+      var url = Uri.parse('http://api.kfoodbox.click/recommended-foods');
+      var response = await http.get(url, headers: {'Accept': '*/*'});
+
+      if (response.statusCode == 200) {
+        var decodedResponse = utf8.decode(response.bodyBytes);
+        var jsonResponse = json.decode(decodedResponse) as Map<String, dynamic>;
+        List<Food> fetchedFoods = [];
+
+        if (jsonResponse.containsKey('foods')) {
+          jsonResponse['foods'].forEach((foodJson) {
+            fetchedFoods.add(Food.fromJson(foodJson));
+          });
+        }
+
+        // Update the global foods list
+        updateFoods(fetchedFoods);
+        print('Foods updated successfully.');
+        print(fetchedFoods);
+      } else {
+        print('Failed to fetch data.');
+        print('Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error occurred: $e');
+    }
   }
 }
