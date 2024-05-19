@@ -11,7 +11,11 @@ class ImageInformationPage extends StatefulWidget {
   final List<dynamic> food_info;
   final Size size;
 
-  ImageInformationPage({required this.image, required this.food_info, required this.size});
+  const ImageInformationPage(
+      {super.key,
+      required this.image,
+      required this.food_info,
+      required this.size});
 
   @override
   _ImageInformationPageState createState() => _ImageInformationPageState();
@@ -64,10 +68,16 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
     double maxHeight = imageHeight / imageWidth * maxWidth; // 세로는 가로 사이즈에 비례
 
     for (var info in widget.food_info) {
-      double xmin = maxWidth / imageWidth * double.parse(info["xmin"].toStringAsFixed(2));
-      double ymin = maxHeight / imageHeight * double.parse(info["ymin"].toStringAsFixed(2));
-      double xmax = maxWidth / imageWidth * double.parse(info["xmax"].toStringAsFixed(2));
-      double ymax = maxHeight / imageHeight * double.parse(info["ymax"].toStringAsFixed(2));
+      double xmin =
+          maxWidth / imageWidth * double.parse(info["xmin"].toStringAsFixed(2));
+      double ymin = maxHeight /
+          imageHeight *
+          double.parse(info["ymin"].toStringAsFixed(2));
+      double xmax =
+          maxWidth / imageWidth * double.parse(info["xmax"].toStringAsFixed(2));
+      double ymax = maxHeight /
+          imageHeight *
+          double.parse(info["ymax"].toStringAsFixed(2));
 
       double left = xmin;
       double top = ymin;
@@ -96,7 +106,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
           left: left,
           top: top,
           child: Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               color: Colors.red.shade100,
               border: Border.all(
@@ -107,7 +117,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
             ),
             child: Text(
               info["englishName"],
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 14,
               ),
@@ -127,7 +137,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(
               context,
@@ -135,12 +145,11 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
             );
           },
         ),
-        backgroundColor: Colors.blue[300],
         title: Text(globals.getText('Korean Food Detection')),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.home),
+            icon: const Icon(Icons.home),
             onPressed: () {
               Navigator.pushReplacement(
                 context,
@@ -168,17 +177,22 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
                     child: Column(
                       children: [
                         ListTile(
-                          title: Text(info["englishName"], style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                          title: Text(info["englishName"],
+                              style: const TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold)),
                           trailing: IconButton(
-                            icon: bookmarkStatus[idx] ? Icon(Icons.bookmark) : Icon(Icons.bookmark_border_outlined),
-                            onPressed: () => toggleBookmark(idx, int.parse(info["id"].toString())),
+                            icon: bookmarkStatus[idx]
+                                ? const Icon(Icons.bookmark)
+                                : const Icon(Icons.bookmark_border_outlined),
+                            onPressed: () => toggleBookmark(
+                                idx, int.parse(info["id"].toString())),
                           ),
                         ),
-                        Divider(),
-                        ListTile(
+                        const Divider(),
+                        const ListTile(
                           title: Text('Explanation -> '),
                         ),
-                        ListTile(
+                        const ListTile(
                           title: Text('Custom Recipes -> '),
                         ),
                       ],
@@ -189,7 +203,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Text(globals.getText('What is Korean Food Detection?')),
           ),
         ],
