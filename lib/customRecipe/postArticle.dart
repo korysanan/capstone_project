@@ -71,7 +71,6 @@ class _RecipePostingState extends State<RecipePosting> {
   void _updateSavedRecipe(int index, String text) {
     setState(() {
       if (index < sequenceController.length) {
-        sequenceController[index].text = text;
         inputSequence[index] = {
           'sequenceNumber': index + 1,
           'content': text,
