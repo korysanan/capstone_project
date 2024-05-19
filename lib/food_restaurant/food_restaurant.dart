@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../home/bottom.dart';
+import '../home/on_item_tap.dart';
 import 'region_select.dart';
 import 'restaurant_info.dart';
 import 'dart:math';
@@ -101,7 +103,8 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
   @override
   Widget build(BuildContext context) {
     int restaurantCount = restaurantList.length;
-
+    int _currentIndex = 0;
+    
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -216,6 +219,10 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: BottomNav(
+        currentIndex: _currentIndex,
+        onTap: (index) => onItemTapped(context, index),
       ),
     );
   }

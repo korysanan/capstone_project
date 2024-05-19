@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../home/bottom.dart';
+import '../../home/on_item_tap.dart';
 import 'service/fetch.dart';
 import 'trans_search1/test.dart';
 import 'trans_0/transit_0.dart';
@@ -146,6 +148,8 @@ class _FilterScreenState extends State<FilterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int _currentIndex = 0;
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('Filtering'),
@@ -340,6 +344,10 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: BottomNav(
+        currentIndex: _currentIndex,
+        onTap: (index) => onItemTapped(context, index),
       ),
     );
   }

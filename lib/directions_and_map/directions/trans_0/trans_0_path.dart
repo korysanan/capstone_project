@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:convert';
 import '../../../globals.dart' as globals;
+import '../../../home/bottom.dart';
+import '../../../home/on_item_tap.dart';
 
 class PathDetailScreen extends StatefulWidget {
   final Map<String, dynamic> jsonMap2;
@@ -19,6 +21,7 @@ class _PathDetailScreenState extends State<PathDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int _currentIndex = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text('Path Detail'),
@@ -39,6 +42,10 @@ class _PathDetailScreenState extends State<PathDetailScreen> {
         onPageFinished: (String url) {
           _injectDataIntoWebView();
         },
+      ),
+      bottomNavigationBar: BottomNav(
+        currentIndex: _currentIndex,
+        onTap: (index) => onItemTapped(context, index),
       ),
     );
   }

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../../home/bottom.dart';
+import '../../../home/on_item_tap.dart';
 import 'trans_0_path.dart';
 
 class TransitScreen0 extends StatelessWidget {
   final Map<String, dynamic> jsonMap;
 
   TransitScreen0({required this.jsonMap});
+  
+  int _currentIndex = 0;
   
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,10 @@ class TransitScreen0 extends StatelessWidget {
             ...buildPathCards(context, jsonMap['result']['path']),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNav(
+        currentIndex: _currentIndex,
+        onTap: (index) => onItemTapped(context, index),
       ),
     );
   }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:intl/intl.dart'; // Add this import
 import '../../../globals.dart' as globals;
+import '../../../home/bottom.dart';
+import '../../../home/on_item_tap.dart';
 
 class DirectionsResultScreen extends StatelessWidget {
   final dynamic directions;
@@ -39,6 +41,7 @@ class DirectionsResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     String displayTextTop;
     String displayTextBottom;
+    int _currentIndex = 0;
 
     try {
       final route = directions['route']['trafast'][0];
@@ -165,6 +168,10 @@ class DirectionsResultScreen extends StatelessWidget {
             },
           ),
         ],
+      ),
+      bottomNavigationBar: BottomNav(
+        currentIndex: _currentIndex,
+        onTap: (index) => onItemTapped(context, index),
       ),
     );
   }
