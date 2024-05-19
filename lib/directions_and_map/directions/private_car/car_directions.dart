@@ -62,7 +62,7 @@ class DirectionsResultScreen extends StatelessWidget {
 
       displayTextTop =
           'Starting point: 현재 위치\n'
-          'Destination restaurant: ${globals.arr_restaurantName}\n';
+          'Destination restaurant: ${globals.arr_restaurantName}';
 
       displayTextBottom =
           'Distance: $distanceText\n'
@@ -71,7 +71,7 @@ class DirectionsResultScreen extends StatelessWidget {
           'Arrival Time: $arrivalTime\n'
           'Toll Fare: ${tollFare} ₩\n'
           'Taxi Fare: ${taxiFare} ₩\n'
-          'Fuel Price: ${fuelPrice} ₩\n';
+          'Fuel Price: ${fuelPrice} ₩';
     } catch (e) {
       displayTextTop = 'Starting point: 현재 위치\nDestination restaurant: ${globals.arr_restaurantName}\n';
       displayTextBottom = 'Failed to parse directions';

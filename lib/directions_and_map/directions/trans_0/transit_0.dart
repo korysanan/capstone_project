@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'test.dart';
+import 'trans_0_path.dart';
 
 class TransitScreen0 extends StatelessWidget {
   final Map<String, dynamic> jsonMap;
