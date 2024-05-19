@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../home/bottom.dart';
 import '../login/screen/login_screen.dart';
 import '../before_code/login/sign_up_screen.dart';
-import 'language_setting.dart';
 import '../home/on_item_tap.dart';
 import '../globals.dart' as globals;
 import '../home/main_screen.dart';
@@ -30,20 +29,10 @@ class _MyPageNoState extends State<MyPageNo> {
         ),
         title: Text(globals.getText('myPageTitle')),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.language),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LanguageSelectScreen(
-                    onLanguageSelected: (selectedCode) {
-                    },
-                  ),
-                ),
-              ).then((_) => setState(() {})); // 언어 선택 후 UI 갱신
-            },
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
           ),
         ],
       ),

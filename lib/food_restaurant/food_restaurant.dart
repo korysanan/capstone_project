@@ -111,15 +111,21 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
               // 새 페이지로 이동
               context,
               MaterialPageRoute(
-                  builder: (context) => RegionSelectScreen(
-                        food_id: widget.food_id,
-                        food_name: widget.food_name,
-                      )),
+                builder: (context) => RegionSelectScreen(
+                  food_id: widget.food_id,
+                  food_name: widget.food_name,
+                )),
             );
           },
         ),
         title: const Text('Select Restaurants'),
         centerTitle: true,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
+          ),
+        ],
       ),
       body: Column(
         children: [

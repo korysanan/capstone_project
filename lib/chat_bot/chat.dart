@@ -30,6 +30,12 @@ class _chatbotState extends State<chatbot> {
         title: Text('ChatBot'),
         backgroundColor: Colors.white,
         centerTitle: true,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
+          ),
+        ],
       ),
       body: Column(
         children: [

@@ -4,7 +4,6 @@ import 'my_page_data.dart';
 import 'package:flutter/material.dart';
 import '../bookmark/custom-recipe-aricles_bookmark/custom-recipe-articles_bookmark_data.dart';
 import '../translate/language_detect.dart';
-import 'language_setting.dart';
 import '../home/bottom.dart';
 import 'user_info.dart';
 import '../home/on_item_tap.dart';
@@ -52,19 +51,10 @@ class _MyPageYesState extends State<MyPageYes> {
         ),
         title: Text(globals.getText('myPageTitle')),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.language),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LanguageSelectScreen(
-                    onLanguageSelected: (selectedCode) {},
-                  ),
-                ),
-              );
-            },
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
           ),
         ],
       ),

@@ -6,11 +6,11 @@ import 'package:capstone_project/community/communityMain.dart';
 import '../customRecipe/recipeMain.dart';
 import '../directions_and_map/my_location/my_location_service.dart';
 import '../food_restaurant/food_select.dart';
+import '../my_page/language_setting.dart';
 import 'bottom.dart';
 import 'on_item_tap.dart';
 import 'package:carousel_slider/carousel_slider.dart'; // slider하기 위해 import
 import '../globals.dart' as globals;
-import 'package:badges/badges.dart' as badges;
 
 class KFoodBoxHome extends StatefulWidget {
   @override
@@ -39,26 +39,21 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
           ),
         ),
         centerTitle: true,
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: 10.0),  // 오른쪽 여백 추가
-            child: badges.Badge(
-              badgeContent: Text(
-                '1',  // 배지 숫자
-                style: TextStyle(color: Colors.white),
-              ),
-              badgeColor: Colors.red,
-              position: badges.BadgePosition.topEnd(top: 5, end: 5),
-              child: IconButton(
-                icon: Icon(Icons.notifications),
-                onPressed: () {
-                  print('Notifications icon tapped!');
-                },
-              ),
-            ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.language),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LanguageSelectScreen(
+                    onLanguageSelected: (selectedCode) {},
+                  ),
+                ),
+              );
+            },
           ),
         ],
-        //backgroundColor: Color.fromARGB(255, 117, 201, 243),
       ),
       body: Container(
         child: ListView(

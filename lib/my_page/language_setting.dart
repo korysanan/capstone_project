@@ -1,11 +1,10 @@
 import 'package:capstone_project/translate/language_service.dart';
 import 'package:flutter/material.dart';
 import '../home/bottom.dart';
+import '../home/main_screen.dart';
 import '../home/on_item_tap.dart';
 import '../translate/language_type.dart';
 import '../globals.dart' as globals;
-import 'my_page_no.dart';
-import 'my_page_yes.dart';
 
 class LanguageSelectScreen extends StatefulWidget {
   final Function(String code) onLanguageSelected;
@@ -40,23 +39,22 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            if (globals.sessionId != null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyPageYes()),
-              );
-            } else {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyPageNo()),
-              );
-            }
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => KFoodBoxHome()),
+            );
           },
         ),
         title: Text(globals.getText('Select Language')),
         centerTitle: true,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: languages.length,
