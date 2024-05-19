@@ -2,10 +2,6 @@ import 'dart:convert';
 import 'odsay_api_service.dart'; // JSON 디코딩을 위해 추가
 
 Future<void> fetchData(double sx, double sy, double ex, double ey, {int? paymentThreshold, int? timeThreshold, required Function(Map<String, dynamic>) onComplete}) async {
-  print(sx);
-  print(sy);
-  print(ex);
-  print(ey);
   String result = await ApiService.fetchBusData(sx, sy, ex, ey);
 
   // JSON 응답 파싱
@@ -38,12 +34,4 @@ Future<void> fetchData(double sx, double sy, double ex, double ey, {int? payment
   // JSON 데이터를 파싱하여 변수에 저장
   Map<String, dynamic> jsonMap = jsonDecode(json.encode(jsonResult));
   onComplete(jsonMap);
-
-  // JSON 객체에서 searchType 값을 추출합니다.
-  /*
-  int searchType = jsonMap['result']['searchType'];
-  double startX = jsonMap['result']['path'][0]['subPath'][0]['startX'];
-  double startY = jsonMap['result']['path'][0]['subPath'][0]['startY'];
-  print('searchType: $searchType');
-  */
 }

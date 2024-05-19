@@ -3,14 +3,13 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../home/bottom.dart';
 import '../../home/on_item_tap.dart';
+import '../../globals.dart' as globals;
 
 class RestaurantMap extends StatefulWidget {
   final String restaurantName;
   final String address;
   final String phoneNumber;
   final double visitorRating;
-  final double latitude;
-  final double longitude;
 
   RestaurantMap({
     Key? key, 
@@ -18,8 +17,6 @@ class RestaurantMap extends StatefulWidget {
     required this.address, 
     required this.phoneNumber, 
     required this.visitorRating, 
-    required this.latitude, 
-    required this.longitude
   }) : super(key: key); 
   
   @override
@@ -67,6 +64,6 @@ class _RestaurantMapState extends State<RestaurantMap> {
   void _injectDataIntoWebView() {
     // JavaScript 함수에 데이터 주입
     _controller.runJavascript(
-        "updateData(${widget.latitude}, ${widget.longitude}, '${widget.restaurantName}', '${widget.address}', '${widget.phoneNumber}', ${widget.visitorRating});");
+        "updateData(${globals.arr_latitude}, ${globals.arr_longitude}, '${widget.restaurantName}', '${widget.address}', '${widget.phoneNumber}', ${widget.visitorRating});");
   }
 }
