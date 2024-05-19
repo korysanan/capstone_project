@@ -56,4 +56,5 @@ final Map<String, String> langZh = {
   'Comment deleted': '评论已删除',
   'Comment edited': '评论已编辑',
   'Write Comment': '写评论',
+  'My posts': '我的帖子',
 };

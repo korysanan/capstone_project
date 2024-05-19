@@ -59,4 +59,5 @@ final Map<String, String> langRo = {
   'Comment deleted': 'Comentariu șters',
   'Comment edited': 'Comentariu editat',
   'Write Comment': 'Scrie un comentariu',
+  'My posts': 'Posturile mele',
 };

@@ -58,4 +58,5 @@ final Map<String, String> langLt = {
   'Comment deleted': 'Komentaras ištrintas',
   'Comment edited': 'Komentaras redaguotas',
   'Write Comment': 'Rašyti komentarą',
+  'My posts': 'Mano pranešimai',
 };

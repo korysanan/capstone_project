@@ -58,4 +58,5 @@ final Map<String, String> langUk = {
   'Comment deleted': 'Коментар видалено',
   'Comment edited': 'Коментар відредаговано',
   'Write Comment': 'Написати коментар',
+  'My posts': 'Мої дописи',
 };

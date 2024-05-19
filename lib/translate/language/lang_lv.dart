@@ -59,4 +59,5 @@ final Map<String, String> langLv = {
   'Comment deleted': 'Komentārs dzēsts',
   'Comment edited': 'Komentārs rediģēts',
   'Write Comment': 'Rakstīt komentāru',
+  'My posts': 'Mani amati',
 };

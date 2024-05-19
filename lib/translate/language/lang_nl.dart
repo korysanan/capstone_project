@@ -60,4 +60,5 @@ final Map<String, String> langNl = {
   'Comment deleted': 'Commentaar verwijderd',
   'Comment edited': 'Commentaar bewerkt',
   'Write Comment': 'Schrijf commentaar',
+  'My posts': 'Mijn berichten',
 };

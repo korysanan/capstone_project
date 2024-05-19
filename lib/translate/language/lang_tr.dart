@@ -59,4 +59,5 @@ final Map<String, String> langTr = {
   'Comment deleted': 'Yorum silindi',
   'Comment edited': 'Yorum düzenlendi',
   'Write Comment': 'Yorum Yaz',
+  'My posts': 'Benim gönderilerim',
 };

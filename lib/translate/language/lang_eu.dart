@@ -58,4 +58,5 @@ final Map<String, String> langEu = {
   'Comment deleted': 'Comment deleted',
   'Comment edited': 'Comment edited',
   'Write Comment': 'Write Comment',
+  'My posts': 'My posts',
 };

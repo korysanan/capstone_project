@@ -60,4 +60,5 @@ final Map<String, String> langId = {
   'Comment deleted': 'Komentar dihapus',
   'Comment edited': 'Komentar diedit',
   'Write Comment': 'Tulis Komentar',
+  'My posts': 'Posting saya',
 };

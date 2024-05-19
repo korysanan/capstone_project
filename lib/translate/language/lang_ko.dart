@@ -56,4 +56,5 @@ final Map<String, String> langKo = {
   'Comment deleted': '댓글이 삭제되었습니다',
   'Comment edited': '댓글이 수정되었습니다',
   'Write Comment': '댓글을 작성하세요',
+  'My posts': '내 게시물',
 };

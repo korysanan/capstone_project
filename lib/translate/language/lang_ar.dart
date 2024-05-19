@@ -58,4 +58,5 @@ final Map<String, String> langAr = {
   'Comment deleted': 'تم حذف التعليق',
   'Comment edited': 'تم تحرير التعليق',
   'Write Comment': 'كتابة تعليق',
+  'My posts': 'مشاركاتي',
 };

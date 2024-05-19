@@ -59,4 +59,5 @@ final Map<String, String> langCs = {
   'Comment deleted': 'Komentář byl smazán',
   'Comment edited': 'Komentář byl upraven',
   'Write Comment': 'Napsat komentář',
+  'My posts': 'Moje příspěvky',
 };

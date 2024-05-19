@@ -59,4 +59,5 @@ final Map<String, String> langFi = {
   'Comment deleted': 'Kommentti poistettu',
   'Comment edited': 'Kommentti muokattu',
   'Write Comment': 'Kirjoita kommentti',
+  'My posts': 'Virkani',
 };

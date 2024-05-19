@@ -59,4 +59,5 @@ final Map<String, String> langHu = {
   'Comment deleted': 'Megjegyzés törölve',
   'Comment edited': 'Megjegyzés szerkesztve',
   'Write Comment': 'Hozzászólás írása',
+  'My posts': 'A hozzászólásaim',
 };

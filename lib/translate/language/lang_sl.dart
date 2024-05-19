@@ -59,4 +59,5 @@ final Map<String, String> langSl = {
   'Comment deleted': 'Komentar izbrisan',
   'Comment edited': 'Komentar urejen',
   'Write Comment': 'Napiši komentar',
+  'My posts': 'Moje objave',
 };

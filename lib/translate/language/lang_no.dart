@@ -60,4 +60,5 @@ final Map<String, String> langNo = {
   'Comment deleted': 'Kommentar slettet',
   'Comment edited': 'Kommentar redigert',
   'Write Comment': 'Skriv kommentar',
+  'My posts': 'Mine innlegg',
 };

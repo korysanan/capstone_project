@@ -61,4 +61,5 @@ final Map<String, String> langEl = {
   'Comment deleted': 'Το σχόλιο διαγράφηκε',
   'Comment edited': 'Το σχόλιο επεξεργάστηκε',
   'Write Comment': 'Γράψτε Σχόλιο',
+  'My posts': 'Οι θέσεις μου',
 };

@@ -56,4 +56,5 @@ final Map<String, String> langJa = {
   'Comment deleted': 'コメントが削除されました',
   'Comment edited': 'コメントが編集されました',
   'Write Comment': 'コメントを書く',
+  'My posts': '私の投稿',
 };

@@ -29,7 +29,7 @@ final Map<String, String> langEn = {
   'Do you really want to withdraw?': 'Do you really want to withdraw?',
   'withdraw': 'withdraw',
   'Find a Korean restaurant in South Korea':
-  'Find a Korean restaurant in South Korea',
+      'Find a Korean restaurant in South Korea',
   'Food Category': 'Food Category',
   'About': 'About',
   'Recipe': 'Recipe',
@@ -42,7 +42,7 @@ final Map<String, String> langEn = {
   'Enter a search term': 'Enter a search term',
   'Add photo': 'Add photo',
   'Article must include title and content':
-  'Article must include title and content',
+      'Article must include title and content',
   'Warning': 'Warning',
   'The maximum number of images is 10': 'The maximum number of images is 10',
   'Are you sure you want to edit it?': 'Are you sure you want to edit it?',
@@ -58,4 +58,5 @@ final Map<String, String> langEn = {
   'Comment deleted': 'Comment deleted',
   'Comment edited': 'Comment edited',
   'Write Comment': 'Write Comment',
+  'My posts': 'My Posts',
 };

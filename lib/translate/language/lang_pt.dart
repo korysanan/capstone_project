@@ -58,4 +58,5 @@ final Map<String, String> langPt = {
   'Comment deleted': 'Comentário excluído',
   'Comment edited': 'Comentário editado',
   'Write Comment': 'Escrever Comentário',
+  'My posts': 'As minhas mensagens',
 };

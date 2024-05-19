@@ -60,4 +60,5 @@ final Map<String, String> langDa = {
   'Comment deleted': 'Kommentar slettet',
   'Comment edited': 'Kommentar redigeret',
   'Write Comment': 'Skriv kommentar',
+  'My posts': 'Mine indlæg',
 };

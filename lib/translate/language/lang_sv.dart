@@ -60,4 +60,5 @@ final Map<String, String> langSv = {
   'Comment deleted': 'Kommentar raderad',
   'Comment edited': 'Kommentar redigerad',
   'Write Comment': 'Skriv kommentar',
+  'My posts': 'Mina inlägg',
 };

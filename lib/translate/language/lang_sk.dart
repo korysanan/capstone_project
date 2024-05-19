@@ -58,4 +58,5 @@ final Map<String, String> langSk = {
   'Comment deleted': 'Komentár zmazaný',
   'Comment edited': 'Komentár upravený',
   'Write Comment': 'Napísať komentár',
+  'My posts': 'Moje príspevky',
 };

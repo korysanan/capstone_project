@@ -60,4 +60,5 @@ final Map<String, String> langBg = {
   'Comment deleted': 'Коментарът е изтрит',
   'Comment edited': 'Коментарът е редактиран',
   'Write Comment': 'Напиши коментар',
+  'My posts': 'Моите публикации',
 };

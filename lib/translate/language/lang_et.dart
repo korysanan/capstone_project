@@ -59,4 +59,5 @@ final Map<String, String> langEt = {
   'Comment deleted': 'Kommentaar kustutatud',
   'Comment edited': 'Kommentaar muudetud',
   'Write Comment': 'Kirjuta kommentaar',
+  'My posts': 'Minu postitused',
 };

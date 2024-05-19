@@ -60,4 +60,5 @@ final Map<String, String> langRu = {
   'Comment deleted': 'Комментарий удален',
   'Comment edited': 'Комментарий отредактирован',
   'Write Comment': 'Написать комментарий',
+  'My posts': 'Мои посты',
 };
