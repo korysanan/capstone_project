@@ -65,7 +65,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text('Restaurant Info'),
+        title: Text(globals.getText('Restaurant Info')),
         centerTitle: true,
         actions: <Widget>[
           Padding(
@@ -80,7 +80,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                widget.restaurant_info['name'] ?? 'Unknown Restaurant',
+                restaurantName,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
@@ -137,7 +137,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                               width: 100, // 이미지의 너비 설정
                                               height: 100, // 이미지의 높이 설정
                                             ),
-                                            Text('Directions') // 이미지 아래 텍스트
+                                            Text(globals.getText('Directions')) // 이미지 아래 텍스트
                                           ],
                                         ),
                                       ),
@@ -161,7 +161,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                               width: 100, // 이미지의 너비 설정
                                               height: 100, // 이미지의 높이 설정
                                             ),
-                                            Text('Map') // 이미지 아래 텍스트
+                                            Text(globals.getText('Map')) // 이미지 아래 텍스트
                                           ],
                                         ),
                                       ),
@@ -171,7 +171,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                     onPressed: () {
                                       Navigator.of(context).pop(); // 다이얼로그 창을 닫음
                                     },
-                                    child: Text('Cancel'),
+                                    child: Text(globals.getText('Cancel')),
                                     style: ElevatedButton.styleFrom(
                                       foregroundColor: Colors.black, backgroundColor: Colors.blue.shade500, // 텍스트 색상 설정
                                     ),
@@ -188,7 +188,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0), // 카드 내부의 패딩
                         child: Text(
-                          '지도 및 길찾기', // 방문자 리뷰 수 데이터
+                          globals.getText('Directions & Map'), // 방문자 리뷰 수 데이터
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
@@ -197,13 +197,49 @@ class _RestaurantPageState extends State<RestaurantPage> {
                 ]
               ),
             ),
-            Text(
-              '전화번호: ${phoneNumber}',
-              style: TextStyle(fontSize: 18),
-            ),
-            Text(
-              '주소: ${address}',
-              style: TextStyle(fontSize: 18),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          globals.getText('Phone Number : '),
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        Expanded(
+                          child: Text(
+                            phoneNumber,
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          globals.getText('Address : '),
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        Expanded(
+                          child: Text(
+                            address,
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

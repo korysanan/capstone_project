@@ -24,17 +24,17 @@ class _PathDetailScreenState extends State<PathDetailScreen> {
     int _currentIndex = 0;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Path Detail'),
+        title: Text(globals.getText('Path Detail')),
         centerTitle: true,
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
+            child: Image.asset('assets/images/kfood_logo.png'),
           ),
         ],
       ),
       body: WebView(
-        initialUrl: 'http://10.0.2.2/flutter/odsay_test_4.html', // Adjust the URL according to your server setup
+        initialUrl: 'http://10.0.2.2/flutter/tran_0_direction.html',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) {
           _controller = webViewController;

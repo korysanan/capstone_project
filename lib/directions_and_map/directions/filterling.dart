@@ -94,7 +94,7 @@ class _FilterScreenState extends State<FilterScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Filter Check'),
+          title: Text(globals.getText('Filter Check')),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -106,13 +106,13 @@ class _FilterScreenState extends State<FilterScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancel'),
+              child: Text(globals.getText('Cancel')),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text('Confirm'),
+              child: Text(globals.getText('Confirm')),
               onPressed: () {
                 if (_selectedVehicle == 'Private car') {
                   _getDirections(context);
@@ -152,7 +152,7 @@ class _FilterScreenState extends State<FilterScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text('Filtering'),
+        title: Text(globals.getText('Filtering')),
         centerTitle: true,
         actions: <Widget>[
           Padding(
@@ -168,7 +168,7 @@ class _FilterScreenState extends State<FilterScreen> {
               padding: const EdgeInsets.all(8.0),
               children: <Widget>[
                 ExpansionTile(
-                  title: Text('Vehicle'),
+                  title: Text(globals.getText('Vehicle')),
                   leading: Icon(Icons.directions_car),
                   children: <Widget>[
                     Row(
@@ -185,7 +185,7 @@ class _FilterScreenState extends State<FilterScreen> {
                             child: Column(
                               children: [
                                 Image.asset(_carImage, width: 180, height: 180),
-                                Text('Private car'),
+                                Text(globals.getText('Private car')),
                               ],
                             ),
                           ),
@@ -201,7 +201,7 @@ class _FilterScreenState extends State<FilterScreen> {
                             child: Column(
                               children: [
                                 Image.asset(_transitImage, width: 180, height: 180),
-                                Text('Transit'),
+                                Text(globals.getText('Transit')),
                               ],
                             ),
                           ),
@@ -214,7 +214,7 @@ class _FilterScreenState extends State<FilterScreen> {
                         _carImage = 'assets/images/car.png';
                         _transitImage = 'assets/images/transit.png';
                       }),
-                      child: Text("It doesn't matter"),
+                      child: Text(globals.getText("It doesn't matter")),
                     ),
                     if (_selectedVehicle != null)
                       Padding(
@@ -224,7 +224,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   ],
                 ),
                 ExpansionTile(
-                  title: Text('Expenses (₩)'),
+                  title: Text(globals.getText('Expenses (₩)')),
                   leading: Icon(Icons.monetization_on),
                   children: <Widget>[
                     Padding(
@@ -233,7 +233,7 @@ class _FilterScreenState extends State<FilterScreen> {
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Enter price in KRW',
+                          labelText: globals.getText('Enter price in KRW'),
                           prefixText: '₩',
                         ),
                         onChanged: (value) {
@@ -244,7 +244,7 @@ class _FilterScreenState extends State<FilterScreen> {
                       ),
                     ),
                     CheckboxListTile(
-                      title: Text('Show Entered Amount'),
+                      title: Text(globals.getText('Show Entered Amount')),
                       value: _selectedPrice != null,
                       onChanged: (bool? value) {
                         setState(() {
@@ -265,13 +265,13 @@ class _FilterScreenState extends State<FilterScreen> {
                             _selectedPrice = null; // Reset the price to null
                           });
                         },
-                        child: Text("It doesn't matter"),
+                        child: Text(globals.getText("It doesn't matter")),
                       ),
                     ),
                   ],
                 ),
                 ExpansionTile(
-                  title: Text('Time required'),
+                  title: Text(globals.getText('Time required')),
                   leading: Icon(Icons.timer),
                   children: <Widget>[
                     Row(
@@ -326,7 +326,7 @@ class _FilterScreenState extends State<FilterScreen> {
                           updateTotalMinutes(); // Recalculate total minutes
                         });
                       },
-                      child: Text("It doesn't matter"),
+                      child: Text(globals.getText("It doesn't matter")),
                     ),
                   ],
                 ),
@@ -337,7 +337,7 @@ class _FilterScreenState extends State<FilterScreen> {
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: ElevatedButton(
               onPressed: () => printFilters(context), // 익명 함수를 사용하여 context 전달
-              child: const Text('Filters select'),
+              child: Text(globals.getText('Filters select')),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50), // Makes button full-width
               ),

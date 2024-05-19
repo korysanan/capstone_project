@@ -259,7 +259,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
             new Divider(height: 50.0,),
             Center(
               child: Text(
-                '음식 정보',
+                globals.getText('Food Information'),
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Color.fromARGB(221, 73, 73, 73),
@@ -328,9 +328,9 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
               ),
             ),
             new Divider(height: 50.0,),
-            const Center(
+            Center(
               child: Text(
-                '게시판',
+                globals.getText('Bulletin Board'),
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Color.fromARGB(221, 73, 73, 73),
@@ -394,7 +394,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
             new Divider(height: 50.0,),
             Center(
               child: Text(
-                '한국 여행',
+                globals.getText('Trip in Korea'),
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Color.fromARGB(221, 73, 73, 73),

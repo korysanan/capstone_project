@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../home/bottom.dart';
 import '../../../home/on_item_tap.dart';
 import 'trans_0_path.dart';
+import '../../../globals.dart' as globals;
 
 class TransitScreen0 extends StatelessWidget {
   final Map<String, dynamic> jsonMap;
@@ -15,7 +16,7 @@ class TransitScreen0 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Movement'),
+        title: Text(globals.getText('Select Movement')),
         centerTitle: true,
         actions: <Widget>[
           Padding(
@@ -100,7 +101,7 @@ class TransitScreen0 extends StatelessWidget {
                 ),
                 SizedBox(height: 8.0),
                 Text(
-                  'Route',
+                  globals.getText('Route'),
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 ...buildSubPathDetails(context, path['subPath']),
@@ -272,13 +273,13 @@ class TransitScreen0 extends StatelessWidget {
   String _getTrafficType(int trafficType) {
     switch (trafficType) {
       case 1:
-        return 'Subway';
+        return globals.getText('Subway');
       case 2:
-        return 'Bus';
+        return globals.getText('Bus');
       case 3:
-        return 'Walking';
+        return globals.getText('Walking');
       default:
-        return 'Etc';
+        return globals.getText('Etc');
     }
   }
 }

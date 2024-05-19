@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../home/bottom.dart';
 import '../home/on_item_tap.dart';
+import '../translate/language_detect.dart';
 import 'region_select.dart';
 import 'restaurant_info.dart';
 import 'dart:math';
@@ -121,7 +122,7 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
             );
           },
         ),
-        title: const Text('Select Restaurants'),
+        title: Text(globals.getText('Select Restaurants')),
         centerTitle: true,
         actions: <Widget>[
           Padding(
@@ -206,9 +207,60 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
                                 fit: BoxFit.cover,
                               ),
                         ListTile(
-                          title: Text('업체명: ${restaurant['name']}'),
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                globals.getText('The name of the restaurant'),
+                                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                              ),
+                              globals.selectedLanguageCode == 'ko'
+                                  ? Text(
+                                      restaurant['name'],
+                                      style: TextStyle(fontSize: 14.0),
+                                    )
+                                  : FutureBuilder<String>(
+                                      future: translateText(restaurant['name']), // Assuming translateText is an async function you've defined or imported
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState == ConnectionState.waiting) {
+                                          return Row(
+                                            children: [
+                                              CircularProgressIndicator(),
+                                              SizedBox(width: 5),
+                                            ],
+                                          );
+                                        } else if (snapshot.connectionState == ConnectionState.done) {
+                                          if (snapshot.hasError) {
+                                            return Text(
+                                              'Error',
+                                              style: TextStyle(fontSize: 14.0),
+                                            );
+                                          } else if (snapshot.data != null) {
+                                            return Text(
+                                              snapshot.data!,
+                                              style: TextStyle(fontSize: 14.0),
+                                            );
+                                          } else {
+                                            return Text(
+                                              'No translation available',
+                                              style: TextStyle(fontSize: 14.0),
+                                            );
+                                          }
+                                        } else {
+                                          return Container();
+                                        }
+                                      },
+                                    ),
+                            ],
+                          ),
                           subtitle: restaurant['visitorRating'] != null
-                              ? Text('평점: ${restaurant['visitorRating']}')
+                              ? Row(
+                                  children: [
+                                    SizedBox(height: 50.0),
+                                    Text(globals.getText('VisitorRating : ')),
+                                    Text('${restaurant['visitorRating']}'),
+                                  ],
+                                )
                               : null,
                         ),
                       ],

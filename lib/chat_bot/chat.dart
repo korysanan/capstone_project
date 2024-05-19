@@ -1,6 +1,7 @@
 import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:flutter/material.dart';
 import 'Messages.dart';
+import '../globals.dart' as globals;
 
 class chatbot extends StatefulWidget {
   const chatbot({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _chatbotState extends State<chatbot> {
     return Scaffold(
       resizeToAvoidBottomInset: true,  // 키보드에 의해 UI가 조정되도록 설정
       appBar: AppBar(
-        title: Text('ChatBot'),
+        title: Text(globals.getText('ChatBot')),
         backgroundColor: Colors.white,
         centerTitle: true,
         actions: <Widget>[
@@ -85,7 +86,7 @@ class _chatbotState extends State<chatbot> {
               controller: _controller,
               style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
-                hintText: "Message Chatbot",
+                hintText: globals.getText('Message Chatbot'),
                 hintStyle: TextStyle(color: Colors.grey),
                 border: InputBorder.none,
               ),

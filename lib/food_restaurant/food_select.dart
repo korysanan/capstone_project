@@ -3,46 +3,10 @@ import 'package:flutter/material.dart';
 import '../home/bottom.dart';
 import '../home/main_screen.dart';
 import '../home/on_item_tap.dart';
+import '../translate/language_detect.dart';
 import 'food_restaurant_db/restaurant_category_db.dart';
 import 'region_select.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const FoodSelectScreen(),
-// This theme was made for FlexColorScheme version 6.1.1. Make sure
-// you use same or higher version, but still same major version. If
-// you use a lower version, some properties may not be supported. In
-// that case you can also remove them after copying the theme to your app.
-      theme: FlexThemeData.light(
-        fontFamily: 'Jalnan',
-        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-        blendLevel: 9,
-        subThemesData: const FlexSubThemesData(
-          blendOnLevel: 10,
-          blendOnColors: false,
-          useFlutterDefaults: true,
-          inputDecoratorIsFilled: false,
-          inputDecoratorBorderType: FlexInputBorderType.underline,
-          navigationBarLabelBehavior:
-              NavigationDestinationLabelBehavior.alwaysHide,
-        ),
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        useMaterial3: true,
-        swapLegacyOnMaterial3: true,
-      ),
-    );
-  }
-}
+import '../globals.dart' as globals;
 
 // ignore: must_be_immutable
 class FoodSelectScreen extends StatelessWidget {
@@ -63,7 +27,7 @@ class FoodSelectScreen extends StatelessWidget {
             );
           },
         ),
-        title: const Text('Select Korean Food (1/2)'),
+        title: Text(globals.getText('Select Korean Food (1/2)')),
         centerTitle: true,
       ),
       body: GridView.builder(
@@ -77,9 +41,40 @@ class FoodSelectScreen extends StatelessWidget {
         itemCount: KoreanFood.foods.length,
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: () {
-              _showConfirmationDialog(context, KoreanFood.foods[index].id,
-                  KoreanFood.foods[index].name);
+            onTap: () async {
+              String foodName;
+
+              if (globals.selectedLanguageCode == 'ko') {
+                foodName = KoreanFood.foods[index].name;
+              } else if (globals.selectedLanguageCode == 'en') {
+                foodName = KoreanFood.foods[index].englishName;
+              } else {
+                // Show a loading dialog while the translation is in progress
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      content: Row(
+                        children: [
+                          CircularProgressIndicator(),
+                        ],
+                      ),
+                    );
+                  },
+                );
+
+                // Perform the translation
+                try {
+                  foodName = await translateText(KoreanFood.foods[index].englishName);
+                } catch (e) {
+                  foodName = 'Error'; // Handle error case
+                }
+
+                // Close the loading dialog
+                Navigator.of(context, rootNavigator: true).pop();
+              }
+
+              _showConfirmationDialog(context, KoreanFood.foods[index].id, foodName);
             },
             child: Container(
               decoration: BoxDecoration(
@@ -115,13 +110,55 @@ class FoodSelectScreen extends StatelessWidget {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.6,
-                          child: Text(
-                            KoreanFood.foods[index].englishName,
-                            style: const TextStyle(
-                              fontSize: 16,
-                            ),
-                            softWrap: true,
-                          ),
+                          child: globals.selectedLanguageCode == 'ko' || globals.selectedLanguageCode == 'en'
+                            ? Text(
+                                KoreanFood.foods[index].englishName,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                ),
+                                softWrap: true,
+                              )
+                            : FutureBuilder<String>(
+                                future: translateText(KoreanFood.foods[index].englishName), // Assuming translateText is an async function you've defined or imported
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState == ConnectionState.waiting) {
+                                    return Row(
+                                      children: [
+                                        CircularProgressIndicator(),
+                                        SizedBox(width: 5),
+                                      ],
+                                    );
+                                  } else if (snapshot.connectionState == ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return Text(
+                                        'Error',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                        softWrap: true,
+                                      );
+                                    } else if (snapshot.data != null) {
+                                      return Text(
+                                        snapshot.data!,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                        softWrap: true,
+                                      );
+                                    } else {
+                                      return Text(
+                                        'No translation available',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                        softWrap: true,
+                                      );
+                                    }
+                                  } else {
+                                    return Container();
+                                  }
+                                },
+                              ),
                         ),
                       ],
                     ),
@@ -144,17 +181,28 @@ class FoodSelectScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Confirm Selection'),
-          content: Text('You have selected $name.'),
+          title: Text(globals.getText('Confirm Selection')),
+            content: RichText(
+              text: TextSpan(
+                text: globals.getText('Food of Choice :'),
+                style: DefaultTextStyle.of(context).style,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: name,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancel'),
+              child: Text(globals.getText('Cancel')),
               onPressed: () {
                 Navigator.of(context).pop(); // 다이얼로그 닫기
               },
             ),
             TextButton(
-              child: const Text('Confirm'),
+              child: Text(globals.getText('Confirm')),
               onPressed: () {
                 Navigator.of(context).pop(); // 다이얼로그 닫고
                 Navigator.push(

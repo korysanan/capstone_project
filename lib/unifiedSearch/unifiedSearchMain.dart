@@ -40,7 +40,7 @@ class _CommunitySearchState extends State<UnifiedSearchMain> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: const BasicAppBar(title: 'Integrated Search'),
+        appBar: BasicAppBar(title: globals.getText('Integrated Search')),
         body: Column(
           children: [
             Align(

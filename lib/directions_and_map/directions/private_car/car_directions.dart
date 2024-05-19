@@ -83,7 +83,7 @@ class DirectionsResultScreen extends StatelessWidget {
     final GlobalKey contentKey = GlobalKey();
 
     return Scaffold(
-      appBar: AppBar(title: Text('Directions Result')),
+      appBar: AppBar(title: Text(globals.getText('Directions Result'))),
       body: Stack(
         children: [
           WebView(

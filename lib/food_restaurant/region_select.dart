@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../home/bottom.dart';
 import '../home/on_item_tap.dart';
+import '../translate/language_detect.dart';
 import 'food_restaurant.dart';
 import 'food_restaurant_db/region_db.dart';
 import 'food_select.dart';
 import 'service/restaurant_service.dart';
+import '../globals.dart' as globals;
 
 class RegionSelectScreen extends StatefulWidget {
   final int food_id;
@@ -29,13 +31,10 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => FoodSelectScreen()),
-            );
+            Navigator.pop(context);
           },
         ),
-        title: Text('Select Region (2/2)'),
+        title: Text(globals.getText('Select Region (2/2)')),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -46,11 +45,11 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text("지역 미선택"),
-                      content: Text("지역을 선택해주세요"),
+                      title: Text(globals.getText('No region selection')),
+                      content: Text(globals.getText('Please select a region')),
                       actions: <Widget>[
                         TextButton(
-                          child: Text("Confirm"),
+                          child: Text(globals.getText('Confirm')),
                           onPressed: () {
                             Navigator.of(context).pop(); // Dismiss the dialog
                           },
@@ -64,27 +63,38 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text("맛집 정보 찾기"),
+                      title: Text(globals.getText('Finding good restaurant information')),
                       content: Column(
                         mainAxisSize: MainAxisSize.min, // Use min size for the content
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(height: 20),
-                          Text("아래 정보를 이용하여 맛집 찾는 것이 맞습니까?"),
+                          Text(globals.getText('Is it correct to use the information below to find a good restaurant?')),
                           SizedBox(height: 10),
-                          Text("음식 이름 : ${widget.food_name}"),
-                          Text("지역 : ${selectRegion}"),
+                          Row(
+                            children: [
+                              Text(globals.getText('Food Name :')),
+                              Text(widget.food_name),
+                            ],
+                          ),
+                          SizedBox(height: 8), // Add some spacing between the texts
+                          Row(
+                            children: [
+                              Text(globals.getText('Area :')),
+                              Text(selectRegion ?? 'Unknown'),
+                            ],
+                          ),
                         ],
                       ),
                       actions: <Widget>[
                         TextButton(
-                          child: Text("Cancel"),
+                          child: Text(globals.getText('Cancel')),
                           onPressed: () {
                             Navigator.of(context).pop(); // Dismiss the dialog
                           },
                         ),
                         TextButton(
-                          child: Text('Confirm'),
+                          child: Text(globals.getText('Confirm')),
                           onPressed: () async {
                             var restaurantData = await fetchRestaurantsData(currentSelect, widget.food_id);
                             if (restaurantData != null) {
@@ -151,13 +161,64 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
                         ),
                       ],
                     ),
-                    child: Text(
-                      KoreanRegion.regions[index].name,
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: selectedRegionIndex == index ? Colors.white : Colors.black,  // Change text color for better visibility
-                      ),
-                      textAlign: TextAlign.center,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: globals.selectedLanguageCode == 'ko' || globals.selectedLanguageCode == 'en'
+                        ? Text(
+                            globals.selectedLanguageCode == 'en'
+                              ? KoreanRegion.regions[index].englishName
+                              : KoreanRegion.regions[index].name,
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: selectedRegionIndex == index ? Colors.white : Colors.black,  // Change text color for better visibility
+                            ),
+                            textAlign: TextAlign.center,
+                          )
+                        : FutureBuilder<String>(
+                            future: translateText(KoreanRegion.regions[index].englishName), // Assuming translateText is an async function you've defined or imported
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CircularProgressIndicator(),
+                                    SizedBox(width: 5),
+                                  ],
+                                );
+                              } else if (snapshot.connectionState == ConnectionState.done) {
+                                if (snapshot.hasError) {
+                                  return Text(
+                                    'Error',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: selectedRegionIndex == index ? Colors.white : Colors.black,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  );
+                                } else if (snapshot.data != null) {
+                                  return Text(
+                                    snapshot.data!,
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: selectedRegionIndex == index ? Colors.white : Colors.black,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  );
+                                } else {
+                                  return Text(
+                                    'No translation available',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: selectedRegionIndex == index ? Colors.white : Colors.black,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  );
+                                }
+                              } else {
+                                return Container();
+                              }
+                            },
+                          ),
                     ),
                   ),
                 );
@@ -170,33 +231,6 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
         currentIndex: _currentIndex,
         onTap: (index) => onItemTapped(context, index),
       ),
-    );
-  }
-
-  void _showConfirmationDialog(BuildContext context, int id, String name) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Confirm Selection'),
-          content: Text('You have selected $name.'),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop(); // Close dialog
-              },
-            ),
-            TextButton(
-              child: Text('Confirm'),
-              onPressed: () {
-                Navigator.of(context).pop(); // Close dialog and navigate if needed
-                // Add navigation logic here if needed
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 }

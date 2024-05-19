@@ -35,7 +35,7 @@ class _RestaurantMapState extends State<RestaurantMap> {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text('Restaurant Map'),
+        title: Text(globals.getText('Restaurant Map')),
         centerTitle: true,
         actions: <Widget>[
           Padding(
