@@ -1,6 +1,7 @@
 import 'dart:io';
 //import 'package:capstone_project/translate/language_detect.dart';
 import 'package:flutter/material.dart';
+import '../translate/language_detect.dart';
 import 'camera_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // JSON 파싱을 위해 추가
@@ -68,10 +69,12 @@ class ImageDetailsPage extends StatelessWidget {
         if (data != null && data['labelId'] != null) {
           labelLookup[data['labelId']] = {
             'id': data['id'],
-            //'name': await translateText(data['name'])
-            'name': data['name'],
-            'englishName': data['englishName']
-          };
+            'name': globals.selectedLanguageCode == 'ko'
+                ? data['name']
+                : globals.selectedLanguageCode == 'en'
+                    ? data['englishName']
+                    : await translateText(data['englishName']),
+          };  
         }
       }
     }
@@ -87,7 +90,6 @@ class ImageDetailsPage extends StatelessWidget {
               'ymax': food['ymax'],
               'id': details['id'],
               'name': details['name'],
-              'englishName': details['englishName'],
             };
           } else {
             return null; // Or handle the case where details are not found
@@ -96,6 +98,7 @@ class ImageDetailsPage extends StatelessWidget {
         .where((element) => element != null)
         .cast<Map<String, dynamic>>()
         .toList();
+    print(foodDetails);
     Navigator.of(context).pop(); // 로딩 다이얼로그 닫기
     Navigator.push(
       context,

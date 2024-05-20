@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import '../categoryPage/foodInformation.dart';
 import '../globals.dart' as globals;
 import '../bookmark/foods_bookmark/foods_bookmark_service.dart';
 import '../bookmark/foods_bookmark/foods_bookmark_data.dart';
@@ -116,7 +117,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
-              info["englishName"],
+              info["name"],
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 14,
@@ -177,7 +178,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
                     child: Column(
                       children: [
                         ListTile(
-                          title: Text(info["englishName"],
+                          title: Text(info["name"],
                               style: const TextStyle(
                                   fontSize: 24, fontWeight: FontWeight.bold)),
                           trailing: IconButton(
@@ -189,11 +190,27 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
                           ),
                         ),
                         const Divider(),
-                        const ListTile(
-                          title: Text('Explanation -> '),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FoodInformation(
+                                        foodId: info["id"],
+                                      )),
+                            );
+                          },
+                          child: const ListTile(
+                            title: Text('Explanation -> '),
+                          ),
                         ),
-                        const ListTile(
-                          title: Text('Custom Recipes -> '),
+                        InkWell(
+                          onTap: () {
+                            print(info["id"]);
+                          },
+                          child: const ListTile(
+                            title: Text('Custom Recipes -> '),
+                          ),
                         ),
                       ],
                     ),
