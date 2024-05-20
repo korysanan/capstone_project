@@ -239,16 +239,6 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                                     }
                                   },
                                 ),
-                                /*
-                                child: Text(
-                                  globals.selectedLanguageCode == 'ko' ? food.name : food.englishName,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                */
                               ),
                             ),
                           ],
