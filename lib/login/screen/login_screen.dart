@@ -4,10 +4,9 @@ import 'package:capstone_project/login/service/login_service.dart';
 //import 'package:capstone_project/login/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../../globals.dart';
+import 'package:capstone_project/globals.dart';
 import 'sign_up_screen/sign_up_email.dart';
 import 'package:capstone_project/home/main_screen.dart';
-
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -25,15 +24,6 @@ class LoginScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min, // Ensures the content takes only needed space
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              /*
-              Text(
-                'K-Food Box',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              */
               Image.asset('assets/images/kfood_logo.png', height: 400), // Logo Image
               TextField(
                 controller: emailController,
@@ -120,6 +110,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () async {
+                    await fetchRecommendedFoods();
                     showDialog(
                       context: context,
                       barrierDismissible: false,
@@ -127,7 +118,6 @@ class LoginScreen extends StatelessWidget {
                         return Center(child: CircularProgressIndicator());
                       },
                     );
-                    fetchRecommendedFoods();
                     await Future.delayed(Duration(seconds: 1));
                     Navigator.pop(context);
                     Navigator.push(
@@ -145,12 +135,6 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  bool _validateEmail(String email) {
-    Pattern pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
-    RegExp regex = RegExp(pattern.toString());
-    return regex.hasMatch(email);
-  }
-
   Future<void> fetchRecommendedFoods() async {
     try {
       var url = Uri.parse('http://api.kfoodbox.click/recommended-foods');
@@ -160,17 +144,13 @@ class LoginScreen extends StatelessWidget {
         var decodedResponse = utf8.decode(response.bodyBytes);
         var jsonResponse = json.decode(decodedResponse) as Map<String, dynamic>;
         List<Food> fetchedFoods = [];
-
         if (jsonResponse.containsKey('foods')) {
           jsonResponse['foods'].forEach((foodJson) {
             fetchedFoods.add(Food.fromJson(foodJson));
           });
         }
 
-        // Update the global foods list
         updateFoods(fetchedFoods);
-        print('Foods updated successfully.');
-        print(fetchedFoods);
       } else {
         print('Failed to fetch data.');
         print('Status code: ${response.statusCode}');
@@ -178,5 +158,11 @@ class LoginScreen extends StatelessWidget {
     } catch (e) {
       print('Error occurred: $e');
     }
+  }
+
+  bool _validateEmail(String email) {
+    Pattern pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+    RegExp regex = RegExp(pattern.toString());
+    return regex.hasMatch(email);
   }
 }
