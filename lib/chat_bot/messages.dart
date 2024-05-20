@@ -25,9 +25,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     padding: EdgeInsets.symmetric(vertical: 14, horizontal: 14),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(
-                            20,
-                          ),
+                          bottomLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                           bottomRight: Radius.circular(
                               widget.messages[index]['isUserMessage'] ? 0 : 20),
@@ -36,10 +34,10 @@ class _MessagesScreenState extends State<MessagesScreen> {
                         ),
                         color: widget.messages[index]['isUserMessage']
                             ? Colors.blue
-                            : Color.fromARGB(208, 185, 243, 85).withOpacity(0.8)),
+                            : Color.fromARGB(208, 185, 243, 85)
+                                .withOpacity(0.8)),
                     constraints: BoxConstraints(maxWidth: w * 2 / 3),
-                    child:
-                        Text(widget.messages[index]['message'].text.text[0])),
+                    child: Text(widget.messages[index]['message'].text.text[0])),
               ],
             ),
           );

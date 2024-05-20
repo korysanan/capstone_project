@@ -14,6 +14,7 @@ class _chatbotState extends State<chatbot> {
   late DialogFlowtter dialogFlowtter;
   final TextEditingController _controller = TextEditingController();
   bool isFirstMessageSent = false;
+  bool isAwaitingResponse = false;
 
   List<Map<String, dynamic>> messages = [];
 
@@ -26,7 +27,7 @@ class _chatbotState extends State<chatbot> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,  // 키보드에 의해 UI가 조정되도록 설정
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text(globals.getText('ChatBot')),
         backgroundColor: Colors.white,
@@ -34,15 +35,15 @@ class _chatbotState extends State<chatbot> {
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
+            child: Image.asset('assets/images/kfood_logo.png'),
           ),
         ],
       ),
       body: Column(
         children: [
-          if (!isFirstMessageSent) // 메시지가 전송되지 않은 경우에만 초기 화면 표시
+          if (!isFirstMessageSent)
             buildInitialScreen(),
-          Expanded( // 메시지 스크린이나 초기 화면 대신 Expanded 위젯을 사용
+          Expanded(
             child: MessagesScreen(messages: messages),
           ),
           buildInputArea(),
@@ -60,16 +61,15 @@ class _chatbotState extends State<chatbot> {
         children: <Widget>[
           Image.asset(
             'assets/images/korea_background.png',
-            width: 300,  // 너비 설정
-            height: 300,  // 높이 설정
+            width: 300,
+            height: 300,
           ),
           Text('Ask me anything...',
               style: TextStyle(
-                fontSize: 30, 
-                color: Colors.black, 
-                fontStyle: FontStyle.italic
-                )
-              ),
+                fontSize: 30,
+                color: Colors.black,
+                fontStyle: FontStyle.italic,
+              )),
         ],
       ),
     );
@@ -110,13 +110,18 @@ class _chatbotState extends State<chatbot> {
     } else {
       setState(() {
         isFirstMessageSent = true;
+        isAwaitingResponse = true;
         addMessage(Message(text: DialogText(text: [text])), true);
+        addMessage(Message(text: DialogText(text: ['Chatbot is typing...'])), false); // Add typing indicator
       });
 
       DetectIntentResponse response = await dialogFlowtter.detectIntent(
           queryInput: QueryInput(text: TextInput(text: text)));
       if (response.message == null) return;
+      await Future.delayed(Duration(seconds: 1)); // Simulate typing delay
       setState(() {
+        isAwaitingResponse = false;
+        messages.removeLast(); // Remove typing indicator
         addMessage(response.message!);
       });
     }
