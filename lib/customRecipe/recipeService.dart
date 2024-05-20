@@ -74,12 +74,18 @@ class RecipeSerrvices {
       commentCount: -1,
     );
     try {
-      var response = await http
-          .get(Uri.parse('$url/custom-recipe-articles/$postId'), headers: {
-        'Accept': '*/*',
-        'Content-Type': 'application/json',
-        'Cookie': globals.sessionId!,
-      });
+      http.Response response;
+      if (globals.sessionId != null) {
+        response = await http
+            .get(Uri.parse('$url/custom-recipe-articles/$postId'), headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json',
+          'Cookie': globals.sessionId!,
+        });
+      } else {
+        response =
+            await http.get(Uri.parse('$url/custom-recipe-articles/$postId'));
+      }
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
         RecipePost postInfo = RecipePost.fromJson(jsonData);
