@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../translate/language_detect.dart';
 import 'Messages.dart';
 import '../globals.dart' as globals;
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class chatbot extends StatefulWidget {
   const chatbot({Key? key}) : super(key: key);
