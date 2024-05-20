@@ -20,6 +20,13 @@ class LoginService {
     );
     print(response.statusCode);
     if (response.statusCode == 200) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(child: CircularProgressIndicator());
+        },
+      );
       globals.sessionId = response.headers['set-cookie'];
       if (globals.sessionId != null) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -34,14 +41,6 @@ class LoginService {
         await _recommendfood();
       }
       globals.setLanguageCode();
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return Center(child: CircularProgressIndicator());
-        },
-      );
-      await Future.delayed(Duration(seconds: 1));
       Navigator.pop(context);
 
       Navigator.push(
