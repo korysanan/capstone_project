@@ -1,7 +1,10 @@
 import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:flutter/material.dart';
+import '../translate/language_detect.dart';
 import 'Messages.dart';
 import '../globals.dart' as globals;
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class chatbot extends StatefulWidget {
   const chatbot({Key? key}) : super(key: key);
@@ -93,9 +96,19 @@ class _chatbotState extends State<chatbot> {
             ),
           ),
           IconButton(
-            onPressed: () {
-              sendMessage(_controller.text);
-              _controller.clear();
+            onPressed: () async {
+              String text = _controller.text;
+              if (text.isNotEmpty) {
+                // Show the user's original message
+                addMessage(Message(text: DialogText(text: [text])), true);
+                _controller.clear();
+
+                // Translate the message
+                String translatedText = await translateTextToEnglish(text);
+
+                // Send the translated message
+                sendMessage(translatedText);
+              }
             },
             icon: Icon(Icons.send),
           )
@@ -111,23 +124,36 @@ class _chatbotState extends State<chatbot> {
       setState(() {
         isFirstMessageSent = true;
         isAwaitingResponse = true;
-        addMessage(Message(text: DialogText(text: [text])), true);
         addMessage(Message(text: DialogText(text: ['Chatbot is typing...'])), false); // Add typing indicator
       });
 
       DetectIntentResponse response = await dialogFlowtter.detectIntent(
           queryInput: QueryInput(text: TextInput(text: text)));
       if (response.message == null) return;
-      await Future.delayed(Duration(seconds: 1)); // Simulate typing delay
-      setState(() {
-        isAwaitingResponse = false;
-        messages.removeLast(); // Remove typing indicator
-        addMessage(response.message!);
-      });
+
+      // Extract and translate the response message
+      String? originalResponseText = response.message?.text?.text?.first;
+      if (originalResponseText != null) {
+        String translatedResponseText = await translateText(originalResponseText);
+
+        await Future.delayed(Duration(seconds: 1)); // Simulate typing delay
+        setState(() {
+          isAwaitingResponse = false;
+          messages.removeLast(); // Remove typing indicator
+          addMessage(Message(text: DialogText(text: [translatedResponseText])));
+        });
+      } else {
+        setState(() {
+          isAwaitingResponse = false;
+          messages.removeLast(); // Remove typing indicator
+        });
+      }
     }
   }
 
   addMessage(Message message, [bool isUserMessage = false]) {
-    messages.add({'message': message, 'isUserMessage': isUserMessage});
+    setState(() {
+      messages.add({'message': message, 'isUserMessage': isUserMessage});
+    });
   }
 }
