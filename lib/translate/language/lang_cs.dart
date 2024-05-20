@@ -116,5 +116,10 @@ final Map<String, String> langCs = {
   'Arrival Time: ': 'Čas příjezdu:',
   'Toll Fare: ': 'Mýtné:',
   'Taxi Fare: ': 'Taxi jízdné:',
-  'Fuel Price: ': 'Cena paliva:'
+  'Fuel Price: ': 'Cena paliva:',
+  'What to look out for when detecting Korean food': 'Na co si dát pozor při detekci korejských potravin',
+  'Precautions for Korean Food Detection': 'Bezpečnostní opatření při detekci korejských potravin',
+  'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Výsledky nemusí být nutně přesné. Detekce může být špatná v následujících případech.',
+  '(1) If the picture is small in size or the picture quality is poor': '(1) Pokud má obrázek malou velikost nebo je jeho kvalita špatná.',
+  "(2) If the food doesn't appear completely in the picture": '(2) Pokud se potravina na obrázku nezobrazuje celá'
 };

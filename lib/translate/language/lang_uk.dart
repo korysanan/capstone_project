@@ -115,5 +115,10 @@ final Map<String, String> langUk = {
   'Arrival Time: ': 'Час прибуття:',
   'Toll Fare: ': 'Плата за проїзд:',
   'Taxi Fare: ': 'Таксі:',
-  'Fuel Price: ': 'Ціна пального: '
+  'Fuel Price: ': 'Ціна пального: ',
+  'What to look out for when detecting Korean food': 'На що звернути увагу при виявленні корейської їжі',
+  'Precautions for Korean Food Detection': 'Запобіжні заходи при виявленні корейської їжі',
+  'The results may not necessarily be accurate. Detections may be poor in the following cases.': "Результати не обов'язково можуть бути точними. Виявлення може бути поганим у наступних випадках.",
+  '(1) If the picture is small in size or the picture quality is poor': '(1) Якщо зображення має малий розмір або погану якість',
+  "(2) If the food doesn't appear completely in the picture": '(2) Якщо їжа не повністю відображається на зображенні'
 };

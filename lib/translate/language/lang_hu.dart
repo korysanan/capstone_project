@@ -115,5 +115,10 @@ final Map<String, String> langHu = {
   'Arrival Time: ': 'Érkezési idő:',
   'Toll Fare: ': 'Útdíj:',
   'Taxi Fare: ': 'Taxi díj:',
-  'Fuel Price: ': 'Üzemanyag ára: '
+  'Fuel Price: ': 'Üzemanyag ára: ',
+  'What to look out for when detecting Korean food': 'Mire kell figyelni a koreai ételek észlelésekor',
+  'Precautions for Korean Food Detection': 'Óvintézkedések a koreai élelmiszerek felismeréséhez',
+  'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Az eredmények nem feltétlenül pontosak. A következő esetekben a kimutatás gyenge lehet.',
+  '(1) If the picture is small in size or the picture quality is poor': '(1) Ha a kép mérete kicsi, vagy a kép minősége rossz.',
+  "(2) If the food doesn't appear completely in the picture": '(2) Ha az élelmiszer nem teljesen jelenik meg a képen'
 };

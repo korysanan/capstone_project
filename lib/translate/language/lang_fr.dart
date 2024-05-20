@@ -118,5 +118,10 @@ final Map<String, String> langFr = {
   'Arrival Time: ': 'Heure d' 'arrivée :',
   'Toll Fare: ': 'Frais de péage :',
   'Taxi Fare: ': 'Tarif de taxi :',
-  'Fuel Price: ': 'Prix du carburant : '
+  'Fuel Price: ': 'Prix du carburant : ',
+  'What to look out for when detecting Korean food': "Précautions à prendre lors de la détection d'aliments coréens",
+  'Precautions for Korean Food Detection': 'Précautions à prendre pour la détection des aliments coréens',
+  'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Les résultats ne sont pas nécessairement exacts. Les détections peuvent être médiocres dans les cas suivants.',
+  '(1) If the picture is small in size or the picture quality is poor': "(1) Si l'image est de petite taille ou si la qualité de l'image est mauvaise.",
+  "(2) If the food doesn't appear completely in the picture": "(2) L'aliment n'apparaît pas complètement sur l'image."
 };

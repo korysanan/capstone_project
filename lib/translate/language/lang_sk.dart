@@ -115,5 +115,10 @@ final Map<String, String> langSk = {
   'Arrival Time: ': 'Čas príchodu:',
   'Toll Fare: ': 'Poplatok za cestovný lístok:',
   'Taxi Fare: ': 'Taxík:',
-  'Fuel Price: ': 'Cena paliva: '
+  'Fuel Price: ': 'Cena paliva: ',
+  'What to look out for when detecting Korean food': 'Na čo si dávať pozor pri detekcii kórejských potravín',
+  'Precautions for Korean Food Detection': 'Bezpečnostné opatrenia pri detekcii kórejských potravín',
+  'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Výsledky nemusia byť vždy presné. Detekcia môže byť nedostatočná v nasledujúcich prípadoch.',
+  '(1) If the picture is small in size or the picture quality is poor': '(1) Ak má obrázok malú veľkosť alebo je jeho kvalita nízka',
+  "(2) If the food doesn't appear completely in the picture": '(2) Ak sa potravina na obrázku nezobrazuje úplne'
 };

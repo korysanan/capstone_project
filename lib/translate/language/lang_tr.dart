@@ -115,5 +115,10 @@ final Map<String, String> langTr = {
   'Arrival Time: ': 'Varış Zamanı:',
   'Toll Fare: ': 'Geçiş Ücreti:',
   'Taxi Fare: ': 'Taksi Ücreti:',
-  'Fuel Price: ': 'Yakıt Fiyatı: '
+  'Fuel Price: ': 'Yakıt Fiyatı: ',
+  'What to look out for when detecting Korean food': 'Kore yemeklerini tespit ederken nelere dikkat etmelisiniz?',
+  'Precautions for Korean Food Detection': 'Kore Gıdası Tespiti için Önlemler',
+  'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Sonuçlar her zaman doğru olmayabilir. Aşağıdaki durumlarda tespitler zayıf olabilir.',
+  '(1) If the picture is small in size or the picture quality is poor': '(1) Resmin boyutu küçükse veya resim kalitesi düşükse',
+  "(2) If the food doesn't appear completely in the picture": '(2) Yiyecek resimde tam olarak görünmüyorsa'
 };

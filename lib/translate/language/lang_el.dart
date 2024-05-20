@@ -118,5 +118,10 @@ final Map<String, String> langEl = {
   'Arrival Time: ': 'Ώρα άφιξης:',
   'Toll Fare: ': 'Διόδια:',
   'Taxi Fare: ': 'Ναύλος ταξί:',
-  'Fuel Price: ': 'Τιμή καυσίμου:'
+  'Fuel Price: ': 'Τιμή καυσίμου:',
+  'What to look out for when detecting Korean food': 'Τι πρέπει να προσέξετε όταν εντοπίζετε κορεατικά τρόφιμα',
+  'Precautions for Korean Food Detection': 'Προφυλάξεις για την ανίχνευση κορεατικών τροφίμων',
+  'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Τα αποτελέσματα μπορεί να μην είναι απαραίτητα ακριβή. Η ανίχνευση μπορεί να είναι ανεπαρκής στις ακόλουθες περιπτώσεις.',
+  '(1) If the picture is small in size or the picture quality is poor': '(1) Εάν η εικόνα έχει μικρό μέγεθος ή η ποιότητα της εικόνας είναι κακή',
+  "(2) If the food doesn't appear completely in the picture": '(2) Εάν το τρόφιμο δεν εμφανίζεται πλήρως στην εικόνα'
 };

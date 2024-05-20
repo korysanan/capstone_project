@@ -114,5 +114,10 @@ final Map<String, String> langLt = {
   'Arrival Time: ': 'Atvykimo laikas:',
   'Toll Fare: ': 'Mokestis:',
   'Taxi Fare: ': 'Taksi mokestis:',
-  'Fuel Price: ': 'Kuro kaina: '
+  'Fuel Price: ': 'Kuro kaina: ',
+  'What to look out for when detecting Korean food': 'Į ką atkreipti dėmesį aptinkant korėjietišką maistą',
+  'Precautions for Korean Food Detection': 'Korėjietiško maisto aptikimo atsargumo priemonės',
+  'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Rezultatai nebūtinai bus tikslūs. Aptikimo rezultatai gali būti prasti toliau nurodytais atvejais.',
+  '(1) If the picture is small in size or the picture quality is poor': '(1) Jei paveikslėlis yra mažo dydžio arba paveikslėlio kokybė yra prasta',
+  "(2) If the food doesn't appear completely in the picture": '(2) Jei maisto produktas nuotraukoje matomas ne visas'
 };

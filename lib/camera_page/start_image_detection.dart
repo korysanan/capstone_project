@@ -163,13 +163,53 @@ class ImageDetailsPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Text(globals.getText('What is Korean Food Detection?')),
+          GestureDetector(
+            onTap: () {
+              _showDialog(context);
+            },
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Text(
+                globals.getText('What to look out for when detecting Korean food'),
+                style: TextStyle(
+                  fontSize: 12,
+                  decoration: TextDecoration.underline,
+                  color: Colors.black,
+                ),
+              ),
+            ),
           ),
-          const SizedBox(height: 20), // Add spacing at the bottom if needed.
         ],
       ),
+    );
+  }
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(globals.getText('Precautions for Korean Food Detection')),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(globals.getText('The results may not necessarily be accurate. Detections may be poor in the following cases.')),
+              SizedBox(height: 10),
+              Text(globals.getText('(1) If the picture is small in size or the picture quality is poor')),
+              SizedBox(height: 10),
+              Text(globals.getText("(2) If the food doesn't appear completely in the picture")),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

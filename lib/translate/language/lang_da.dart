@@ -117,5 +117,10 @@ final Map<String, String> langDa = {
   'Arrival Time: ': 'Ankomsttid:',
   'Toll Fare: ': 'Vejafgift:',
   'Taxi Fare: ': 'Taxa pris:',
-  'Fuel Price: ': 'Brændstofpris:'
+  'Fuel Price: ': 'Brændstofpris:',
+  'What to look out for when detecting Korean food': 'Hvad skal man være opmærksom på, når man opdager koreansk mad?',
+  'Precautions for Korean Food Detection': 'Forholdsregler ved detektering af koreansk mad',
+  'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Resultaterne er ikke nødvendigvis nøjagtige. Registreringen kan være dårlig i følgende tilfælde.',
+  '(1) If the picture is small in size or the picture quality is poor': '(1) Hvis billedet er lille i størrelse, eller billedkvaliteten er dårlig',
+  "(2) If the food doesn't appear completely in the picture": '(2) Hvis maden ikke vises helt på billedet'
 };

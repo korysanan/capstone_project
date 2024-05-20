@@ -112,5 +112,10 @@ final Map<String, String> langZh = {
   'Arrival Time: ': '到达时间:',
   'Toll Fare: ': '通行费:',
   'Taxi Fare: ': '出租车费用:',
-  'Fuel Price: ': '燃油价格: '
+  'Fuel Price: ': '燃油价格: ',
+  'What to look out for when detecting Korean food': '检测韩国食品时应注意的事项',
+  'Precautions for Korean Food Detection': '检测韩国食品的注意事项',
+  'The results may not necessarily be accurate. Detections may be poor in the following cases.': '检测结果不一定准确。在下列情况下，检测结果可能不佳。',
+  '(1) If the picture is small in size or the picture quality is poor': '(1) 如果图片较小或图片质量较差',
+  "(2) If the food doesn't appear completely in the picture": '(2) 如果食物没有完全出现在图片中'
 };

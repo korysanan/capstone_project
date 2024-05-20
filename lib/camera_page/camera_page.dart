@@ -124,9 +124,9 @@ Future<Size> _getImageSize(File imageFile) async {
             child: Padding(
               padding: EdgeInsets.all(20),
               child: Text(
-                globals.getText('What is Korean Food Detection?'),
+                globals.getText('What to look out for when detecting Korean food'),
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 12,
                   decoration: TextDecoration.underline,
                   color: Colors.black,
                 ),
@@ -143,16 +143,16 @@ Future<Size> _getImageSize(File imageFile) async {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Precautions for Korean Food Detection'),
+          title: Text(globals.getText('Precautions for Korean Food Detection')),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('The results may not necessarily be accurate. Detections may be poor in the following cases.'),
+              Text(globals.getText('The results may not necessarily be accurate. Detections may be poor in the following cases.')),
               SizedBox(height: 10),
-              Text('(1) If the picture is small in size or the picture quality is poor'),
+              Text(globals.getText('(1) If the picture is small in size or the picture quality is poor')),
               SizedBox(height: 10),
-              Text("(2) If the food doesn't appear completely in the picture"),
+              Text(globals.getText("(2) If the food doesn't appear completely in the picture")),
             ],
           ),
           actions: <Widget>[

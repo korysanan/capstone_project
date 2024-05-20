@@ -116,5 +116,10 @@ final Map<String, String> langFi = {
   'Arrival Time: ': 'Saapumisaika:',
   'Toll Fare: ': 'Tollimaksu:',
   'Taxi Fare: ': 'Taksimaksu:',
-  'Fuel Price: ': 'Polttoaineen hinta: '
+  'Fuel Price: ': 'Polttoaineen hinta: ',
+  'What to look out for when detecting Korean food': 'Mitä korealaista ruokaa etsittäessä on syytä huomioida?',
+  'Precautions for Korean Food Detection': 'Korealaisen ruoan havaitsemiseen liittyvät varotoimet',
+  'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Tulokset eivät välttämättä ole tarkkoja. Havainto voi olla heikko seuraavissa tapauksissa.',
+  '(1) If the picture is small in size or the picture quality is poor': '(1) Jos kuva on pienikokoinen tai kuvan laatu on huono.',
+  "(2) If the food doesn't appear completely in the picture": '(2) Jos ruoka ei näy kuvassa kokonaan'
 };
