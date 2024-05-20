@@ -107,9 +107,11 @@ class _LanguageSelectScreenState extends State<LanguageSelectScreen> {
                 setState(() {
                   _CI = id;  // 선택된 id를 _currentIndex로 업데이트
                   globals.selectedLanguageCode = code; // 전역 변수 업데이트
+                  globals.user_language_id = id;
                 });
                 widget.onLanguageSelected(code); // 선택된 언어 코드를 부모 위젯에 전달
               }
+              print(_CI);
             },
           );
         },
