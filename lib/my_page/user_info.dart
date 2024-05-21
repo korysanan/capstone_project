@@ -31,9 +31,14 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
             );
           },
         ),
-        backgroundColor: Colors.blue[300],
         title: Text(globals.getText('User Information')),
         centerTitle: true,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
+          ),
+        ],
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
