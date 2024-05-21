@@ -5,7 +5,6 @@ import 'foods_bookmark_service.dart';
 class FoodBookmarkData {
   // 북마크 리스트 선언 
   static List<dynamic> foods_bookmarks = [];
-
   // 북마크 리스트에 저장
 
   static void setBookmarks(List<dynamic> newBookmarks) {

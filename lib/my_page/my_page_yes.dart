@@ -180,32 +180,39 @@ class _MyPageYesState extends State<MyPageYes> {
       title: Text(title),
       children: children.map((String item) {
         return ListTile(
-          title: FutureBuilder<String>(
-            future: translateText(item),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasError) {
-                  return const Text(
-                    'Error',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                } else {
-                  return Text(
-                    snapshot.data ?? 'Translation error', // 번역 실패시 대체 텍스트
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  );
-                }
-              } else {
-                return const CircularProgressIndicator(); // 로딩 중 표시
-              }
-            },
-          ),
+          title: globals.selectedLanguageCode != 'ko'
+              ? FutureBuilder<String>(
+                  future: translateText(item),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        return const Text(
+                          'Error',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      } else {
+                        return Text(
+                          snapshot.data ?? 'Translation error', // 번역 실패시 대체 텍스트
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        );
+                      }
+                    } else {
+                      return const CircularProgressIndicator(); // 로딩 중 표시
+                    }
+                  },
+                )
+              : Text(
+                  item,
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
           trailing: IconButton(
             icon: const Icon(Icons.delete),
             onPressed: () => _deleteItem(title, item),
