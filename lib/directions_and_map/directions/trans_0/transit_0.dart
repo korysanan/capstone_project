@@ -79,26 +79,86 @@ class TransitScreen0 extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Total Time: ${_formatTotalTime(path['info']['totalTime'])}',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    Row(
+                      children: [
+                        Text(
+                          globals.getText('Total Time: '),
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '${_formatTotalTime(path['info']['totalTime'])}',
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                    Text(
-                      'Payment: ${path['info']['payment']} ₩',
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                    Row(
+                      children: [
+                        Text(
+                          globals.getText('Payment: '),
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                        ),
+                        Text(
+                          '${path['info']['payment']} ₩',
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                        ),
+                      ],
                     ),
                   ],
                 ),
                 SizedBox(height: 8.0),
                 buildBarChart(context, path['subPath']),
                 Divider(),
-                Text(
-                  'Departures : ${path['info']['firstStartStation']}',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                Row(
+                  children: [
+                    Text(
+                      globals.getText('Departures: '),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${path['info']['firstStartStationKor']}',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            '(${path['info']['firstStartStation']})',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  'Arrivals : ${path['info']['lastEndStation']}',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                Row(
+                  children: [
+                    Text(
+                      globals.getText('Arrivals: '),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${path['info']['lastEndStationKor']}',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            '(${path['info']['lastEndStation']})',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 8.0),
                 Text(
@@ -140,26 +200,89 @@ class TransitScreen0 extends StatelessWidget {
                   color: textColor,
                 ),
                 SizedBox(width: 8.0),
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: _getTrafficType(subPath['trafficType']),
-                        style: TextStyle(fontSize: 16, color: textColor),
-                      ),
-                      TextSpan(
-                        text: _getLaneInfo(subPath['lane']),
-                        style: TextStyle(fontSize: 12, color: textColor),
-                      ),
-                    ],
+                Expanded(
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: _getTrafficType(subPath['trafficType']),
+                          style: TextStyle(fontSize: 16, color: textColor),
+                        ),
+                        TextSpan(
+                          text: _getLaneInfo(subPath['lane']),
+                          style: TextStyle(fontSize: 12, color: textColor),
+                        ),
+                      ],
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
             ),
-            Text('Distance: ${_formatDistance(subPath['distance'])}'),
-            Text('Duration of time: ${subPath['sectionTime']}min'),
-            Text('Departures: ${subPath['startName']}'),
-            Text('Arrivals: ${subPath['endName']}'),
+            Row(
+              children: [
+                Text(
+                  globals.getText('Distance: '),
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '${_formatDistance(subPath['distance'])}',
+                    style: TextStyle(fontSize: 14),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  globals.getText('Duration: '),
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '${subPath['sectionTime']}min',
+                    style: TextStyle(fontSize: 14),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  globals.getText('Departures: '),
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '${subPath['startNameKor']} (${subPath['startName']})',
+                    style: TextStyle(fontSize: 14),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  globals.getText('Arrivals: '),
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '${subPath['endNameKor']} (${subPath['endName']})',
+                    style: TextStyle(fontSize: 14),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       );

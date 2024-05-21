@@ -60,60 +60,64 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
                 );
               } else{
                 showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text(globals.getText('Finding good restaurant information')),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min, // Use min size for the content
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(height: 20),
-                          Text(globals.getText('Is it correct to use the information below to find a good restaurant?')),
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Text(globals.getText('Food Name :')),
-                              Text(widget.food_name),
-                            ],
-                          ),
-                          SizedBox(height: 8), // Add some spacing between the texts
-                          Row(
-                            children: [
-                              Text(globals.getText('Area :')),
-                              Text(selectRegion ?? 'Unknown'),
-                            ],
-                          ),
-                        ],
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          child: Text(globals.getText('Cancel')),
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Dismiss the dialog
-                          },
-                        ),
-                        TextButton(
-                          child: Text(globals.getText('Confirm')),
-                          onPressed: () async {
-                            var restaurantData = await fetchRestaurantsData(currentSelect, widget.food_id);
-                            if (restaurantData != null) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => RestaurantDetailsPage(restaurantData: restaurantData, food_id: widget.food_id, food_name: widget.food_name,),
-                                ),
-                              );
-                            } else {
-                              print('Failed to fetch restaurant data.');
-                            }
-                            // 한국의 네이버지도 서비스에서 방문자의 리뷰수나 평점수가 높은 드
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
+  context: context,
+  builder: (BuildContext context) {
+    return AlertDialog(
+      title: Text(globals.getText('Finding good restaurant information')),
+      content: Column(
+        mainAxisSize: MainAxisSize.min, // Use min size for the content
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 20),
+          Text(globals.getText('Is it correct to use the information below to find a good restaurant?')),
+          SizedBox(height: 10),
+          Row(
+            children: [
+              Text(globals.getText('Food Name :')),
+              Flexible(
+                child: Text(widget.food_name),
+              ),
+            ],
+          ),
+          SizedBox(height: 8), // Add some spacing between the texts
+          Row(
+            children: [
+              Text(globals.getText('Area :')),
+              Flexible(
+                child: Text(selectRegion ?? 'Unknown'),
+              ),
+            ],
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        TextButton(
+          child: Text(globals.getText('Cancel')),
+          onPressed: () {
+            Navigator.of(context).pop(); // Dismiss the dialog
+          },
+        ),
+        TextButton(
+          child: Text(globals.getText('Confirm')),
+          onPressed: () async {
+            var restaurantData = await fetchRestaurantsData(currentSelect, widget.food_id);
+            if (restaurantData != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RestaurantDetailsPage(restaurantData: restaurantData, food_id: widget.food_id, food_name: widget.food_name,),
+                ),
+              );
+            } else {
+              print('Failed to fetch restaurant data.');
+            }
+          },
+        ),
+      ],
+    );
+  },
+);
+
               }
             },
           ),

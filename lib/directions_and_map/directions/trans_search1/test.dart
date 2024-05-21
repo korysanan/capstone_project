@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'json_test.dart'; // Import the new screen
+import 'json_test.dart';
+import '../../../globals.dart' as globals;
 
 class TestScreen extends StatelessWidget {
   final Map<String, dynamic> jsonMap;
@@ -9,7 +10,6 @@ class TestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(jsonMap);
     return Scaffold(
       appBar: AppBar(
         title: Text('Select Movement (1/2)'),
@@ -57,11 +57,11 @@ class TestScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Total Time: ${_formatTotalTime(path['info']['totalTime'])}',
+                      globals.getText('Total Time: ') + _formatTotalTime(path['info']['totalTime']),
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'Payment: ${path['info']['totalPayment']} ₩',
+                      globals.getText('Payment: ') + path['info']['totalPayment'].toString() + ' ₩',
                       style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                     ),
                   ],
@@ -70,16 +70,16 @@ class TestScreen extends StatelessWidget {
                 buildBarChart(context, path['subPath']),
                 Divider(),
                 Text(
-                  'Departures: ${path['info']['firstStartStation']}',
+                  globals.getText('Departures: ') + path['info']['firstStartStation'],
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 Text(
-                  'Arrivals: ${path['info']['lastEndStation']}',
+                  globals.getText('Arrivals: ') + path['info']['lastEndStation'],
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(height: 8.0),
                 Text(
-                  'Route',
+                  globals.getText('Route'),
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 ...buildSubPathDetails(context, path['subPath']),
@@ -95,9 +95,9 @@ class TestScreen extends StatelessWidget {
     if (totalTime >= 60) {
       int hours = totalTime ~/ 60;
       int minutes = totalTime % 60;
-      return '${hours}hr ${minutes}min';
+      return hours.toString() + 'hr ' + minutes.toString() + 'min';
     } else {
-      return '${totalTime}min';
+      return totalTime.toString() + 'min';
     }
   }
 
@@ -108,6 +108,7 @@ class TestScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Divider(),
             Row(
               children: [
                 Icon(
@@ -117,22 +118,42 @@ class TestScreen extends StatelessWidget {
                 ),
                 SizedBox(width: 8.0),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      '${subPath['startName']}',
-                      style: TextStyle(fontSize: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          subPath['startNameKor'],
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          subPath['startName'],
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
                     ),
-                    Text(
-                      '${subPath['endName']}',
-                      style: TextStyle(fontSize: 16),
+                    Text("↓"),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          subPath['endNameKor'],
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          subPath['endName'],
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
-            Text('Distance: ${_formatDistance(subPath['distance'])}'),
-            Text('Duration: ${subPath['sectionTime']}min'),
+            SizedBox(height: 10,),
+            Text(globals.getText('Distance: ') + _formatDistance(subPath['distance'])),
+            Text(globals.getText('Duration: ') + subPath['sectionTime'].toString() + 'min'),
           ],
         ),
       );
@@ -170,9 +191,9 @@ class TestScreen extends StatelessWidget {
   String _formatDistance(int distance) {
     if (distance >= 1000) {
       double km = distance / 1000;
-      return '${km.toStringAsFixed(1)}km';
+      return km.toStringAsFixed(1) + 'km';
     } else {
-      return '${distance}m';
+      return distance.toString() + 'm';
     }
   }
 
