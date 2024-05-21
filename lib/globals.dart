@@ -19,6 +19,14 @@ class Food {
       imageUrl: json['imageUrl'],
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'englishName': englishName,
+      'imageUrl': imageUrl,
+    };
+  }
 }
 
 List<Food>? foods;

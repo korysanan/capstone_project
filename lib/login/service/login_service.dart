@@ -1,4 +1,3 @@
-import 'package:capstone_project/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -6,9 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../home/main_screen.dart';
 import '../../globals.dart' as globals;
 import '../screen/login_screen.dart';
+import 'package:intl/intl.dart';
 
 class LoginService {
-  // 로그인 api 이용
   static Future<void> login(BuildContext context, String email, String password) async {
     var response = await http.post(
       Uri.parse('http://api.kfoodbox.click/login'),
@@ -30,14 +29,11 @@ class LoginService {
       if (globals.sessionId != null) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('sessionId', globals.sessionId!);
-        // Fetch user_nickname
+        // Fetch user details
         await _fetchNickname();
-        // Fetch user_email
         await _fetchEmail();
-        // Fetch user_language
         await _fetchLanguage();
-        
-        await _recommendfood();
+        await _checkAndUpdateFood();
       }
       globals.setLanguageCode();
       Navigator.pop(context);
@@ -65,41 +61,38 @@ class LoginService {
     }
   }
 
-  // 자신의 닉네임 불러오기 api
   static Future<void> _fetchNickname() async {
     var response = await http.get(
       Uri.parse('http://api.kfoodbox.click/my-nickname'),
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': globals.sessionId!, // Send session ID in headers
+        'Cookie': globals.sessionId!,
       },
     );
     if (response.statusCode == 200) {
-      globals.user_nickname = json.decode(response.body)['nickname']; // Assuming the nickname is returned in this manner
+      globals.user_nickname = json.decode(response.body)['nickname'];
     }
   }
 
-  // 자신의 이메일 불러오기 api
   static Future<void> _fetchEmail() async {
     var response = await http.get(
       Uri.parse('http://api.kfoodbox.click/my-email'),
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': globals.sessionId!, // Send session ID in headers
+        'Cookie': globals.sessionId!,
       },
     );
     if (response.statusCode == 200) {
-      globals.user_email = json.decode(response.body)['email']; // Assuming the email is returned in this manner
+      globals.user_email = json.decode(response.body)['email'];
     }
   }
 
-  // 자신의 언어선택한거 불러오기 
   static Future<void> _fetchLanguage() async {
     var response = await http.get(
       Uri.parse('http://api.kfoodbox.click/my-language'),
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': globals.sessionId!, // Send session ID in headers
+        'Cookie': globals.sessionId!,
       },
     );
     if (response.statusCode == 200) {
@@ -109,20 +102,51 @@ class LoginService {
     }
   }
 
-  // 자신의 음식 추천
+  static Future<void> _checkAndUpdateFood() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? storedTimestamp = prefs.getString('food_timestamp');
+    DateFormat dateFormat = DateFormat("yyyy-MM-ddTHH:mm:ssZ");
+    DateTime now = DateTime.now().toUtc();
+
+    if (storedTimestamp != null) {
+      DateTime storedTime = dateFormat.parse(storedTimestamp, true).toUtc();
+
+      if (now.difference(storedTime).inDays >= 1) {
+        // Update recommended food if a day has passed
+        await _recommendfood();
+        await prefs.setString('food_timestamp', dateFormat.format(now));
+      } else {
+        // Load food from SharedPreferences if within a day
+        String? storedFoods = prefs.getString('foods');
+        if (storedFoods != null) {
+          List<dynamic> foodList = json.decode(storedFoods);
+          globals.foods = foodList.map((foodJson) => globals.Food.fromJson(foodJson)).toList();
+        }
+      }
+    } else {
+      // First time fetch
+      await _recommendfood();
+      await prefs.setString('food_timestamp', dateFormat.format(now));
+    }
+  }
+
   static Future<void> _recommendfood() async {
     var response = await http.get(
       Uri.parse('http://api.kfoodbox.click/recommended-foods'),
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': globals.sessionId!, // Send session ID in headers
+        'Cookie': globals.sessionId!,
       },
     );
     if (response.statusCode == 200) {
       var decodedResponse = utf8.decode(response.bodyBytes);
       var data = json.decode(decodedResponse);
-      List<Food> foods = (data['foods'] as List).map((foodJson) => Food.fromJson(foodJson)).toList();
-      globals.foods = foods;  // Store the list of foods in the global variable
+      List<globals.Food> foods = (data['foods'] as List).map((foodJson) => globals.Food.fromJson(foodJson)).toList();
+      globals.updateFoods(foods);
+
+      // Save food list to SharedPreferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('foods', json.encode(foods.map((food) => food.toJson()).toList()));
     } else {
       print('Failed to fetch foods. Status code: ${response.statusCode}');
     }
