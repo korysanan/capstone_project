@@ -5,6 +5,7 @@ import '../../../home/on_item_tap.dart';
 import 'trans_0_path.dart';
 import '../../../globals.dart' as globals;
 
+// ignore: must_be_immutable
 class TransitScreen0 extends StatelessWidget {
   final Map<String, dynamic> jsonMap;
 

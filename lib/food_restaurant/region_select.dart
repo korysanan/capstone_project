@@ -139,88 +139,57 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
               ),
               itemCount: KoreanRegion.regions.length,
               itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    setState(() {
-                      selectRegion = KoreanRegion.regions[index].name;
-                      currentSelect = KoreanRegion.regions[index].id;
-                      selectedRegionIndex = index;
-                    });
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: selectedRegionIndex == index ? Colors.blue : Colors.white,  // Change color when selected
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 1,
-                          blurRadius: 2,
-                          offset: Offset(0, 2),
+                return FutureBuilder<String>(
+                  future: () async {
+                    if (globals.selectedLanguageCode == 'en') {
+                      return KoreanRegion.regions[index].englishName;
+                    } else if (globals.selectedLanguageCode == 'ko') {
+                      return KoreanRegion.regions[index].name;
+                    } else {
+                      return await translateText(KoreanRegion.regions[index].englishName);
+                    }
+                  }(),
+                  builder: (context, snapshot) {
+                    String regionName = snapshot.data ?? '...';
+
+                    return InkWell(
+                      onTap: snapshot.connectionState == ConnectionState.done
+                          ? () {
+                              setState(() {
+                                selectRegion = regionName;
+                                currentSelect = KoreanRegion.regions[index].id;
+                                selectedRegionIndex = index;
+                              });
+                            }
+                          : null,
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: selectedRegionIndex == index ? Colors.blue : Colors.white,  // Change color when selected
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      child: globals.selectedLanguageCode == 'ko' || globals.selectedLanguageCode == 'en'
-                        ? Text(
-                            globals.selectedLanguageCode == 'en'
-                              ? KoreanRegion.regions[index].englishName
-                              : KoreanRegion.regions[index].name,
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: Text(
+                            regionName,
                             style: TextStyle(
                               fontSize: 10,
                               color: selectedRegionIndex == index ? Colors.white : Colors.black,  // Change text color for better visibility
                             ),
                             textAlign: TextAlign.center,
-                          )
-                        : FutureBuilder<String>(
-                            future: translateText(KoreanRegion.regions[index].englishName), // Assuming translateText is an async function you've defined or imported
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                return Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CircularProgressIndicator(),
-                                    SizedBox(width: 5),
-                                  ],
-                                );
-                              } else if (snapshot.connectionState == ConnectionState.done) {
-                                if (snapshot.hasError) {
-                                  return Text(
-                                    'Error',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: selectedRegionIndex == index ? Colors.white : Colors.black,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  );
-                                } else if (snapshot.data != null) {
-                                  return Text(
-                                    snapshot.data!,
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: selectedRegionIndex == index ? Colors.white : Colors.black,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  );
-                                } else {
-                                  return Text(
-                                    'No translation available',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: selectedRegionIndex == index ? Colors.white : Colors.black,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  );
-                                }
-                              } else {
-                                return Container();
-                              }
-                            },
                           ),
-                    ),
-                  ),
+                        ),
+                      ),
+                    );
+                  },
                 );
               },
             ),

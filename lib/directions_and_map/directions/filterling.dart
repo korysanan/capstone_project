@@ -98,9 +98,33 @@ class _FilterScreenState extends State<FilterScreen> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Vehicle: ${_selectedVehicle ?? "It doesn't matter"}'),
-                Text('Expenses: ${_selectedPrice?.round() ?? "It doesn't matter"}'),
-                Text('Time required(minutes): ${_totalMinutes ?? "It doesn't matter"}'),
+                Row(
+                  children: [
+                    Text(globals.getText('Vehicle')),
+                    Text(' : '),
+                    Text(
+                      _selectedVehicle == 'Private car'
+                          ? globals.getText('Private car')
+                          : _selectedVehicle == 'Transit'
+                              ? globals.getText('Transit')
+                              : globals.getText("It doesn't matter"),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(globals.getText('Expenses (₩)')),
+                    Text(' : '),
+                    Text('${_selectedPrice?.round() ?? globals.getText("It doesn't matter")}'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(globals.getText('Time required')),
+                    Text(' : '),
+                    Text('${_totalMinutes ?? globals.getText("It doesn't matter")}'),
+                  ],
+                ),
               ],
             ),
           ),
@@ -122,8 +146,6 @@ class _FilterScreenState extends State<FilterScreen> {
                     paymentThreshold: _selectedPrice?.round(),
                     timeThreshold: _totalMinutes,
                     onComplete: (jsonMap) {
-                      // Transit 선택시 처리 로직
-                      // 예를 들어, 'TransitScreen'으로 이동할 수 있음
                       _navigateToTransitScreen(context, jsonMap); // 수정된 부분
                     },
                   );
@@ -255,7 +277,15 @@ class _FilterScreenState extends State<FilterScreen> {
                     if (_selectedPrice != null)
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Text('Entered Amount: ₩${_selectedPrice!.round()}'),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(globals.getText('Expenses (₩)')),
+                            Text(' : '),
+                            Text('${_selectedPrice!.round()}'),
+                          ],
+                        ),
                       ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -316,7 +346,15 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Text('Time required: $_totalMinutes minutes'),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(globals.getText('Time required')),
+                          Text(' : '),
+                          Text('$_totalMinutes minutes'),
+                        ],
+                      ),
                     ),
                     ElevatedButton(
                       onPressed: () {

@@ -5,6 +5,7 @@ import '../home/bottom.dart';
 import '../home/on_item_tap.dart';
 import '../directions_and_map/map/naver_map.dart';
 import '../globals.dart' as globals;
+import '../translate/language_detect.dart'; // 번역 함수 가져오기
 
 class RestaurantPage extends StatefulWidget {
   final Map<String, dynamic> restaurant_info;
@@ -19,7 +20,9 @@ class _RestaurantPageState extends State<RestaurantPage> {
   int _currentIndex = 0;
 
   late String restaurantName;
+  late String translatedRestaurantName = '';
   late String address;
+  late String translatedAddress = '';
   late String phoneNumber;
   late String imageUrl;
   late int visitorReviewCount;
@@ -31,7 +34,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
   late String information;
   late String additionalExplanation;
   late String homepageUrl;
-  late int all_review_count;
+  late int allReviewCount;
 
   @override
   void initState() {
@@ -50,11 +53,32 @@ class _RestaurantPageState extends State<RestaurantPage> {
     globals.arr_latitude = double.tryParse(latitudeStr) ?? 0.0;
     globals.arr_longitude = double.tryParse(longitudeStr) ?? 0.0;
     information = widget.restaurant_info['information'] ?? 'No additional information available';
-    additionalExplanation = widget.restaurant_info['additionalExplanation'] ?? 'No additionalExplanation available';
+    additionalExplanation = widget.restaurant_info['additionalExplanation'] ?? 'No additional explanation available';
     homepageUrl = widget.restaurant_info['homepageUrl'] ?? 'No homepage available';
 
     // 여기에서 all_review를 계산합니다.
-    all_review_count = visitorReviewCount + blogReviewCount + photoReviewCount;
+    allReviewCount = visitorReviewCount + blogReviewCount + photoReviewCount;
+
+    // 번역 작업을 수행합니다.
+    _translateRestaurantDetails();
+  }
+
+  Future<void> _translateRestaurantDetails() async {
+    if (globals.selectedLanguageCode != 'ko') {
+      translatedRestaurantName = await translateText(restaurantName);
+      translatedAddress = await translateText(address);
+
+      // 상태 업데이트
+      setState(() {});
+    }
+  }
+
+  Future<String> _getTranslatedText(String text) async {
+    if (globals.selectedLanguageCode == 'ko') {
+      return text;
+    } else {
+      return await translateText(text);
+    }
   }
 
   @override
@@ -79,9 +103,39 @@ class _RestaurantPageState extends State<RestaurantPage> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                restaurantName,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              child: FutureBuilder<String>(
+                future: _getTranslatedText(restaurantName),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(),
+                        SizedBox(width: 5),
+                        Text('Translating...'),
+                      ],
+                    );
+                  } else if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return Text(
+                        'Error',
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      );
+                    } else if (snapshot.data != null) {
+                      return Text(
+                        snapshot.data!,
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      );
+                    } else {
+                      return Text(
+                        'No translation available',
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      );
+                    }
+                  } else {
+                    return Container();
+                  }
+                },
               ),
             ),
             Image.network(
@@ -93,7 +147,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly, // 자식들 사이의 간격을 균등하게 분배
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly, // 자식들 사이의 간격을 균등하게 분배
                 children: <Widget>[
                   Card(
                     elevation: 4.0, // 카드의 그림자 깊이
@@ -127,7 +181,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                             context,
                                             MaterialPageRoute(builder: (context) => FilterScreen()),
                                           );
-                                          // 첫 번째 이미지 버튼 기능FilterScreen
+                                          // 첫 번째 이미지 버튼 기능 FilterScreen
                                         },
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min, // 내용에 맞게 최소 크기 설정
@@ -142,12 +196,22 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                         ),
                                       ),
                                       TextButton(
-                                        onPressed: () {
+                                        onPressed: () async {
+                                          showDialog(
+                                            context: context,
+                                            barrierDismissible: false,
+                                            builder: (BuildContext context) {
+                                              return Center(child: CircularProgressIndicator());
+                                            },
+                                          );
+                                          String nameToSend = globals.selectedLanguageCode == 'ko' ? restaurantName : await _getTranslatedText(restaurantName);
+                                          String addressToSend = globals.selectedLanguageCode == 'ko' ? address : await _getTranslatedText(address);
+                                          Navigator.pop(context);
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(builder: (context) => RestaurantMap(
-                                              restaurantName: restaurantName,
-                                              address: address,
+                                              restaurantName: nameToSend,
+                                              address: addressToSend,
                                               phoneNumber: phoneNumber,
                                               visitorRating: visitorRating,
                                             )),
@@ -194,7 +258,44 @@ class _RestaurantPageState extends State<RestaurantPage> {
                       ),
                     ),
                   )
-                ]
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FutureBuilder<String>(
+                future: _getTranslatedText(address),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(),
+                        SizedBox(width: 5),
+                        Text('Translating...'),
+                      ],
+                    );
+                  } else if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return Text(
+                        'Error',
+                        style: TextStyle(fontSize: 18),
+                      );
+                    } else if (snapshot.data != null) {
+                      return Text(
+                        snapshot.data!,
+                        style: TextStyle(fontSize: 18),
+                      );
+                    } else {
+                      return Text(
+                        'No translation available',
+                        style: TextStyle(fontSize: 18),
+                      );
+                    }
+                  } else {
+                    return Container();
+                  }
+                },
               ),
             ),
             Padding(
@@ -230,9 +331,39 @@ class _RestaurantPageState extends State<RestaurantPage> {
                           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Expanded(
-                          child: Text(
-                            address,
-                            style: TextStyle(fontSize: 18),
+                          child: FutureBuilder<String>(
+                            future: _getTranslatedText(address),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CircularProgressIndicator(),
+                                    SizedBox(width: 5),
+                                    Text('Translating...'),
+                                  ],
+                                );
+                              } else if (snapshot.connectionState == ConnectionState.done) {
+                                if (snapshot.hasError) {
+                                  return Text(
+                                    'Error',
+                                    style: TextStyle(fontSize: 18),
+                                  );
+                                } else if (snapshot.data != null) {
+                                  return Text(
+                                    snapshot.data!,
+                                    style: TextStyle(fontSize: 18),
+                                  );
+                                } else {
+                                  return Text(
+                                    'No translation available',
+                                    style: TextStyle(fontSize: 18),
+                                  );
+                                }
+                              } else {
+                                return Container();
+                              }
+                            },
                           ),
                         ),
                       ],

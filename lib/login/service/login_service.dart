@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../home/main_screen.dart';
 import '../../globals.dart' as globals;
-import '../screen/login_screen.dart'; // Import globals
+import '../screen/login_screen.dart';
 
 class LoginService {
   // 로그인 api 이용
@@ -18,7 +18,6 @@ class LoginService {
         'password': password,
       }),
     );
-    print(response.statusCode);
     if (response.statusCode == 200) {
       showDialog(
         context: context,

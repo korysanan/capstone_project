@@ -63,18 +63,37 @@ class DirectionsResultScreen extends StatelessWidget {
 
       String arrivalTime = calculateArrivalTime(durationText, departureTime);
 
+      final String departureLabel = globals.getText('Departures: ');
+      final String arrivalLabel = globals.getText('Arrivals: ');
+
       displayTextTop =
           'Starting point: 현재 위치\n'
           'Destination restaurant: ${globals.arr_restaurantName}';
 
-      displayTextBottom =
-          'Distance: $distanceText\n'
-          'Duration: $durationText\n'
-          'Departure Time: $departureTime\n'
-          'Arrival Time: $arrivalTime\n'
-          'Toll Fare: ${tollFare} ₩\n'
-          'Taxi Fare: ${taxiFare} ₩\n'
-          'Fuel Price: ${fuelPrice} ₩';
+      final String distanceLabel = globals.getText('Distance: ');
+      final String distanceValue = '$distanceText\n';
+      final String durationLabel = globals.getText('Duration: ');
+      final String durationValue = '$durationText\n';
+      final String departureTimeLabel = globals.getText('Departure Time: ');
+      final String departureTimeValue = '$departureTime\n';
+      final String arrivalTimeLabel = globals.getText('Arrival Time: ');
+      final String arrivalTimeValue = '$arrivalTime\n';
+      final String tollFareLabel = globals.getText('Toll Fare: ');
+      final String tollFareValue = '${tollFare} ₩\n';
+      final String taxiFareLabel = globals.getText('Taxi Fare: ');
+      final String taxiFareValue = '${taxiFare} ₩\n';
+      final String fuelPriceLabel = globals.getText('Fuel Price: ');
+      final String fuelPriceValue = '${fuelPrice} ₩';
+
+      displayTextBottom = 
+        '$distanceLabel $distanceValue'
+        '$durationLabel $durationValue'
+        '$departureTimeLabel $departureTimeValue'
+        '$arrivalTimeLabel $arrivalTimeValue'
+        '$tollFareLabel $tollFareValue'
+        '$taxiFareLabel $taxiFareValue'
+        '$fuelPriceLabel $fuelPriceValue';
+
     } catch (e) {
       displayTextTop = 'Starting point: 현재 위치\nDestination restaurant: ${globals.arr_restaurantName}\n';
       displayTextBottom = 'Failed to parse directions';
