@@ -204,14 +204,6 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
                             title: Text('Explanation -> '),
                           ),
                         ),
-                        InkWell(
-                          onTap: () {
-                            print(info["id"]);
-                          },
-                          child: const ListTile(
-                            title: Text('Custom Recipes -> '),
-                          ),
-                        ),
                       ],
                     ),
                   );
