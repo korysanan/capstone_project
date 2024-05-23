@@ -115,22 +115,9 @@ class TransitScreen0 extends StatelessWidget {
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${path['info']['firstStartStationKor']}',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Text(
-                            '(${path['info']['firstStartStation']})',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
+                    Text(
+                      globals.getText('Current Location'),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
@@ -141,22 +128,9 @@ class TransitScreen0 extends StatelessWidget {
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${path['info']['lastEndStationKor']}',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Text(
-                            '(${path['info']['lastEndStation']})',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
+                    Text(
+                      globals.arr_restaurantName ?? 'Default Name',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),

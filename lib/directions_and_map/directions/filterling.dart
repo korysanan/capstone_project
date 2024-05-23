@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../home/bottom.dart';
 import '../../home/on_item_tap.dart';
+import '../../translate/language_detect.dart';
 import 'service/fetch.dart';
 import 'trans_search1/test.dart';
 import 'trans_0/transit_0.dart';
@@ -54,8 +55,21 @@ class _FilterScreenState extends State<FilterScreen> {
     });
   }
 
-  void _navigateToTransitScreen(BuildContext context, Map<String, dynamic> jsonMap) {
+  void _navigateToTransitScreen(BuildContext context, Map<String, dynamic> jsonMap) async {
     if (jsonMap['result']['searchType'] == 0){
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(child: CircularProgressIndicator());
+        },
+      );
+      if (globals.selectedLanguageCode == 'ko') {
+        globals.arr_restaurantName = globals.arr_restaurantName ?? 'Default Name';
+      } else {
+        globals.arr_restaurantName = await _getTranslatedText(globals.arr_restaurantName ?? 'Default Name');
+      }
+      Navigator.pop(context);
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -74,10 +88,23 @@ class _FilterScreenState extends State<FilterScreen> {
 
   void _getDirections(BuildContext context) async {
     try {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(child: CircularProgressIndicator());
+        },
+      );
+      if (globals.selectedLanguageCode == 'ko') {
+        globals.arr_restaurantName = globals.arr_restaurantName ?? 'Default Name';
+      } else {
+        globals.arr_restaurantName = await _getTranslatedText(globals.arr_restaurantName ?? 'Default Name');
+      }
       var directions = await _naverMapAPIService.getDrivingDirections(
         '${globals.my_longitude},${globals.my_latitude}',
         '${globals.arr_longitude},${globals.arr_latitude}'
       );
+      Navigator.pop(context);
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -166,6 +193,14 @@ class _FilterScreenState extends State<FilterScreen> {
         );
       },
     );
+  }
+
+  Future<String> _getTranslatedText(String text) async {
+    if (globals.selectedLanguageCode == 'ko') {
+      return text;
+    } else {
+      return await translateText(text);
+    }
   }
 
   @override
