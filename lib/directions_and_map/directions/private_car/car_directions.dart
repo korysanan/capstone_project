@@ -7,7 +7,8 @@ import '../../../home/on_item_tap.dart';
 
 class DirectionsResultScreen extends StatelessWidget {
   final dynamic directions;
-
+  WebViewController? _controller;
+  
   DirectionsResultScreen({required this.directions});
 
   String calculateArrivalTime(String durationText, String departureTime) {
@@ -64,11 +65,13 @@ class DirectionsResultScreen extends StatelessWidget {
       String arrivalTime = calculateArrivalTime(durationText, departureTime);
 
       final String departureLabel = globals.getText('Departures: ');
+      final String departure = 'Current Location\n';
       final String arrivalLabel = globals.getText('Arrivals: ');
+      final String? arrival = globals.arr_restaurantName;
 
       displayTextTop =
-          'Starting point: 현재 위치\n'
-          'Destination restaurant: ${globals.arr_restaurantName}';
+        '$departureLabel $departure'
+        '$arrivalLabel $arrival';
 
       final String distanceLabel = globals.getText('Distance: ');
       final String distanceValue = '$distanceText\n';
@@ -86,7 +89,7 @@ class DirectionsResultScreen extends StatelessWidget {
       final String fuelPriceValue = '${fuelPrice} ₩';
 
       displayTextBottom = 
-        '$distanceLabel $distanceValue'
+        '$distanceLabel $distanceValue\n'
         '$durationLabel $durationValue'
         '$departureTimeLabel $departureTimeValue'
         '$arrivalTimeLabel $arrivalTimeValue'
@@ -102,16 +105,32 @@ class DirectionsResultScreen extends StatelessWidget {
     final GlobalKey contentKey = GlobalKey();
 
     return Scaffold(
-      appBar: AppBar(title: Text(globals.getText('Directions Result'))),
+      appBar: AppBar(
+        title: Text(globals.getText('Directions Result')),
+        centerTitle: true,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           WebView(
-            initialUrl: 'https://www.google.com/maps', // Replace with your desired URL
+            initialUrl: 'http://10.0.2.2/flutter/car_direction.html', // 원격 HTML 파일 로드
             javascriptMode: JavascriptMode.unrestricted,
+            onWebViewCreated: (WebViewController webViewController) {
+              _controller = webViewController;
+            },
+            onPageFinished: (String url) {
+              _injectDataIntoWebView();
+            },
           ),
           DraggableScrollableSheet(
             initialChildSize: 0.1,
             minChildSize: 0.1,
+            maxChildSize: 0.5,
             builder: (BuildContext context, ScrollController scrollController) {
               return LayoutBuilder(
                 builder: (context, constraints) {
@@ -193,5 +212,15 @@ class DirectionsResultScreen extends StatelessWidget {
         onTap: (index) => onItemTapped(context, index),
       ),
     );
+  }
+
+  void _injectDataIntoWebView() {
+    if (_controller != null) {
+      String script = """
+        console.log('searchDrivingPath called with: ${globals.my_longitude}, ${globals.my_latitude}, ${globals.arr_longitude}, ${globals.arr_latitude}');
+        searchDrivingPath(${globals.my_longitude}, ${globals.my_latitude}, ${globals.arr_longitude}, ${globals.arr_latitude});
+      """;
+      _controller!.runJavascript(script);
+    }
   }
 }
