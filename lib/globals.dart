@@ -31,8 +31,8 @@ class Food {
 
 List<Food>? foods;
 
-const apiKey = '7f0cb90f-8897-474f-a7d0-570e0f6a5bd2:fx';
-//const apiKey = 'cc306a14-243b-4106-8133-633127ed6af8:fx';
+//const apiKey = '7f0cb90f-8897-474f-a7d0-570e0f6a5bd2:fx';
+const apiKey = 'cc306a14-243b-4106-8133-633127ed6af8:fx';
 String ODSay_apiKey = "NmHBe2KbysaotzsEo6+3ewb5Dke9KHGzmtW+QDXXvJM";
 const googleTranslateApiKey = 'AIzaSyBq5r5xStMzDC56y1nx0HUoQdhi5JGOwJM';
 //const googleTranslateApiKey = '';
@@ -50,8 +50,8 @@ int user_language_id = 18;
 
 double my_latitude = 36.76327;
 double my_longitude = 127.2820;
-double arr_latitude = 0.0;
-double arr_longitude = 0.0;
+double arr_latitude = 37.468615;
+double arr_longitude = 127.027954;
 String? arr_restaurantName;
 
 void updateUserLanguage(String newLanguage) {
