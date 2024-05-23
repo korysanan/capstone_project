@@ -154,27 +154,7 @@ class _RecipeInformationState extends State<RecipeInformation> {
             isChanged: widget.isChanged,
           ),
           resizeToAvoidBottomInset: false,
-          body: isLoading
-              ? MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  home: Scaffold(
-                    body: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text('Translating...',
-                            style: TextStyle(fontSize: 20)),
-                        Container(
-                          decoration: const BoxDecoration(color: Colors.white),
-                          child: Center(
-                              child:
-                                  Image.asset('assets/images/load-33_256.gif')),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              : SingleChildScrollView(
+          body: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
