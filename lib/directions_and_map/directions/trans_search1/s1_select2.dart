@@ -1,29 +1,45 @@
 import 'package:flutter/material.dart';
-
-import '../../../home/bottom.dart';
-import '../../../home/on_item_tap.dart';
-import 'trans_0_path.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 import '../../../globals.dart' as globals;
 
-// ignore: must_be_immutable
-class TransitScreen0 extends StatelessWidget {
-  final Map<String, dynamic> jsonMap;
+class JsonDisplayScreen extends StatelessWidget {
+  final String jsonData;
 
-  TransitScreen0({required this.jsonMap});
-  
-  int _currentIndex = 0;
-  
+  JsonDisplayScreen({required this.jsonData});
+
   @override
   Widget build(BuildContext context) {
+    // Parse the JSON data
+    Map<String, dynamic> parsedJson = json.decode(jsonData);
+
+    // Extract the first path from cityTransitStart and cityTransitEnd
+    if (parsedJson.containsKey('cityTransitStart')) {
+      parsedJson['cityTransitStart']['result']['path'] = [
+        parsedJson['cityTransitStart']['result']['path'][0]
+      ];
+    }
+    if (parsedJson.containsKey('cityTransitEnd')) {
+      parsedJson['cityTransitEnd']['result']['path'] = [
+        parsedJson['cityTransitEnd']['result']['path'][0]
+      ];
+    }
+
+    // Convert the modified JSON back to a string
+    String modifiedJsonDataString = json.encode(parsedJson);
+    Map<String, dynamic> modifiedJsonData = json.decode(modifiedJsonDataString);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(globals.getText('Select Movement')),
+        title: Text('Select Movement (2/2)'),
         centerTitle: true,
         actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
-          ),
+          IconButton(
+            icon: Icon(Icons.send),
+            onPressed: () {
+              print('click');
+            },
+          )
         ],
       ),
       body: SingleChildScrollView(
@@ -31,44 +47,30 @@ class TransitScreen0 extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            ...buildPathCards(context, jsonMap['result']['path']),
+            Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  ...buildPathCards1(context, modifiedJsonData['cityTransitStart']['result']['path'], modifiedJsonData['interCityTransit']['info']['firstStartStation']),
+                  if (modifiedJsonData.containsKey('interCityTransit')) ...[
+                    Text(
+                      '${modifiedJsonData['interCityTransit']['info']['firstStartStation']} -> ${modifiedJsonData['interCityTransit']['info']['lastEndStation']}',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Divider(),
+                  ],
+                  ...buildPathCards2(context, modifiedJsonData['cityTransitEnd']['result']['path'], modifiedJsonData['interCityTransit']['info']['lastEndStation']),
+                ],
+              ),
+            ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNav(
-        currentIndex: _currentIndex,
-        onTap: (index) => onItemTapped(context, index),
-      ),
     );
   }
-
-  List<Widget> buildPathCards(BuildContext context, List<dynamic> paths) {
+  List<Widget> buildPathCards1(BuildContext context, List<dynamic> paths, String fs) {
     return paths.map((path) {
       return InkWell(
-        onTap: () {
-          // Create jsonMap2
-          Map<String, dynamic> jsonMap2 = {
-            "result": {
-              "searchType": jsonMap['result']['searchType'],
-              "outTrafficCheck": jsonMap['result']['outTrafficCheck'],
-              "busCount": jsonMap['result']['busCount'],
-              "subwayCount": jsonMap['result']['subwayCount'],
-              "subwayBusCount": jsonMap['result']['subwayBusCount'],
-              "pointDistance": jsonMap['result']['pointDistance'],
-              "startRadius": jsonMap['result']['startRadius'],
-              "endRadius": jsonMap['result']['endRadius'],
-              "path": [path] // Only the clicked path
-            }
-          };
-
-          // Navigate to PathDetailScreen
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PathDetailScreen(jsonMap2: jsonMap2),
-            ),
-          );
-        },
         child: Card(
           margin: EdgeInsets.symmetric(vertical: 8.0),
           child: Padding(
@@ -130,6 +132,91 @@ class TransitScreen0 extends StatelessWidget {
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
+                        fs,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8.0),
+                Text(
+                  globals.getText('Route'),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                ...buildSubPathDetails(context, path['subPath']),
+              ],
+            ),
+          ),
+        ),
+      );
+    }).toList();
+  }
+  
+  List<Widget> buildPathCards2(BuildContext context, List<dynamic> paths, String le) {
+    return paths.map((path) {
+      return InkWell(
+        child: Card(
+          margin: EdgeInsets.symmetric(vertical: 8.0),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          globals.getText('Total Time: '),
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '${_formatTotalTime(path['info']['totalTime'])}',
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          globals.getText('Payment: '),
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                        ),
+                        Text(
+                          '${path['info']['payment']} ₩',
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8.0),
+                buildBarChart(context, path['subPath']),
+                Divider(),
+                Row(
+                  children: [
+                    Text(
+                      globals.getText('Departures: '),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      le,
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      globals.getText('Arrivals: '),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
                         globals.arr_restaurantName ?? 'Default Name',
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                         overflow: TextOverflow.ellipsis,
@@ -150,7 +237,6 @@ class TransitScreen0 extends StatelessWidget {
       );
     }).toList();
   }
-
   String _formatTotalTime(int totalTime) {
     if (totalTime >= 60) {
       int hours = totalTime ~/ 60;
