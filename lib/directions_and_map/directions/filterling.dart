@@ -4,7 +4,7 @@ import '../../home/bottom.dart';
 import '../../home/on_item_tap.dart';
 import '../../translate/language_detect.dart';
 import 'service/fetch.dart';
-import 'trans_search1/test.dart';
+import 'trans_search1/s1_select1.dart';
 import 'trans_0/transit_0.dart';
 import '../../globals.dart' as globals;
 
@@ -80,7 +80,7 @@ class _FilterScreenState extends State<FilterScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => TestScreen(jsonMap: jsonMap),
+          builder: (context) => Test_Screen(jsonMap: jsonMap),
         ),
       );
     }
@@ -265,19 +265,6 @@ class _FilterScreenState extends State<FilterScreen> {
                         ),
                       ],
                     ),
-                    ElevatedButton(
-                      onPressed: () => setState(() {
-                        _selectedVehicle = null;
-                        _carImage = 'assets/images/car.png';
-                        _transitImage = 'assets/images/transit.png';
-                      }),
-                      child: Text(globals.getText("It doesn't matter")),
-                    ),
-                    if (_selectedVehicle != null)
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Selected Vehicle: $_selectedVehicle'),
-                      ),
                   ],
                 ),
                 ExpansionTile(
