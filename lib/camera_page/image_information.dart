@@ -117,7 +117,7 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
-              info["name"],
+              info["englishName"], // Update this line
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 14,
@@ -174,38 +174,41 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
                 children: uniqueFoodInfo.asMap().entries.map((entry) {
                   int idx = entry.key;
                   var info = entry.value;
-                  return Card(
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text(info["name"],
-                              style: const TextStyle(
-                                  fontSize: 24, fontWeight: FontWeight.bold)),
-                          trailing: IconButton(
-                            icon: bookmarkStatus[idx]
-                                ? const Icon(Icons.bookmark)
-                                : const Icon(Icons.bookmark_border_outlined),
-                            onPressed: () => toggleBookmark(
-                                idx, int.parse(info["id"].toString())),
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FoodInformation(
+                                  foodId: info["id"],
+                                )),
+                      );
+                    },
+                    child: Card(
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text(
+                              info["name"],
+                              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: globals.selectedLanguageCode != 'ko'
+                              ? Text(
+                                  "(${info["englishName"]})",
+                                  style: const TextStyle(fontSize: 18),
+                                )
+                              : null,
+                            trailing: IconButton(
+                              icon: bookmarkStatus[idx]
+                                  ? const Icon(Icons.bookmark)
+                                  : const Icon(Icons.bookmark_border_outlined),
+                              onPressed: () => toggleBookmark(
+                                  idx, int.parse(info["id"].toString())),
+                            ),
                           ),
-                        ),
-                        const Divider(),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => FoodInformation(
-                                        foodId: info["id"],
-                                      )),
-                            );
-                          },
-                          child: const ListTile(
-                            title: Text('Explanation -> '),
-                          ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    )
                   );
                 }).toList(),
               ),

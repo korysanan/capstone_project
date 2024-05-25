@@ -119,5 +119,7 @@ final Map<String, String> langEn = {
   'Precautions for Korean Food Detection': 'Precautions for Korean Food Detection',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'The results may not necessarily be accurate. Detections may be poor in the following cases.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) If the picture is small in size or the picture quality is poor',
-  "(2) If the food doesn't appear completely in the picture": "(2) If the food doesn't appear completely in the picture"
+  "(2) If the food doesn't appear completely in the picture": "(2) If the food doesn't appear completely in the picture",
+  'Route': 'Route',
+  'Current Location': 'Current Location'
 };

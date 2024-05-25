@@ -1,10 +1,10 @@
 import 'dart:io';
-//import 'package:capstone_project/translate/language_detect.dart';
 import 'package:flutter/material.dart';
+import '../home/main_screen.dart';
 import '../translate/language_detect.dart';
 import 'camera_page.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert'; // JSON 파싱을 위해 추가
+import 'dart:convert'; // JSON parsing
 import 'image_information.dart';
 import '../globals.dart' as globals;
 
@@ -17,13 +17,12 @@ class ImageDetailsPage extends StatelessWidget {
   Future<void> uploadImage(BuildContext context, File image) async {
     showDialog(
       context: context,
-      barrierDismissible: false, // 사용자가 다이얼로그 바깥을 터치해도 닫히지 않도록 설정
+      barrierDismissible: false, // Prevent closing the dialog by tapping outside
       builder: (BuildContext context) {
         return const Center(child: CircularProgressIndicator());
       },
     );
 
-    // 서버 업로드 로직
     var uri = Uri.parse('http://3.35.120.84:5000/predict');
     var request = http.MultipartRequest('POST', uri)
       ..files.add(await http.MultipartFile.fromPath('image', image.path));
@@ -36,8 +35,7 @@ class ImageDetailsPage extends StatelessWidget {
         List<dynamic> jsonResponse = jsonDecode(responseBody);
         List<dynamic> foodInfo = [];
         for (var item in jsonResponse) {
-          //print('xmin: ${item["xmin"]}, ymin: ${item["ymin"]}, xmax: ${item["xmax"]}, ymax: ${item["ymax"]}, confidence: ${item["confidence"]}, class: ${item["class"]}, name: ${item["name"]}');
-          foodInfo.add(item); // 모든 정보 food_info의 저장
+          foodInfo.add(item); // Store all information in food_info
         }
         if (foodInfo.isNotEmpty) {
           await fetchFoodDetailsAndNavigate(foodInfo, context, image);
@@ -47,12 +45,11 @@ class ImageDetailsPage extends StatelessWidget {
       }
     } else {
       print('Image upload failed');
-      // 실패 처리 로직 (예: 실패 알림 표시)
+      // Handle failure (e.g., show a failure notification)
     }
   }
 
-  Future<void> fetchFoodDetailsAndNavigate(
-      List<dynamic> foodInfo, BuildContext context, File image) async {
+  Future<void> fetchFoodDetailsAndNavigate(List<dynamic> foodInfo, BuildContext context, File image) async {
     List<Map<String, dynamic>> foodDetails = [];
     Map<int, Map<String, dynamic>> labelLookup = {};
 
@@ -67,13 +64,16 @@ class ImageDetailsPage extends StatelessWidget {
       if (response.statusCode == 200) {
         var data = jsonDecode(utf8.decode(response.bodyBytes));
         if (data != null && data['labelId'] != null) {
+          String englishName = globals.selectedLanguageCode == 'ko'
+              ? data['name']
+              : globals.selectedLanguageCode == 'en'
+                  ? data['englishName']
+                  : await translateText(data['englishName']);
+
           labelLookup[data['labelId']] = {
             'id': data['id'],
-            'name': globals.selectedLanguageCode == 'ko'
-                ? data['name']
-                : globals.selectedLanguageCode == 'en'
-                    ? data['englishName']
-                    : await translateText(data['englishName']),
+            'name': data['name'],
+            'englishName': englishName ?? 'Unknown', // Provide a default value
           };  
         }
       }
@@ -90,21 +90,21 @@ class ImageDetailsPage extends StatelessWidget {
               'ymax': food['ymax'],
               'id': details['id'],
               'name': details['name'],
+              'englishName': details['englishName'],
             };
           } else {
-            return null; // Or handle the case where details are not found
+            return null; // Handle the case where details are not found
           }
         })
         .where((element) => element != null)
         .cast<Map<String, dynamic>>()
         .toList();
-    print(foodDetails);
-    Navigator.of(context).pop(); // 로딩 다이얼로그 닫기
+    Navigator.of(context).pop(); // Close loading dialog
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => ImageInformationPage(
-              image: image, food_info: foodDetails, size: size)), // 수정된 부분
+              image: image, food_info: foodDetails, size: size)),
     );
   }
 
@@ -124,6 +124,17 @@ class ImageDetailsPage extends StatelessWidget {
         ),
         title: Text(globals.getText('Korean Food Detection')),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => KFoodBoxHome()),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -139,7 +150,7 @@ class ImageDetailsPage extends StatelessWidget {
               style: const TextStyle(fontSize: 20),
             ),
             onPressed: () {
-              uploadImage(context, image); // 여기에서 context와 함께 uploadImage 호출
+              uploadImage(context, image); // Call uploadImage with context
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.yellow.shade100,
@@ -186,6 +197,7 @@ class ImageDetailsPage extends StatelessWidget {
       ),
     );
   }
+
   void _showDialog(BuildContext context) {
     showDialog(
       context: context,

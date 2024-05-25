@@ -65,9 +65,19 @@ Future<Size> _getImageSize(File imageFile) async {
             );
           },
         ),
-        
         title: Text(globals.getText('Korean Food Detection')),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => KFoodBoxHome()),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

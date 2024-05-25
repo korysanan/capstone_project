@@ -117,5 +117,6 @@ final Map<String, String> langKo = {
   'Precautions for Korean Food Detection': '한식 탐지 시 주의사항',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': '결과가 반드시 정확하지 않을 수 있습니다. 다음과 같은 경우 감지가 제대로 되지 않을 수 있습니다.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) 사진의 크기가 작거나 화질이 좋지 않은 경우',
-  "(2) If the food doesn't appear completely in the picture": '(2) 음식이 사진에 완전히 나타나지 않는 경우'
+  "(2) If the food doesn't appear completely in the picture": '(2) 음식이 사진에 완전히 나타나지 않는 경우',
+  'Route': '경로'
 };
