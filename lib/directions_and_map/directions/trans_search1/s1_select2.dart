@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import '../../../globals.dart' as globals;
+import 's1_test.dart';
+import 's1_test2.dart';
 
 class JsonDisplayScreen extends StatelessWidget {
   final String jsonData;
@@ -37,7 +39,7 @@ class JsonDisplayScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.send),
             onPressed: () {
-              print('click');
+              _showConfirmationDialog(context, modifiedJsonData);
             },
           )
         ],
@@ -68,6 +70,43 @@ class JsonDisplayScreen extends StatelessWidget {
       ),
     );
   }
+
+  void _showConfirmationDialog(BuildContext context, Map<String, dynamic> modifiedJsonData) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirm'),
+          content: Text('Do you want to display the modified JSON data?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Confirm'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _navigateToDisplayJsonScreen(context, modifiedJsonData);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _navigateToDisplayJsonScreen(BuildContext context, Map<String, dynamic> modifiedJsonData) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        //builder: (context) => DisplayJsonScreen(modifiedJsonData: modifiedJsonData),
+        builder: (context) => WebViewScreen(),
+      ),
+    );
+  }
+
   List<Widget> buildPathCards1(BuildContext context, List<dynamic> paths, String fs) {
     return paths.map((path) {
       return InkWell(
