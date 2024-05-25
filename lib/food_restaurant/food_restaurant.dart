@@ -31,7 +31,7 @@ class RestaurantDetailsPage extends StatefulWidget {
 
 class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
   String dropdownValue = list.first;
-  String sort = "LATEST";
+  String sort = "Visitor Rating";
   List<dynamic> restaurantList = [];
 
   void sortReataurantList() {
@@ -104,8 +104,8 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
   @override
   Widget build(BuildContext context) {
     int restaurantCount = restaurantList.length;
-    int _currentIndex = 0;
-    
+    int currentIndex = 0;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -115,10 +115,10 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
               // 새 페이지로 이동
               context,
               MaterialPageRoute(
-                builder: (context) => RegionSelectScreen(
-                  food_id: widget.food_id,
-                  food_name: widget.food_name,
-                )),
+                  builder: (context) => RegionSelectScreen(
+                        food_id: widget.food_id,
+                        food_name: widget.food_name,
+                      )),
             );
           },
         ),
@@ -126,8 +126,9 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
         centerTitle: true,
         actions: <Widget>[
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Image.asset(
+                'assets/images/kfood_logo.png'), // Your image asset here
           ),
         ],
       ),
@@ -210,38 +211,90 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
                           title: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                globals.getText('The name of the restaurant'),
-                                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                              ),
                               globals.selectedLanguageCode == 'ko'
                                   ? Text(
                                       restaurant['name'],
-                                      style: TextStyle(fontSize: 14.0),
+                                      style: const TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold),
                                     )
                                   : FutureBuilder<String>(
-                                      future: translateText(restaurant['name']), // Assuming translateText is an async function you've defined or imported
+                                      future: translateText(restaurant[
+                                          'name']), // Assuming translateText is an async function you've defined or imported
                                       builder: (context, snapshot) {
-                                        if (snapshot.connectionState == ConnectionState.waiting) {
-                                          return Row(
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return const Row(
                                             children: [
                                               CircularProgressIndicator(),
                                               SizedBox(width: 5),
                                             ],
                                           );
-                                        } else if (snapshot.connectionState == ConnectionState.done) {
+                                        } else if (snapshot.connectionState ==
+                                            ConnectionState.done) {
                                           if (snapshot.hasError) {
-                                            return Text(
+                                            return const Text(
                                               'Error',
-                                              style: TextStyle(fontSize: 14.0),
+                                              style: TextStyle(
+                                                  fontSize: 18.0,
+                                                  fontWeight: FontWeight.bold),
                                             );
                                           } else if (snapshot.data != null) {
                                             return Text(
                                               snapshot.data!,
-                                              style: TextStyle(fontSize: 14.0),
+                                              style: const TextStyle(
+                                                  fontSize: 18.0,
+                                                  fontWeight: FontWeight.bold),
                                             );
                                           } else {
+                                            return const Text(
+                                              'No translation available',
+                                              style: TextStyle(fontSize: 14.0),
+                                            );
+                                          }
+                                        } else {
+                                          return Container();
+                                        }
+                                      },
+                                    ),
+                              const SizedBox(height: 5),
+                              globals.selectedLanguageCode == 'ko'
+                                  ? Text(
+                                      restaurant['address'],
+                                      style: const TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    )
+                                  : FutureBuilder<String>(
+                                      future: translateText(restaurant[
+                                          'address']), // Assuming translateText is an async function you've defined or imported
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return const Row(
+                                            children: [
+                                              CircularProgressIndicator(),
+                                              SizedBox(width: 5),
+                                            ],
+                                          );
+                                        } else if (snapshot.connectionState ==
+                                            ConnectionState.done) {
+                                          if (snapshot.hasError) {
+                                            return const Text(
+                                              'Error',
+                                              style: TextStyle(
+                                                fontSize: 16.0,
+                                              ),
+                                            );
+                                          } else if (snapshot.data != null) {
                                             return Text(
+                                              snapshot.data!,
+                                              style: const TextStyle(
+                                                fontSize: 16.0,
+                                              ),
+                                            );
+                                          } else {
+                                            return const Text(
                                               'No translation available',
                                               style: TextStyle(fontSize: 14.0),
                                             );
@@ -256,7 +309,7 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
                           subtitle: restaurant['visitorRating'] != null
                               ? Row(
                                   children: [
-                                    SizedBox(height: 50.0),
+                                    const SizedBox(height: 50.0),
                                     Text(globals.getText('VisitorRating : ')),
                                     Text('${restaurant['visitorRating']}'),
                                   ],
@@ -273,7 +326,7 @@ class _RestaurantDetailsPageState extends State<RestaurantDetailsPage> {
         ],
       ),
       bottomNavigationBar: BottomNav(
-        currentIndex: _currentIndex,
+        currentIndex: currentIndex,
         onTap: (index) => onItemTapped(context, index),
       ),
     );
