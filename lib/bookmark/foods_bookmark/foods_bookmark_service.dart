@@ -8,7 +8,7 @@ class FoodBookmarkService {
   static Future<void> fetchBookmarks() async {
     try {
       var response = await http.get(
-        Uri.parse('http://api.kfoodbox.click/my-food-bookmarks'),
+        Uri.parse('https://api-v2.kfoodbox.click/my-food-bookmarks'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,
@@ -34,7 +34,7 @@ class FoodBookmarkService {
   static Future<void> addBookmark(int foodId) async {
     try {
       var response = await http.post(
-        Uri.parse('http://api.kfoodbox.click/foods/$foodId/bookmark'),
+        Uri.parse('https://api-v2.kfoodbox.click/foods/$foodId/bookmark'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,
@@ -55,7 +55,7 @@ class FoodBookmarkService {
   static Future<void> deleteBookmark(int foodId) async {
     try {
       var response = await http.delete(
-        Uri.parse('http://api.kfoodbox.click/foods/$foodId/bookmark'),
+        Uri.parse('https://api-v2.kfoodbox.click/foods/$foodId/bookmark'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,

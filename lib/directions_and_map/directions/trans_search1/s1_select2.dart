@@ -102,7 +102,7 @@ class JsonDisplayScreen extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         //builder: (context) => DisplayJsonScreen(modifiedJsonData: modifiedJsonData),
-        builder: (context) => WebViewScreen(),
+        builder: (context) => WebViewScreen(modifiedJsonData: modifiedJsonData),
       ),
     );
   }

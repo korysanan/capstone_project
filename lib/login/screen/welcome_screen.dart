@@ -1,10 +1,5 @@
-import 'dart:convert';
-
-import 'package:capstone_project/globals.dart';
-//import 'package:capstone_project/login/service/login_service.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
-import 'package:http/http.dart' as http;
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -56,34 +51,5 @@ class WelcomeScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<void> fetchRecommendedFoods() async {
-    try {
-      var url = Uri.parse('http://api.kfoodbox.click/recommended-foods');
-      var response = await http.get(url, headers: {'Accept': '*/*'});
-
-      if (response.statusCode == 200) {
-        var decodedResponse = utf8.decode(response.bodyBytes);
-        var jsonResponse = json.decode(decodedResponse) as Map<String, dynamic>;
-        List<Food> fetchedFoods = [];
-
-        if (jsonResponse.containsKey('foods')) {
-          jsonResponse['foods'].forEach((foodJson) {
-            fetchedFoods.add(Food.fromJson(foodJson));
-          });
-        }
-
-        // Update the global foods list
-        updateFoods(fetchedFoods);
-        print('Foods updated successfully.');
-        print(fetchedFoods);
-      } else {
-        print('Failed to fetch data.');
-        print('Status code: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error occurred: $e');
-    }
   }
 }

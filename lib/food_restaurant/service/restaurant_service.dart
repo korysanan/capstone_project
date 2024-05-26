@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 // 서버로부터 데이터를 불러오는 함수
 Future<Map<String, dynamic>?> fetchRestaurantsData(int koreaRegionId, int restaurantCategoryId) async {
   // API URL 구성
-  Uri url = Uri.parse('http://api.kfoodbox.click/korea-restaurants?koreaRegionId=$koreaRegionId&restaurantCategoryId=$restaurantCategoryId');
+  Uri url = Uri.parse('https://api-v2.kfoodbox.click/korea-restaurants?koreaRegionId=$koreaRegionId&restaurantCategoryId=$restaurantCategoryId');
 
   try {
     // GET 요청

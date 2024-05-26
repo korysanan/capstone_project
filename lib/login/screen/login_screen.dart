@@ -137,7 +137,7 @@ class LoginScreen extends StatelessWidget {
 
   Future<void> fetchRecommendedFoods() async {
     try {
-      var url = Uri.parse('http://api.kfoodbox.click/recommended-foods');
+      var url = Uri.parse('https://api-v2.kfoodbox.click/recommended-foods');
       var response = await http.get(url, headers: {'Accept': '*/*'});
 
       if (response.statusCode == 200) {

@@ -55,7 +55,7 @@ class ImageDetailsPage extends StatelessWidget {
 
     for (var item in foodInfo) {
       var response = await http.get(
-        Uri.parse('http://api.kfoodbox.click/labelled-foods/${item['class']}'),
+        Uri.parse('https://api-v2.kfoodbox.click/labelled-foods/${item['class']}'),
         headers: {
           'accept': 'application/json',
         },

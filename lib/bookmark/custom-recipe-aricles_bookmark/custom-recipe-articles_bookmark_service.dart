@@ -9,7 +9,7 @@ class RecipeBookmarkService {
     try {
       var response = await http.get(
         Uri.parse(
-            'http://api.kfoodbox.click/my-custom-recipe-article-bookmarks'),
+            'https://api-v2.kfoodbox.click/my-custom-recipe-article-bookmarks'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,
@@ -36,7 +36,7 @@ class RecipeBookmarkService {
     try {
       var response = await http.post(
         Uri.parse(
-            'http://api.kfoodbox.click/custom-recipe-articles/$postId/bookmark'),
+            'https://api-v2.kfoodbox.click/custom-recipe-articles/$postId/bookmark'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,
@@ -58,7 +58,7 @@ class RecipeBookmarkService {
     try {
       var response = await http.delete(
         Uri.parse(
-            'http://api.kfoodbox.click/custom-recipe-articles/$postId/bookmark'),
+            'https://api-v2.kfoodbox.click/custom-recipe-articles/$postId/bookmark'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,
@@ -80,7 +80,7 @@ class RecipeBookmarkService {
     try {
       var response = await http.post(
         Uri.parse(
-            'http://api.kfoodbox.click/custom-recipe-articles/$postId/like'),
+            'https://api-v2.kfoodbox.click/custom-recipe-articles/$postId/like'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,
@@ -101,7 +101,7 @@ class RecipeBookmarkService {
     try {
       var response = await http.delete(
         Uri.parse(
-            'http://api.kfoodbox.click/custom-recipe-articles/$postId/like'),
+            'https://api-v2.kfoodbox.click/custom-recipe-articles/$postId/like'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,

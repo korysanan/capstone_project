@@ -8,7 +8,7 @@ class CommunityBookmarkService {
   static Future<void> fetchBookmarks() async {
     try {
       var response = await http.get(
-        Uri.parse('http://api.kfoodbox.click/my-community-article-bookmarks'),
+        Uri.parse('https://api-v2.kfoodbox.click/my-community-article-bookmarks'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,
@@ -35,7 +35,7 @@ class CommunityBookmarkService {
     try {
       var response = await http.post(
         Uri.parse(
-            'http://api.kfoodbox.click/community-articles/$postId/bookmark'),
+            'https://api-v2.kfoodbox.click/community-articles/$postId/bookmark'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,
@@ -57,7 +57,7 @@ class CommunityBookmarkService {
     try {
       var response = await http.delete(
         Uri.parse(
-            'http://api.kfoodbox.click/community-articles/$postId/bookmark'),
+            'https://api-v2.kfoodbox.click/community-articles/$postId/bookmark'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,
@@ -78,7 +78,7 @@ class CommunityBookmarkService {
   static Future<void> addLike(int postId) async {
     try {
       var response = await http.post(
-        Uri.parse('http://api.kfoodbox.click/community-articles/$postId/like'),
+        Uri.parse('https://api-v2.kfoodbox.click/community-articles/$postId/like'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,
@@ -98,7 +98,7 @@ class CommunityBookmarkService {
   static Future<void> deleteLike(int postId) async {
     try {
       var response = await http.delete(
-        Uri.parse('http://api.kfoodbox.click/community-articles/$postId/like'),
+        Uri.parse('https://api-v2.kfoodbox.click/community-articles/$postId/like'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,

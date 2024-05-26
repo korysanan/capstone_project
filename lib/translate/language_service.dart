@@ -3,7 +3,7 @@ import 'dart:convert';
 import '../globals.dart' as globals;
 
 Future<void> updateUserLanguage(int languageId) async {
-  String url = 'http://api.kfoodbox.click/my-language';
+  String url = 'https://api-v2.kfoodbox.click/my-language';
   try {
     var response = await http.put(
       Uri.parse(url),

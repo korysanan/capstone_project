@@ -9,7 +9,7 @@ import '../../globals.dart' as globals;
 import '../db/recipePost.dart';
 
 class RecipeSerrvices {
-  static const String url = 'http://api.kfoodbox.click';
+  static const String url = 'https://api-v2.kfoodbox.click';
 
   static List<Article> toArticleList(List<dynamic> json) {
     List<Article> articles = [];

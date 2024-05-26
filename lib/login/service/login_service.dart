@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 class LoginService {
   static Future<void> login(BuildContext context, String email, String password) async {
     var response = await http.post(
-      Uri.parse('http://api.kfoodbox.click/login'),
+      Uri.parse('https://api-v2.kfoodbox.click/login'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'email': email,
@@ -63,7 +63,7 @@ class LoginService {
 
   static Future<void> _fetchNickname() async {
     var response = await http.get(
-      Uri.parse('http://api.kfoodbox.click/my-nickname'),
+      Uri.parse('https://api-v2.kfoodbox.click/my-nickname'),
       headers: {
         'Content-Type': 'application/json',
         'Cookie': globals.sessionId!,
@@ -76,7 +76,7 @@ class LoginService {
 
   static Future<void> _fetchEmail() async {
     var response = await http.get(
-      Uri.parse('http://api.kfoodbox.click/my-email'),
+      Uri.parse('https://api-v2.kfoodbox.click/my-email'),
       headers: {
         'Content-Type': 'application/json',
         'Cookie': globals.sessionId!,
@@ -89,7 +89,7 @@ class LoginService {
 
   static Future<void> _fetchLanguage() async {
     var response = await http.get(
-      Uri.parse('http://api.kfoodbox.click/my-language'),
+      Uri.parse('https://api-v2.kfoodbox.click/my-language'),
       headers: {
         'Content-Type': 'application/json',
         'Cookie': globals.sessionId!,
@@ -132,7 +132,7 @@ class LoginService {
 
   static Future<void> _recommendfood() async {
     var response = await http.get(
-      Uri.parse('http://api.kfoodbox.click/recommended-foods'),
+      Uri.parse('https://api-v2.kfoodbox.click/recommended-foods'),
       headers: {
         'Content-Type': 'application/json',
         'Cookie': globals.sessionId!,
@@ -153,7 +153,7 @@ class LoginService {
   }
   // 닉네임, 비밀번호 변경 api 불러오기 
   static Future<void> updateUser(BuildContext context, String nickname, String password) async {
-    var url = Uri.parse('http://api.kfoodbox.click/user'); // Modify with your actual server URL
+    var url = Uri.parse('https://api-v2.kfoodbox.click/user'); // Modify with your actual server URL
     var response = await http.put(
       url,
       headers: {
@@ -216,7 +216,7 @@ class LoginService {
 
     if (sessionId != null) {
       var response = await http.post(
-        Uri.parse('http://api.kfoodbox.click/logout'),
+        Uri.parse('https://api-v2.kfoodbox.click/logout'),
         headers: {
           'Content-Type': 'application/json',
           'Cookie': sessionId,
@@ -255,7 +255,7 @@ class LoginService {
 
   // 회원 탈퇴 기능 api 
   static Future<void> deleteUser(BuildContext context) async {
-    var url = Uri.parse('http://api.kfoodbox.click/user');  // Modify with your actual server URL
+    var url = Uri.parse('https://api-v2.kfoodbox.click/user');  // Modify with your actual server URL
     var response = await http.delete(
       url,
       headers: {

@@ -7,7 +7,7 @@ class MyPageService {
   static Future<void> fetchUserArticles() async {
     try {
       var response = await http.get(
-        Uri.parse('http://api.kfoodbox.click/my-articles'),
+        Uri.parse('https://api-v2.kfoodbox.click/my-articles'),
         headers: {
           'Accept': '*/*',
           'Cookie': globals.sessionId!,

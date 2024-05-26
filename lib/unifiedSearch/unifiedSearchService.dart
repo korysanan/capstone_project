@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class UnifiedSearchService {
-  static const String url = 'http://api.kfoodbox.click';
+  static const String url = 'https://api-v2.kfoodbox.click';
 
   static List<CategoryFood> toFoodList(List<dynamic> json) {
     List<CategoryFood> articles = [];

@@ -6,7 +6,7 @@ import '../screen/login_screen.dart';
 
 
 Future<void> sendVerificationCode(BuildContext context, String email) async { // 인증번호 보내기
-  const String serverAddress = 'http://api.kfoodbox.click/authentication-number';
+  const String serverAddress = 'https://api-v2.kfoodbox.click/authentication-number';
   try {
     final response = await http.post(
       Uri.parse(serverAddress),
@@ -35,7 +35,7 @@ Future<void> sendVerificationCode(BuildContext context, String email) async { //
 }
 
 Future<bool> verifyCertificationNumber(BuildContext context, String email, String certificationNumber) async {
-  const String serverAddress = 'http://api.kfoodbox.click/signup-authentication';
+  const String serverAddress = 'https://api-v2.kfoodbox.click/signup-authentication';
 
   try {
     final response = await http.post(
@@ -69,7 +69,7 @@ Future<bool> verifyCertificationNumber(BuildContext context, String email, Strin
 }
 
 Future<bool> checkNicknameExistence(String nickname) async { // 닉네임 중복 체크 
-  final Uri url = Uri.parse('http://api.kfoodbox.click/nickname-existence?nickname=$nickname');
+  final Uri url = Uri.parse('https://api-v2.kfoodbox.click/nickname-existence?nickname=$nickname');
   final response = await http.get(url);
 
   if (response.statusCode == 200) {
@@ -81,7 +81,7 @@ Future<bool> checkNicknameExistence(String nickname) async { // 닉네임 중복
 }
 
 Future<bool> checkEmailExistence(String email) async { // 이메일 중복 체크 
-  final Uri url = Uri.parse('http://api.kfoodbox.click/email-existence?email=$email');
+  final Uri url = Uri.parse('https://api-v2.kfoodbox.click/email-existence?email=$email');
   final response = await http.get(url);
 
   if (response.statusCode == 200) {
@@ -93,7 +93,7 @@ Future<bool> checkEmailExistence(String email) async { // 이메일 중복 체�
 }
 
 Future<void> registerUser(BuildContext context, String email, String password, String nickname, int languageId) async {
-  const String serverAddress = 'http://api.kfoodbox.click/user';
+  const String serverAddress = 'https://api-v2.kfoodbox.click/user';
   try {
     final response = await http.post(
       Uri.parse(serverAddress),

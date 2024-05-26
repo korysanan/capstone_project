@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../globals.dart' as globals;
 
 class CommunitySerrvices {
-  static const String url = 'http://api.kfoodbox.click';
+  static const String url = 'https://api-v2.kfoodbox.click';
 
   static List<Article> toArticleList(List<dynamic> json) {
     List<Article> articles = [];

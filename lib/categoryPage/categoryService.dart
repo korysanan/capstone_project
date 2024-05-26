@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CategorySerrvices {
-  static const String url = 'http://api.kfoodbox.click';
+  static const String url = 'https://api-v2.kfoodbox.click';
 
   static List<FoodCategory> toFoodCategory(List<dynamic> json) {
     List<FoodCategory> foodCategories = [];
