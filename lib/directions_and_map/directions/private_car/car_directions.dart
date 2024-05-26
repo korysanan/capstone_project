@@ -8,7 +8,7 @@ import '../../../home/on_item_tap.dart';
 class DirectionsResultScreen extends StatelessWidget {
   final dynamic directions;
   WebViewController? _controller;
-  
+
   DirectionsResultScreen({required this.directions});
 
   String calculateArrivalTime(String durationText, String departureTime) {
@@ -43,6 +43,7 @@ class DirectionsResultScreen extends StatelessWidget {
     String displayTextTop;
     String displayTextBottom;
     int _currentIndex = 0;
+    List<dynamic> path = [];
 
     try {
       final route = directions['route']['trafast'][0];
@@ -53,6 +54,7 @@ class DirectionsResultScreen extends StatelessWidget {
       final tollFare = summary['tollFare'];
       final taxiFare = summary['taxiFare'];
       final fuelPrice = summary['fuelPrice'];
+      path = route['path'];
 
       String distanceText = distance >= 1000
           ? '${(distance / 1000).toStringAsFixed(2)} km'
@@ -118,13 +120,13 @@ class DirectionsResultScreen extends StatelessWidget {
       body: Stack(
         children: [
           WebView(
-            initialUrl: 'http://10.0.2.2/flutter/car_direction.html', // 원격 HTML 파일 로드
+            initialUrl: 'http://3.35.120.84/ct.html', // 원격 HTML 파일 로드
             javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: (WebViewController webViewController) {
               _controller = webViewController;
             },
             onPageFinished: (String url) {
-              _injectDataIntoWebView();
+              _injectDataIntoWebView(path);
             },
           ),
           DraggableScrollableSheet(
@@ -214,11 +216,12 @@ class DirectionsResultScreen extends StatelessWidget {
     );
   }
 
-  void _injectDataIntoWebView() {
+  void _injectDataIntoWebView(List<dynamic> path) {
     if (_controller != null) {
+      String pathData = path.map((coords) => '[${coords[0]}, ${coords[1]}]').join(',');
       String script = """
-        console.log('searchDrivingPath called with: ${globals.my_longitude}, ${globals.my_latitude}, ${globals.arr_longitude}, ${globals.arr_latitude}');
-        searchDrivingPath(${globals.my_longitude}, ${globals.my_latitude}, ${globals.arr_longitude}, ${globals.arr_latitude});
+        console.log('searchDrivingPath called with: ${globals.my_longitude}, ${globals.my_latitude}, ${globals.arr_longitude}, ${globals.arr_latitude}, [$pathData]');
+        searchDrivingPath(${globals.my_longitude}, ${globals.my_latitude}, ${globals.arr_longitude}, ${globals.arr_latitude}, [$pathData]);
       """;
       _controller!.runJavascript(script);
     }
