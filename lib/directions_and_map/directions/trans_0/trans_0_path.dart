@@ -34,7 +34,7 @@ class _PathDetailScreenState extends State<PathDetailScreen> {
         ],
       ),
       body: WebView(
-        initialUrl: 'http://10.0.2.2/flutter/tran_0_direction.html',
+        initialUrl: 'http://3.35.120.84/tran_0_direction.html',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) {
           _controller = webViewController;
@@ -56,9 +56,10 @@ class _PathDetailScreenState extends State<PathDetailScreen> {
       'sy': globals.my_latitude,
       'ex': globals.arr_longitude,
       'ey': globals.arr_latitude,
-      //'jsonMap2': widget.jsonMap2, // Include the jsonMap2 data
+      'jsonMap2': widget.jsonMap2, // Include the jsonMap2 data
     };
     String jsonData = jsonEncode(data);
+    jsonData = jsonData.replaceAll("'", r"\'"); // Escape single quotes
     _controller.runJavascript("updateData('$jsonData');");
   }
 }

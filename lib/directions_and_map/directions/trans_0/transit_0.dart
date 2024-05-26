@@ -60,7 +60,6 @@ class TransitScreen0 extends StatelessWidget {
               "path": [path] // Only the clicked path
             }
           };
-
           // Navigate to PathDetailScreen
           Navigator.push(
             context,

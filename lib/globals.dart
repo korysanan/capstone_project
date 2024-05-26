@@ -50,8 +50,10 @@ int user_language_id = 18;
 
 double my_latitude = 36.76327;
 double my_longitude = 127.2820;
-double arr_latitude = 35.2060297;
-double arr_longitude = 129.0794613;
+//double my_latitude = 0.0;
+//double my_longitude = 0.0;
+double arr_latitude = 0.0;
+double arr_longitude = 0.0;
 String? arr_restaurantName;
 
 void updateUserLanguage(String newLanguage) {

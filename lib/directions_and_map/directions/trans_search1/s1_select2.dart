@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import '../../../globals.dart' as globals;
-import 's1_test.dart';
-import 's1_test2.dart';
+import 's1_path.dart';
 
 class JsonDisplayScreen extends StatelessWidget {
   final String jsonData;
@@ -101,7 +100,6 @@ class JsonDisplayScreen extends StatelessWidget {
   void _navigateToDisplayJsonScreen(BuildContext context, Map<String, dynamic> modifiedJsonData) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        //builder: (context) => DisplayJsonScreen(modifiedJsonData: modifiedJsonData),
         builder: (context) => WebViewScreen(modifiedJsonData: modifiedJsonData),
       ),
     );
