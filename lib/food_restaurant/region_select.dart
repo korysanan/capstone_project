@@ -29,9 +29,12 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FoodSelectScreen()),
+            );
           },
         ),
         title: Text(globals.getText('Select Region (2/2)')),
