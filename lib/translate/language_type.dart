@@ -17,7 +17,7 @@ enum Language {
   ar,
   et,
   en,
-  eu,
+  //eu,
   uk,
   it,
   id,
@@ -26,7 +26,7 @@ enum Language {
   cs,
   tr,
   pt,
-  br,
+  //br,
   pl,
   fr,
   fi,
@@ -52,7 +52,7 @@ enum Language {
       case Language.ar: return 16;
       case Language.et: return 17;
       case Language.en: return 18;
-      case Language.eu: return 19;
+      //case Language.en: return 19;
       case Language.uk: return 20;
       case Language.it: return 21;
       case Language.id: return 22;
@@ -61,7 +61,7 @@ enum Language {
       case Language.cs: return 25;
       case Language.tr: return 26;
       case Language.pt: return 27;
-      case Language.br: return 28;
+      //case Language.br: return 28;
       case Language.pl: return 29;
       case Language.fr: return 30;
       case Language.fi: return 31;
@@ -107,9 +107,11 @@ enum Language {
       case Language.et:
         return "Eesti";
       case Language.en:
-        return "English (USA)";
+        return "English";
+      /*
       case Language.eu:
         return "English (UK)";
+      */
       case Language.uk:
         return "Українська";
       case Language.it:
@@ -126,8 +128,10 @@ enum Language {
         return "Türkçe";
       case Language.pt:
         return "Português";
+      /*
       case Language.br:
         return "Português (Brasil)";
+      */
       case Language.pl:
         return "Polski";
       case Language.fr:
@@ -145,12 +149,16 @@ enum Language {
     switch (this) {
       case Language.en:
         return "en-US";
+      /*  
       case Language.eu:
         return "en-GB";
+      */
       case Language.pt:
         return "pt-PT";
+      /*
       case Language.br:
         return "pt-BR";
+      */
       default:
         return null;
     }

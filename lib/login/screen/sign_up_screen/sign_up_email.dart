@@ -97,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     onPressed: () {
                       emailVerification!.checkEmailAndSendVerification();
                     },
-                    child: Text('ReDuplicate check'),
+                    child: Text('Re-Send'),
                   ),
                 ],
               )
