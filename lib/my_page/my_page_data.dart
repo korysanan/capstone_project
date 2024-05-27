@@ -13,15 +13,11 @@ class MyPageData {
     my_recipe_articles = myRecipes;
   }
 
-  static List<String> getCommunityArticleNames() {
-    return my_community_articles
-        .map((article) => article['title'] as String)
-        .toList();
+  static List<dynamic> getCommunityArticleNames() {
+    return my_community_articles;
   }
 
-  static List<String> getRecipeArticleNames() {
-    return my_recipe_articles
-        .map((article) => article['title'] as String)
-        .toList();
+  static List<dynamic> getRecipeArticleNames() {
+    return my_recipe_articles;
   }
 }

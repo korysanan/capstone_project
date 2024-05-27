@@ -1,5 +1,6 @@
-import 'package:capstone_project/my_page/my_page_service.dart';
-
+import '../categoryPage/foodInformation.dart';
+import '../community/postInformation.dart';
+import '../customRecipe/recipePostInformation.dart';
 import 'my_page_data.dart';
 import 'package:flutter/material.dart';
 import '../bookmark/custom-recipe-aricles_bookmark/custom-recipe-articles_bookmark_data.dart';
@@ -23,15 +24,15 @@ class MyPageYes extends StatefulWidget {
 class _MyPageYesState extends State<MyPageYes> {
   final int _currentIndex = 0; // bottomnavigation index 번호
 
-  Map<String, List<String>> items = {
-    globals.getText('community'): CommunityBookmarkData.getBookmarkNames(),
-    globals.getText('custom recipes'): RecipeBookmarkData.getBookmarkNames(),
-    globals.getText('foods'): FoodBookmarkData.getBookmarkNames(),
+  Map<String, List<dynamic>> items = {
+    'community': CommunityBookmarkData.getBookmarkNames(),
+    'custom recipes': RecipeBookmarkData.getBookmarkNames(),
+    'foods': FoodBookmarkData.getBookmarkNames(),
   };
 
-  Map<String, List<String>> myArticles = {
-    globals.getText('community'): MyPageData.getCommunityArticleNames(),
-    globals.getText('custom recipes'): MyPageData.getRecipeArticleNames(),
+  Map<String, List<dynamic>> myArticles = {
+    'community': MyPageData.getCommunityArticleNames(),
+    'custom recipes': MyPageData.getRecipeArticleNames(),
   };
 
   @override
@@ -53,8 +54,9 @@ class _MyPageYesState extends State<MyPageYes> {
         centerTitle: true,
         actions: <Widget>[
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Image.asset('assets/images/kfood_logo.png'), // Your image asset here
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Image.asset(
+                'assets/images/kfood_logo.png'), // Your image asset here
           ),
         ],
       ),
@@ -110,7 +112,7 @@ class _MyPageYesState extends State<MyPageYes> {
             ),
           ),
           ...items.entries
-              .map((entry) => entry.key == globals.getText('foods')
+              .map((entry) => entry.key == 'foods'
                   ? _buildExpansionTileWithTranslate(
                       title: entry.key, children: entry.value)
                   : _buildExpansionTile(
@@ -147,82 +149,139 @@ class _MyPageYesState extends State<MyPageYes> {
   }
 
   Widget _buildArticleExpansionTile(
-      {required String title, required List<String> children}) {
+      {required String title, required List<dynamic>? children}) {
     return ExpansionTile(
-      title: Text(title),
-      children: children.map((String item) {
-        return ListTile(
-          title: Text(item),
-        );
-      }).toList(),
+      title: Text(
+        globals.getText(title),
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+      children: children!.isNotEmpty
+          ? children.map((item) {
+              return ListTile(
+                title: Text(item['title']),
+                onTap: () {
+                  if (title == 'community') {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PostInformation(
+                                  postId: item['id'],
+                                  isChanged: false,
+                                )));
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RecipeInformation(
+                                  postId: item['id'],
+                                  isChanged: false,
+                                )));
+                  }
+                },
+              );
+            }).toList()
+          : [],
     );
   }
 
   Widget _buildExpansionTile(
-      {required String title, required List<String> children}) {
+      {required String title, required List<dynamic>? children}) {
     return ExpansionTile(
-      title: Text(title),
-      children: children.map((String item) {
-        return ListTile(
-          title: Text(item),
-          trailing: IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () => _deleteItem(title, item),
-          ),
-        );
-      }).toList(),
-    );
+        title: Text(globals.getText(title),
+            style: const TextStyle(fontWeight: FontWeight.bold)),
+        children: children!.isNotEmpty
+            ? children.map((item) {
+                return ListTile(
+                  title: Text(item['title'].toString()),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () => _deleteItem(title, item),
+                  ),
+                  onTap: () {
+                    if (title == 'community') {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PostInformation(
+                                    postId: item['id'],
+                                    isChanged: false,
+                                  )));
+                    } else {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RecipeInformation(
+                                    postId: item['id'],
+                                    isChanged: false,
+                                  )));
+                    }
+                  },
+                );
+              }).toList()
+            : []);
   }
 
   Widget _buildExpansionTileWithTranslate(
-      {required String title, required List<String> children}) {
+      {required String title, required List<dynamic>? children}) {
     return ExpansionTile(
-      title: Text(title),
-      children: children.map((String item) {
-        return ListTile(
-          title: globals.selectedLanguageCode != 'ko'
-              ? FutureBuilder<String>(
-                  future: translateText(item),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      if (snapshot.hasError) {
-                        return const Text(
-                          'Error',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        );
-                      } else {
-                        return Text(
-                          snapshot.data ?? 'Translation error', // 번역 실패시 대체 텍스트
+        title: Text(globals.getText(title),
+            style: const TextStyle(fontWeight: FontWeight.bold)),
+        children: children!.isNotEmpty
+            ? children.map((item) {
+                return ListTile(
+                  title: globals.selectedLanguageCode != 'ko'
+                      ? FutureBuilder<String>(
+                          future: translateText(item['name'].toString()),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              if (snapshot.hasError) {
+                                return const Text(
+                                  'Error',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                              } else {
+                                return Text(
+                                  snapshot.data ??
+                                      'Translation error', // 번역 실패시 대체 텍스트
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                  ),
+                                );
+                              }
+                            } else {
+                              return const CircularProgressIndicator(); // 로딩 중 표시
+                            }
+                          },
+                        )
+                      : Text(
+                          item['name'].toString(),
                           style: const TextStyle(
                             fontSize: 16.0,
                           ),
-                        );
-                      }
-                    } else {
-                      return const CircularProgressIndicator(); // 로딩 중 표시
-                    }
-                  },
-                )
-              : Text(
-                  item,
-                  style: const TextStyle(
-                    fontSize: 16.0,
+                        ),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () => _deleteItem(title, item),
                   ),
-                ),
-          trailing: IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () => _deleteItem(title, item),
-          ),
-        );
-      }).toList(),
-    );
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FoodInformation(
+                                  foodId: item['id'],
+                                )));
+                  },
+                );
+              }).toList()
+            : []);
   }
 
-  void _deleteItem(String category, String item) {
+  void _deleteItem(String category, dynamic item) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -241,10 +300,12 @@ class _MyPageYesState extends State<MyPageYes> {
               ),
               onPressed: () {
                 setState(() {
-                  if (category == globals.getText('foods')) {
+                  if (category == 'foods') {
                     FoodBookmarkData.deleteBookmark(item);
-                  } else if (category == globals.getText('community')) {
+                  } else if (category == 'community') {
                     CommunityBookmarkData.deleteBookmark(item);
+                  } else if (category == 'custom recipes') {
+                    RecipeBookmarkData.deleteBookmark(item);
                   }
                   items[category]?.remove(item);
                   if (items[category]?.isEmpty ?? true) {

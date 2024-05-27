@@ -11,10 +11,8 @@ class CommunityBookmarkData {
   }
 
   // 북마크 이름만 보내기 (이거 마이페이지에서 사용)
-  static List<String> getBookmarkNames() {
-    return communities_bookmarks
-        .map((bookmark) => bookmark['title'] as String)
-        .toList();
+  static List<dynamic> getBookmarkNames() {
+    return communities_bookmarks;
   }
 
   // 북마크 보유 여부 (true, false)
@@ -24,15 +22,7 @@ class CommunityBookmarkData {
   }
 
   // 북마크 삭제
-  static void deleteBookmark(String communityTitle) {
-    int? postId;
-
-    for (var bookmark in communities_bookmarks) {
-      if (bookmark['title'] == communityTitle) {
-        postId = bookmark['id'] as int;
-        CommunityBookmarkService.deleteBookmark(postId);
-        break;
-      }
-    }
+  static void deleteBookmark(dynamic community) {
+    CommunityBookmarkService.deleteBookmark(community['id'] as int);
   }
 }

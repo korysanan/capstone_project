@@ -11,10 +11,8 @@ class RecipeBookmarkData {
   }
 
   // 북마크 이름만 보내기 (이거 마이페이지에서 사용)
-  static List<String> getBookmarkNames() {
-    return recipe_bookmarks
-        .map((bookmark) => bookmark['title'] as String)
-        .toList();
+  static List<dynamic> getBookmarkNames() {
+    return recipe_bookmarks;
   }
 
   // 북마크 보유 여부 (true, false)
@@ -23,15 +21,7 @@ class RecipeBookmarkData {
   }
 
   // 북마크 삭제
-  static void deleteBookmark(String communityTitle) {
-    int? postId;
-
-    for (var bookmark in recipe_bookmarks) {
-      if (bookmark['title'] == communityTitle) {
-        postId = bookmark['id'] as int;
-        RecipeBookmarkService.deleteBookmark(postId);
-        break;
-      }
-    }
+  static void deleteBookmark(dynamic recipe) {
+    RecipeBookmarkService.deleteBookmark(recipe['id'] as int);
   }
 }

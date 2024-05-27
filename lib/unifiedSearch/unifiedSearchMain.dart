@@ -21,7 +21,7 @@ class UnifiedSearchMain extends StatefulWidget {
 class _CommunitySearchState extends State<UnifiedSearchMain> {
   final int _currentIndex = 0; // bottomnavigation index 번호
   bool isSearched = false;
-  String inputText = '';
+  String? inputText = '';
   final focusNode = FocusNode();
   List foodInfo = [false];
   List communityInfo = [false];
