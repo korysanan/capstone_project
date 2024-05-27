@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import '../../home/bottom.dart';
@@ -22,7 +24,7 @@ class _FilterScreenState extends State<FilterScreen> {
   String _transitImage = 'assets/images/transit.png';
 
   double? _selectedPrice;
-  TimeOfDay? _selectedTime;
+  //TimeOfDay? _selectedTime;
 
   int _selectedHours = 0;
   int _selectedMinutes = 0;
@@ -56,33 +58,53 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 
   void _navigateToTransitScreen(BuildContext context, Map<String, dynamic> jsonMap) async {
-    if (jsonMap['result']['searchType'] == 0){
+    if (jsonMap['result']['path'].isEmpty){
       showDialog(
         context: context,
-        barrierDismissible: false,
         builder: (BuildContext context) {
-          return Center(child: CircularProgressIndicator());
+          return AlertDialog(
+            title: Text('No Match'),
+            content: Text('No matching routes found.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text(globals.getText('OK')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
         },
       );
-      if (globals.selectedLanguageCode == 'ko') {
-        globals.arr_restaurantName = globals.arr_restaurantName ?? 'Default Name';
+    } else{
+      if (jsonMap['result']['searchType'] == 0){
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return Center(child: CircularProgressIndicator());
+          },
+        );
+        if (globals.selectedLanguageCode == 'ko') {
+          globals.arr_restaurantName = globals.arr_restaurantName ?? 'Default Name';
+        } else {
+          globals.arr_restaurantName = await _getTranslatedText(globals.arr_restaurantName ?? 'Default Name');
+        }
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TransitScreen0(jsonMap: jsonMap),
+          ),
+        );
       } else {
-        globals.arr_restaurantName = await _getTranslatedText(globals.arr_restaurantName ?? 'Default Name');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TransitScreen1(jsonMap: jsonMap),
+          ),
+        );
       }
-      Navigator.pop(context);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => TransitScreen0(jsonMap: jsonMap),
-        ),
-      );
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Test_Screen(jsonMap: jsonMap),
-        ),
-      );
     }
   }
 
@@ -105,18 +127,65 @@ class _FilterScreenState extends State<FilterScreen> {
         '${globals.arr_longitude},${globals.arr_latitude}'
       );
       Navigator.pop(context);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DirectionsResultScreen(directions: directions),
-        ),
-      );
+      var fuelPrice = directions['route']['trafast'][0]['summary']['fuelPrice'];
+      var tollFare = directions['route']['trafast'][0]['summary']['tollFare'];
+      var sum_price = fuelPrice + tollFare;
+      var duration = directions['route']['trafast'][0]['summary']['duration'] / 60000;
+      
+      if ((_totalMinutes == null || duration <= _totalMinutes!) && 
+          (_selectedPrice == null || sum_price <= _selectedPrice!)) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DirectionsResultScreen(directions: directions),
+          ),
+        );
+      } else{
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('No Match'),
+              content: Text('No matching routes found.'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text(globals.getText('Confirm')),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
     } catch (e) {
       print('Error getting directions: $e');
     }
   }
 
   void printFilters(BuildContext context) {
+    if (_selectedVehicle == null) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Please select a vehicle.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text(globals.getText('OK')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -173,16 +242,6 @@ class _FilterScreenState extends State<FilterScreen> {
                     paymentThreshold: _selectedPrice?.round(),
                     timeThreshold: _totalMinutes,
                     onComplete: (jsonMap) {
-                      _navigateToTransitScreen(context, jsonMap); // 수정된 부분
-                    },
-                  );
-                } else {
-                  fetchData(
-                    sx, sy, ex, ey,
-                    paymentThreshold: _selectedPrice?.round(),
-                    timeThreshold: _totalMinutes,
-                    onComplete: (jsonMap) {
-                      // 선택된 차량이 없을 때 기본 처리 로직
                       _navigateToTransitScreen(context, jsonMap); // 수정된 부분
                     },
                   );
@@ -372,18 +431,18 @@ class _FilterScreenState extends State<FilterScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(globals.getText('Time required')),
-                          Text(' : '),
-                          Text('$_totalMinutes minutes'),
+                          if (_totalMinutes != null) ...[
+                            Text(globals.getText('Time required')),
+                            Text(' : '),
+                            Text('$_totalMinutes minutes'),
+                          ],
                         ],
                       ),
                     ),
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          _selectedHours = 0; // Reset hours to 0
-                          _selectedMinutes = 0; // Reset minutes to 0
-                          updateTotalMinutes(); // Recalculate total minutes
+                          _totalMinutes = null;
                         });
                       },
                       child: Text(globals.getText("It doesn't matter")),

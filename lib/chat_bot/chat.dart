@@ -40,16 +40,16 @@ class _chatbotState extends State<chatbot> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          if (!isFirstMessageSent)
-            buildInitialScreen(),
-          Expanded(
-            child: MessagesScreen(messages: messages),
-          ),
-          buildInputArea(),
-          SizedBox(height: 5),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            if (!isFirstMessageSent) buildInitialScreen(),
+            Expanded(
+              child: MessagesScreen(messages: messages),
+            ),
+            buildInputArea(),
+          ],
+        ),
       ),
     );
   }
@@ -65,12 +65,21 @@ class _chatbotState extends State<chatbot> {
             width: 300,
             height: 300,
           ),
-          Text('Ask me anything...',
+          Text('Ask me about Korean food...',
               style: TextStyle(
-                fontSize: 30,
-                color: Colors.black,
+                fontSize: 25,
+                color: Colors.black.withOpacity(0.4), // Adjust the opacity here
                 fontStyle: FontStyle.italic,
               )),
+          //SizedBox(height: 200),
+          /*
+          Text('I can only answer questions \nrelated to apps or Korean food.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black,
+              )),
+          */
         ],
       ),
     );

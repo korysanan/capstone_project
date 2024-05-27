@@ -4,10 +4,10 @@ import '../../../globals.dart' as globals;
 import 's1_select2.dart';
 import 'service/s1_fetch.dart';
 
-class Test_Screen extends StatelessWidget {
+class TransitScreen1 extends StatelessWidget {
   final Map<String, dynamic> jsonMap;
 
-  Test_Screen({required this.jsonMap});
+  TransitScreen1({required this.jsonMap});
 
   @override
   Widget build(BuildContext context) {

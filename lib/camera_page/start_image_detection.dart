@@ -40,6 +40,26 @@ class ImageDetailsPage extends StatelessWidget {
         if (foodInfo.isNotEmpty) {
           await fetchFoodDetailsAndNavigate(foodInfo, context, image);
         }
+        else {
+          Navigator.of(context).pop();
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('No Match'),
+                content: Text('There is no match.'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('OK'),
+                  ),
+                ],
+              );
+            },
+          );
+        }
       } catch (e) {
         print('Error parsing server response: $e');
       }
