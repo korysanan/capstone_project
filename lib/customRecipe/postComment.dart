@@ -40,7 +40,7 @@ class _ArticleCommentsState extends State<ArticleComments> {
                       Row(
                         children: [
                           Text(
-                            '${widget.comments?[index].nickname}   ',
+                            '${widget.comments?[index].nickname ?? 'deleted account'}    ',
                             style: const TextStyle(
                               fontSize: 18,
                             ),
