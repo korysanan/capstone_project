@@ -131,5 +131,13 @@ final Map<String, String> langNo = {
   'Current Location': 'Nåværende plassering',
   'Do you want to proceed with directions?': 'Vil du fortsette med veibeskrivelsen?',
   'Check': 'Kryss av',
-  'Section Time: ': 'Seksjonstid: '
+  'Section Time: ': 'Seksjonstid: ',
+  'Cautions (1/2)' : 'Advarsler (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Denne chatboten bruker oversettelser. Noen oversettelser kan være litt unøyaktige, noe som resulterer i upassende resultater.',
+  'Next' : 'Neste',
+  'Cautions (2/2)' : 'Advarsler (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Du kan bare svare på spørsmål om apper og koreansk mat, og i matkategorien kan du bare svare på 27 spørsmål om koreansk mat. Listen over de 27 matvarene finnes på neste side, eller ved å be chatboten om en liste over koreanske matvarer.",
+  'Previous' : 'Forrige',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Diverse \n2. Stekt\n3. Suppe\n4. Kimchi\n5. Urter\n6. Riskake\n7. Dumpling\n8. Nudler\n9. Kryddret\n10. Ris\n11. Stekt\n12. Wraps\n13. Drikke\n14. Marinert krabbe\n15. Pickles\n16. Spyd\n17. Pannekake\n18. Hot Pot\n19. Brasert\n20. Grøt\n21. Gryteretter\n22. Dampet\n23. Suppe\n24. Frites\n25. Søtsaker\n26. Sjømat\n27. Rå fisk"
+
 };

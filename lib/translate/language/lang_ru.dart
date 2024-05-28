@@ -132,5 +132,13 @@ final Map<String, String> langRu = {
   'Current Location': 'Текущее местоположение',
   'Do you want to proceed with directions?': 'Вы хотите перейти к указаниям?',
   'Check': 'Проверьте',
-  'Section Time: ': 'Время раздела: '
+  'Section Time: ': 'Время раздела: ',
+  'Cautions (1/2)' : 'Предостережения (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Этот чат-бот использует переводы. Некоторые переводы могут быть немного неточными, что приводит к неподобающим результатам.',
+  'Next' : 'Далее',
+  'Cautions (2/2)' : 'Предостережения (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Вы можете отвечать только на вопросы о приложениях и корейской еде, а в категории еды вы можете отвечать только на 27 вопросов о корейской еде. Список из 27 продуктов можно найти на следующей странице или спросив у чат-бота список корейских продуктов.",
+  'Previous' : 'Назад',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Разное \n2. Жареное\n3. Суп\n4. Кимчи\n5. Травы\n6. Рисовый пирог\n7. Пельмени\n8. Лапша\n9. Приправленное\n10. Рис\n11. Жареное\n12. Обёртки\n13. Напитки\n14. Маринованный краб\n15. Соленья\n16. Шашлык\n17. Блин\n18. Кастрюля\n19. Тушёное\n20. Каша\n21. Рагу\n22. Пареное\n23. Суп\n24. Жареное\n25. Сладости\n26. Морепродукты\n27. Сырая рыба"
+
 };

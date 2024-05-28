@@ -127,5 +127,12 @@ final Map<String, String> langKo = {
   'Current Location': '현재 위치',
   'Do you want to proceed with directions?': '길안내를 원하십니까?',
   'Check': '체크',
-  'Section Time: ': '구간 시간: '
+  'Section Time: ': '구간 시간: ',
+  'Cautions (1/2)' : '주의사항 (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : '이 채팅봇은 번역을 사용합니다. 일부 번역은 약간 부정확할 수 있으며 부적절한 결과를 초래할 수 있습니다.',
+  'Next' : '다음',
+  'Cautions (2/2)' : '주의사항 (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "앱과 한국 음식에 대한 질문만 답할 수 있으며, 음식 카테고리에서는 한국 음식에 대한 27개의 질문에만 답할 수 있습니다. 27개의 음식 목록은 다음 페이지에서 찾을 수 있거나 채팅봇에게 한국 음식 목록을 물어볼 수 있습니다.",
+  'Previous' : '이전',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. 기타 \n2. 구이\n3. 국\n4. 김치\n5. 나물\n6. 떡\n7. 만두\n8. 면\n9. 무침\n10. 밥\n11. 볶음\n12. 쌈\n13. 음료\n14. 양념게장\n15. 장아찌\n16. 꼬치\n17. 전\n18. 찌개\n19. 조림\n20. 죽\n21. 찜\n22. 탕\n23. 튀김\n24. 후식\n25. 해물\n26. 생선회"
 };

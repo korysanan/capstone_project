@@ -131,5 +131,13 @@ final Map<String, String> langSl = {
   'Current Location': 'Trenutna lokacija',
   'Do you want to proceed with directions?': 'Ali želite nadaljevati z navodili?',
   'Check': 'Preverite',
-  'Section Time: ': 'Čas oddelka: '
+  'Section Time: ': 'Čas oddelka: ',
+  'Cautions (1/2)' : 'Opozorila (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Ta chatbot uporablja prevode. Nekateri prevodi so lahko nekoliko netočni, kar povzroči neprimerne rezultate.',
+  'Next' : 'Naslednji',
+  'Cautions (2/2)' : 'Opozorila (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Odgovarjate lahko le na vprašanja o aplikacijah in korejski hrani, v kategoriji hrane pa lahko odgovarjate le na 27 vprašanj o korejski hrani. Seznam 27 živil najdete na naslednji strani ali če vprašate chatbot za seznam korejskih živil.",
+  'Previous' : 'Prejšnji',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Razno \n2. Pečeno\n3. Juha\n4. Kimchi\n5. Zelišča\n6. Riževa torta\n7. Cmok\n8. Rezanci\n9. Začinjeno\n10. Riž\n11. Praženo\n12. Zavijanje\n13. Pijače\n14. Marinirani rak\n15. Kumarice\n16. Nabodalo\n17. Palačinka\n18. Vroča lonec\n19. Dušeno\n20. Kaša\n21. Enolončnice\n22. Kuhano na pari\n23. Juha\n24. Ocvrti krompirček\n25. Sladkarije\n26. Morski sadeži\n27. Surova riba"
+
 };

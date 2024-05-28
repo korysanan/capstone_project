@@ -131,5 +131,13 @@ final Map<String, String> langRo = {
   'Current Location': 'Locația curentă',
   'Do you want to proceed with directions?': 'Doriți să continuați cu indicațiile?',
   'Check': 'Verificați',
-  'Section Time: ': 'Timpul secțiunii: '
+  'Section Time: ': 'Timpul secțiunii: ',
+  'Cautions (1/2)' : 'Avertismente (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Acest chatbot folosește traduceri. Unele traduceri pot fi ușor inexacte, ceea ce poate duce la rezultate inadecvate.',
+  'Next' : 'Următorul',
+  'Cautions (2/2)' : 'Avertismente (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Puteți răspunde doar la întrebări despre aplicații și mâncare coreeană, iar în categoria de alimente puteți răspunde doar la 27 de întrebări despre mâncarea coreeană. Lista celor 27 de alimente poate fi găsită pe pagina următoare sau întrebând chatbot-ul pentru o listă de alimente coreene.",
+  'Previous' : 'Precedent',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Altele \n2. Fript\n3. Supă\n4. Kimchi\n5. Plante\n6. Prăjitură de orez\n7. Găluște\n8. Tăiței\n9. Condimentat\n10. Orez\n11. Prăjit\n12. Împachetate\n13. Băuturi\n14. Crab marinat\n15. Murături\n16. Frigărui\n17. Clătită\n18. Oală fierbinte\n19. Înăbușit\n20. Terci\n21. Tocane\n22. Aburit\n23. Supă\n24. Prăjituri\n25. Dulciuri\n26. Fructe de mare\n27. Pește crud"
+
 };

@@ -130,5 +130,13 @@ final Map<String, String> langEt = {
   'Current Location': 'Praegune asukoht',
   'Do you want to proceed with directions?': 'Kas soovite jätkata teekonnaga?',
   'Check': 'Kontrollige',
-  'Section Time: ': 'Sektsiooni aeg: '
+  'Section Time: ': 'Sektsiooni aeg: ',
+  'Cautions (1/2)' : 'Hoiatused (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'See juturobot kasutab tõlkeid. Mõned tõlked võivad olla veidi ebatäpsed, mis põhjustab ebasobivaid tulemusi.',
+  'Next' : 'Järgmine',
+  'Cautions (2/2)' : 'Hoiatused (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Saate vastata ainult rakenduste ja Korea toidu kohta esitatud küsimustele ning toidukategoorias saate vastata ainult 27 küsimusele Korea toidu kohta. 27 toiduainete loendit saate vaadata järgmisel lehel või küsides juturobotilt Korea toiduainete loendit.",
+  'Previous' : 'Eelmine',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Muud \n2. Röstitud\n3. Supp\n4. Kimchi\n5. Maitsetaimed\n6. Riisikook\n7. Pelmeenid\n8. Nuudlid\n9. Maitseainega\n10. Riis\n11. Praetud\n12. Wrapid\n13. Joogid\n14. Marineeritud krabi\n15. Marineeritud kurgid\n16. Varrask\n17. Pannkook\n18. Hot Pot\n19. Hautatud\n20. Puder\n21. Hautised\n22. Aurutatud\n23. Supp\n24. Friikartulid\n25. Maiustused\n26. Mereannid\n27. Toores kala"
+
 };

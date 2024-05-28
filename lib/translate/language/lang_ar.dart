@@ -129,5 +129,13 @@ final Map<String, String> langAr = {
   'Current Location': 'الموقع الحالي',
   'Do you want to proceed with directions?': 'هل تريد متابعة الاتجاهات؟',
   'Check': 'تحقق',
-  'Section Time: ': 'وقت القسم: '
+  'Section Time: ': 'وقت القسم: ',
+  'Cautions (1/2)' : 'تحذيرات (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'يستخدم هذا الشات بوت الترجمات. قد تكون بعض الترجمات غير دقيقة بعض الشيء، مما يؤدي إلى نتائج غير ملائمة.',
+  'Next' : 'التالي',
+  'Cautions (2/2)' : 'تحذيرات (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "يمكنك الإجابة على الأسئلة المتعلقة بالتطبيقات والطعام الكوري فقط، وفي فئة الطعام، يمكنك الإجابة على 27 سؤالًا فقط حول الطعام الكوري. يمكن العثور على قائمة الأطعمة الـ 27 في الصفحة التالية، أو عن طريق طلب قائمة الأطعمة الكورية من الشات بوت.",
+  'Previous' : 'السابق',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. متنوع \n2. مشوي\n3. حساء\n4. كيمتشي\n5. أعشاب\n6. كعكة الأرز\n7. زلابية\n8. نودلز\n9. متبل\n10. أرز\n11. مقلي\n12. لفائف\n13. مشروبات\n14. سلطعون متبل\n15. مخللات\n16. مشواة\n17. فطيرة\n18. وعاء ساخن\n19. مطهو\n20. عصيدة\n21. يخنات\n22. مطهو على البخار\n23. حساء\n24. بطاطا مقلية\n25. حلويات\n26. مأكولات بحرية\n27. سمك ني"
+
 };

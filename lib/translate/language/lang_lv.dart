@@ -130,5 +130,13 @@ final Map<String, String> langLv = {
   'Current Location': 'Pašreizējā atrašanās vieta',
   'Do you want to proceed with directions?': 'Vai vēlaties turpināt virzienu?',
   'Check': 'Pārbaudiet',
-  'Section Time: ': 'Sadaļas laiks: '
+  'Section Time: ': 'Sadaļas laiks: ',
+  'Cautions (1/2)' : 'Brīdinājumi (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Šis čatbots izmanto tulkojumus. Daži tulkojumi var būt nedaudz neprecīzi, izraisot nepiemērotus rezultātus.',
+  'Next' : 'Nākošais',
+  'Cautions (2/2)' : 'Brīdinājumi (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Jūs varat atbildēt tikai uz jautājumiem par lietotnēm un korejiešu ēdieniem, un pārtikas kategorijā jūs varat atbildēt tikai uz 27 jautājumiem par korejiešu ēdieniem. 27 pārtikas produktu sarakstu var atrast nākamajā lapā vai jautājot čatbotam par korejiešu pārtikas produktu sarakstu.",
+  'Previous' : 'Iepriekšējais',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Citi \n2. Cepts\n3. Zupa\n4. Kimči\n5. Garšaugi\n6. Rīsu kūka\n7. Pelmeņi\n8. Nūdeles\n9. Garšots\n10. Rīsi\n11. Cepts\n12. Ietinumi\n13. Dzērieni\n14. Marinēts Krabis\n15. Marinēti gurķi\n16. Šašliks\n17. Pankūka\n18. Karstais katls\n19. Sautēts\n20. Putra\n21. Sautējumi\n22. Tvaicēts\n23. Zupa\n24. Frī kartupeļi\n25. Saldumi\n26. Jūras veltes\n27. Jēlas zivis"
+
 };

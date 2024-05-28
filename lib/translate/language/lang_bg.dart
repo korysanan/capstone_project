@@ -132,5 +132,13 @@ final Map<String, String> langBg = {
   'Current Location': 'Текущо местоположение',
   'Do you want to proceed with directions?': 'Искате ли да продължите с указанията?',
   'Check': 'Проверете',
-  'Section Time: ': 'Време за раздел: '
+  'Section Time: ': 'Време за раздел: ',
+  'Cautions (1/2)' : 'Предупреждения (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Този чатбот използва преводи. Някои преводи могат да бъдат малко неточни, което води до неподходящи резултати.',
+  'Next' : 'Следващ',
+  'Cautions (2/2)' : 'Предупреждения (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Можете да отговаряте само на въпроси за приложения и корейска храна, а в категорията на храната можете да отговаряте само на 27 въпроса за корейска храна. Списъкът с 27 храни може да бъде намерен на следващата страница или като попитате чатбота за списък с корейски храни.",
+  'Previous' : 'Предишен',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Други \n2. Печено\n3. Супа\n4. Кимчи\n5. Билки\n6. Оризов кекс\n7. Кнедли\n8. Нудълс\n9. Подправено\n10. Ориз\n11. Пържено\n12. Обвивки\n13. Напитки\n14. Мариниран рак\n15. Кисели краставички\n16. Шиш\n17. Палачинка\n18. Гореща тенджера\n19. Задушено\n20. Каша\n21. Яхнии\n22. На пара\n23. Супа\n24. Пържени картофи\n25. Сладкиши\n26. Морски дарове\n27. Сурова риба"
+
 };

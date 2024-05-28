@@ -131,5 +131,13 @@ final Map<String, String> langPl = {
   'Current Location': 'Aktualna lokalizacja',
   'Do you want to proceed with directions?': 'Czy chcesz kontynuować z instrukcjami?',
   'Check': 'Sprawdź',
-  'Section Time: ': 'Czas sekcji: '
+  'Section Time: ': 'Czas sekcji: ',
+  'Cautions (1/2)' : 'Ostrzeżenia (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Ten chatbot używa tłumaczeń. Niektóre tłumaczenia mogą być nieco niedokładne, co skutkuje nieodpowiednimi wynikami.',
+  'Next' : 'Następny',
+  'Cautions (2/2)' : 'Ostrzeżenia (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Możesz odpowiadać tylko na pytania dotyczące aplikacji i jedzenia koreańskiego, a w kategorii jedzenia możesz odpowiadać tylko na 27 pytań dotyczących jedzenia koreańskiego. Lista 27 produktów znajduje się na następnej stronie lub możesz zapytać chatbota o listę koreańskich produktów.",
+  'Previous' : 'Poprzedni',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Inne \n2. Pieczony\n3. Zupa\n4. Kimchi\n5. Zioła\n6. Ciasto ryżowe\n7. Pieróg\n8. Makaron\n9. Przyprawiony\n10. Ryż\n11. Smażony\n12. Zawijanie\n13. Napoje\n14. Marynowany krab\n15. Kiszonki\n16. Szpikulec\n17. Naleśnik\n18. Garnek na gorąco\n19. Duszony\n20. Kasza\n21. Gulasz\n22. Na parze\n23. Zupa\n24. Frytki\n25. Słodycze\n26. Owoce morza\n27. Surowa ryba"
+
 };

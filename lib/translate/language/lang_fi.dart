@@ -131,5 +131,13 @@ final Map<String, String> langFi = {
   'Current Location': 'Nykyinen sijainti',
   'Do you want to proceed with directions?': 'Haluatko jatkaa reittiohjeita?',
   'Check': 'Tarkista',
-  'Section Time: ': 'Osio aika: '
+  'Section Time: ': 'Osio aika: ',
+  'Cautions (1/2)' : 'Varoitukset (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Tämä chatbot käyttää käännöksiä. Jotkut käännökset voivat olla hieman epätarkkoja, mikä johtaa epäasianmukaisiin tuloksiin.',
+  'Next' : 'Seuraava',
+  'Cautions (2/2)' : 'Varoitukset (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Voit vastata vain sovelluksia ja korealaista ruokaa koskeviin kysymyksiin, ja ruokaluokassa voit vastata vain 27 kysymykseen korealaisesta ruoasta. Luettelo 27 ruoasta löytyy seuraavalta sivulta tai pyytämällä chatbotia korealaisen ruoan luettelosta.",
+  'Previous' : 'Edellinen',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Muut \n2. Paahdettu\n3. Keitto\n4. Kimchi\n5. Yrtit\n6. Riisikakku\n7. Nyytit\n8. Nuudelit\n9. Maustettu\n10. Riisi\n11. Paistettu\n12. Wrapit\n13. Juomat\n14. Marinoitu rapu\n15. Suolakurkku\n16. Varras\n17. Pannukakku\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish"
+
 };

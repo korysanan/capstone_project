@@ -131,5 +131,13 @@ final Map<String, String> langId = {
   'Current Location': 'Lokasi saat ini',
   'Do you want to proceed with directions?': 'Apakah Anda ingin melanjutkan dengan petunjuk arah?',
   'Check': 'Centang',
-  'Section Time: ': 'Waktu Bagian: '
+  'Section Time: ': 'Waktu Bagian: ',
+  'Cautions (1/2)' : 'Peringatan (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Chatbot ini menggunakan terjemahan. Beberapa terjemahan mungkin sedikit tidak akurat, menghasilkan hasil yang tidak pantas.',
+  'Next' : 'Berikutnya',
+  'Cautions (2/2)' : 'Peringatan (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Anda hanya dapat menjawab pertanyaan tentang aplikasi dan makanan Korea, dan dalam kategori makanan, Anda hanya dapat menjawab 27 pertanyaan tentang makanan Korea. Daftar 27 makanan dapat ditemukan di halaman berikutnya, atau dengan menanyakan chatbot untuk daftar makanan Korea.",
+  'Previous' : 'Sebelumnya',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Lainnya \n2. Panggang\n3. Sup\n4. Kimchi\n5. Herbal\n6. Kue beras\n7. Pangsit\n8. Mie\n9. Dibumbui\n10. Nasi\n11. Tumis\n12. Bungkus\n13. Minuman\n14. Kepiting marinated\n15. Acar\n16. Skewer\n17. Pancake\n18. Panci panas\n19. Braised\n20. Bubur\n21. Stews\n22. Dimasak\n23. Sup\n24. Kentang goreng\n25. Manisan\n26. Makanan laut\n27. Ikan mentah"
+
 };

@@ -127,5 +127,13 @@ final Map<String, String> langZh = {
   'Current Location': '当前位置',
   'Do you want to proceed with directions?': '要继续导航吗？',
   'Check': '检查',
-  'Section Time: ': '部分时间: '
+  'Section Time: ': '部分时间: ',
+  'Cautions (1/2)' : '注意事项 (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : '此聊天机器人使用翻译。某些翻译可能不太准确，导致不适当的结果。',
+  'Next' : '下一个',
+  'Cautions (2/2)' : '注意事项 (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "您只能回答有关应用程序和韩国食品的问题，在食品类别中，您只能回答关于韩国食品的27个问题。27种食品的列表可以在下一页找到，也可以通过询问聊天机器人获得韩国食品的列表。",
+  'Previous' : '上一个',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. 其他 \n2. 烤\n3. 汤\n4. 泡菜\n5. 草药\n6. 年糕\n7. 饺子\n8. 面条\n9. 调味\n10. 米饭\n11. 炒\n12. 包\n13. 饮料\n14. 腌蟹\n15. 泡菜\n16. 串\n17. 煎饼\n18. 火锅\n19. 红烧\n20. 粥\n21. 炖\n22. 蒸\n23. 汤\n24. 炸薯条\n25. 甜食\n26. 海鲜\n27. 生鱼"
+
 };

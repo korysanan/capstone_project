@@ -129,5 +129,13 @@ final Map<String, String> langLt = {
   'Current Location': 'Dabartinė vieta',
   'Do you want to proceed with directions?': 'Ar norite tęsti nurodymus?',
   'Check': 'Patikrinkite',
-  'Section Time: ': 'Skyriaus laikas: '
+  'Section Time: ': 'Skyriaus laikas: ',
+  'Cautions (1/2)' : 'Įspėjimai (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Šis pokalbių robotas naudoja vertimus. Kai kurie vertimai gali būti šiek tiek netikslūs, todėl rezultatai gali būti netinkami.',
+  'Next' : 'Kitas',
+  'Cautions (2/2)' : 'Įspėjimai (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Galite atsakyti tik į klausimus apie programas ir korėjietišką maistą, o maisto kategorijoje galite atsakyti tik į 27 klausimus apie korėjietišką maistą. 27 maisto produktų sąrašą galite rasti kitame puslapyje arba paklausę pokalbių roboto apie korėjietiško maisto sąrašą.",
+  'Previous' : 'Ankstesnis',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Kita \n2. Kepta\n3. Sriuba\n4. Kimči\n5. Žolelės\n6. Ryžių pyragas\n7. Koldūnai\n8. Makaronai\n9. Prieskoniais pagardinta\n10. Ryžiai\n11. Kepta\n12. Vyniotiniai\n13. Gėrimai\n14. Marinuotas krabas\n15. Marinuoti agurkai\n16. Iešmeliai\n17. Blynai\n18. Karštas puodas\n19. Troškinta\n20. Košė\n21. Troškiniai\n22. Garuose virta\n23. Sriuba\n24. Kepta\n25. Saldumynai\n26. Jūros gėrybės\n27. Žuvis"
+
 };

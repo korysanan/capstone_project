@@ -130,5 +130,13 @@ final Map<String, String> langHu = {
   'Current Location': 'Jelenlegi hely',
   'Do you want to proceed with directions?': 'Szeretné folytatni az útbaigazítást?',
   'Check': 'Ellenőrizze a  címet.',
-  'Section Time: ': 'Szakaszidő: '
+  'Section Time: ': 'Szakaszidő: ',
+  'Cautions (1/2)' : 'Figyelmeztetések (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Ez a chatbot fordításokat használ. Egyes fordítások kissé pontatlanok lehetnek, ami nem megfelelő eredményeket eredményezhet.',
+  'Next' : 'Következő',
+  'Cautions (2/2)' : 'Figyelmeztetések (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Csak az alkalmazásokkal és a koreai ételekkel kapcsolatos kérdésekre válaszolhat, és az ételek kategóriájában csak 27 kérdésre válaszolhat a koreai ételekkel kapcsolatban. A 27 élelmiszer listája a következő oldalon található, vagy kérheti a chatbotot a koreai ételek listájáról.",
+  'Previous' : 'Előző',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Egyéb \n2. Sült\n3. Leves\n4. Kimchi\n5. Gyógynövények\n6. Rizstorta\n7. Gombóc\n8. Tészta\n9. Fűszeres\n10. Rizs\n11. Sült\n12. Wraps\n13. Italok\n14. Pácolt rák\n15. Savanyúság\n16. Nyárs\n17. Palacsinta\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish"
+
 };

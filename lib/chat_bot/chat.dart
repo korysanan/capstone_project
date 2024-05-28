@@ -21,8 +21,93 @@ class _chatbotState extends State<chatbot> {
 
   @override
   void initState() {
-    DialogFlowtter.fromFile().then((instance) => dialogFlowtter = instance);
+    DialogFlowtter.fromFile().then((instance) {
+      dialogFlowtter = instance;
+      showAlertDialog(); // Show AlertDialog on init
+    });
     super.initState();
+  }
+
+  void showAlertDialog() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(globals.getText('Cautions (1/2)')),
+            content: Text(globals.getText('This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.')),
+            actions: <Widget>[
+              TextButton(
+                child: Text(globals.getText('Next')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  showAlertDialog2();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    });
+  }
+
+  void showAlertDialog2() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(globals.getText('Cautions (2/2)')),
+            content: Text(globals.getText("You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods.")),
+            actions: <Widget>[
+              TextButton(
+                child: Text(globals.getText('Previous')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  showAlertDialog();
+                },
+              ),
+              TextButton(
+                child: Text(globals.getText('Next')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  showAlertDialog3();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    });
+  }
+
+  void showAlertDialog3() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(globals.getText('Food Category')),
+            content: Text(globals.getText("1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish")),
+            actions: <Widget>[
+              TextButton(
+                child: Text(globals.getText('Previous')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  showAlertDialog2();
+                },
+              ),
+              TextButton(
+                child: Text(globals.getText('Confirm')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    });
   }
 
   @override
@@ -65,21 +150,14 @@ class _chatbotState extends State<chatbot> {
             width: 200,
             height: 200,
           ),
-          Text('Ask me about Korean food...',
-              style: TextStyle(
-                fontSize: 25,
-                color: Colors.black.withOpacity(0.4), // Adjust the opacity here
-                fontStyle: FontStyle.italic,
-              )),
-          //SizedBox(height: 200),
-          /*
-          Text('I can only answer questions \nrelated to apps or Korean food.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.black,
-              )),
-          */
+          Text(
+            'Ask me about Korean food...',
+            style: TextStyle(
+              fontSize: 25,
+              color: Colors.black.withOpacity(0.4), // Adjust the opacity here
+              fontStyle: FontStyle.italic,
+            ),
+          ),
         ],
       ),
     );

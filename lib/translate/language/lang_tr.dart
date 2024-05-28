@@ -130,5 +130,13 @@ final Map<String, String> langTr = {
   'Current Location': 'Geçerli Konum',
   'Do you want to proceed with directions?': 'Talimatlarla devam etmek istiyor musunuz?',
   'Check': 'Kontrol et',
-  'Section Time: ': 'Bölüm Zamanı: '
+  'Section Time: ': 'Bölüm Zamanı: ',
+  'Cautions (1/2)' : 'Uyarılar (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Bu sohbet robotu çeviriler kullanır. Bazı çeviriler biraz yanlış olabilir ve uygunsuz sonuçlara yol açabilir.',
+  'Next' : 'Sonraki',
+  'Cautions (2/2)' : 'Uyarılar (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Sadece uygulamalar ve Kore yemekleri hakkında sorulara cevap verebilirsiniz ve yiyecek kategorisinde yalnızca Kore yemekleri hakkında 27 soruya cevap verebilirsiniz. 27 yiyeceğin listesi bir sonraki sayfada bulunabilir veya sohbet robotuna Kore yiyeceklerinin bir listesini sorarak bulabilirsiniz.",
+  'Previous' : 'Önceki',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Diğer \n2. Kızartılmış\n3. Çorba\n4. Kimchi\n5. Otlar\n6. Pirinç keki\n7. Börek\n8. Erişte\n9. Baharatlı\n10. Pirinç\n11. Kızartılmış\n12. Dürümler\n13. İçecekler\n14. Marine edilmiş yengeç\n15. Turşular\n16. Şiş\n17. Krep\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish"
+
 };

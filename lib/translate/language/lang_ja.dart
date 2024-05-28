@@ -127,5 +127,13 @@ final Map<String, String> langJa = {
   'Current Location': '現在地',
   'Do you want to proceed with directions?': '案内を続けますか？',
   'Check': 'チェック',
-  'Section Time: ': '区間時間: '
+  'Section Time: ': '区間時間: ',
+  'Cautions (1/2)' : '注意事項 (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'このチャットボットは翻訳を使用します。翻訳が若干不正確な場合があり、不適切な結果をもたらすことがあります。',
+  'Next' : '次へ',
+  'Cautions (2/2)' : '注意事項 (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "アプリと韓国料理に関する質問にのみ回答でき、食べ物のカテゴリーでは韓国料理に関する27の質問にのみ回答できます。27の食品のリストは次のページで見つけることができるか、チャットボットに韓国食品のリストを尋ねることで確認できます。",
+  'Previous' : '前へ',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. その他 \n2. 焼いた\n3. スープ\n4. キムチ\n5. ハーブ\n6. 餅\n7. 餃子\n8. 麺\n9. 味付け\n10. ご飯\n11. 炒め物\n12. 包む\n13. 飲み物\n14. マリネされたカニ\n15. ピクルス\n16. 串焼き\n17. パンケーキ\n18. 鍋\n19. 煮込み\n20. お粥\n21. シチュー\n22. 蒸し\n23. スープ\n24. フライドポテト\n25. 甘いもの\n26. シーフード\n27. 生魚"
+
 };

@@ -133,5 +133,12 @@ final Map<String, String> langEl = {
   'Current Location': 'Τρέχουσα τοποθεσία',
   'Do you want to proceed with directions?': 'Θέλετε να συνεχίσετε με τις οδηγίες;',
   'Check': 'Ελέγξτε το',
-  'Section Time: ': 'Χρόνος Ενότητας: '
+  'Section Time: ': 'Χρόνος Ενότητας: ',
+  'Cautions (1/2)' : 'Προειδοποιήσεις (1/2)',
+  'This chatbot uses translations. Some translations may be slightly inaccurate, resulting in inappropriate results.' : 'Αυτό το chatbot χρησιμοποιεί μεταφράσεις. Ορισμένες μεταφράσεις μπορεί να είναι ελαφρώς ανακριβείς, με αποτέλεσμα ακατάλληλα αποτελέσματα.',
+  'Next' : 'Επόμενο',
+  'Cautions (2/2)' : 'Προειδοποιήσεις (2/2)',
+  "You can only answer questions about apps and Korean food, and in the food category, you can only answer 27 questions about Korean food. The list of 27 foods can be found on the following page, or by asking the chatbot for a list of Korean foods." : "Μπορείτε να απαντήσετε μόνο σε ερωτήσεις σχετικά με εφαρμογές και κορεάτικα φαγητά, και στην κατηγορία των φαγητών μπορείτε να απαντήσετε μόνο σε 27 ερωτήσεις σχετικά με κορεάτικα φαγητά. Η λίστα των 27 φαγητών μπορεί να βρεθεί στην επόμενη σελίδα, ή ρωτώντας το chatbot για μια λίστα κορεάτικων φαγητών.",
+  'Previous' : 'Προηγούμενο',
+  "1. Etc \n2. Roasted\n3. Soup\n4. Kimchi\n5. Herbs\n6. Rice cake\n7. Dumpling\n8. Noodles\n9. Seasoned\n10. Rice\n11. Stir-fried\n12. Wraps\n13. Beverages\n14. Marinated Crab\n15. Pickles\n16. Skewer\n17. Pancake\n18. Hot Pot\n19. Braised\n20. Porridge\n21. Stews\n22. Steamed\n23. Soup\n24. Fries\n25. Sweets\n26. Seafood\n27. Raw fish" : "1. Διάφορα \n2. Ψητά\n3. Σούπα\n4. Κίμτσι\n5. Βότανα\n6. Κέικ ρυζιού\n7. Ζυμαρικά\n8. Νούντλς\n9. Καρυκευμένα\n10. Ρύζι\n11. Τηγανητά\n12. Τυλίγματα\n13. Ποτά\n14. Μαριναρισμένο καβούρι\n15. Τουρσιά\n16. Καλαμάκι\n17. Τηγανίτες\n18. Ζεστό κατσαρόλα\n19. Σιγοβρασμένα\n20. Χυλός\n21. Ραγού\n22. Ατμομαγειρεμένα\n23. Σούπα\n24. Τηγανιτά\n25. Γλυκά\n26. Θαλασσινά\n27. Ωμό ψάρι"
 };
