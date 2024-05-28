@@ -173,12 +173,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text('Verification Failed'),
-                          content: Text('Please check your certification number and try again.'),
+                          content: Text('Resend your certification number.'),
                           actions: <Widget>[
                             TextButton(
-                              child: Text('OK'),
-                              onPressed: () {
+                              child: Text('Re-send'),
+                              onPressed: () async {
+                                await sendVerificationCode(context, _emailController.text);
                                 Navigator.of(context).pop();
+                                _remainingTime = 300;
                               },
                             ),
                           ],
