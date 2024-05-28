@@ -46,14 +46,14 @@ class ImageDetailsPage extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text('No Match'),
-                content: Text('There is no match.'),
+                title: Text(globals.getText('No Match')),
+                content: Text(globals.getText('There is no match.')),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('OK'),
+                    child: Text(globals.getText('Confirm')),
                   ),
                 ],
               );

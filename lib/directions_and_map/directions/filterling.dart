@@ -184,7 +184,7 @@ class _FilterScreenState extends State<FilterScreen> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(globals.getText('Error')),
-            content: Text(globals.getText('Please select a vehicle.')),
+            content: Text(globals.getText('Please select a vehicle')),
             actions: <Widget>[
               TextButton(
                 child: Text(globals.getText('Confirm')),
