@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../home/bottom.dart';
 import '../login/screen/login_screen.dart';
-import '../before_code/login/sign_up_screen.dart';
 import '../home/on_item_tap.dart';
 import '../globals.dart' as globals;
 import '../home/main_screen.dart';
+import '../login/screen/sign_up_screen/sign_up_email.dart';
 
 class MyPageNo extends StatefulWidget {
   @override

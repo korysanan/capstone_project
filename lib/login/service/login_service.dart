@@ -233,15 +233,6 @@ class LoginService {
           context,
           MaterialPageRoute(builder: (context) => LoginScreen()),
         );
-      } else if(response.statusCode == 401){
-        globals.sessionId = null;
-        globals.user_nickname = null;
-        globals.user_email = null;
-        globals.user_language = null;
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
-        );
       } else {
         showDialog(
           context: context,
