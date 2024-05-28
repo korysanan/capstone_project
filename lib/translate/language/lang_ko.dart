@@ -118,5 +118,13 @@ final Map<String, String> langKo = {
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': '결과가 반드시 정확하지 않을 수 있습니다. 다음과 같은 경우 감지가 제대로 되지 않을 수 있습니다.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) 사진의 크기가 작거나 화질이 좋지 않은 경우',
   "(2) If the food doesn't appear completely in the picture": '(2) 음식이 사진에 완전히 나타나지 않는 경우',
-  'Route': '경로'
+  'Route': '경로',
+  'Error': '에러',
+  'Please select a vehicle': '운송수단을 선택해주세요.',
+  'No Match': '매치 안됨',
+  'No matching routes found.': '매치된 길을 찾을 수 없습니다.',
+  'There is no match.': '매치가 안됐습니다.',
+  'Current Location': '현재 위치',
+  'Do you want to proceed with directions?': '길안내를 원하십니까?',
+  'Check': '체크'
 };

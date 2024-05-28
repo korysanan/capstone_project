@@ -48,7 +48,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
         ],
       ),
       body: WebView(
-        initialUrl: 'http://3.35.120.84/tran_1_direction.html', // 웹뷰의 초기 URL 설정
+        initialUrl: 'http://3.35.120.84/tran_1_direction.html',//'http://10.0.2.2/flutter/tran_1_direction.html', // 웹뷰의 초기 URL 설정
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) {
           _controller = webViewController;

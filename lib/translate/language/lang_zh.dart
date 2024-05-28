@@ -117,5 +117,14 @@ final Map<String, String> langZh = {
   'Precautions for Korean Food Detection': '检测韩国食品的注意事项',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': '检测结果不一定准确。在下列情况下，检测结果可能不佳。',
   '(1) If the picture is small in size or the picture quality is poor': '(1) 如果图片较小或图片质量较差',
-  "(2) If the food doesn't appear completely in the picture": '(2) 如果食物没有完全出现在图片中'
+  "(2) If the food doesn't appear completely in the picture": '(2) 如果食物没有完全出现在图片中',
+  'Route': '路线',
+  'Error': '错误',
+  'Please select a vehicle': '请选择车辆',
+  'No Match': '没有匹配',
+  'No matching routes found.': '未找到匹配路线。',
+  'There is no match.': '没有匹配。',
+  'Current Location': '当前位置',
+  'Do you want to proceed with directions?': '要继续导航吗？',
+  'Check': '检查'
 };

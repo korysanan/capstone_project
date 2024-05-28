@@ -121,5 +121,14 @@ final Map<String, String> langFi = {
   'Precautions for Korean Food Detection': 'Korealaisen ruoan havaitsemiseen liittyvät varotoimet',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Tulokset eivät välttämättä ole tarkkoja. Havainto voi olla heikko seuraavissa tapauksissa.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Jos kuva on pienikokoinen tai kuvan laatu on huono.',
-  "(2) If the food doesn't appear completely in the picture": '(2) Jos ruoka ei näy kuvassa kokonaan'
+  "(2) If the food doesn't appear completely in the picture": '(2) Jos ruoka ei näy kuvassa kokonaan',
+  'Route': 'Reitti',
+  'Error': 'Virhe',
+  'Please select a vehicle': 'Valitse ajoneuvo',
+  'No Match': 'Ei vastaavuutta',
+  'No matching routes found.': 'Vastaavia reittejä ei löytynyt.',
+  'There is no match.': 'Ei vastaavuutta.',
+  'Current Location': 'Nykyinen sijainti',
+  'Do you want to proceed with directions?': 'Haluatko jatkaa reittiohjeita?',
+  'Check': 'Tarkista'
 };

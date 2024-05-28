@@ -120,5 +120,14 @@ final Map<String, String> langTr = {
   'Precautions for Korean Food Detection': 'Kore Gıdası Tespiti için Önlemler',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Sonuçlar her zaman doğru olmayabilir. Aşağıdaki durumlarda tespitler zayıf olabilir.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Resmin boyutu küçükse veya resim kalitesi düşükse',
-  "(2) If the food doesn't appear completely in the picture": '(2) Yiyecek resimde tam olarak görünmüyorsa'
+  "(2) If the food doesn't appear completely in the picture": '(2) Yiyecek resimde tam olarak görünmüyorsa',
+  'Route': 'Rota',
+  'Error': 'Hata',
+  'Please select a vehicle': 'Lütfen bir araç seçin',
+  'No Match': 'Eşleşme Yok',
+  'No matching routes found.': 'Eşleşen rota bulunamadı.',
+  'There is no match.': 'Eşleşme yok.',
+  'Current Location': 'Geçerli Konum',
+  'Do you want to proceed with directions?': 'Talimatlarla devam etmek istiyor musunuz?',
+  'Check': 'Kontrol et'
 };

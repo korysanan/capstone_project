@@ -63,11 +63,11 @@ class _FilterScreenState extends State<FilterScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('No Match'),
-            content: Text('No matching routes found.'),
+            title: Text(globals.getText('No Match')),
+            content: Text(globals.getText('No matching routes found.')),
             actions: <Widget>[
               TextButton(
-                child: Text(globals.getText('OK')),
+                child: Text(globals.getText('Confirm')),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -98,6 +98,19 @@ class _FilterScreenState extends State<FilterScreen> {
           ),
         );
       } else {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return Center(child: CircularProgressIndicator());
+          },
+        );
+        if (globals.selectedLanguageCode == 'ko') {
+          globals.arr_restaurantName = globals.arr_restaurantName ?? 'Default Name';
+        } else {
+          globals.arr_restaurantName = await _getTranslatedText(globals.arr_restaurantName ?? 'Default Name');
+        }
+        Navigator.pop(context);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -170,11 +183,11 @@ class _FilterScreenState extends State<FilterScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Error'),
-            content: Text('Please select a vehicle.'),
+            title: Text(globals.getText('Error')),
+            content: Text(globals.getText('Please select a vehicle.')),
             actions: <Widget>[
               TextButton(
-                child: Text(globals.getText('OK')),
+                child: Text(globals.getText('Confirm')),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

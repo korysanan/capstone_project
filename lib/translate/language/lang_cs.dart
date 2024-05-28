@@ -121,5 +121,14 @@ final Map<String, String> langCs = {
   'Precautions for Korean Food Detection': 'Bezpečnostní opatření při detekci korejských potravin',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Výsledky nemusí být nutně přesné. Detekce může být špatná v následujících případech.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Pokud má obrázek malou velikost nebo je jeho kvalita špatná.',
-  "(2) If the food doesn't appear completely in the picture": '(2) Pokud se potravina na obrázku nezobrazuje celá'
+  "(2) If the food doesn't appear completely in the picture": '(2) Pokud se potravina na obrázku nezobrazuje celá',
+  'Route': 'Trasa',
+  'Error': 'Chyba',
+  'Please select a vehicle': 'Vyberte prosím vozidlo',
+  'No Match': 'Žádná shoda',
+  'No matching routes found.': 'Nebyly nalezeny žádné odpovídající trasy.',
+  'There is no match.': 'Neexistuje žádná shoda.',
+  'Current Location': 'Aktuální poloha',
+  'Do you want to proceed with directions?': 'Chcete pokračovat s pokyny?',
+  'Check': 'Zkontrolujte'
 };

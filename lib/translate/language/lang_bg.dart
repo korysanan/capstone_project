@@ -122,5 +122,14 @@ final Map<String, String> langBg = {
   'Precautions for Korean Food Detection': 'Предпазни мерки при откриване на корейски храни',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Резултатите може да не са непременно точни. Откриването може да е слабо в следните случаи.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Ако снимката е с малък размер или качеството на снимката е лошо',
-  "(2) If the food doesn't appear completely in the picture": '(2) Ако храната не се вижда изцяло на снимката'
+  "(2) If the food doesn't appear completely in the picture": '(2) Ако храната не се вижда изцяло на снимката',
+  'Route': 'Маршрут',
+  'Error': 'Грешка',
+  'Please select a vehicle': 'Моля, изберете превозно средство',
+  'No Match': 'Няма съвпадение',
+  'No matching routes found.': 'Не са намерени подходящи маршрути.',
+  'There is no match.': 'Няма съвпадение.',
+  'Current Location': 'Текущо местоположение',
+  'Do you want to proceed with directions?': 'Искате ли да продължите с указанията?',
+  'Check': 'Проверете'
 };

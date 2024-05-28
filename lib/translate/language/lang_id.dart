@@ -121,5 +121,14 @@ final Map<String, String> langId = {
   'Precautions for Korean Food Detection': 'Tindakan Pencegahan untuk Mendeteksi Makanan Korea',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Hasilnya belum tentu akurat. Deteksi mungkin tidak akurat dalam kasus-kasus berikut ini.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Jika gambar berukuran kecil atau kualitas gambar buruk',
-  "(2) If the food doesn't appear completely in the picture": '(2) Jika makanan tidak muncul sepenuhnya dalam gambar'
+  "(2) If the food doesn't appear completely in the picture": '(2) Jika makanan tidak muncul sepenuhnya dalam gambar',
+  'Route': 'Rute',
+  'Error': 'Kesalahan',
+  'Please select a vehicle': 'Silakan pilih kendaraan',
+  'No Match': 'Tidak ada kecocokan',
+  'No matching routes found.': 'Tidak ditemukan rute yang cocok.',
+  'There is no match.': 'Tidak ada kecocokan.',
+  'Current Location': 'Lokasi saat ini',
+  'Do you want to proceed with directions?': 'Apakah Anda ingin melanjutkan dengan petunjuk arah?',
+  'Check': 'Centang'
 };

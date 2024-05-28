@@ -121,5 +121,14 @@ final Map<String, String> langEs = {
   'Precautions for Korean Food Detection': 'Precauciones para la detección de alimentos coreanos',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Los resultados pueden no ser necesariamente exactos. Las detecciones pueden ser deficientes en los siguientes casos.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Si la imagen es de tamaño pequeño o la calidad de la imagen es deficiente.',
-  "(2) If the food doesn't appear completely in the picture": '(2) Si el alimento no aparece completamente en la imagen'
+  "(2) If the food doesn't appear completely in the picture": '(2) Si el alimento no aparece completamente en la imagen',
+  'Route': 'Ruta',
+  'Error': 'Error',
+  'Please select a vehicle': 'Seleccione un vehículo',
+  'No Match': 'No hay coincidencias',
+  'No matching routes found.': 'No se han encontrado rutas coincidentes.',
+  'There is no match.': 'No hay ninguna coincidencia.',
+  'Current Location': 'Localización actual',
+  'Do you want to proceed with directions?': '¿Desea continuar con las indicaciones?',
+  'Check': 'Compruebe'
 };

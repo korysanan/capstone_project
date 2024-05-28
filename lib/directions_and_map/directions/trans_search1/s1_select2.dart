@@ -13,7 +13,7 @@ class JsonDisplayScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Parse the JSON data
     Map<String, dynamic> parsedJson = json.decode(jsonData);
-
+    print(parsedJson['interCityTransit']);
     // Extract the first path from cityTransitStart and cityTransitEnd
     if (parsedJson.containsKey('cityTransitStart')) {
       parsedJson['cityTransitStart']['result']['path'] = [
@@ -75,17 +75,17 @@ class JsonDisplayScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Confirm'),
-          content: Text('Do you want to display the modified JSON data?'),
+          title: Text(globals.getText('Check')),
+          content: Text(globals.getText('Do you want to proceed with directions?')),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: Text(globals.getText('Cancel')),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Confirm'),
+              child: Text(globals.getText('Confirm')),
               onPressed: () {
                 Navigator.of(context).pop();
                 _navigateToDisplayJsonScreen(context, modifiedJsonData);

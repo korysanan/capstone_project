@@ -121,5 +121,14 @@ final Map<String, String> langRo = {
   'Precautions for Korean Food Detection': 'Precauții pentru detectarea alimentelor coreene',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Este posibil ca rezultatele să nu fie neapărat exacte. Detecțiile pot fi slabe în următoarele cazuri.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Dacă imaginea este de dimensiuni mici sau dacă calitatea imaginii este slabă',
-  "(2) If the food doesn't appear completely in the picture": '(2) Dacă alimentele nu apar complet în imagine'
+  "(2) If the food doesn't appear completely in the picture": '(2) Dacă alimentele nu apar complet în imagine',
+  'Route': 'Ruta',
+  'Error': 'Eroare',
+  'Please select a vehicle': 'Vă rugăm să selectați un vehicul',
+  'No Match': 'Nu se potrivește',
+  'No matching routes found.': 'Nu s-au găsit rute corespunzătoare.',
+  'There is no match.': 'Nu există nicio potrivire.',
+  'Current Location': 'Locația curentă',
+  'Do you want to proceed with directions?': 'Doriți să continuați cu indicațiile?',
+  'Check': 'Verificați'
 };

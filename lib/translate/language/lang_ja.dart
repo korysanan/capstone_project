@@ -117,5 +117,14 @@ final Map<String, String> langJa = {
   'Precautions for Korean Food Detection': '韓国食品を検出する際の注意事項',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': '必ずしも正確な結果が得られるとは限りません。次のような場合、検出結果が悪くなることがあります。',
   '(1) If the picture is small in size or the picture quality is poor': '(1) 画像が小さい、または画質が悪い場合',
-  "(2) If the food doesn't appear completely in the picture": '(2) 食品が完全に写っていない場合'
+  "(2) If the food doesn't appear completely in the picture": '(2) 食品が完全に写っていない場合',
+  'Route': 'ルート',
+  'Error': 'エラー',
+  'Please select a vehicle': '車両を選択してください',
+  'No Match': '該当なし',
+  'No matching routes found.': '該当するルートが見つかりません。',
+  'There is no match.': '一致するルートはありません。',
+  'Current Location': '現在地',
+  'Do you want to proceed with directions?': '案内を続けますか？',
+  'Check': 'チェック'
 };

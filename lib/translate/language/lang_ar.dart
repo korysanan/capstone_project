@@ -119,5 +119,14 @@ final Map<String, String> langAr = {
   'Precautions for Korean Food Detection': 'احتياطات الكشف عن الطعام الكوري',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'قد لا تكون النتائج دقيقة بالضرورة. قد تكون الاكتشافات ضعيفة في الحالات التالية.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) إذا كانت الصورة صغيرة الحجم أو كانت جودة الصورة رديئة',
-  "(2) If the food doesn't appear completely in the picture": '(2) إذا لم يظهر الطعام بشكل كامل في الصورة'
+  "(2) If the food doesn't appear completely in the picture": '(2) إذا لم يظهر الطعام بشكل كامل في الصورة',
+  'Route': 'المسار',
+  'Error': 'خطأ',
+  'Please select a vehicle': 'يرجى تحديد مركبة',
+  'No Match': 'لا يوجد تطابق',
+  'No matching routes found.': 'لم يتم العثور على مسارات مطابقة.',
+  'There is no match.': 'لا يوجد تطابق.',
+  'Current Location': 'الموقع الحالي',
+  'Do you want to proceed with directions?': 'هل تريد متابعة الاتجاهات؟',
+  'Check': 'تحقق'
 };

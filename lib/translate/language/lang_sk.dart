@@ -120,5 +120,14 @@ final Map<String, String> langSk = {
   'Precautions for Korean Food Detection': 'Bezpečnostné opatrenia pri detekcii kórejských potravín',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Výsledky nemusia byť vždy presné. Detekcia môže byť nedostatočná v nasledujúcich prípadoch.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Ak má obrázok malú veľkosť alebo je jeho kvalita nízka',
-  "(2) If the food doesn't appear completely in the picture": '(2) Ak sa potravina na obrázku nezobrazuje úplne'
+  "(2) If the food doesn't appear completely in the picture": '(2) Ak sa potravina na obrázku nezobrazuje úplne',
+  'Route': 'Trasa',
+  'Error': 'Chyba',
+  'Please select a vehicle': 'Prosím, vyberte vozidlo',
+  'No Match': 'Žiadna zhoda',
+  'No matching routes found.': 'Nenašli sa žiadne zodpovedajúce trasy.',
+  'There is no match.': 'Neexistuje žiadna zhoda.',
+  'Current Location': 'Aktuálna poloha',
+  'Do you want to proceed with directions?': 'Chcete pokračovať s pokynmi?',
+  'Check': 'Skontrolujte'
 };

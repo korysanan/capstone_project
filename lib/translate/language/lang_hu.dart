@@ -120,5 +120,14 @@ final Map<String, String> langHu = {
   'Precautions for Korean Food Detection': 'Óvintézkedések a koreai élelmiszerek felismeréséhez',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Az eredmények nem feltétlenül pontosak. A következő esetekben a kimutatás gyenge lehet.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Ha a kép mérete kicsi, vagy a kép minősége rossz.',
-  "(2) If the food doesn't appear completely in the picture": '(2) Ha az élelmiszer nem teljesen jelenik meg a képen'
+  "(2) If the food doesn't appear completely in the picture": '(2) Ha az élelmiszer nem teljesen jelenik meg a képen',
+  'Route': 'Útvonal',
+  'Error': 'Hiba',
+  'Please select a vehicle': 'Kérjük, válasszon járművet',
+  'No Match': 'Nincs találat',
+  'No matching routes found.': 'Nem találtunk megfelelő útvonalat.',
+  'There is no match.': 'Nincs egyezés.',
+  'Current Location': 'Jelenlegi hely',
+  'Do you want to proceed with directions?': 'Szeretné folytatni az útbaigazítást?',
+  'Check': 'Ellenőrizze a  címet.'
 };

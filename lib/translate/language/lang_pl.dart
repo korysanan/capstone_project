@@ -121,5 +121,14 @@ final Map<String, String> langPl = {
   'Precautions for Korean Food Detection': 'Środki ostrożności przy wykrywaniu koreańskiej żywności',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Wyniki niekoniecznie muszą być dokładne. Wykrycia mogą być słabe w następujących przypadkach.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Jeśli obraz jest mały lub jego jakość jest niska.',
-  "(2) If the food doesn't appear completely in the picture": '(2) Jeśli jedzenie nie pojawia się w całości na zdjęciu'
+  "(2) If the food doesn't appear completely in the picture": '(2) Jeśli jedzenie nie pojawia się w całości na zdjęciu',
+  'Route': 'Trasa',
+  'Error': 'Błąd',
+  'Please select a vehicle': 'Wybierz pojazd',
+  'No Match': 'Brak dopasowania',
+  'No matching routes found.': 'Nie znaleziono pasujących tras.',
+  'There is no match.': 'Nie ma dopasowania.',
+  'Current Location': 'Aktualna lokalizacja',
+  'Do you want to proceed with directions?': 'Czy chcesz kontynuować z instrukcjami?',
+  'Check': 'Sprawdź'
 };

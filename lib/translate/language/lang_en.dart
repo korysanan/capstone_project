@@ -121,5 +121,12 @@ final Map<String, String> langEn = {
   '(1) If the picture is small in size or the picture quality is poor': '(1) If the picture is small in size or the picture quality is poor',
   "(2) If the food doesn't appear completely in the picture": "(2) If the food doesn't appear completely in the picture",
   'Route': 'Route',
-  'Current Location': 'Current Location'
+  'Current Location': 'Current Location',
+  'Error': 'Error',
+  'Please select a vehicle': 'Please select a vehicle',
+  'No Match': 'No Match',
+  'No matching routes found.': 'No matching routes found.',
+  'There is no match.': 'There is no match.',
+  'Do you want to proceed with directions?': 'Do you want to proceed with directions?',
+  'Check': 'Check'
 };

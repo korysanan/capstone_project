@@ -214,10 +214,6 @@ class _ImageInformationPageState extends State<ImageInformationPage> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Text(globals.getText('What is Korean Food Detection?')),
-          ),
         ],
       ),
     );

@@ -123,5 +123,14 @@ final Map<String, String> langEl = {
   'Precautions for Korean Food Detection': 'Προφυλάξεις για την ανίχνευση κορεατικών τροφίμων',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Τα αποτελέσματα μπορεί να μην είναι απαραίτητα ακριβή. Η ανίχνευση μπορεί να είναι ανεπαρκής στις ακόλουθες περιπτώσεις.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Εάν η εικόνα έχει μικρό μέγεθος ή η ποιότητα της εικόνας είναι κακή',
-  "(2) If the food doesn't appear completely in the picture": '(2) Εάν το τρόφιμο δεν εμφανίζεται πλήρως στην εικόνα'
+  "(2) If the food doesn't appear completely in the picture": '(2) Εάν το τρόφιμο δεν εμφανίζεται πλήρως στην εικόνα',
+  'Route': 'Διαδρομή',
+  'Error': 'Σφάλμα',
+  'Please select a vehicle': 'Παρακαλώ επιλέξτε ένα όχημα',
+  'No Match': 'Δεν υπάρχει αντιστοιχία',
+  'No matching routes found.': 'Δεν βρέθηκαν ταιριαστές διαδρομές.',
+  'There is no match.': 'Δεν υπάρχει αντιστοιχία.',
+  'Current Location': 'Τρέχουσα τοποθεσία',
+  'Do you want to proceed with directions?': 'Θέλετε να συνεχίσετε με τις οδηγίες;',
+  'Check': 'Ελέγξτε το'
 };

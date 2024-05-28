@@ -120,5 +120,14 @@ final Map<String, String> langLv = {
   'Precautions for Korean Food Detection': 'Piesardzības pasākumi korejiešu pārtikas produktu noteikšanai',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Rezultāti ne vienmēr var būt precīzi. Atklājums var būt slikts šādos gadījumos.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Ja attēls ir maza izmēra vai attēla kvalitāte ir slikta.',
-  "(2) If the food doesn't appear completely in the picture": '(2) Ja pārtikas produkts attēlā nav redzams pilnībā.'
+  "(2) If the food doesn't appear completely in the picture": '(2) Ja pārtikas produkts attēlā nav redzams pilnībā.',
+  'Route': 'Maršruts',
+  'Error': 'Kļūda',
+  'Please select a vehicle': 'Lūdzu, izvēlieties transportlīdzekli',
+  'No Match': 'Nav atbilstības',
+  'No matching routes found.': 'Nav atrasts neviens atbilstošs maršruts.',
+  'There is no match.': 'Nav atbilstības.',
+  'Current Location': 'Pašreizējā atrašanās vieta',
+  'Do you want to proceed with directions?': 'Vai vēlaties turpināt virzienu?',
+  'Check': 'Pārbaudiet'
 };

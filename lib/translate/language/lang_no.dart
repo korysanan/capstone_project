@@ -121,5 +121,14 @@ final Map<String, String> langNo = {
   'Precautions for Korean Food Detection': 'Forholdsregler for påvisning av koreansk mat',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Resultatene er ikke nødvendigvis nøyaktige. I følgende tilfeller kan deteksjonen være dårlig.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Hvis bildet er lite i størrelse eller bildekvaliteten er dårlig',
-  "(2) If the food doesn't appear completely in the picture": '(2) Hvis maten ikke vises helt i bildet'
+  "(2) If the food doesn't appear completely in the picture": '(2) Hvis maten ikke vises helt i bildet',
+  'Route': 'Rute',
+  'Error': 'Feil',
+  'Please select a vehicle': 'Vennligst velg et kjøretøy',
+  'No Match': 'Ingen match',
+  'No matching routes found.': 'Ingen matchende ruter funnet.',
+  'There is no match.': 'Det er ingen match.',
+  'Current Location': 'Nåværende plassering',
+  'Do you want to proceed with directions?': 'Vil du fortsette med veibeskrivelsen?',
+  'Check': 'Kryss av'
 };

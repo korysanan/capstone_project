@@ -120,5 +120,14 @@ final Map<String, String> langUk = {
   'Precautions for Korean Food Detection': 'Запобіжні заходи при виявленні корейської їжі',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': "Результати не обов'язково можуть бути точними. Виявлення може бути поганим у наступних випадках.",
   '(1) If the picture is small in size or the picture quality is poor': '(1) Якщо зображення має малий розмір або погану якість',
-  "(2) If the food doesn't appear completely in the picture": '(2) Якщо їжа не повністю відображається на зображенні'
+  "(2) If the food doesn't appear completely in the picture": '(2) Якщо їжа не повністю відображається на зображенні',
+  'Route': 'Маршрут',
+  'Error': 'Помилка',
+  'Please select a vehicle': 'Будь ласка, оберіть транспортний засіб',
+  'No Match': 'Немає збігів',
+  'No matching routes found.': 'Не знайдено відповідних маршрутів.',
+  'There is no match.': 'Не знайдено жодного збігу.',
+  'Current Location': 'Поточне місцезнаходження',
+  'Do you want to proceed with directions?': 'Бажаєте продовжити маршрут?',
+  'Check': 'Перевірте'
 };

@@ -119,5 +119,14 @@ final Map<String, String> langLt = {
   'Precautions for Korean Food Detection': 'Korėjietiško maisto aptikimo atsargumo priemonės',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Rezultatai nebūtinai bus tikslūs. Aptikimo rezultatai gali būti prasti toliau nurodytais atvejais.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Jei paveikslėlis yra mažo dydžio arba paveikslėlio kokybė yra prasta',
-  "(2) If the food doesn't appear completely in the picture": '(2) Jei maisto produktas nuotraukoje matomas ne visas'
+  "(2) If the food doesn't appear completely in the picture": '(2) Jei maisto produktas nuotraukoje matomas ne visas',
+  'Route': 'Maršrutas',
+  'Error': 'Klaida',
+  'Please select a vehicle': 'Pasirinkite transporto priemonę',
+  'No Match': 'Neatitinka',
+  'No matching routes found.': 'Tinkamų maršrutų nerasta.',
+  'There is no match.': 'Nėra atitikmenų.',
+  'Current Location': 'Dabartinė vieta',
+  'Do you want to proceed with directions?': 'Ar norite tęsti nurodymus?',
+  'Check': 'Patikrinkite'
 };

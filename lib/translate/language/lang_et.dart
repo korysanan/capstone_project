@@ -120,5 +120,14 @@ final Map<String, String> langEt = {
   'Precautions for Korean Food Detection': 'Ettevaatusabinõud Korea toidu tuvastamiseks',
   'The results may not necessarily be accurate. Detections may be poor in the following cases.': 'Tulemused ei pruugi olla täpsed. Tuvastus võib olla halb järgmistel juhtudel.',
   '(1) If the picture is small in size or the picture quality is poor': '(1) Kui pilt on väikese suurusega või kui pildi kvaliteet on halb',
-  "(2) If the food doesn't appear completely in the picture": '(2) Kui toit ei paista pildil täielikult välja'
+  "(2) If the food doesn't appear completely in the picture": '(2) Kui toit ei paista pildil täielikult välja',
+  'Route': 'Marsruut',
+  'Error': 'Viga',
+  'Please select a vehicle': 'Palun valige sõiduk',
+  'No Match': 'Ei vasta',
+  'No matching routes found.': 'Sobivaid marsruute ei leitud.',
+  'There is no match.': 'Vastavus puudub.',
+  'Current Location': 'Praegune asukoht',
+  'Do you want to proceed with directions?': 'Kas soovite jätkata teekonnaga?',
+  'Check': 'Kontrollige'
 };
