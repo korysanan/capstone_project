@@ -129,5 +129,6 @@ final Map<String, String> langBr = {
   'There is no match.': 'Não há correspondência.',
   'Current Location': 'Localização atual',
   'Do you want to proceed with directions?': 'Pretende prosseguir com as direcções?',
-  'Check': 'Verificar'
+  'Check': 'Verificar',
+  'Section Time: ': 'Tempo da seção: '
 };

@@ -132,5 +132,6 @@ final Map<String, String> langEl = {
   'There is no match.': 'Δεν υπάρχει αντιστοιχία.',
   'Current Location': 'Τρέχουσα τοποθεσία',
   'Do you want to proceed with directions?': 'Θέλετε να συνεχίσετε με τις οδηγίες;',
-  'Check': 'Ελέγξτε το'
+  'Check': 'Ελέγξτε το',
+  'Section Time: ': 'Χρόνος Ενότητας: '
 };

@@ -130,5 +130,6 @@ final Map<String, String> langPl = {
   'There is no match.': 'Nie ma dopasowania.',
   'Current Location': 'Aktualna lokalizacja',
   'Do you want to proceed with directions?': 'Czy chcesz kontynuować z instrukcjami?',
-  'Check': 'Sprawdź'
+  'Check': 'Sprawdź',
+  'Section Time: ': 'Czas sekcji: '
 };

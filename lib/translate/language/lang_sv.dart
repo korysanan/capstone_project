@@ -130,5 +130,6 @@ final Map<String, String> langSv = {
   'There is no match.': 'Det finns ingen matchning.',
   'Current Location': 'Aktuell plats',
   'Do you want to proceed with directions?': 'Vill du fortsätta med vägbeskrivningen?',
-  'Check': 'Kontrollera'
+  'Check': 'Kontrollera',
+  'Section Time: ': 'Sektionstid: '
 };

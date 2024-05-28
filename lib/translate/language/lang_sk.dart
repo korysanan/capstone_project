@@ -129,5 +129,6 @@ final Map<String, String> langSk = {
   'There is no match.': 'Neexistuje žiadna zhoda.',
   'Current Location': 'Aktuálna poloha',
   'Do you want to proceed with directions?': 'Chcete pokračovať s pokynmi?',
-  'Check': 'Skontrolujte'
+  'Check': 'Skontrolujte',
+  'Section Time: ': 'Čas sekcie: '
 };

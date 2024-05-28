@@ -130,5 +130,6 @@ final Map<String, String> langFi = {
   'There is no match.': 'Ei vastaavuutta.',
   'Current Location': 'Nykyinen sijainti',
   'Do you want to proceed with directions?': 'Haluatko jatkaa reittiohjeita?',
-  'Check': 'Tarkista'
+  'Check': 'Tarkista',
+  'Section Time: ': 'Osio aika: '
 };

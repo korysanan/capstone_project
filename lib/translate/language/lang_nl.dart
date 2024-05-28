@@ -130,5 +130,6 @@ final Map<String, String> langNl = {
   'There is no match.': 'Er is geen overeenkomst.',
   'Current Location': 'Huidige locatie',
   'Do you want to proceed with directions?': 'Wil je doorgaan met de routebeschrijving?',
-  'Check': 'Controleer'
+  'Check': 'Controleer',
+  'Section Time: ': 'Sectietijd: '
 };

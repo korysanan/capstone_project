@@ -129,5 +129,6 @@ final Map<String, String> langHu = {
   'There is no match.': 'Nincs egyezés.',
   'Current Location': 'Jelenlegi hely',
   'Do you want to proceed with directions?': 'Szeretné folytatni az útbaigazítást?',
-  'Check': 'Ellenőrizze a  címet.'
+  'Check': 'Ellenőrizze a  címet.',
+  'Section Time: ': 'Szakaszidő: '
 };

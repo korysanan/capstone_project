@@ -15,7 +15,6 @@ Future<void> updateUserLanguage(int languageId) async {
         'languageId': languageId
       }),
     );
-    print(response.statusCode);
     if (response.statusCode == 200) {
       // 언어 설정 업데이트 성공
       globals.user_language = languageId.toString();  // 전역 변수 업데이트

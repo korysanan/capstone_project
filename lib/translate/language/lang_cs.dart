@@ -130,5 +130,6 @@ final Map<String, String> langCs = {
   'There is no match.': 'Neexistuje žádná shoda.',
   'Current Location': 'Aktuální poloha',
   'Do you want to proceed with directions?': 'Chcete pokračovat s pokyny?',
-  'Check': 'Zkontrolujte'
+  'Check': 'Zkontrolujte',
+  'Section Time: ': 'Čas sekce: '
 };

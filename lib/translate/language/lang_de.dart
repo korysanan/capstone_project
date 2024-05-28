@@ -133,5 +133,6 @@ final Map<String, String> langDe = {
   'There is no match.': 'Es gibt keine Übereinstimmung.',
   'Current Location': 'Aktueller Standort',
   'Do you want to proceed with directions?': 'Möchten Sie mit der Wegbeschreibung fortfahren?',
-  'Check': 'Prüfen Sie'
+  'Check': 'Prüfen Sie',
+  'Section Time: ': 'Abschnittszeit: '
 };

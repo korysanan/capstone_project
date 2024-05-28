@@ -129,5 +129,6 @@ final Map<String, String> langTr = {
   'There is no match.': 'Eşleşme yok.',
   'Current Location': 'Geçerli Konum',
   'Do you want to proceed with directions?': 'Talimatlarla devam etmek istiyor musunuz?',
-  'Check': 'Kontrol et'
+  'Check': 'Kontrol et',
+  'Section Time: ': 'Bölüm Zamanı: '
 };

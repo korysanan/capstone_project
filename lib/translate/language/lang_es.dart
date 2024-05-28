@@ -130,5 +130,6 @@ final Map<String, String> langEs = {
   'There is no match.': 'No hay ninguna coincidencia.',
   'Current Location': 'Localización actual',
   'Do you want to proceed with directions?': '¿Desea continuar con las indicaciones?',
-  'Check': 'Compruebe'
+  'Check': 'Compruebe',
+  'Section Time: ': 'Tiempo de sección: '
 };

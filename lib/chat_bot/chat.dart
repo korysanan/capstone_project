@@ -62,8 +62,8 @@ class _chatbotState extends State<chatbot> {
         children: <Widget>[
           Image.asset(
             'assets/images/korea_background.png',
-            width: 300,
-            height: 300,
+            width: 200,
+            height: 200,
           ),
           Text('Ask me about Korean food...',
               style: TextStyle(

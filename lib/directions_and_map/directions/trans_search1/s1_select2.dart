@@ -52,15 +52,15 @@ class JsonDisplayScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  ...buildPathCards1(context, modifiedJsonData['cityTransitStart']['result']['path'], modifiedJsonData['interCityTransit']['info']['firstStartStation']),
-                  if (modifiedJsonData.containsKey('interCityTransit')) ...[
+                  ...buildPathCards1(context, modifiedJsonData['cityTransitStart']['result']['path'], '${modifiedJsonData['interCityTransit']['info']['firstStartStationKor']} (${modifiedJsonData['interCityTransit']['info']['firstStartStation']})'),
+                  if (modifiedJsonData.containsKey('interCityTransit')) ...[                              
                     Text(
                       '${modifiedJsonData['interCityTransit']['info']['firstStartStation']} -> ${modifiedJsonData['interCityTransit']['info']['lastEndStation']}',
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     Divider(),
                   ],
-                  ...buildPathCards2(context, modifiedJsonData['cityTransitEnd']['result']['path'], modifiedJsonData['interCityTransit']['info']['lastEndStation']),
+                  ...buildPathCards2(context, modifiedJsonData['cityTransitEnd']['result']['path'], '${modifiedJsonData['interCityTransit']['info']['lastEndStationKor']} (${modifiedJsonData['interCityTransit']['info']['lastEndStation']})'),
                 ],
               ),
             ),

@@ -130,5 +130,6 @@ final Map<String, String> langNo = {
   'There is no match.': 'Det er ingen match.',
   'Current Location': 'Nåværende plassering',
   'Do you want to proceed with directions?': 'Vil du fortsette med veibeskrivelsen?',
-  'Check': 'Kryss av'
+  'Check': 'Kryss av',
+  'Section Time: ': 'Seksjonstid: '
 };

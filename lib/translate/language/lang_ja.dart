@@ -126,5 +126,6 @@ final Map<String, String> langJa = {
   'There is no match.': '一致するルートはありません。',
   'Current Location': '現在地',
   'Do you want to proceed with directions?': '案内を続けますか？',
-  'Check': 'チェック'
+  'Check': 'チェック',
+  'Section Time: ': '区間時間: '
 };

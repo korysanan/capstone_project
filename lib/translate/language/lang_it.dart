@@ -129,5 +129,6 @@ final Map<String, String> langIt = {
   'There is no match.': "Non c'è nessuna corrispondenza.",
   'Current Location': 'Posizione attuale',
   'Do you want to proceed with directions?': 'Vuoi procedere con le indicazioni stradali?',
-  'Check': 'Controllare'
+  'Check': 'Controllare',
+  'Section Time: ': 'Tempo di sezione: '
 };

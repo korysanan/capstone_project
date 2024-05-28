@@ -130,5 +130,6 @@ final Map<String, String> langRo = {
   'There is no match.': 'Nu există nicio potrivire.',
   'Current Location': 'Locația curentă',
   'Do you want to proceed with directions?': 'Doriți să continuați cu indicațiile?',
-  'Check': 'Verificați'
+  'Check': 'Verificați',
+  'Section Time: ': 'Timpul secțiunii: '
 };

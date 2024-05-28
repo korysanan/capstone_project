@@ -126,5 +126,6 @@ final Map<String, String> langKo = {
   'There is no match.': '매치가 안됐습니다.',
   'Current Location': '현재 위치',
   'Do you want to proceed with directions?': '길안내를 원하십니까?',
-  'Check': '체크'
+  'Check': '체크',
+  'Section Time: ': '구간 시간: '
 };

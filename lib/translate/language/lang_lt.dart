@@ -128,5 +128,6 @@ final Map<String, String> langLt = {
   'There is no match.': 'Nėra atitikmenų.',
   'Current Location': 'Dabartinė vieta',
   'Do you want to proceed with directions?': 'Ar norite tęsti nurodymus?',
-  'Check': 'Patikrinkite'
+  'Check': 'Patikrinkite',
+  'Section Time: ': 'Skyriaus laikas: '
 };

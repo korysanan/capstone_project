@@ -128,5 +128,6 @@ final Map<String, String> langEn = {
   'No matching routes found.': 'No matching routes found.',
   'There is no match.': 'There is no match.',
   'Do you want to proceed with directions?': 'Do you want to proceed with directions?',
-  'Check': 'Check'
+  'Check': 'Check',
+  'Section Time: ': 'Section Time: '
 };

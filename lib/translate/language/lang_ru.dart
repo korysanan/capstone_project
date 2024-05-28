@@ -131,5 +131,6 @@ final Map<String, String> langRu = {
   'There is no match.': 'Нет совпадений.',
   'Current Location': 'Текущее местоположение',
   'Do you want to proceed with directions?': 'Вы хотите перейти к указаниям?',
-  'Check': 'Проверьте'
+  'Check': 'Проверьте',
+  'Section Time: ': 'Время раздела: '
 };

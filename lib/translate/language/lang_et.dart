@@ -129,5 +129,6 @@ final Map<String, String> langEt = {
   'There is no match.': 'Vastavus puudub.',
   'Current Location': 'Praegune asukoht',
   'Do you want to proceed with directions?': 'Kas soovite jätkata teekonnaga?',
-  'Check': 'Kontrollige'
+  'Check': 'Kontrollige',
+  'Section Time: ': 'Sektsiooni aeg: '
 };

@@ -129,5 +129,6 @@ final Map<String, String> langUk = {
   'There is no match.': 'Не знайдено жодного збігу.',
   'Current Location': 'Поточне місцезнаходження',
   'Do you want to proceed with directions?': 'Бажаєте продовжити маршрут?',
-  'Check': 'Перевірте'
+  'Check': 'Перевірте',
+  'Section Time: ': 'Час розділу: '
 };

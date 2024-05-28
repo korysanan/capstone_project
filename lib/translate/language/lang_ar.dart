@@ -128,5 +128,6 @@ final Map<String, String> langAr = {
   'There is no match.': 'لا يوجد تطابق.',
   'Current Location': 'الموقع الحالي',
   'Do you want to proceed with directions?': 'هل تريد متابعة الاتجاهات؟',
-  'Check': 'تحقق'
+  'Check': 'تحقق',
+  'Section Time: ': 'وقت القسم: '
 };

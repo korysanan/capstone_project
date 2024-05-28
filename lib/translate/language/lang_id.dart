@@ -130,5 +130,6 @@ final Map<String, String> langId = {
   'There is no match.': 'Tidak ada kecocokan.',
   'Current Location': 'Lokasi saat ini',
   'Do you want to proceed with directions?': 'Apakah Anda ingin melanjutkan dengan petunjuk arah?',
-  'Check': 'Centang'
+  'Check': 'Centang',
+  'Section Time: ': 'Waktu Bagian: '
 };

@@ -131,5 +131,6 @@ final Map<String, String> langDa = {
   'There is no match.': 'Der er ikke noget match.',
   'Current Location': 'Nuværende placering',
   'Do you want to proceed with directions?': 'Vil du fortsætte med rutevejledning?',
-  'Check': 'Tjek'
+  'Check': 'Tjek',
+  'Section Time: ': 'Sektionstid: '
 };

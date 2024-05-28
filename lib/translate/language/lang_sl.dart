@@ -130,5 +130,6 @@ final Map<String, String> langSl = {
   'There is no match.': 'Ni ujemanja.',
   'Current Location': 'Trenutna lokacija',
   'Do you want to proceed with directions?': 'Ali želite nadaljevati z navodili?',
-  'Check': 'Preverite'
+  'Check': 'Preverite',
+  'Section Time: ': 'Čas oddelka: '
 };

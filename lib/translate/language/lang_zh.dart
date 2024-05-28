@@ -126,5 +126,6 @@ final Map<String, String> langZh = {
   'There is no match.': '没有匹配。',
   'Current Location': '当前位置',
   'Do you want to proceed with directions?': '要继续导航吗？',
-  'Check': '检查'
+  'Check': '检查',
+  'Section Time: ': '部分时间: '
 };

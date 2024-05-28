@@ -129,5 +129,6 @@ final Map<String, String> langLv = {
   'There is no match.': 'Nav atbilstības.',
   'Current Location': 'Pašreizējā atrašanās vieta',
   'Do you want to proceed with directions?': 'Vai vēlaties turpināt virzienu?',
-  'Check': 'Pārbaudiet'
+  'Check': 'Pārbaudiet',
+  'Section Time: ': 'Sadaļas laiks: '
 };
