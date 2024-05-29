@@ -439,6 +439,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                         ],
                       ),
                     );
+                    Navigator.of(context).pop();
                   } // 주석은 여기에 원래
                 },
                 child: Column(
