@@ -425,7 +425,11 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                       MaterialPageRoute(builder: (context) => FoodSelectScreen()),
                     );
                   } catch (e) {
-                    // Handle errors appropriately
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FoodSelectScreen()),
+                    );
+                    /*
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
@@ -440,6 +444,7 @@ class _KFoodBoxHomeState extends State<KFoodBoxHome> {
                       ),
                     );
                     Navigator.of(context).pop();
+                    */
                   } // 주석은 여기에 원래
                 },
                 child: Column(
